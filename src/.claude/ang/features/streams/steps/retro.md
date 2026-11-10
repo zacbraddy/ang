@@ -1,0 +1,1 @@
+**After step 3, mail checkpoint:** run `ang-context-manager.mjs stream list` and check the 10k changes agreed this session against the other streams' focus lines. No mail is the default and usually right. Suggest one note (text, target stream, why) only if it changes what that stream does or decides; never for routine progress. Send it only on the user's yes.

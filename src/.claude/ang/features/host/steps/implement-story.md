@@ -1,0 +1,1 @@
+**Host checkpoints:** at step 2, set stage `in-progress` and say status `story NN implementing`. When you stop and ask (step 3, or a walkthrough step waiting on the user), say status what you're waiting on in a few words and ask for the user. At step 5, set stage `in-review`, say status `story NN implemented, awaiting review` and ask for the user.

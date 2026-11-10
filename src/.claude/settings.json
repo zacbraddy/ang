@@ -1,0 +1,32 @@
+{
+  "outputStyle": "Partner In Crime",
+  "permissions": {
+    "allow": [
+      "Bash(node .claude/scripts/ang-context-manager.mjs:*)",
+      "Bash(jq:*)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/scripts/ang-context-manager.mjs\" session banner" }]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/scripts/ang-context-manager.mjs\" session subagent" }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/scripts/ang-context-manager.mjs\" library index --quiet" }]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/scripts/ang-context-manager.mjs\" library index --quiet" }]
+      }
+    ]
+  }
+}

@@ -1,0 +1,3 @@
+**In step 2:** leave `10k/intent.md` out of the slices. It is the user's delivery intent rather than a claim about the code, so checking it against the code would only mark it unverifiable; the check-in below covers it.
+
+**After step 4, delivery intent check-in:** play `10k/intent.md` back in a few lines (goal, stance, *holds until*) and ask whether it still holds. On a yes, set its `confirmed:` to today. On a no, help the user word what has changed, rewrite it in its shape (`.claude/ang/features/intent/conventions.md`) and set `confirmed:` to today. This and `/retro` are the only places that ask.

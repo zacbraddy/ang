@@ -1,0 +1,1 @@
+**Step 2 of Add, waiting on another stream:** wrap a `story:`, `stage:` or `file:` condition as `stream:<stream>:<condition>` (e.g. `stream:bake-off:story:extraction-bake-off/03=done`). It is judged on that stream's branch, so only work committed there counts. Readiness shows in this stream's own `validate`; it sends no mail.

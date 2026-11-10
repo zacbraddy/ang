@@ -1,0 +1,2 @@
+**After step 2,** once the branch is confirmed merged, set stage `completed` on the stream's workspace (`path:<worktree>`). Skip this for an abandoned stream.
+**Step 5:** remove the worktree with the host's **remove stream workspace** instead of `git worktree remove`, so the workspace card goes too. It refuses a dirty worktree the same way; never add `--force` without the user's say-so. It finishes in the background and usually deletes the branch too, so check `git worktree list` and `git branch --list <branch>` a few seconds later before offering any branch deletion.

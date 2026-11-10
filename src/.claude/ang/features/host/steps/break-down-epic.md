@@ -1,0 +1,1 @@
+**Host checkpoints:** at step 3, set stage `in-progress`, say status `<slug>: story list awaiting agreement` and ask for the user. At step 5, set stage `in-review`, say status `<slug>: stories drafted, awaiting review` and ask for the user.

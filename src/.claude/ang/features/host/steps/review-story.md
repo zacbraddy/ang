@@ -1,0 +1,1 @@
+**Host checkpoints:** at step 1, set stage `in-progress` and say status `reviewing story NN`. At step 5, before asking which findings to fix, say status `story NN review: pick fixes` and ask for the user. After step 6, set stage `in-review`, say status `story NN reviewed, fixes unstaged` and ask for the user.
