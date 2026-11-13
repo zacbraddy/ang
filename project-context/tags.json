@@ -1,1 +1,56 @@
-[]
+[
+  {
+    "tag": "brand-voice",
+    "shortDescription": "How Ang and its author present publicly: tone, attribution, promotion",
+    "department": [
+      "marketing"
+    ]
+  },
+  {
+    "tag": "constraints",
+    "shortDescription": "Hard limits on time, money, ownership and legal setup",
+    "department": [
+      "financial",
+      "legal",
+      "product"
+    ]
+  },
+  {
+    "tag": "delivery-intent",
+    "shortDescription": "How the user means work to be delivered right now",
+    "department": [
+      "product"
+    ]
+  },
+  {
+    "tag": "open-source",
+    "shortDescription": "Releasing and running Ang as an open-source project: licence, contributions, maintenance stance",
+    "department": [
+      "legal",
+      "product",
+      "marketing"
+    ]
+  },
+  {
+    "tag": "product-vision",
+    "shortDescription": "What Ang is, its scope and the principles that govern changes to it",
+    "department": [
+      "product",
+      "marketing"
+    ]
+  },
+  {
+    "tag": "repo-structure",
+    "shortDescription": "Where things live in the repo and why",
+    "department": [
+      "technical"
+    ]
+  },
+  {
+    "tag": "tech-stack",
+    "shortDescription": "Languages, runtimes, harnesses and dependencies Ang is built on",
+    "department": [
+      "technical"
+    ]
+  }
+]

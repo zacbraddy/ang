@@ -1,1 +1,71 @@
-[]
+[
+  {
+    "title": "Business constraints",
+    "path": "project-context/10k/business-constraints.md",
+    "shortDescription": "Ownership, licence, maintenance stance, spend and capacity limits on Ang as an open-source project",
+    "tags": [
+      "constraints",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Delivery intent",
+    "path": "project-context/10k/intent.md",
+    "shortDescription": "How Zac means the open-source release of Ang to be delivered, and why",
+    "tags": [
+      "delivery-intent",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Voice and attribution",
+    "path": "project-context/10k/marketing/voice-and-attribution.md",
+    "shortDescription": "The tone Ang's public writing uses and how its author and We Right Code are credited",
+    "tags": [
+      "brand-voice",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Ang's first principles",
+    "path": "project-context/10k/product/first-principles.md",
+    "shortDescription": "The four ranked principles that govern every decision about what Ang does and doesn't become",
+    "tags": [
+      "product-vision"
+    ]
+  },
+  {
+    "title": "What Ang is",
+    "path": "project-context/10k/product/what-ang-is.md",
+    "shortDescription": "Ang's definition, positioning, deliberately closed feature set and how its author uses it",
+    "tags": [
+      "product-vision",
+      "open-source"
+    ]
+  },
+  {
+    "title": "ADR 0001: Claude Code is the harness, Orca is an optional host",
+    "path": "project-context/10k/technical/adrs/0001-claude-code-harness-orca-optional.md",
+    "shortDescription": "Ang targets Claude Code only; Orca support switches on only when configured and detected",
+    "tags": [
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "ADR 0002: Zero-dependency library script",
+    "path": "project-context/10k/technical/adrs/0002-zero-dependency-library-script.md",
+    "shortDescription": "The context library is managed by one Node CLI that uses only built-ins, so Ang ships with no package.json or install step",
+    "tags": [
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Project structure",
+    "path": "project-context/10k/technical/project-structure.md",
+    "shortDescription": "What ships (src/), how this repo runs Ang on itself through symlinks, and where everything else lives",
+    "tags": [
+      "repo-structure",
+      "tech-stack"
+    ]
+  }
+]
