@@ -59,5 +59,13 @@
     "tags": [
       "open-source"
     ]
+  },
+  {
+    "title": "Parked work",
+    "path": "project-context/ideas/parked.md",
+    "shortDescription": "Doable threads with no value yet, each with the wake condition that would make it worth doing",
+    "tags": [
+      "distribution"
+    ]
   }
 ]

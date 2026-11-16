@@ -32,9 +32,8 @@ Team-neutral means wording that doesn't assume a solo pilot, such as "docs are f
 ## Output style (`partner-in-crime.md`)
 Ship it as-is as the default. The one change is to drop "ADHD-friendly" from its description and keep the behaviour.
 
-## Still open
-- The generic rule's neutral file name, replacing `working-with-zac.md` (u3).
-- What the tailoring step asks, and how it rewrites these sections, is u3.
+## Tailoring
+The [tailoring step](tailoring.md) writes the personal sections into a gitignored, additive-only rule overlay in the repo. The generic rule's neutral file name is a planning detail.
 
 ## Related
 - [Hub](../README.md)

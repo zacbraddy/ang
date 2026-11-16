@@ -39,6 +39,16 @@
     ]
   },
   {
+    "title": "Tailoring step and per-user config",
+    "path": "project-context/shaping/generic-personal-defaults/shaping-content/tailoring.md",
+    "shortDescription": "A re-runnable tailoring command writes per-user settings into gitignored local files in the repo, and bootstrap invokes it",
+    "tags": [
+      "distribution",
+      "repo-structure",
+      "brand-voice"
+    ]
+  },
+  {
     "title": "Pilot feature spike",
     "path": "project-context/shaping/generic-personal-defaults/spikes/pilot-feature/README.md",
     "shortDescription": "Throwaway spike proving a pilot-name Ang feature reaches sessions and subagents with no per-skill templating",

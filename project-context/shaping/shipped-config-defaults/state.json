@@ -3,11 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u1",
-      "question": "Where should this repo's own ang.json live vs the shipped default: a moved file, or created by bootstrap?",
-      "approach": "Check how /bootstrap-repo and session features use ang.json"
-    },
-    {
       "id": "u2",
       "question": "Which intent and host defaults should ship so validate passes on a fresh install?",
       "approach": ""
@@ -23,6 +18,12 @@
       "id": "k2",
       "fact": "intent: true without 10k/intent.md fails library validate on a fresh install",
       "source": "shaping-content/brief.md"
+    },
+    {
+      "id": "k3",
+      "fact": "Neither: ang.json moves to the repo root (committed defaults) with a gitignored ang.local.json overlay for personal keys (decided in generic-personal-defaults)",
+      "source": "/project-context/shaping/generic-personal-defaults/shaping-content/tailoring.md",
+      "answers": "Where should this repo's own ang.json live vs the shipped default: a moved file, or created by bootstrap?"
     }
   ],
   "decisions": [
@@ -44,6 +45,10 @@
     {
       "date": "2026-11-16",
       "event": "from raw: opening-ang.md, bootstrap-leftovers.md (fast-tracked to shaping)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "removed k3: ang.json moves to the repo root with a gitignored ang.local.json overlay for personal keys (decided in generic-personal-defaults)"
     }
   ]
 }

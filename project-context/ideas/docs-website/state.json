@@ -16,6 +16,11 @@
       "id": "u3",
       "question": "Information architecture: which pages, and how does the brain-dump content map onto them?",
       "approach": ""
+    },
+    {
+      "id": "u4",
+      "question": "Does an extends-style shared ang.json work for teams across repos? Spike it, then document it as the team pattern",
+      "approach": "Spike; see /project-context/shaping/generic-personal-defaults/shaping-content/tailoring.md"
     }
   ],
   "knowns": [
