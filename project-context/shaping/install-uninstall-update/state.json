@@ -3,16 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u6",
-      "question": "Where does install.sh live and how is it fetched (repo root rather than src/, URL pinned to a release tag) so it never ships into installs itself?",
-      "approach": ""
-    },
-    {
-      "id": "u7",
-      "question": "Where and in what form does an install record its Ang version (tag, commit SHA), and how does an upgrade baseline an instance with no record, such as ohnvm?",
-      "approach": ""
-    },
-    {
       "id": "u8",
       "question": "How would the workflow-improvement workflow keep a local version and changelog of improvements that an upgrading agent can reason over?",
       "approach": ""
@@ -26,6 +16,26 @@
       "id": "u10",
       "question": "What must each upstream release publish (tags, changelog) for an upgrading agent to know what changed?",
       "approach": ""
+    },
+    {
+      "id": "u11",
+      "question": "How does the upgrade skill baseline an instance with no version record, such as ohnvm (candidate: hash its files against past tags' trees and pick the closest)?",
+      "approach": "shaping-content/install-script-spike.md"
+    },
+    {
+      "id": "u12",
+      "question": "Each release must stamp its tag into install.sh before tagging. Is that a manual step in the release checklist, or a small script, and does it fold into what each release publishes (u10)?",
+      "approach": "shaping-content/install-script-spike.md"
+    },
+    {
+      "id": "u13",
+      "question": "How does an upgrade update Ang's own settings entries without duplicating them? The user-favouring install merge would append a changed Ang hook beside the old one (candidate: diff against the previous release's settings.json found by the recorded SHA)",
+      "approach": "shaping-content/install-script-spike.md"
+    },
+    {
+      "id": "u14",
+      "question": "What minimum Node version do the documented install prerequisite and install.sh's node check state? It waits on open-source-hygiene's u7: docs say 21+, but the code's import.meta.dirname needs 22.16+. install.sh itself needs only 18+ (fetch). Once it's settled, install.sh should check the version, not just that node exists",
+      "approach": "https://github.com/zacbraddy/ang/blob/stream/open-source-hygiene/project-context/shaping/open-source-hygiene/state.json"
     }
   ],
   "knowns": [
@@ -55,6 +65,18 @@
       "id": "k5",
       "fact": "Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, a local changelog of workflow improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges. Motivating case: ohnvm's pre-open-source Ang",
       "source": "shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "id": "k6",
+      "fact": "install.sh lives at the repo root, outside src/, so the copy-in never ships it. Users pipe it from raw.githubusercontent.com/zacbraddy/ang/<ref>/install.sh to sh. The ref is stamped into the script, with an optional argument to override it. Spiked: install.sh never appears in an installed tree",
+      "source": "shaping-content/install-script-spike.md",
+      "answers": "Where does install.sh live and how is it fetched (repo root rather than src/, URL pinned to a release tag) so it never ships into installs itself?"
+    },
+    {
+      "id": "k7",
+      "fact": "install.sh resolves the ref to a full SHA through GitHub's API, installs that SHA and writes .claude/ang/version.json { ref, sha, installedAt }. Spiked: the record matched git rev-parse on every run",
+      "source": "shaping-content/install-script-spike.md",
+      "answers": "Where and in what form does an install record its Ang version (tag, commit SHA), and how does an upgrade baseline an instance with no record, such as ohnvm?"
     }
   ],
   "decisions": [
@@ -82,6 +104,16 @@
       "id": "d5",
       "decision": "Tests ship with installs: a local workflow improvement may change shipped scripts, and having the tests on hand lets the user run them to check (Zac's call)",
       "evidence": "shaping-content/copy-in-spike.md"
+    },
+    {
+      "id": "d6",
+      "decision": "giget stays, run through npx and pinned to giget@3.3.1; the README and docs list node with npm/npx as the prerequisite. Zac's call: node is already required, giget carries features we'd otherwise hand-roll, and documenting npm/npx beats also leaning on curl and tar inside the script",
+      "evidence": "shaping-content/install-script-spike.md"
+    },
+    {
+      "id": "d7",
+      "decision": "The install's settings merge favours the user: their values win, Ang adds only missing keys, arrays are unioned, and only the first backup (.claude/settings.json.pre-ang) is kept, so re-runs are no-ops. Spiked: the user's outputStyle, model, deny rule and hook all survived, with no duplicates on re-run",
+      "evidence": "shaping-content/install-script-spike.md"
     }
   ],
   "lineage": [
@@ -140,6 +172,14 @@
     {
       "date": "2026-11-16",
       "event": "decided: Tests ship with installs: a local workflow improvement may change shipped scripts, and having the tests on hand lets the user run them to check (Zac's call)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: giget stays, run through npx and pinned to giget@3.3.1; the README and docs list node with npm/npx as the prerequisite. Zac's call: node is already required, giget carries features we'd otherwise hand-roll, and documenting npm/npx beats also leaning on curl and tar inside the script"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: The install's settings merge favours the user: their values win, Ang adds only missing keys, arrays are unioned, and only the first backup (.claude/settings.json.pre-ang) is kept, so re-runs are no-ops. Spiked: the user's outputStyle, model, deny rule and hook all survived, with no duplicates on re-run"
     }
   ]
 }

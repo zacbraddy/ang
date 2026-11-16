@@ -44,9 +44,26 @@
     ]
   },
   {
+    "title": "Install script spike",
+    "path": "project-context/shaping/install-uninstall-update/shaping-content/install-script-spike.md",
+    "shortDescription": "A prototype install.sh at the repo root, fetched at a pinned ref, installs Ang with giget, merges the user's settings and records the installed version; all five success measures passed",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
     "title": "Copy-in spike",
     "path": "project-context/shaping/install-uninstall-update/spikes/copy-in/README.md",
     "shortDescription": "Throwaway script comparing degit and giget installs of src/ into an empty repo and an existing project",
+    "tags": [
+      "distribution"
+    ]
+  },
+  {
+    "title": "Install script spike",
+    "path": "project-context/shaping/install-uninstall-update/spikes/install-script/README.md",
+    "shortDescription": "Throwaway prototype of install.sh plus a harness that pipes it into an empty repo and an existing project",
     "tags": [
       "distribution"
     ]
