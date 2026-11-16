@@ -82,6 +82,16 @@
     ]
   },
   {
+    "title": "Person references in shipped files",
+    "path": "project-context/planning/generic-defaults/person-references.md",
+    "shortDescription": "Where shipped skills, rules and features refer to the pilot, and the two pointers that break when working-with-zac.md is renamed",
+    "tags": [
+      "open-source",
+      "distribution",
+      "repo-structure"
+    ]
+  },
+  {
     "title": "Generic defaults",
     "path": "project-context/planning/generic-defaults/README.md",
     "shortDescription": "Ship generic, Zac-free defaults (rule, output style, config) plus a tailoring command that writes per-user choices locally",

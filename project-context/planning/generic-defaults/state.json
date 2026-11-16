@@ -1,14 +1,7 @@
 {
   "status": "active",
   "statusNote": "",
-  "unknowns": [
-    {
-      "id": "u1",
-      "question": "Which references to the pilot ('the user', 'me', 'Zac') remain in skills, and should they be made consistent?",
-      "approach": "Grep src/.claude; at import the stance was first-person 'me' is fine",
-      "from": "generic-personal-defaults"
-    }
-  ],
+  "unknowns": [],
   "knowns": [
     {
       "id": "k1",
@@ -86,6 +79,12 @@
       "fact": "Names (Zac's call, 2026-11-16): /tailor-ang (tailoring command), .claude/rules/engineering-defaults.md (generic rule replacing working-with-zac.md), .claude/rules/pilot.local.md (gitignored personal rule overlay). Verb-noun matches existing commands; pilot.local.md ties to the pilot feature and the *.local.* gitignore pattern",
       "source": "README.md",
       "answers": "Names: the tailoring command, the generic rule file (replacing working-with-zac.md), and the personal overlay file"
+    },
+    {
+      "id": "k15",
+      "fact": "No literal pilot name outside working-with-zac.md. 'me' (invoker voice in skills) vs 'the user' (agents, features, scripts) both read right solo or team, so no mass rewrite. Fix two 'my rules' pointers (review-story, write-story) to name engineering-defaults.md",
+      "source": "person-references.md",
+      "answers": "Which references to the pilot ('the user', 'me', 'Zac') remain in skills, and should they be made consistent?"
     }
   ],
   "decisions": [
