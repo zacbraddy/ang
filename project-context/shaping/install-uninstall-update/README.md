@@ -6,13 +6,14 @@ tags: [distribution, open-source]
 # Install, uninstall, update
 
 ## Summary
-How does Ang land in a user's repo quickly? Options include a Claude Code plugin marketplace, a copy script, or `degit`-style cloning, weighed against Ang being a starter that users edit (workflow improvements depend on that). Also: is an uninstall command worth having, and what must it never remove? Is an update command worth having, given users diverge from upstream by design? And how does `project-context/README.md` reach an install, since `library init` doesn't create it?
+How does Ang land in a user's repo quickly? Research points to copying files in (`degit`/`giget`-style, possibly with a hash-manifest update later) rather than a Claude Code plugin, since plugins can't ship rules or permissions and wipe user edits on update. Also: is an uninstall command worth having, and what must it never remove? Is an update command worth having, given users diverge from upstream by design? And how does `project-context/README.md` reach an install, since `library init` doesn't create it?
 
 ## Why it matters
 The README's quick start and a clean first run depend on it. ADR 0002 assumes Ang is copied in, but the route was never decided.
 
 ## What's here
 - [Brief](ideas-content/brief.md)
+- [Install route landscape](ideas-content/install-route.md): plugins vs copy-in tools vs copy-in with managed updates, and how comparable frameworks do it
 
 ## Related
 - [ADR 0002: zero-dependency library script](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)

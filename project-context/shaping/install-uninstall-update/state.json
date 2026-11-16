@@ -3,11 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u1",
-      "question": "Install route: plugin marketplace, copy script or degit-style clone, given users must own and edit their copy?",
-      "approach": "Research Claude Code plugin editability; compare options against ADR 0002"
-    },
-    {
       "id": "u2",
       "question": "How does project-context/README.md reach a user's install, and should library init copy it?",
       "approach": ""
@@ -33,6 +28,12 @@
       "id": "k2",
       "fact": "Gitignored *.local.* files (pilot.local.md, local styles) sit physically under src/.claude/ in this repo through the symlinks. Git never ships them, but any install route that copies src/ from disk would. Keeping them out of a release is this item's job",
       "source": "https://github.com/zacbraddy/ang/blob/e34550491f625b84a6013a30e16438245bc62468/project-context/execution/generic-defaults/plan.md"
+    },
+    {
+      "id": "k3",
+      "fact": "Copy-in fits, plugin doesn't: plugins can't ship rules or permissions, wipe user edits on update and namespace skills; candidates are plain degit/giget copy-in, copy-in plus a hash-manifest update, or copier",
+      "source": "ideas-content/install-route.md",
+      "answers": "Install route: plugin marketplace, copy script or degit-style clone, given users must own and edit their copy?"
     }
   ],
   "decisions": [],
@@ -44,6 +45,10 @@
     {
       "date": "2026-11-16",
       "event": "from raw: bootstrap-leftovers.md"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "moved ideas → shaping"
     }
   ]
 }

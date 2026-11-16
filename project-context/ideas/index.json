@@ -28,23 +28,6 @@
     ]
   },
   {
-    "title": "Install, uninstall, update, brief",
-    "path": "project-context/ideas/install-uninstall-update/ideas-content/brief.md",
-    "shortDescription": "Zac's framing of the install, uninstall and update questions",
-    "tags": [
-      "distribution"
-    ]
-  },
-  {
-    "title": "Install, uninstall, update",
-    "path": "project-context/ideas/install-uninstall-update/README.md",
-    "shortDescription": "How Ang gets into a project, and whether uninstall and update commands are worth having",
-    "tags": [
-      "distribution",
-      "open-source"
-    ]
-  },
-  {
     "title": "Open-source hygiene, brief",
     "path": "project-context/ideas/open-source-hygiene/ideas-content/brief.md",
     "shortDescription": "Zac's stance on open-source standards and the deferred quality-tooling options",

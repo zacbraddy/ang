@@ -1,5 +1,31 @@
 [
   {
+    "title": "Install, uninstall, update, brief",
+    "path": "project-context/shaping/install-uninstall-update/ideas-content/brief.md",
+    "shortDescription": "Zac's framing of the install, uninstall and update questions",
+    "tags": [
+      "distribution"
+    ]
+  },
+  {
+    "title": "Install route landscape",
+    "path": "project-context/shaping/install-uninstall-update/ideas-content/install-route.md",
+    "shortDescription": "Plugin marketplace versus copy-in tools versus copy-in with managed updates, weighed against users owning and editing their copy of Ang",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Install, uninstall, update",
+    "path": "project-context/shaping/install-uninstall-update/README.md",
+    "shortDescription": "How Ang gets into a project, and whether uninstall and update commands are worth having",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
     "title": "Repo README",
     "path": "project-context/shaping/repo-readme/README.md",
     "shortDescription": "A short whistle-stop README covering concepts, key commands and a quick start",
