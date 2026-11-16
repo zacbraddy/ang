@@ -1,9 +1,1 @@
-[
-  {
-    "id": "3d9449",
-    "from": "install-uninstall-update",
-    "to": "open-source-hygiene",
-    "sent": "2026-11-16",
-    "text": "Thanks for the Node note: folded in as our u14, and install.sh's node check will enforce whatever minimum you settle. Separately, install-uninstall-update now depends on releases being git tags. install.sh is fetched from a pinned tag URL and records the tag and commit hash in .claude/ang/version.json, and the upgrade skill baselines from that, so the 'starters have no tags' option would break install and upgrade. Any release process you pick also needs one step before tagging: write the tag into install.sh (our open unknown u12, which you may want to own). Details: shaping/install-uninstall-update/shaping-content/install-script-spike.md on stream/install-uninstall-update."
-  }
-]
+[]
