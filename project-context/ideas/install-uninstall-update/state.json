@@ -28,6 +28,11 @@
       "id": "k1",
       "fact": "Requirements and options as Zac framed them",
       "source": "ideas-content/brief.md"
+    },
+    {
+      "id": "k2",
+      "fact": "Gitignored *.local.* files (pilot.local.md, local styles) sit physically under src/.claude/ in this repo through the symlinks. Git never ships them, but any install route that copies src/ from disk would. Keeping them out of a release is this item's job",
+      "source": "https://github.com/zacbraddy/ang/blob/e34550491f625b84a6013a30e16438245bc62468/project-context/execution/generic-defaults/plan.md"
     }
   ],
   "decisions": [],

@@ -33,6 +33,11 @@
       "id": "k2",
       "fact": "Where the brain dump describes how Ang works and the files differ, the files are truth (e.g. evidence tiers)",
       "source": "ideas-content/brief.md"
+    },
+    {
+      "id": "k3",
+      "fact": "An \"extends\"-style shared config (e.g. a team's base ang.json) is the team answer to a configurable config path. Sent here to spike as a documented pattern, not built into Ang",
+      "source": "https://github.com/zacbraddy/ang/blob/e34550491f625b84a6013a30e16438245bc62468/project-context/execution/generic-defaults/origins/generic-personal-defaults/shaping-content/tailoring.md"
     }
   ],
   "decisions": [],

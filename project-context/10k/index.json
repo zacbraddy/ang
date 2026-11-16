@@ -60,6 +60,42 @@
     ]
   },
   {
+    "title": "ADR 0003: Per-user config is a gitignored overlay limited to LOCAL_KEYS",
+    "path": "project-context/10k/technical/adrs/0003-per-user-config-overlay.md",
+    "shortDescription": "Root ang.json is committed and project-owned; gitignored ang.local.json may set only host and pilot, and any other key is dropped with a warning",
+    "tags": [
+      "tech-stack",
+      "repo-structure"
+    ]
+  },
+  {
+    "title": "ADR 0004: Pilot identity is hook-injected, never templated",
+    "path": "project-context/10k/technical/adrs/0004-pilot-identity-hook-injected.md",
+    "shortDescription": "The pilot's name reaches agents through the optional pilot feature's rule(value) at session and subagent start; shipped files never contain a name",
+    "tags": [
+      "tech-stack",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "C4 level 1, context",
+    "path": "project-context/10k/technical/architecture/1-context.md",
+    "shortDescription": "Who uses Ang and which outside systems it touches; Ang is a set of files inside one repo, run by Claude Code",
+    "tags": [
+      "repo-structure",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "C4 level 2, containers",
+    "path": "project-context/10k/technical/architecture/2-containers.md",
+    "shortDescription": "Ang's containers split into committed, team-wide ones and gitignored, per-user ones, and how Claude Code and the script use each",
+    "tags": [
+      "repo-structure",
+      "tech-stack"
+    ]
+  },
+  {
     "title": "Project structure",
     "path": "project-context/10k/technical/project-structure.md",
     "shortDescription": "What ships (src/), how this repo runs Ang on itself through symlinks, and where everything else lives",

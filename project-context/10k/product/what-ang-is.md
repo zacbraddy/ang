@@ -6,7 +6,7 @@ tags: [product-vision, open-source]
 # What Ang is
 
 ## Summary
-Ang (Avoid Navel Gazing) is an AI-assisted software development framework for Claude Code, optionally enriched by the Orca workspace host. It is shipped as a lean *starter* that each user bends into their own framework, not a finished product that grows with every request. Its feature set is deliberately closed. Every fact here is the user's own statement of intent (ET 1, evidence tier 1: a primary source), given at bootstrap on 2026-11-13.
+Ang (Avoid Navel Gazing) is an AI-assisted software development framework for Claude Code, optionally enriched by the Orca workspace host. It is shipped as a lean *starter* that each user bends into their own framework, not a finished product that grows with every request. Its feature set is deliberately closed, and it ships opinionated defaults. Every fact here is the user's own statement of intent (ET 1, evidence tier 1: a primary source), given at bootstrap on 2026-11-13 and in the generic-defaults epic on 2026-11-16.
 
 ## Definition
 - A framework of skills, agents, rules and one library script that runs inside Claude Code. Orca is an optional host that adds worktree cards and streams support.
@@ -16,6 +16,7 @@ Ang (Avoid Navel Gazing) is an AI-assisted software development framework for Cl
 
 ## Positioning
 - **A sourdough starter, not the loaf.** The open-source repo is the starter. A user's own copy, bent by their workflow improvements, is *their* Ang. The two serve different purposes and never need to agree.
+- **Solo devs and teams.** Shipped wording is team-neutral, and a teammate joining a bootstrapped repo runs `/tailor-ang` to set their own name, host and style. The release doesn't optimise for teams.
 - Ang gets more useful through use: friction becomes a workflow improvement, which an agent implements in a fresh session.
 - Supporting another harness (Codex etc.) or a bespoke workflow is the user's own adaptation, not a roadmap item for the repo.
 
@@ -27,6 +28,16 @@ The core features are:
 4. Streams: parallel worktrees with a cross-stream mailbox, for parallel solo work or teams.
 
 A new feature joins the open-source repo only if its benefit is truly universal. There are no plans to grow the set.
+
+Configuration modules (`intent`, `host`, `pilot`) and `/tailor-ang` personalise these four. They aren't features in this sense.
+
+## Defaults and opinions
+- **Methods ship as defaults.** DDD, Onion architecture, TDD, Atomic Design and Lean ship in `engineering-defaults.md`, so output is predictable out of the box. Only facts about the pilot are personal: identity, experience, stack, and whether they work solo or in a team. `/tailor-ang` adds those in a gitignored `pilot.local.md`.
+- **Initiative isn't configurable.** "Say a better approach once, then do what's decided" is part of Ang. There are no rule variants or rule interview.
+- **Disagree by bending it.** Anyone who wants different defaults raises a workflow improvement in their own instance.
+- **Ang writes only inside the repo.** Per-user choices go to gitignored `*.local` files in the repo, never to `~/.claude`.
+- **Fresh-install defaults:** intent on, streams off. `/bootstrap-repo` asks each feature question and writes the answers to `ang.json`.
+- **Voice:** Partner In Crime is the default output style. Four more styles ship, plus a short interview for a custom one (`src/.claude/output-styles/`).
 
 ## How the author uses it
 - **Client contracts:** drop Ang beside a client repo, `/bootstrap-repo` in brownfield mode, then feed onboarding notes and tickets into `raw/`.
