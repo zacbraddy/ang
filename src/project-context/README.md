@@ -225,9 +225,9 @@ An **Evidence Tier (ET)** says how far a claim can be trusted. **ET 1** is a pri
 
 ## Moonshots & parked work
 
-Two lists in `ideas/` for threads `/ideate` keeps but that shouldn't become items. Each file is a normal doc (frontmatter, Summary, Related), with one `###` entry per thread. They live outside `10k/` because they are aspirations, not facts.
+Two lists in `ideas/` for threads any workflow step keeps but that shouldn't become items. Each file is a normal doc (frontmatter, Summary, Related), with one `###` entry per thread. They live outside `10k/` because they are aspirations, not facts.
 - `ideas/moonshots.md`: long-range visions, never worked on directly. Entry: the vision, why it matters, and what a cheap opening during implementation would look like. The user confirms every moonshot.
-- `ideas/parked.md`: doable work with no value yet. Entry: what it is, the wake condition that would make it worth doing, and the source (raw filename plus commit hash).
+- `ideas/parked.md`: doable work with no value yet. Entry: what it is, the wake condition that would make it worth doing, and the source (raw filename plus commit hash, or the item doc or session that cut it).
 
 Glancing at these lists is optional and never a required step. `/refine-ideas` and `/retro` mention any parked entry whose wake condition looks to have come true, and `/shape-ideas` mentions a moonshot that the chosen approach could open a door to. To promote a parked entry, delete it and run it through `/ideate` (or `ang-context-manager.mjs state init`) as usual.
 

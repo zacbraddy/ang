@@ -16,6 +16,7 @@ All project knowledge, technical and business, lives in `project-context/`. Conv
 - Script-managed, never hand-edited: `index.json`, `state.json` and `triggers.json`. Use `node .claude/scripts/ang-context-manager.mjs` (`--help` lists its commands). Finish every workflow command with `ang-context-manager.mjs library validate` and fix what it reports. A `🤔 needs judgement` trigger's custom conditions are questions to check, not passes: mention it to the user as ready only if they all hold.
 - Links inside an item folder are relative. All other links start with `/project-context/`.
 - Reuse tags from `tags.json`. Add one with `ang-context-manager.mjs tag add` only when none fit.
+- Cutting doable work that has no value yet? Park it in `ideas/parked.md` with a wake condition (README: Moonshots & parked work), not only in the item's docs.
 - Document only what matters beyond this session. Replace outdated content, state entries included (`state replace`), never add one saying "Replaces X"; git is the history.
 - Spell out every abbreviation and coined label the first time it appears in a reply or doc, e.g. "ET 1 (evidence tier 1: a primary source)". Bare register keys and acronyms are where the user loses the thread.
 - Never write secrets (logins, API keys, customer personal data) anywhere in the repo.
