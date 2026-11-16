@@ -3,18 +3,8 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u2",
-      "question": "Pilot name in ang.json templated into skills: how is it templated, and what's the default when unset?",
-      "approach": "Spike templating one skill; check how the harness renders it"
-    },
-    {
       "id": "u3",
       "question": "What does the tailoring step look like, and how does /bootstrap-repo offer defaults vs customise?",
-      "approach": ""
-    },
-    {
-      "id": "u4",
-      "question": "How does the workflow-improvement flow keep new features honouring pilot-name templating?",
       "approach": ""
     },
     {
@@ -39,6 +29,18 @@
       "fact": "Only pilot facts (identity, stack) are personal; opinionated methods ship as defaults",
       "source": "shaping-content/personal-line.md",
       "answers": "Where's the line between Zac's personal rule/style and a generic default that keeps their spirit?"
+    },
+    {
+      "id": "k4",
+      "fact": "Pilot name is an optional 'pilot' feature in ang.json (default null = off), injected by SessionStart/SubagentStart hooks; no per-skill templating",
+      "source": "shaping-content/pilot-name.md",
+      "answers": "Pilot name in ang.json templated into skills: how is it templated, and what's the default when unset?"
+    },
+    {
+      "id": "k5",
+      "fact": "Nothing to honour: the name never lives in skills; new work just writes 'me'/'the user', never a literal name",
+      "source": "shaping-content/pilot-name.md",
+      "answers": "How does the workflow-improvement flow keep new features honouring pilot-name templating?"
     }
   ],
   "decisions": [
@@ -56,6 +58,11 @@
       "id": "d3",
       "decision": "Generic rule wording is team-neutral; tailoring adds solo framing — Ang serves solo and teams",
       "evidence": "shaping-content/personal-line.md"
+    },
+    {
+      "id": "d4",
+      "decision": "Pilot name via a hook-injected 'pilot' feature, not templating — spike passed 4/4; skills, rules and future features stay untouched",
+      "evidence": "shaping-content/pilot-name.md"
     }
   ],
   "lineage": [
@@ -78,6 +85,10 @@
     {
       "date": "2026-11-16",
       "event": "decided: Generic rule wording is team-neutral; tailoring adds solo framing — Ang serves solo and teams"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Pilot name via a hook-injected 'pilot' feature, not templating — spike passed 4/4; skills, rules and future features stay untouched"
     }
   ]
 }

@@ -29,6 +29,25 @@
     ]
   },
   {
+    "title": "Pilot name without templating",
+    "path": "project-context/shaping/generic-personal-defaults/shaping-content/pilot-name.md",
+    "shortDescription": "The pilot's name ships as an optional Ang feature injected by hooks, so skills, rules and future features never template it",
+    "tags": [
+      "distribution",
+      "repo-structure",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "Pilot feature spike",
+    "path": "project-context/shaping/generic-personal-defaults/spikes/pilot-feature/README.md",
+    "shortDescription": "Throwaway spike proving a pilot-name Ang feature reaches sessions and subagents with no per-skill templating",
+    "tags": [
+      "distribution",
+      "repo-structure"
+    ]
+  },
+  {
     "title": "Repo README",
     "path": "project-context/shaping/repo-readme/README.md",
     "shortDescription": "A short whistle-stop README covering concepts, key commands and a quick start",

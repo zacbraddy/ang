@@ -33,10 +33,11 @@ Team-neutral means wording that doesn't assume a solo pilot, such as "docs are f
 Ship it as-is as the default. The one change is to drop "ADHD-friendly" from its description and keep the behaviour.
 
 ## Still open
-- The file name `working-with-zac.md` and how the pilot is referred to depend on u2 (pilot name templating).
+- The generic rule's neutral file name, replacing `working-with-zac.md` (u3).
 - What the tailoring step asks, and how it rewrites these sections, is u3.
 
 ## Related
 - [Hub](../README.md)
 - [Brief](brief.md)
+- [Pilot name without templating](pilot-name.md)
 - [What Ang is](/project-context/10k/product/what-ang-is.md)
