@@ -6,7 +6,7 @@ tags: [distribution, repo-structure, brand-voice]
 # Tailoring step and per-user config
 
 ## Summary
-Tailoring gets its own re-runnable command, and `/bootstrap-repo` invokes it rather than duplicating it. Everything it writes stays inside the repo, in gitignored `*.local` files, and nothing goes to `~/.claude`. Config moves to the repo root: a committed `ang.json` for project defaults, plus a gitignored `ang.local.json` that may override personal keys only. Output style is a short pick from up to 4 canned styles (Partner In Crime is the recommended default), with a bounded interview as a fifth option. The per-user intent overlay and a configurable config path were both cut on YAGNI (you aren't gonna need it) grounds. Decided with Zac, 2026-11-16 (ET 1, evidence tier 1: the pilot's own call). Claude Code behaviour comes from Anthropic's docs, read the same day (ET 1 for "documented", untested in practice).
+Tailoring gets its own re-runnable command, and `/bootstrap-repo` invokes it rather than duplicating it. Everything it writes stays inside the repo, in gitignored `*.local` files, and nothing goes to `~/.claude`. Config moves to the repo root: a committed `ang.json` for project defaults, plus a gitignored `ang.local.json` that may override personal keys only. Output style is a numbered pick from five canned styles (Partner In Crime is the recommended default), with a bounded interview as a sixth option ([canned output styles](../../../output-styles.md)). The per-user intent overlay and a configurable config path were both cut on YAGNI (you aren't gonna need it) grounds. Decided with Zac, 2026-11-16 (ET 1, evidence tier 1: the pilot's own call). Claude Code behaviour comes from Anthropic's docs, read the same day (ET 1 for "documented", untested in practice).
 
 ## Why a separate command
 `/bootstrap-repo` refuses once `10k/` holds docs. A teammate who joins an existing Ang repo would otherwise have no way to set their name, host or style. A re-runnable tailoring command fills that gap, and bootstrap just calls it, so nothing is duplicated.
@@ -24,16 +24,16 @@ Tailoring gets its own re-runnable command, and `/bootstrap-repo` invokes it rat
 | `intent` | Project | No |
 | `streams` | Project (it drives branches and worktrees) | No. If it appears in local, validate warns and the value is ignored |
 
-- Each feature declares whether it can be overridden, so validate can enforce the table above.
+- A `LOCAL_KEYS` constant in the loader enforces the table above: other local keys are dropped and `validate` warns (d13, [config move](../../../config-move.md)).
 - Root placement signals to anyone reading the repo that it runs on Ang. `$CLAUDE_PROJECT_DIR` is the project root in hooks, even in worktrees, so the hooks can still find the file (Claude Code hooks docs).
 - `host` moves out of bootstrap's feature questions and into the tailoring step.
 
 ## Output style
-- **Ships:** up to 4 canned styles in `.claude/output-styles/`, with Partner In Crime as the default. The other 3 are designed as part of this workstream.
+- **Ships:** five canned styles in `.claude/output-styles/`, with Partner In Crime as the default ([canned output styles](../../../output-styles.md)).
 - **Project default:** `outputStyle` in `.claude/settings.json`.
 - **Personal choice:** the tailoring step writes `outputStyle` to `.claude/settings.local.json`. Local beats shared project settings: "managed, command line, project local, shared project, user" (Claude Code settings docs).
-- **Picking one:** a single question dialog with Partner In Crime marked as recommended, so most users just press Enter.
-- **Option 5, the interview:** 4–5 fixed questions (tone, verbosity, reply shape, humour or emoji, when to get serious), with a follow-up only where an answer is unclear. It should take under a minute. It writes a gitignored `.claude/output-styles/<name>.local.md`, then suggests raising a workflow improvement to make that style a canned one.
+- **Picking one:** one numbered list in a plain message, with Partner In Crime as 1 and recommended, so an empty reply takes the default.
+- **Option 6, the interview:** 5 fixed questions, built from scratch (d14). It should take under a minute. It writes a gitignored `.claude/output-styles/<name>.local.md`, then suggests raising a workflow improvement to make that style a canned one.
 
 ## Personal rule overlay
 - The shipped generic rule stays untouched.

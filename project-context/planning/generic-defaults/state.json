@@ -179,6 +179,11 @@
       "id": "d16",
       "decision": "Personal rule content comes from a 3-question interview inside /tailor-ang (bootstrap gets it by invoking the command): role and experience, default stack, solo or team. Same pattern as d14: numbered choices plus free text, skip allowed, full pilot.local.md previewed before writing. A repo scan may only suggest an answer for the stack question, never write it. Why: a scan finds the repo's stack, which belongs in committed 10k/ (bootstrap founding already captures it), not the pilot's own defaults in a gitignored file; and teammates running /tailor-ang standalone have nothing new to scan. Zac's call, 2026-11-16",
       "evidence": "origins/generic-personal-defaults/shaping-content/personal-line.md"
+    },
+    {
+      "id": "d17",
+      "decision": "Tests use built-in node:test beside the code (*.test.mjs); loadConfig splits into a pure mergeConfig plus an IO wrapper so merge rules are unit-tested; validate warns when ang.local.json exists but isn't gitignored. Why: ADR 0002 bans deps, and the merge is the logic worth driving test-first",
+      "evidence": "plan.md"
     }
   ],
   "lineage": [
@@ -329,6 +334,10 @@
     {
       "date": "2026-11-16",
       "event": "decided: Personal rule content comes from a 3-question interview inside /tailor-ang (bootstrap gets it by invoking the command): role and experience, default stack, solo or team. Same pattern as d14: numbered choices plus free text, skip allowed, full pilot.local.md previewed before writing. A repo scan may only suggest an answer for the stack question, never write it. Why: a scan finds the repo's stack, which belongs in committed 10k/ (bootstrap founding already captures it), not the pilot's own defaults in a gitignored file; and teammates running /tailor-ang standalone have nothing new to scan. Zac's call, 2026-11-16"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Tests use built-in node:test beside the code (*.test.mjs); loadConfig splits into a pure mergeConfig plus an IO wrapper so merge rules are unit-tested; validate warns when ang.local.json exists but isn't gitignored. Why: ADR 0002 bans deps, and the merge is the logic worth driving test-first"
     }
   ],
   "type": "technical"

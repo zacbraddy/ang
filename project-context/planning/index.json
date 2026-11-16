@@ -92,6 +92,17 @@
     ]
   },
   {
+    "title": "Generic defaults plan",
+    "path": "project-context/planning/generic-defaults/plan.md",
+    "shortDescription": "Scope, approach, sequencing, risks, test strategy and candidate ADRs for shipping Zac-free defaults plus the /tailor-ang command",
+    "tags": [
+      "open-source",
+      "distribution",
+      "repo-structure",
+      "brand-voice"
+    ]
+  },
+  {
     "title": "Generic defaults",
     "path": "project-context/planning/generic-defaults/README.md",
     "shortDescription": "Ship generic, Zac-free defaults (rule, output style, config) plus a tailoring command that writes per-user choices locally",
