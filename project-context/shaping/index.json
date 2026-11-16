@@ -1,5 +1,37 @@
 [
   {
+    "title": "Open-source hygiene, brief",
+    "path": "project-context/shaping/open-source-hygiene/ideas-content/brief.md",
+    "shortDescription": "Zac's stance on open-source standards and the deferred quality-tooling options",
+    "tags": [
+      "open-source"
+    ]
+  },
+  {
+    "title": "Open-source hygiene survey of small, whimsical repos",
+    "path": "project-context/shaping/open-source-hygiene/ideas-content/hygiene-survey.md",
+    "shortDescription": "Which community health files 17 small or personality-driven repos keep, adapt or drop, and candidate kits for Ang",
+    "tags": [
+      "open-source"
+    ]
+  },
+  {
+    "title": "Quality tooling for the Ang repo",
+    "path": "project-context/shaping/open-source-hygiene/ideas-content/quality-tooling.md",
+    "shortDescription": "Evidence on none vs zero-dependency CI (B) vs a full lint/format/hook kit (C) for a tiny, solo, low-contribution repo",
+    "tags": [
+      "open-source"
+    ]
+  },
+  {
+    "title": "Open-source hygiene, Ang-sized",
+    "path": "project-context/shaping/open-source-hygiene/README.md",
+    "shortDescription": "Which open-source standards Ang should adopt, adapt or drop, including whether the repo needs quality tooling",
+    "tags": [
+      "open-source"
+    ]
+  },
+  {
     "title": "Repo README",
     "path": "project-context/shaping/repo-readme/README.md",
     "shortDescription": "A short whistle-stop README covering concepts, key commands and a quick start",
