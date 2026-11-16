@@ -32,6 +32,15 @@
     ]
   },
   {
+    "title": "Test runner for the Ang repo",
+    "path": "project-context/shaping/open-source-hygiene/shaping-content/test-runner.md",
+    "shortDescription": "Why the quality kit keeps node:test instead of Vitest, and how a dev-only root package.json sits beside ADR 0002",
+    "tags": [
+      "open-source",
+      "tech-stack"
+    ]
+  },
+  {
     "title": "Repo README",
     "path": "project-context/shaping/repo-readme/README.md",
     "shortDescription": "A short whistle-stop README covering concepts, key commands and a quick start",
