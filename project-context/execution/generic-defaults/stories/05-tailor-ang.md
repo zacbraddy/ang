@@ -21,6 +21,7 @@ A teammate joining a bootstrapped repo runs `/tailor-ang` and gets their own nam
 ## Rough scope
 - Host detection, and a pilot name prompt that accepts skip (null).
 - The numbered picker and the option-6 interview exactly as specified (d8, d14). The picker opens by saying the choice is low stakes: `/output-style` switches between shipped styles any time, and re-running `/tailor-ang` builds a custom one later.
+- A generated style file is read on its own and describes only what it wants. An axis answered "none" (humour and emoji, say) leaves its line out entirely, rather than writing "No humour or emoji", because naming a behaviour to forbid it plants the idea. It never defines itself against another style either.
 - The personal-rule interview: role and experience, default stack, solo or team (d16). A repo scan may suggest a stack answer, never write one.
 - Preview each file. Write `ang.local.json`, `.claude/settings.local.json` (merged into any existing file), `.claude/rules/pilot.local.md` and any `.claude/output-styles/<slug>.local.md`.
 - Append any missing `.gitignore` entries before writing.

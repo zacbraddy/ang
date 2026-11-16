@@ -2,7 +2,7 @@
 title: Output styles
 shortDescription: Commit the five canned output styles, with Partner In Crime as the default and without the ADHD label
 tags: [distribution, brand-voice]
-status: ready
+status: done
 owner: agent
 dependsOn: []
 ---
@@ -48,6 +48,18 @@ A fresh install ships five styles, and `settings.json`'s `outputStyle: "Partner 
 - **Names**: `name` is the display name exactly as in the spec ("Straight Shooter", "Mentor", "Briefing", "Pair Programmer"); the filename is its kebab-case slug. No `.local` in canned filenames, since `*.local.md` is gitignored.
 - **`settings.json`**: no change; it already says `"Partner In Crime"`.
 - **Out of scope**: the picker and interview (05); the `project-structure.md` note that output styles were untracked (06); staging or committing (left for review).
+
+## Review
+Done-when checks all pass: five files present, none ignored by `git check-ignore`, frontmatter plus `# Voice` and `# Shape of every reply` only, no "adhd" match, `outputStyle` resolves, `library validate` clean. Content matches [canned output styles](../output-styles.md) and the per-style notes. The `/output-style` listing check is still a manual look for Zac.
+
+**Must-fix**: none.
+
+**Should-fix**: none. A suggested "No emoji." guard rail for Mentor and Pair Programmer was declined. Each style is read in isolation, with no knowledge of the others, so it should describe only what it wants. Naming a behaviour to forbid it plants the idea.
+- Follow-up (fixed): rewrote the four new styles as standalone descriptions. They no longer forbid behaviours ("no emoji", "never write None", "not jokey") or define themselves against a sibling ("no personality").
+
+**Nit** (fixed)
+- `src/.claude/output-styles/mentor.md:8-9`: "no jargon left unexplained" duplicated "Define each term the first time it appears". Removed.
+- `src/.claude/output-styles/partner-in-crime.md:16`: added the missing trailing newline.
 
 ## Links
 - [Plan: scope 5](../plan.md)
