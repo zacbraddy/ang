@@ -47,11 +47,13 @@ For each proposal give: the target doc (new path), department, the facts it will
 
 Write each batch once I agree.
 
-**Ang features.** Ask me once about each optional Ang feature below, giving its default, unless it says to detect it instead. For each yes or detection, do what its *If yes* says.
+**Ang features.** Ask me once about each optional Ang feature below that isn't marked personal (`/tailor-ang` covers those), giving its default, unless it says to detect it instead. For each yes or detection, do what its *If yes* says.
 
 !`node .claude/scripts/ang-context-manager.mjs session features`
 
 **Ang config.** Write root `ang.json` (`project-context/README.md`, Ang config) with every feature key above that isn't marked personal, from my answer or your detection. Personal keys belong in `ang.local.json`, which `/tailor-ang` writes; skip them here.
+
+Then invoke the `tailor-ang` skill and follow it. When it hands back, or I decline or stop tailoring partway, carry straight on to Write: its files are reviewed with everything else in step 8, and step 6 catches any gitignore or local-key problem it leaves.
 
 ## 5. Write
 - Every doc: frontmatter (`title`, `shortDescription`, `tags`), `## Summary` first, `## Related` last. Each Summary says what its facts actually rest on: my statements of intent (ET 1, said as such), the code they describe as backticked repo paths (`src/db/sqlite.ts`), or research with its date, tier and status. A doc that mixes sources says so per section or per fact.
@@ -68,4 +70,5 @@ No code yet (a founding-only repo)? Skip this and tell me to run `/bootstrap-qua
 ## 8. Leftovers and hand over
 - Leftovers: list the threads you set aside across every step: ideas, open questions, gaps between docs and code, risks, and tooling debt. If I want them carried, write them to `project-context/raw/bootstrap-leftovers.md` as plain markdown for `/ideate`.
 - Delete the raw inputs you've fully processed, provided each is committed (README: Raw inputs); leave sensitive inspiration-only files alone. Their facts are now in 10k and their open threads are in leftovers, so `/ideate` won't process them a second time.
-- List the docs written, the leftovers file and the tooling added, with paths. Changes are unstaged for me to review and commit. Suggest `/ideate` as the next step if `raw/` has anything in it.
+- List the docs written, `ang.json`, every file `/tailor-ang` wrote, the leftovers file and the tooling added, with paths. Tailor's files other than `.gitignore` are gitignored, so I review those on disk. Changes are unstaged for me to review and commit. Suggest `/ideate` as the next step if `raw/` has anything in it.
+- Tell me to quit Claude Code and start it again: the banner, pilot rule and output style load only at startup.

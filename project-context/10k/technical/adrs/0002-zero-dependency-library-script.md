@@ -6,7 +6,7 @@ tags: [tech-stack]
 # ADR 0002: Zero-dependency library script
 
 ## Summary
-Everything mechanical about the context library is done by `ang-context-manager.mjs`: indexes, state, tags, triggers, validation and the session banner. It is plain Node ESM (ECMAScript modules) that imports only `node:fs` and `node:path`. Ang has no `package.json` and no install step. This is drawn from the code in `src/.claude/scripts/` as of 2026-11-13.
+Everything mechanical about the context library is done by `ang-context-manager.mjs`: indexes, state, tags, triggers, validation and the session banner. It is plain Node ESM (ECMAScript modules) that imports only Node built-ins: `node:fs`, `node:path` and `node:child_process` (for `git check-ignore` in `validate`), plus `node:test` and its companions in tests. Ang has no `package.json` and no install step. This is drawn from the code in `src/.claude/scripts/` as of 2026-11-16.
 
 ## Context
 Ang is copied into a repo, often a client's, beside whatever stack that repo already has. A dependency tree would mean an install step and possible clashes, and it would keep needing upkeep.
@@ -21,7 +21,7 @@ Ang is copied into a repo, often a client's, beside whatever stack that repo alr
 - Any new script capability must be written by hand against the built-ins, or justify adding the first dependency.
 
 ## Standing
-2026-11-13. Built: the only imports across `src/.claude/scripts/` are `node:fs` and `node:path`, and the repo has no `package.json`.
+2026-11-16. Built: the script imports only `node:fs`, `node:path` and `node:child_process`; its tests add `node:test`, `node:assert/strict` and `node:os`. The repo has no `package.json`.
 
 ## Related
 | Doc | Why |

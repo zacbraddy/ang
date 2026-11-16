@@ -2,7 +2,7 @@
 title: Bootstrap and docs
 shortDescription: /bootstrap-repo writes a root ang.json and invokes /tailor-ang; 10k, ADRs and the shipped README describe the finished shape
 tags: [distribution, documentation, repo-structure]
-status: ready
+status: done
 owner: agent
 dependsOn: [05]
 ---
@@ -48,7 +48,25 @@ A fresh install is generic and valid end to end. Bootstrapping a scratch repo yi
 - **ADR 0002** Summary (line 9) and Standing (line 24): the library imports only Node built-ins: `node:fs`, `node:path`, `node:child_process` (for `git check-ignore` in validate), and `node:test` for tests.
 - **`src/project-context/README.md`, Ang config (lines 39–48):** fix the shape on line 41 (`intent`, `streams` in `ang.json`; `pilot`, `host` in `ang.local.json`), turn the parked pointer into a link to `/project-context/ideas/parked.md`, and add the easy-to-change-later sentence.
 - Before closing, grep `src/` and `project-context/10k/` for other stale `ang.json` or symlink claims and fix what turns up.
+- **Deviation: no parked-idea pointer in the shipped README.** The team-overrides idea is parked in Ang's own library, which never ships, so `src/project-context/README.md` doesn't mention it. A link to it also broke `validate` on a fresh install.
+- **Deviation: bootstrap skips personal features in its questions.** Step 4 asked about every feature, so `pilot` would have been asked twice. It now asks only about non-personal ones and leaves the rest to `/tailor-ang`.
+- **Also fixed:** project-structure claimed the root `project-context/` has no `README.md`; it is now a symlink to the shipped one. ADR 0002 also names the test-only built-ins (`node:assert/strict`, `node:os`).
+- **Also added:** root `CLAUDE.md`, telling agents in this repo that `src/` ships to installs and that the root `project-context/README.md` is a symlink to the shipped one.
+- **Fresh-install check (2026-11-16):** tracked `src/.claude` and `src/project-context` copied to a scratch git repo: `library validate` passes, banner reads `Ang: no optional features on`. Full suite 37/37. Zac's manual scratch-repo `/bootstrap-repo` run (2026-11-16) passed.
 - **Out of scope:** script changes, new features in bootstrap's question flow, and the install/uninstall story (`ideas/install-uninstall-update`).
+
+## Review
+Tests 37/37, `library validate` passes, the stale-claim grep is clean, and the ADR 0002 import list matches `src/.claude/scripts/`. All acceptance criteria are met in the prose. One Done-when item is still open.
+
+**Must-fix**
+- Done-when: the manual scratch-repo `/bootstrap-repo` run was outstanding. Resolved: Zac ran it on 2026-11-16 and it passed.
+
+**Should-fix**
+- `src/.claude/skills/bootstrap-repo/SKILL.md:56`: "When it hands back" covers a finished tailor run, but a decline at tailor step 5 (`tailor-ang/SKILL.md:70`) or a "stop" partway has no stated route back. The stop-partway criterion relies on bootstrap carrying on regardless; say so.
+- `CLAUDE.md` (new, root) is staged with this story but isn't in its scope or implementation notes. Commit it on its own, or add an "Also added" line here.
+
+**Nit**
+- `src/project-context/README.md:1`: stray blank line before the `# Project Context Library` heading, shipped to every install.
 
 ## Links
 - [Plan: scope 7–8, success measures, test strategy](../plan.md)
