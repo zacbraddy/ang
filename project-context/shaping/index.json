@@ -53,6 +53,15 @@
     ]
   },
   {
+    "title": "Upgrade merge spike",
+    "path": "project-context/shaping/install-uninstall-update/shaping-content/upgrade-merge-spike.md",
+    "shortDescription": "A file-by-file three-way merge, with the recorded install SHA as base, upgraded a locally improved instance across 28 changed files with 2 files needing judgement; with no version record the same upgrade showed 16 conflicted files and broke the instance when applied",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
     "title": "Copy-in spike",
     "path": "project-context/shaping/install-uninstall-update/spikes/copy-in/README.md",
     "shortDescription": "Throwaway script comparing degit and giget installs of src/ into an empty repo and an existing project",
@@ -66,6 +75,15 @@
     "shortDescription": "Throwaway prototype of install.sh plus a harness that pipes it into an empty repo and an existing project",
     "tags": [
       "distribution"
+    ]
+  },
+  {
+    "title": "Upgrade merge spike code",
+    "path": "project-context/shaping/install-uninstall-update/spikes/upgrade-merge/README.md",
+    "shortDescription": "Throwaway file-by-file three-way upgrade script and the harness that installs an old Ang, improves it locally and upgrades it",
+    "tags": [
+      "distribution",
+      "open-source"
     ]
   },
   {

@@ -18,6 +18,11 @@ A `localOverrides` list in `ang.json` (e.g. `["intent"]`) that lets the team all
 - **Wake condition:** a user asks to override a project-wide key (`intent`, `streams` or a future one) for themselves only.
 - **Source:** parked in planning on 2026-11-16, not from a raw file. See [Config move blast radius](https://github.com/zacbraddy/ang/blob/e34550491f625b84a6013a30e16438245bc62468/project-context/execution/generic-defaults/config-move.md) (at `e345504`) and [ADR 0003](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md).
 
+### Local changelog of workflow improvements
+`/raise-workflow-improvement` and `/improve-workflow` would keep a local version and changelog of the improvements made in an instance, so an upgrading agent can see why each local change was made. The upgrade skill already gets *what* changed by diffing the instance against the release recorded in `.claude/ang/version.json`. Only the *why* is missing, and in a guided merge the user is there to supply it.
+- **Wake condition:** guided merges keep stalling because nobody remembers why a local change was made.
+- **Source:** cut in shaping on 2026-11-16, not from a raw file. Zac's call after the [upgrade merge spike](/project-context/shaping/install-uninstall-update/shaping-content/upgrade-merge-spike.md), which found every local edit without a changelog.
+
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)
 - [ADR 0003: Per-user config overlay](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md)

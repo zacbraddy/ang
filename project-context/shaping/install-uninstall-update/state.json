@@ -1,26 +1,11 @@
 {
-  "status": "active",
-  "statusNote": "",
+  "status": "ready-for-planning",
+  "statusNote": "Install route, settings merge, version record and upgrade merge are all spiked or Zac's call; remaining unknowns are release-format, settings-upgrade and escape-hatch design detail for planning, plus Node minimum blocked on open-source-hygiene with a best guess",
   "unknowns": [
     {
-      "id": "u8",
-      "question": "How would the workflow-improvement workflow keep a local version and changelog of improvements that an upgrading agent can reason over?",
-      "approach": ""
-    },
-    {
-      "id": "u9",
-      "question": "How would an upgrade skill merge upstream changes around local improvements: what makes a merge simple versus too much (the escape hatch), and what does taking only chosen parts look like?",
-      "approach": ""
-    },
-    {
       "id": "u10",
-      "question": "What must each upstream release publish (tags, changelog) for an upgrading agent to know what changed?",
-      "approach": ""
-    },
-    {
-      "id": "u11",
-      "question": "How does the upgrade skill baseline an instance with no version record, such as ohnvm (candidate: hash its files against past tags' trees and pick the closest)?",
-      "approach": "shaping-content/install-script-spike.md"
+      "question": "What must each upstream release publish (tags, changelog, and declared moves and migrations such as ang.json leaving .claude/) for an upgrading agent to know what changed? A file-level merge can't see moves",
+      "approach": "shaping-content/upgrade-merge-spike.md"
     },
     {
       "id": "u12",
@@ -36,6 +21,11 @@
       "id": "u14",
       "question": "What minimum Node version do the documented install prerequisite and install.sh's node check state? It waits on open-source-hygiene's u7: docs say 21+, but the code's import.meta.dirname needs 22.16+. install.sh itself needs only 18+ (fetch). Once it's settled, install.sh should check the version, not just that node exists",
       "approach": "https://github.com/zacbraddy/ang/blob/stream/open-source-hygiene/project-context/shaping/open-source-hygiene/state.json"
+    },
+    {
+      "id": "u15",
+      "question": "What does taking only chosen parts of a release look like in the escape hatch: per file, per feature or per changelog entry, and how does the version record show a partial upgrade?",
+      "approach": ""
     }
   ],
   "knowns": [
@@ -63,7 +53,7 @@
     },
     {
       "id": "k5",
-      "fact": "Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, a local changelog of workflow improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges. Motivating case: ohnvm's pre-open-source Ang",
+      "fact": "Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, a local changelog of workflow improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges",
       "source": "shaping-content/install-and-upgrade-direction.md"
     },
     {
@@ -77,6 +67,12 @@
       "fact": "install.sh resolves the ref to a full SHA through GitHub's API, installs that SHA and writes .claude/ang/version.json { ref, sha, installedAt }. Spiked: the record matched git rev-parse on every run",
       "source": "shaping-content/install-script-spike.md",
       "answers": "Where and in what form does an install record its Ang version (tag, commit SHA), and how does an upgrade baseline an instance with no record, such as ohnvm?"
+    },
+    {
+      "id": "k8",
+      "fact": "A file-by-file three-way merge (base: the version.json SHA; git merge-file where both changed) sorts every file into one category. Across 28 upstream-changed files and 6 local improvements, only 4 files needed judgement. Conflicted files are the cost signal; fast-path and new-file counts are nearly free. Clean merges can still be semantically stale, and upstream moves look like deletions",
+      "source": "shaping-content/upgrade-merge-spike.md",
+      "answers": "How would an upgrade skill merge upstream changes around local improvements: what makes a merge simple versus too much (the escape hatch), and what does taking only chosen parts look like?"
     }
   ],
   "decisions": [
@@ -114,6 +110,21 @@
       "id": "d7",
       "decision": "The install's settings merge favours the user: their values win, Ang adds only missing keys, arrays are unioned, and only the first backup (.claude/settings.json.pre-ang) is kept, so re-runs are no-ops. Spiked: the user's outputStyle, model, deny rule and hook all survived, with no duplicates on re-run",
       "evidence": "shaping-content/install-script-spike.md"
+    },
+    {
+      "id": "d8",
+      "decision": "No pre-open-source upgrade path: the skill isn't designed around instances like ohnvm, because only Zac has them and only until he upgrades them. A missing version record never hard-stops an upgrade, so an LLM-run upgrade of ohnvm may succeed by accident (Zac's call)",
+      "evidence": "shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "id": "d9",
+      "decision": "The upgrade skill merges file by file, three-way, against the version.json SHA, with git merge-file. Fast path when no file needs judgement. Guided merge when a handful do (clean merges reread against upstream's diff, conflicts resolved with the user, conflict-deletes checked as moves). Escape hatch before writing anything when many files conflict or there's no version record. The 'many' threshold rests on two spike runs; tune it on real upgrades",
+      "evidence": "shaping-content/upgrade-merge-spike.md"
+    },
+    {
+      "id": "d10",
+      "decision": "No local changelog of workflow improvements in v1: diffing the instance against the version.json SHA already shows what changed locally, and the user supplies the why during a guided merge. Parked with a wake condition (Zac's call)",
+      "evidence": "/project-context/ideas/parked.md"
     }
   ],
   "lineage": [
@@ -180,6 +191,38 @@
     {
       "date": "2026-11-16",
       "event": "decided: The install's settings merge favours the user: their values win, Ang adds only missing keys, arrays are unioned, and only the first backup (.claude/settings.json.pre-ang) is kept, so re-runs are no-ops. Spiked: the user's outputStyle, model, deny rule and hook all survived, with no duplicates on re-run"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced k5: Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, a local changelog of workflow improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges. Motivating case: ohnvm's pre-open-source Ang → Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, a local changelog of workflow improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: No pre-open-source upgrade path: the skill isn't designed around instances like ohnvm, because only Zac has them and only until he upgrades them. A missing version record never hard-stops an upgrade, so an LLM-run upgrade of ohnvm may succeed by accident (Zac's call)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "removed u11: How does the upgrade skill baseline an instance with no version record, such as ohnvm (candidate: hash its files against past tags' trees and pick the closest)?"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: The upgrade skill merges file by file, three-way, against the version.json SHA, with git merge-file. Fast path when no file needs judgement. Guided merge when a handful do (clean merges reread against upstream's diff, conflicts resolved with the user, conflict-deletes checked as moves). Escape hatch before writing anything when many files conflict or there's no version record. The 'many' threshold rests on two spike runs; tune it on real upgrades"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced u10: What must each upstream release publish (tags, changelog) for an upgrading agent to know what changed? → What must each upstream release publish (tags, changelog, and declared moves and migrations such as ang.json leaving .claude/) for an upgrading agent to know what changed? A file-level merge can't see moves; approach:  → shaping-content/upgrade-merge-spike.md"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "status → ready-for-planning: Install route, settings merge, version record and upgrade merge are all spiked or Zac's call; remaining unknowns are release-format, settings-upgrade and escape-hatch design detail for planning, plus Node minimum blocked on open-source-hygiene with a best guess"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "removed u8: How would the workflow-improvement workflow keep a local version and changelog of improvements that an upgrading agent can reason over?"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: No local changelog of workflow improvements in v1: diffing the instance against the version.json SHA already shows what changed locally, and the user supplies the why during a guided merge. Parked with a wake condition (Zac's call)"
     }
   ]
 }

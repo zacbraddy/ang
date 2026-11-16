@@ -24,11 +24,11 @@ In a vanilla install, uninstalling means deleting Ang's skills, rules and `proje
 Zac's ambition, in his words where possible:
 - **Know the installed version.** The installed instance records which Ang open-source version it came from.
 - **An upgrade skill.** It fetches the latest release from the open-source repo and "massages" the updates into the local instance around whatever workflow improvements it has.
-- **Local improvements keep their own record.** The workflow-improvement workflow (`/raise-workflow-improvement`, `/improve-workflow`) would keep a local version and changelog of the improvements made in this instance. Then the upgrading agent can see what diverged and why.
+- **Local improvements keep their own record.** Later parked (Zac's call, 2026-11-16): the [upgrade merge spike](upgrade-merge-spike.md) found every local edit by diffing against the recorded SHA, so the changelog waits in [parked work](/project-context/ideas/parked.md).
 - **Escape hatch.** When local improvements make an upgrade too large to be reasonable, the user is warned of the size of the job before diving in. They are offered options, such as taking only the parts of the new release that made them want to upgrade.
 - **Fast path.** When the merge turns out to be simple, the skill just does it.
 
-**First real use:** Zac's `ohnvm` repo runs a snowflaked, pre-open-source Ang. Upgrading it to the open-source version without losing much time is the motivating case. That instance has no recorded version, so it's also the hardest one: an upgrade has to cope without a known baseline.
+**ohnvm, a hoped-for side effect:** Zac's `ohnvm` repo runs a snowflaked, pre-open-source Ang with no recorded version. Its Ang predates this repo (first committed 2026-10-19; this repo starts 2026-11-10), so no Ang commit is its true baseline. Zac's call (2026-11-16): the upgrade skill gets **no special path for pre-open-source instances**. Only Zac has them, and only until he's upgraded them. Instead, nothing in the skill outright stops an upgrade when the version record is missing. An LLM runs the skill, so with no hard stop it may well upgrade ohnvm by accident, which would be a bonus, not a requirement.
 
 ## Against the delivery intent, deliberately
 The [delivery intent](/project-context/10k/intent.md) says to build the least and treats new features as a "no" until they make their case. Zac has made the case for the upgrade skill. It goes against the intent on purpose, as a rare exception, because he sees real value in it. It also stays in this item rather than splitting out. It's part of the same logical unit of work as install, and growing in size doesn't make it a separate one.
