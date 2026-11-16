@@ -6,7 +6,7 @@ tags: [distribution, open-source]
 # Install, uninstall, update
 
 ## Summary
-How does Ang land in a user's repo quickly? Research points to copying files in (`degit`/`giget`-style, possibly with a hash-manifest update later) rather than a Claude Code plugin, since plugins can't ship rules or permissions and wipe user edits on update. Also: is an uninstall command worth having, and what must it never remove? Is an update command worth having, given users diverge from upstream by design? And how does `project-context/README.md` reach an install, since `library init` doesn't create it?
+How does Ang land in a user's repo, and how does it stay current? The install is settled: a shipped `install.sh` one-liner wraps a copy-in of `src/`. A spike showed the copy-in works in about 4 seconds and brings `project-context/README.md` along. The script exists partly to protect a user's own `.claude/settings.json`, which the copy-in tools overwrite. There will be no uninstall command. The script backs up the user's settings before merging into them. An upgrade skill is also in scope, by Zac's deliberate exception to the delivery intent. It merges upstream releases around an instance's local workflow improvements, and most of its design is still open.
 
 ## Why it matters
 The README's quick start and a clean first run depend on it. ADR 0002 assumes Ang is copied in, but the route was never decided.
@@ -14,6 +14,8 @@ The README's quick start and a clean first run depend on it. ADR 0002 assumes An
 ## What's here
 - [Brief](ideas-content/brief.md)
 - [Install route landscape](ideas-content/install-route.md): plugins vs copy-in tools vs copy-in with managed updates, and how comparable frameworks do it
+- [Copy-in bake-off](shaping-content/copy-in-spike.md): degit vs giget into an empty repo and an existing project ([spike](spikes/copy-in/README.md))
+- [Install script and upgrade ambition](shaping-content/install-and-upgrade-direction.md): Zac's calls on install and uninstall, and the upgrade skill to explore
 
 ## Related
 - [ADR 0002: zero-dependency library script](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)

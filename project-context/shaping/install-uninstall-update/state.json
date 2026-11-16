@@ -3,18 +3,28 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u2",
-      "question": "How does project-context/README.md reach a user's install, and should library init copy it?",
+      "id": "u6",
+      "question": "Where does install.sh live and how is it fetched (repo root rather than src/, URL pinned to a release tag) so it never ships into installs itself?",
       "approach": ""
     },
     {
-      "id": "u3",
-      "question": "Is an uninstall command worth having? If so, what does it remove and never remove?",
+      "id": "u7",
+      "question": "Where and in what form does an install record its Ang version (tag, commit SHA), and how does an upgrade baseline an instance with no record, such as ohnvm?",
       "approach": ""
     },
     {
-      "id": "u4",
-      "question": "Is an update command worth having, given users diverge by design?",
+      "id": "u8",
+      "question": "How would the workflow-improvement workflow keep a local version and changelog of improvements that an upgrading agent can reason over?",
+      "approach": ""
+    },
+    {
+      "id": "u9",
+      "question": "How would an upgrade skill merge upstream changes around local improvements: what makes a merge simple versus too much (the escape hatch), and what does taking only chosen parts look like?",
+      "approach": ""
+    },
+    {
+      "id": "u10",
+      "question": "What must each upstream release publish (tags, changelog) for an upgrading agent to know what changed?",
       "approach": ""
     }
   ],
@@ -34,9 +44,46 @@
       "fact": "Copy-in fits, plugin doesn't: plugins can't ship rules or permissions, wipe user edits on update and namespace skills; candidates are plain degit/giget copy-in, copy-in plus a hash-manifest update, or copier",
       "source": "ideas-content/install-route.md",
       "answers": "Install route: plugin marketplace, copy script or degit-style clone, given users must own and edit their copy?"
+    },
+    {
+      "id": "k4",
+      "fact": "Copying src/ brings project-context/README.md along with .claude/, so an install gets the conventions doc without library init copying it",
+      "source": "shaping-content/copy-in-spike.md",
+      "answers": "How does project-context/README.md reach a user's install, and should library init copy it?"
+    },
+    {
+      "id": "k5",
+      "fact": "Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, a local changelog of workflow improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges. Motivating case: ohnvm's pre-open-source Ang",
+      "source": "shaping-content/install-and-upgrade-direction.md"
     }
   ],
-  "decisions": [],
+  "decisions": [
+    {
+      "id": "d1",
+      "decision": "Install by copy-in of src/ (giget/degit --force) wrapped in a shipped install.sh, so the install is one copy-pasteable line. The script protects the user's .claude/settings.json and carries future install changes to every new user (Zac's call)",
+      "evidence": "shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "id": "d2",
+      "decision": "No uninstall command: removing a vanilla install is deleting skills, rules and project-context/, and local workflow improvements make automating it unreliable. Easy by hand, hard to automate (Zac's call)",
+      "evidence": "shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "id": "d3",
+      "decision": "The upgrade skill is in scope for this item and is to be built. Zac's deliberate exception to the intent's build-the-least: real value, and it belongs to the same logical unit of work as install, however big it has grown",
+      "evidence": "shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "id": "d4",
+      "decision": "install.sh merges an existing .claude/settings.json with node (already required, no jq dependency) and first keeps a backup of the user's original, in case the merge drops properties that mattered (Zac's call)",
+      "evidence": "shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "id": "d5",
+      "decision": "Tests ship with installs: a local workflow improvement may change shipped scripts, and having the tests on hand lets the user run them to check (Zac's call)",
+      "evidence": "shaping-content/copy-in-spike.md"
+    }
+  ],
   "lineage": [
     {
       "date": "2026-11-16",
@@ -49,6 +96,50 @@
     {
       "date": "2026-11-16",
       "event": "moved ideas → shaping"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Install by plain copy-in of src/ (npx giget or degit, --force). Both work in about 4s and leave a valid library, so no installer needs building. Picking between the two tools is cosmetic"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced d1: Install by plain copy-in of src/ (npx giget or degit, --force). Both work in about 4s and leave a valid library, so no installer needs building. Picking between the two tools is cosmetic → Install by copy-in of src/ (giget/degit --force) wrapped in a shipped install.sh, so the install is one copy-pasteable line. The script protects the user's .claude/settings.json and carries future install changes to every new user (Zac's call); evidence: shaping-content/copy-in-spike.md → shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: No uninstall command: removing a vanilla install is deleting skills, rules and project-context/, and local workflow improvements make automating it unreliable. Easy by hand, hard to automate (Zac's call)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "removed u5: How does an install into a project that has its own .claude/settings.json keep the user's settings? copy-in --force overwrites it. Lean: a quick-start line to commit first and merge back from git diff"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "removed u3: Is an uninstall command worth having? If so, what does it remove and never remove?"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced u4: Is an update command worth having, given users diverge by design? → Is an upgrade skill worth building, and as part of the first release or after it? Zac's ambition: merge upstream releases around local workflow improvements, with an escape hatch and a fast path; approach:  → shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: The upgrade skill is in scope for this item and is to be built. Zac's deliberate exception to the intent's build-the-least: real value, and it belongs to the same logical unit of work as install, however big it has grown"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "removed u4: Is an upgrade skill worth building, and as part of the first release or after it? Zac's ambition: merge upstream releases around local workflow improvements, with an escape hatch and a fast path"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: install.sh merges an existing .claude/settings.json with node (already required, no jq dependency) and first keeps a backup of the user's original, in case the merge drops properties that mattered (Zac's call)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "removed u5: How does install.sh handle an existing .claude/settings.json: rename it and leave the merge to the user, or merge it (jq if present, or node, which Ang already requires)?"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Tests ship with installs: a local workflow improvement may change shipped scripts, and having the tests on hand lets the user run them to check (Zac's call)"
     }
   ]
 }

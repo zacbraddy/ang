@@ -26,6 +26,32 @@
     ]
   },
   {
+    "title": "Copy-in bake-off",
+    "path": "project-context/shaping/install-uninstall-update/shaping-content/copy-in-spike.md",
+    "shortDescription": "degit and giget both install a working Ang from src/ in one command, but need --force and overwrite an existing .claude/settings.json",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Install script and upgrade ambition",
+    "path": "project-context/shaping/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
+    "shortDescription": "Zac's calls on 2026-11-16 - a shipped install.sh one-liner, no uninstall command, and an in-scope upgrade skill that merges upstream releases around local workflow improvements",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Copy-in spike",
+    "path": "project-context/shaping/install-uninstall-update/spikes/copy-in/README.md",
+    "shortDescription": "Throwaway script comparing degit and giget installs of src/ into an empty repo and an existing project",
+    "tags": [
+      "distribution"
+    ]
+  },
+  {
     "title": "Repo README",
     "path": "project-context/shaping/repo-readme/README.md",
     "shortDescription": "A short whistle-stop README covering concepts, key commands and a quick start",
