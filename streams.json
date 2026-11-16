@@ -4,5 +4,11 @@
     "branch": "stream/docs-website",
     "worktree": "/home/zacbraddy/orca/workspaces/ang/docs-website",
     "focus": "Ang's docs website: framework, design, hosting and content in Zac's voice (ideas/docs-website)"
+  },
+  {
+    "slug": "install-uninstall-update",
+    "branch": "stream/install-uninstall-update",
+    "worktree": "/home/zacbraddy/orca/workspaces/ang/install-uninstall-update",
+    "focus": "How Ang gets into a project, and whether uninstall and update commands are worth having (ideas/install-uninstall-update)"
   }
 ]
