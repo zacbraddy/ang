@@ -1,9 +1,1 @@
-[
-  {
-    "id": "93e17c",
-    "from": "open-source-hygiene",
-    "to": "install-uninstall-update",
-    "sent": "2026-11-16",
-    "text": "Heads up from open-source-hygiene: Ang's code already uses import.meta.dirname, which eslint-plugin-n flags below Node 22.16, but project-structure.md says Node 21+. The real minimum Node version is undecided (our u7); whatever install prerequisites you document should wait for it or align with it."
-  }
-]
+[]
