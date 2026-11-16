@@ -53,6 +53,14 @@
     ]
   },
   {
+    "title": "Quality tooling for the Ang repo",
+    "path": "project-context/ideas/open-source-hygiene/ideas-content/quality-tooling.md",
+    "shortDescription": "Evidence on none vs zero-dependency CI (B) vs a full lint/format/hook kit (C) for a tiny, solo, low-contribution repo",
+    "tags": [
+      "open-source"
+    ]
+  },
+  {
     "title": "Open-source hygiene, Ang-sized",
     "path": "project-context/ideas/open-source-hygiene/README.md",
     "shortDescription": "Which open-source standards Ang should adopt, adapt or drop, including whether the repo needs quality tooling",

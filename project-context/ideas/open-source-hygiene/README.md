@@ -6,15 +6,17 @@ tags: [open-source]
 # Open-source hygiene, Ang-sized
 
 ## Summary
-Zac has never properly released a repo as open source. Research small, whimsical open-source projects to see which accepted standards suit Ang, adapted or dropped, without pretending to be React. MIT is decided. Templates and CONTRIBUTORS are out unless they're no-brainers. Includes the question of whether the Ang repo needs lint, tests and CI at all.
+Zac has never properly released a repo as open source. Research small, whimsical open-source projects to see which accepted standards suit Ang, adapted or dropped, without pretending to be React. MIT is decided. PR and issue templates are in, to steer contributions toward Ang's first principles and open conversation. The repo gets the full quality kit (ESLint, Prettier, Vitest, Husky, lint-staged and CI), dev-only, with auto-fix, zero warnings and no markdown linting, and the README gets status badges.
 
 ## Why it matters
-The tagged release needs a decided, Ang-sized hygiene checklist, and the shipped rule's push for `/bootstrap-quality` depends on the tooling answer.
+The tagged release needs a decided, Ang-sized hygiene checklist, and the shipped rule's push for `/bootstrap-quality` should agree with what the Ang repo itself does.
 
 ## What's here
 - [Brief](ideas-content/brief.md)
+- [Quality tooling](ideas-content/quality-tooling.md): evidence and Zac's decision for the full kit
 
 ## Related
+- [Repo README (shaping)](/project-context/shaping/repo-readme/README.md): where the badges will sit
 - [Business constraints](/project-context/10k/business-constraints.md)
 - [Delivery intent](/project-context/10k/intent.md)
 - [ADR 0002: zero-dependency library script](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)
