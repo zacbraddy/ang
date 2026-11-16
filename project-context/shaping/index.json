@@ -49,6 +49,22 @@
     ]
   },
   {
+    "title": "Minimum supported Node version",
+    "path": "project-context/shaping/open-source-hygiene/shaping-content/node-version.md",
+    "shortDescription": "Ang is developed against the current Node LTS, and that LTS is the minimum it supports",
+    "tags": [
+      "open-source"
+    ]
+  },
+  {
+    "title": "What the PR and issue templates are for",
+    "path": "project-context/shaping/open-source-hygiene/shaping-content/pr-template-purpose.md",
+    "shortDescription": "Ang's templates are a guided rubber-ducking nudge toward first principles, not a wall against unwanted PRs",
+    "tags": [
+      "open-source"
+    ]
+  },
+  {
     "title": "Test runner for the Ang repo",
     "path": "project-context/shaping/open-source-hygiene/shaping-content/test-runner.md",
     "shortDescription": "Why the quality kit keeps node:test instead of Vitest, and how a dev-only root package.json sits beside ADR 0002",

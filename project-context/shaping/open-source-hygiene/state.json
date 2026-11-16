@@ -1,18 +1,7 @@
 {
-  "status": "active",
-  "statusNote": "",
-  "unknowns": [
-    {
-      "id": "u6",
-      "question": "How should Ang guard against agent-written PRs/issues and forkers PR-ing upstream by accident (template wording, collaborators-only settings)?",
-      "approach": "Decide in shaping alongside the template kit"
-    },
-    {
-      "id": "u7",
-      "question": "What minimum Node version does Ang support? Docs say 21+, but the code uses import.meta.dirname, which eslint-plugin-n flags below 22.16; the root package.json engines field must state it",
-      "approach": ""
-    }
-  ],
+  "status": "ready-for-planning",
+  "statusNote": "All unknowns answered; kit, tooling, ESLint set, Node minimum and template purpose decided by Zac with evidence and a probe on Ang's code; ADR 0002 amendment noted",
+  "unknowns": [],
   "knowns": [
     {
       "id": "k1",
@@ -53,6 +42,18 @@
       "fact": "No: shipped Ang drops the /bootstrap-quality nudge; /bootstrap-repo offers tooling up front, declining is a decision, and /trigger covers reminders (Zac, 2026-11-16)",
       "source": "shaping-content/bootstrap-quality-nudge.md",
       "answers": "Should the generic personal rule still push /bootstrap-quality on repos lacking tooling?"
+    },
+    {
+      "id": "k8",
+      "fact": "Node 26 (the current LTS) is the minimum supported version; all 37 tests pass on v26.13.1. Older versions may work but aren't supported",
+      "source": "shaping-content/node-version.md",
+      "answers": "What minimum Node version does Ang support? Docs say 21+, but the code uses import.meta.dirname, which eslint-plugin-n flags below 22.16; the root package.json engines field must state it"
+    },
+    {
+      "id": "k9",
+      "fact": "Templates only, as a guided rubber-ducking nudge toward Ang's first principles, not a guard: no collaborators-only setting, PR cap or auto-close. Evidence shows templates don't block PRs, and blocking was never the aim",
+      "source": "shaping-content/pr-template-purpose.md",
+      "answers": "How should Ang guard against agent-written PRs/issues and forkers PR-ing upstream by accident (template wording, collaborators-only settings)?"
     }
   ],
   "decisions": [
@@ -105,6 +106,21 @@
       "id": "d10",
       "decision": "Remove the 'flag it once and suggest /bootstrap-quality' line from the shipped engineering-defaults rule and 'flag that instead' from the bootstrap-quality description — Ang agents don't nag, and one repo's tooling choice binds no other install (Zac, 2026-11-16)",
       "evidence": "shaping-content/bootstrap-quality-nudge.md"
+    },
+    {
+      "id": "d11",
+      "decision": "Develop against the current Node LTS and make it the minimum: engines >=26, .node-version 26, CI on 26, bumped together each October; release notes say older versions may work but aren't supported. Only the version we develop on is actually tested (Zac, 2026-11-16)",
+      "evidence": "shaping-content/node-version.md"
+    },
+    {
+      "id": "d12",
+      "decision": "Templates only (option C), PR and issue alike, as rubber-ducking nudges toward first principles: the PR template asks the raiser to justify the change for all Ang users so ego PRs talk themselves into a local workflow improvement; issues lead with open conversation over cold feature demands, though both are welcome; bad PRs still arriving is accepted (Zac, 2026-11-16)",
+      "evidence": "shaping-content/pr-template-purpose.md"
+    },
+    {
+      "id": "d13",
+      "decision": "Releases are git tags with generated GitHub Releases, no hand-kept changelog: install.sh and the upgrade skill pin to tags (install-uninstall-update's install-script spike). Stamping the tag into install.sh before tagging (their u12) stays with that stream (Zac, 2026-11-16)",
+      "evidence": "ideas-content/hygiene-survey.md"
     }
   ],
   "lineage": [
@@ -183,6 +199,26 @@
     {
       "date": "2026-11-16",
       "event": "decided: Remove the 'flag it once and suggest /bootstrap-quality' line from the shipped engineering-defaults rule and 'flag that instead' from the bootstrap-quality description — Ang agents don't nag, and one repo's tooling choice binds no other install (Zac, 2026-11-16)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Develop against the current Node LTS and make it the minimum: engines >=26, .node-version 26, CI on 26, bumped together each October; release notes say older versions may work but aren't supported. Only the version we develop on is actually tested (Zac, 2026-11-16)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Templates only (option C): the PR template asks the raiser to justify the change against first principles and for all Ang users, so good PRs make their case and ego PRs talk themselves into a local workflow improvement; bad PRs still arriving is accepted (Zac, 2026-11-16)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "status → ready-for-planning: All unknowns answered; kit, tooling, ESLint set, Node minimum and template purpose decided by Zac with evidence and a probe on Ang's code; ADR 0002 amendment noted"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced d12: Templates only (option C): the PR template asks the raiser to justify the change against first principles and for all Ang users, so good PRs make their case and ego PRs talk themselves into a local workflow improvement; bad PRs still arriving is accepted (Zac, 2026-11-16) → Templates only (option C), PR and issue alike, as rubber-ducking nudges toward first principles: the PR template asks the raiser to justify the change for all Ang users so ego PRs talk themselves into a local workflow improvement; issues lead with open conversation over cold feature demands, though both are welcome; bad PRs still arriving is accepted (Zac, 2026-11-16)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Releases are git tags with generated GitHub Releases, no hand-kept changelog: install.sh and the upgrade skill pin to tags (install-uninstall-update's install-script spike). Stamping the tag into install.sh before tagging (their u12) stays with that stream (Zac, 2026-11-16)"
     }
   ]
 }
