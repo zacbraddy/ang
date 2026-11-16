@@ -13,7 +13,7 @@ argument-hint: "[optional story path]"
    - **Done when**: the concrete evidence that proves completion.
    - **Acceptance criteria**: terse Given/When/Then lines covering the main happy and unhappy paths.
    - Code stories:
-     - **Test plan**: which unit, integration and E2E tests, and what we deliberately won't test (per my testing rules).
+     - **Test plan**: which unit, integration and E2E tests, and what we deliberately won't test (per `engineering-defaults.md`).
      - **Implementation notes**: files, modules, C4 code elements, edge cases, out of scope.
    - `user`/`both` stories:
      - **Guide**: numbered steps for me.

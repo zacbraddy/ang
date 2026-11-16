@@ -2,7 +2,7 @@
 title: Generic rule and pointer fixes
 shortDescription: Ship team-neutral engineering-defaults.md in place of working-with-zac.md, move Zac's identity to his gitignored pilot.local.md, and fix the two "my rules" pointers
 tags: [distribution, brand-voice]
-status: ready
+status: done
 owner: agent
 dependsOn: []
 ---
@@ -50,6 +50,11 @@ A fresh install ships an opinionated rule with no pilot name in it. Zac's sessio
   - `src/.claude/skills/review-story/SKILL.md:23`: "my coding and testing rules (right-sized tests, no testing libraries, …)" → "`engineering-defaults.md`, plus `pilot.local.md` when present (right-sized tests, no tests of library behaviour, comments only where there be dragons)". The old "no testing libraries" misread the rule ([person references](../person-references.md)).
 - **Gitignore**: no change needed. Root `.gitignore` already has unanchored `*.local.md` (story 01).
 - **Out of scope**: "me"/"the user" in other skills, agents and scripts (k5, k15); test fixtures named "Zac"; `src/.claude/output-styles/` (04); `/tailor-ang` writing `pilot.local.md` (05); docs (06).
+
+## Review
+All Done-when checks pass: `check-ignore` reports `.gitignore:3:*.local.md`, the `zac` grep is empty, 37/37 tests pass, `library validate` is clean. Every row of the [personal line](../origins/generic-personal-defaults/shaping-content/personal-line.md) table lands in one of the two files. The old rule was untracked, so a line-by-line diff isn't possible.
+
+- **Nit (fixed)**: `src/.claude/rules/engineering-defaults.md:6` "In client repos" assumed a contractor; now "In repos with their own conventions".
 
 ## Links
 - [Plan: scope 4](../plan.md)

@@ -20,7 +20,7 @@ Run this in a session that didn't implement the story.
      - it conforms to the plan.
    - **code:**
      - conformance to C4;
-     - my coding and testing rules (right-sized tests, no testing libraries, comments only where there be dragons);
+     - `engineering-defaults.md`, plus `pilot.local.md` when present (right-sized tests, no tests of library behaviour, comments only where there be dragons);
      - correctness, security and performance red flags;
      - simplicity, and whether every abstraction earns its place.
    - **non-code artefacts:**
