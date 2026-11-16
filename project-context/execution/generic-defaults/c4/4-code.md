@@ -19,7 +19,7 @@ A table of the functions and constants each changed module exposes, their signat
 | `config/config.mjs` | `bannerLine()` | changed | Broken suffix reads "Ang config invalid", since errors can come from either file |
 | `features.mjs` | `FEATURES` | changed | `[intent, streams, host, pilot]` |
 | `features.mjs` | `featureRule(feature, config)` | new | `feature.rule(config[key])` when the feature exports `rule`, else `featureText(feature, 'rule.md')` |
-| `commands/session.mjs` | `onRules()` | new (private) | `onFeatures(config).map(featureRule)`, used by `session banner` and `session subagent` |
+| `features.mjs` | `onRules(config)` | new | `featureRule` for each on feature, nulls dropped; takes config so it unit-tests without IO. Used by `session banner` and `session subagent` |
 | `commands/session.mjs` | `session features` | changed | Appends "personal, set by `/tailor-ang`" to each `LOCAL_KEYS` entry |
 | `library/validate.mjs` | `validateLibrary()` | changed | Adds `loadConfig` warnings to the report; calls `localFileIgnoreWarning()` |
 | `library/validate.mjs` | `localFileIgnoreWarning()` | new (private) | When `LOCAL_FILE` exists, runs `git check-ignore -q` via `node:child_process`; warns if it isn't ignored. No git or not a repo: no warning |
@@ -30,10 +30,9 @@ A table of the functions and constants each changed module exposes, their signat
 | File | Kind | Covers |
 |---|---|---|
 | `scripts/ang/config/config.test.mjs` | unit | `mergeConfig`: defaults only; shared over defaults; local over shared for `LOCAL_KEYS`; dropped key warns; unknown key or bad value errors with the file named; non-object local errors |
-| `scripts/ang/features.test.mjs` | unit | `featureRule` prefers `rule(value)` and falls back to `rule.md` |
+| `scripts/ang/features.test.mjs` | unit | `featureRule` prefers `rule(value)` and falls back to `rule.md`; `onRules` skips off features' rules |
 | `ang/features/pilot/feature.test.mjs` | unit | `check` and `on`: `null` and a name pass; `""`, whitespace and numbers fail |
-| `scripts/ang/commands/session.test.mjs` | unit | `session features` marks local keys; banner and subagent output skip off features' rules |
-| `scripts/cli.test.mjs` | integration | Spawns the CLI with `CLAUDE_PROJECT_DIR` set to a temp dir: banner names the pilot and `validate` passes; dropped key warns with exit 0; invalid JSON exits 1; no config passes `validate` |
+| `scripts/cli.test.mjs` | integration | Spawns the CLI with `CLAUDE_PROJECT_DIR` set to a temp dir: banner names the pilot and `validate` passes; subagent context carries the pilot rule; `session features` marks local keys; dropped key warns with exit 0; invalid JSON exits 1; no config passes `validate` |
 
 ## Files `/tailor-ang` writes
 Prose skill, no script code (plan Approach). Every file is previewed before it's written.

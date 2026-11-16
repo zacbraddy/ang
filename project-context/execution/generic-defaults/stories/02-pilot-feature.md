@@ -2,7 +2,7 @@
 title: Pilot feature
 shortDescription: Promote the pilot-feature spike so the pilot's name reaches sessions and subagents through the existing hooks
 tags: [distribution]
-status: ready
+status: done
 owner: agent
 dependsOn: [01]
 ---
@@ -18,7 +18,8 @@ Sessions in this repo show `Ang: intent · host (orca) · pilot (Zac)`, and suba
 - `node --test 'src/.claude/**/*.test.mjs'` passes, including:
   - pilot `check` and `on` unit tests (`null` and a name pass; `""`, whitespace and numbers fail);
   - `featureRule` unit tests (`rule(value)` beats `rule.md`; falls back to `rule.md`; `null` when neither);
-  - integration tests: banner names the pilot and carries its rule; subagent context carries the pilot rule and omits rules of off features.
+  - `onRules` unit test (carries on features' rules only);
+  - integration tests: banner names the pilot and carries its rule; subagent context carries the pilot rule.
 - This repo's `ang.local.json` is `{ "host": "orca", "pilot": "Zac" }`; `session banner` here prints `Ang: intent · host (orca) · pilot (Zac)` followed by the pilot rule; `library validate` passes.
 - `grep -rn 'Zac' src/.claude/ang src/.claude/scripts --exclude='*.test.mjs'` returns nothing (shipped code never holds a pilot's name).
 
@@ -35,14 +36,14 @@ Sessions in this repo show `Ang: intent · host (orca) · pilot (Zac)`, and suba
 ## Test plan
 - **Unit** — write first:
   - `src/.claude/ang/features/pilot/feature.test.mjs`: `config.check` returns `null` for `null` and `"Zac"`, an error for `""`, `"   "`, `42`; `on` is true for `"Zac"`, false for `null`.
-  - `src/.claude/scripts/ang/features.test.mjs`: `featureRule` with fake feature objects over a temp `dir` (`fs.mkdtempSync`): `rule` export + `rule.md` → `rule(value)` output, called with `config[key]`; `rule.md` only → its trimmed text; neither → `null`.
+  - `src/.claude/scripts/ang/features.test.mjs`: `featureRule` with fake feature objects over a temp `dir` (`fs.mkdtempSync`): `rule` export + `rule.md` → `rule(value)` output, called with `config[key]`; `rule.md` only → its trimmed text; neither → `null`. `onRules` with `{ intent: false, pilot: 'Zac' }` → contains `## Pilot`, not `## Delivery intent`.
 - **Integration** — extend `src/.claude/scripts/cli.test.mjs` with the existing `project()` helper:
   - `ang.local.json` `{ pilot: 'Zac' }` → `session banner` exit 0, matches `/^Ang: pilot \(Zac\)$/m` and `/Zac is the pilot/`; `library validate` exits 0.
-  - `ang.json` `{ intent: false }`, `ang.local.json` `{ pilot: 'Zac' }` → `session subagent` prints JSON whose `additionalContext` contains `## Pilot` and not `## Delivery intent` (proves off features are skipped through `onRules()`).
+  - `ang.local.json` `{ pilot: 'Zac' }` → `session subagent` prints JSON whose `additionalContext` contains `## Pilot`.
   - `ang.local.json` `{ pilot: '  ' }` → `library validate` exits 1 naming `pilot`.
   - Extend the `session features` test: `pilot` is marked personal.
   - The helper passes `input: ''`; the subagent case needs stdin JSON, so give `run` an optional input (e.g. `'{"agent_type":"Explore"}'`).
-- **Won't test**: `onRules()` directly (a private one-line map over `onFeatures` + `featureRule`, needs module mocking; the subagent and banner integration cases cover it), pilot `banner`/`validate`/`bootstrap` (static data), the exact rule wording, the hook wiring in `settings.json`, this repo's `ang.local.json` (the banner proves it). No `session.test.mjs`: this deliberately departs from [C4 code](../c4/4-code.md), since everything it would test is IO-bound and already covered by integration.
+- **Won't test**: pilot `banner`/`validate`/`bootstrap` (static data), the exact rule wording, the hook wiring in `settings.json`, this repo's `ang.local.json` (the banner proves it). No `session.test.mjs`: this deliberately departs from [C4 code](../c4/4-code.md), since everything it would test is IO-bound and already covered by integration.
 
 ## Implementation notes
 - **Constraints**: `node:` built-ins only (ADR 0002), ESM `.mjs`, no `package.json`.
@@ -51,11 +52,20 @@ Sessions in this repo show `Ang: intent · host (orca) · pilot (Zac)`, and suba
   - import `pilot`; `FEATURES = [intent, streams, host, pilot]` (order sets banner order: `intent · host (orca) · pilot (Zac)`).
   - `export const featureRule = (feature, config) => (feature.rule ? feature.rule(config[feature.key]) : featureText(feature, 'rule.md'))`, per the [spike diff](../origins/generic-personal-defaults/spikes/pilot-feature/script-changes.diff).
   - Update the contract comment at :1-6: add `rule?(value) → text (in place of rule.md, when the rule depends on the value)`.
-- `src/.claude/scripts/ang/commands/session.mjs`: private `onRules()` = `onFeatures(config).map((f) => featureRule(f, config)).filter(Boolean)`; `banner` and `subagent` use it in place of `onTexts('rule.md')`. `onTexts` stays for `steps` and agent add-ons.
+- `src/.claude/scripts/ang/features.mjs` also exports `onRules(config)` = `onFeatures(config).map((f) => featureRule(f, config)).filter(Boolean)`, taking config like `onFeatures` so it unit-tests without mocking.
+- `src/.claude/scripts/ang/commands/session.mjs`: `banner` and `subagent` use `onRules(loadConfig().config)` in place of `onTexts('rule.md')`. `onTexts` stays for `steps` and agent add-ons.
 - `config.mjs` needs no change: `LOCAL_KEYS` already includes `pilot`, and `CONFIG_DEFAULTS` picks up `pilot: null` from `FEATURES`.
 - **This repo**: add `"pilot": "Zac"` to root `ang.local.json` (gitignored). Leave changes unstaged.
 - **Edge cases**: a name with surrounding spaces (`" Zac "`) passes `check` and is used as given; fine, `/tailor-ang` writes it. Hook output budget: the rule adds ~200 characters against the 10,000-character limit.
+- **Done**: `config.test.mjs` gained `pilot: null` in its defaults plus two cases beyond the test plan, covering the shared/local precedence and invalid-pilot criteria at the unit level.
 - **Out of scope**: `/tailor-ang` asking for and writing the name (05); `10k/technical/project-structure.md` feature list (06); skills saying "me"/"the user" (03); the stale `.claude/ang.json` wording at `origins/.../pilot-name.md:9` (origin doc, frozen).
+
+## Review
+All Done-when evidence present: 37/37 tests pass, banner prints `Ang: intent · host (orca) · pilot (Zac)` plus the pilot rule, subagent context carries it, `grep 'Zac'` over shipped code is empty, `library validate` passes. `pilot/feature.mjs` is byte-identical to the spike. Every acceptance criterion has a test.
+
+- **must-fix**: none.
+- **should-fix**: none.
+- **nit**: [C4 code](../c4/4-code.md):22 still lists `onRules()` as private to `session.mjs`, and :35 still plans `session.test.mjs`. The story moved `onRules` to `features.mjs` (exported, unit-tested) and dropped `session.test.mjs` on purpose; update both rows so C4 matches. *Fixed.*
 
 ## Links
 - [Plan: scope 3](../plan.md)

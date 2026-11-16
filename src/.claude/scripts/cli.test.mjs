@@ -9,9 +9,9 @@ const CLI = path.join(import.meta.dirname, 'ang-context-manager.mjs');
 const dirs = [];
 after(() => dirs.forEach((dir) => fs.rmSync(dir, { recursive: true, force: true })));
 
-// A temp project holding the given files ({ 'ang.json': {...} }; strings are written raw), with the CLI spawned against it.
-// paths.mjs reads CLAUDE_PROJECT_DIR at import time, so a fresh process per run is the only clean seam.
-function project(files = {}) {
+// A temp project holding the given files ({ 'ang.json': {...} }; strings are written raw), with the CLI spawned against it
+// and given `input` on stdin. paths.mjs reads CLAUDE_PROJECT_DIR at import time, so a fresh process per run is the only clean seam.
+function project(files = {}, { input = '' } = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ang-cli-'));
   dirs.push(dir);
   for (const [name, content] of Object.entries(files)) {
@@ -19,7 +19,7 @@ function project(files = {}) {
   }
   const run = (...args) => {
     const env = { ...process.env, CLAUDE_PROJECT_DIR: dir, ORCA_WORKTREE_ID: 'test' };
-    const { status, stdout, stderr } = spawnSync(process.execPath, [CLI, ...args], { cwd: dir, env, encoding: 'utf8', input: '' });
+    const { status, stdout, stderr } = spawnSync(process.execPath, [CLI, ...args], { cwd: dir, env, encoding: 'utf8', input });
     return { status, out: stdout + stderr };
   };
   return { dir, run };
@@ -49,14 +49,37 @@ test('session banner names the host set in ang.local.json', () => {
   assert.match(out, /^Ang: host \(orca\)$/m);
 });
 
+test('session banner names the pilot and carries their rule', () => {
+  const { run } = project({ 'ang.local.json': { pilot: 'Zac' } });
+  const banner = run('session', 'banner');
+  assert.equal(banner.status, 0, banner.out);
+  assert.match(banner.out, /^Ang: pilot \(Zac\)$/m);
+  assert.match(banner.out, /Zac is the pilot/);
+  const validate = run('library', 'validate');
+  assert.equal(validate.status, 0, validate.out);
+});
+
+test('session subagent carries the pilot rule', () => {
+  const { status, out } = project({ 'ang.local.json': { pilot: 'Zac' } }, { input: '{"agent_type":"Explore"}' }).run('session', 'subagent');
+  assert.equal(status, 0, out);
+  assert.match(JSON.parse(out).hookSpecificOutput.additionalContext, /## Pilot/);
+});
+
+test('library validate fails on a blank pilot, naming it', () => {
+  const { status, out } = project({ 'ang.local.json': { pilot: '  ' } }).run('library', 'validate');
+  assert.equal(status, 1, out);
+  assert.match(out, /ang\.local\.json: pilot must be null or a name/);
+});
+
 test('session banner flags invalid config', () => {
   const { out } = project({ 'ang.json': '[' }).run('session', 'banner');
   assert.match(out, /^Ang: .* · Ang config invalid, run ang-context-manager\.mjs library validate$/m);
 });
 
-test('session features marks host as personal', () => {
+test('session features marks host and pilot as personal', () => {
   const { status, out } = project().run('session', 'features');
   assert.equal(status, 0, out);
   assert.match(out, /\*\*host\*\*.* — personal, set by `\/tailor-ang`/);
+  assert.match(out, /\*\*pilot\*\*.* — personal, set by `\/tailor-ang`/);
   assert.doesNotMatch(out, /\*\*intent\*\*.*personal/);
 });

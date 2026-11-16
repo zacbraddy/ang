@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import { bannerLine, LOCAL_KEYS, loadConfig } from '../config/config.mjs';
-import { FEATURES, featureText, onFeatures } from '../features.mjs';
+import { FEATURES, featureText, onFeatures, onRules } from '../features.mjs';
 
 // Here be dragons: these commands feed hooks and skill `!` injections. A failing `!` command aborts the whole skill,
 // so they swallow every error and exit 0; printing nothing is the safe fallback.
@@ -28,7 +28,7 @@ export default [
     summary: 'Ang mode line plus each on feature\'s rule (SessionStart hook)',
     run() {
       // Here be dragons: hook output over 10,000 characters is moved to a file the agent isn't told about. Keep rules lean.
-      const sections = [bannerLine(), ...onTexts('rule.md')];
+      const sections = [bannerLine(), ...onRules(loadConfig().config)];
       console.log(sections.join('\n\n'));
     },
   },
@@ -52,7 +52,7 @@ export default [
       quietly(() => {
         const agentType = readHookInput().agent_type;
         const agentAddOns = agentType ? onTexts('agents', `${agentType}.md`) : [];
-        const context = [...onTexts('rule.md'), ...agentAddOns];
+        const context = [...onRules(loadConfig().config), ...agentAddOns];
         if (!context.length) return;
         const hookSpecificOutput = { hookEventName: 'SubagentStart', additionalContext: context.join('\n\n') };
         console.log(JSON.stringify({ hookSpecificOutput }));
