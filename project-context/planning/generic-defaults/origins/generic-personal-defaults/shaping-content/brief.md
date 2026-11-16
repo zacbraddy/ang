@@ -22,5 +22,5 @@ Ship generic defaults for both files, add an Ang step that generates versions ta
 `src/.claude/settings.json` sets `"outputStyle": "Partner In Crime"` and the root `.claude/output-styles` symlink is tracked, but `src/.claude/output-styles/` is untracked, so a fresh clone names a style it doesn't have.
 
 ## Related
-- [Hub](../README.md)
+- [Hub](../../../README.md)
 - [Project structure](/project-context/10k/technical/project-structure.md)

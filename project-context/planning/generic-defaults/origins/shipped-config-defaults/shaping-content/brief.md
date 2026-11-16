@@ -16,4 +16,4 @@ Separate this repo's `ang.json` from the shipped default, keep streams off and p
 - `ang-context-manager.mjs session features` lists each feature's key, bootstrap question and default.
 
 ## Related
-- [Hub](../README.md)
+- [Hub](../../../README.md)

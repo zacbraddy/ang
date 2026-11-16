@@ -31,4 +31,4 @@ A `pilot` feature in `.claude/ang.json` gets the pilot's name into every main se
 
 ## Related
 - [Pilot name findings](../../shaping-content/pilot-name.md)
-- [Hub](../../README.md)
+- [Hub](../../../../README.md)

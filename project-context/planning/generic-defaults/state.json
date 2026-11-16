@@ -1,0 +1,277 @@
+{
+  "status": "active",
+  "statusNote": "",
+  "unknowns": [
+    {
+      "id": "u2",
+      "question": "Blast radius of moving config to root ang.json + ang.local.json: what reads .claude/ang.json today (script loader, hooks, skills, bootstrap, validate, docs), and where the per-feature 'overridable' flag lives",
+      "approach": "Grep src/ and .claude/scripts for ang.json; read the feature loader"
+    },
+    {
+      "id": "u3",
+      "question": "What are the other up-to-3 canned output styles beside Partner In Crime?",
+      "approach": "Draft 2-3 contrasting candidates (e.g. terse, teaching, formal) and ask Zac"
+    },
+    {
+      "id": "u4",
+      "question": "Names: the tailoring command, the generic rule file (replacing working-with-zac.md), and the personal overlay file",
+      "approach": "Propose names consistent with existing commands; Zac picks"
+    },
+    {
+      "id": "u1",
+      "question": "Which references to the pilot ('the user', 'me', 'Zac') remain in skills, and should they be made consistent?",
+      "approach": "Grep src/.claude; at import the stance was first-person 'me' is fine",
+      "from": "generic-personal-defaults"
+    }
+  ],
+  "knowns": [
+    {
+      "id": "k1",
+      "fact": "Requirements: ship generic defaults, add a tailoring step, /bootstrap-repo offers defaults or customise",
+      "source": "origins/generic-personal-defaults/shaping-content/brief.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "k2",
+      "fact": "Shipped settings name the Partner In Crime output style, but src/.claude/output-styles/ is untracked",
+      "source": "origins/generic-personal-defaults/shaping-content/brief.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "k3",
+      "fact": "Only pilot facts (identity, stack) are personal; opinionated methods ship as defaults",
+      "source": "origins/generic-personal-defaults/shaping-content/personal-line.md",
+      "answers": "Where's the line between Zac's personal rule/style and a generic default that keeps their spirit?",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "k4",
+      "fact": "Pilot name is an optional 'pilot' feature (default null = off), injected by SessionStart/SubagentStart hooks; set per user in ang.local.json by the tailoring command; no per-skill templating",
+      "source": "origins/generic-personal-defaults/shaping-content/pilot-name.md",
+      "answers": "Pilot name in ang.json templated into skills: how is it templated, and what's the default when unset?",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "k5",
+      "fact": "Nothing to honour: the name never lives in skills; new work just writes 'me'/'the user', never a literal name",
+      "source": "origins/generic-personal-defaults/shaping-content/pilot-name.md",
+      "answers": "How does the workflow-improvement flow keep new features honouring pilot-name templating?",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "k6",
+      "fact": "A re-runnable tailoring command (bootstrap invokes it) writes pilot, host, output-style choice and an additive personal rule overlay into gitignored *.local files in the repo",
+      "source": "origins/generic-personal-defaults/shaping-content/tailoring.md",
+      "answers": "What does the tailoring step look like, and how does /bootstrap-repo offer defaults vs customise?",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "k7",
+      "fact": "Claude Code rules have no precedence (a conflicting rule may win either way) and settings.local.json beats settings.json; hand-created local files need repo .gitignore entries",
+      "source": "origins/generic-personal-defaults/shaping-content/tailoring.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "k8",
+      "fact": "ang.json is a symlink into src/, so this repo's config is the shipped default",
+      "source": "origins/shipped-config-defaults/shaping-content/brief.md",
+      "from": "shipped-config-defaults"
+    },
+    {
+      "id": "k11",
+      "fact": "Fresh install: shipping today's ang.json (intent true, no 10k/intent.md) fails validate; shipping none (features all off) passes",
+      "source": "origins/shipped-config-defaults/shaping-content/fresh-install-defaults.md",
+      "answers": "Which intent and host defaults should ship so validate passes on a fresh install?",
+      "from": "shipped-config-defaults"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "d1",
+      "decision": "Ship DDD/Onion/TDD/Atomic Design/Lean as defaults — predictable output out of the box; dissenters raise a workflow improvement",
+      "evidence": "origins/generic-personal-defaults/shaping-content/personal-line.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "d2",
+      "decision": "Partner In Crime ships as the default output style, minus the ADHD label — Zac's call",
+      "evidence": "origins/generic-personal-defaults/shaping-content/personal-line.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "d3",
+      "decision": "Generic rule wording is team-neutral; tailoring adds solo framing — Ang serves solo and teams",
+      "evidence": "origins/generic-personal-defaults/shaping-content/personal-line.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "d4",
+      "decision": "Pilot name via a hook-injected 'pilot' feature, not templating — spike passed 4/4; skills, rules and future features stay untouched",
+      "evidence": "origins/generic-personal-defaults/shaping-content/pilot-name.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "d5",
+      "decision": "Tailoring is its own re-runnable command that /bootstrap-repo invokes — teammates joining a bootstrapped repo need a route in",
+      "evidence": "origins/generic-personal-defaults/shaping-content/tailoring.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "d6",
+      "decision": "Ang writes only inside the repo, never ~/.claude — Ang is bounded to one repo; Zac's call",
+      "evidence": "origins/generic-personal-defaults/shaping-content/tailoring.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "d7",
+      "decision": "Config moves to root ang.json (committed defaults) + gitignored ang.local.json overriding personal keys only (pilot, host); intent and streams are project-locked — per-user keys must not leak into team repos",
+      "evidence": "origins/generic-personal-defaults/shaping-content/tailoring.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "d8",
+      "decision": "Output style: up to 4 canned styles, Partner In Crime recommended default, plus a bounded under-a-minute interview (4–5 questions) as option 5 that suggests raising a workflow improvement — most users take a default",
+      "evidence": "origins/generic-personal-defaults/shaping-content/tailoring.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "d9",
+      "decision": "Cut per-user intent garnish and configurable config path — YAGNI, teams aren't in the release goal; extends-style shared config sent to docs-website to spike",
+      "evidence": "origins/generic-personal-defaults/shaping-content/tailoring.md",
+      "from": "generic-personal-defaults"
+    },
+    {
+      "id": "d10",
+      "decision": "Streams ship off by default, whatever happens to ang.json — Zac's requirement",
+      "evidence": "origins/shipped-config-defaults/shaping-content/brief.md",
+      "from": "shipped-config-defaults"
+    },
+    {
+      "id": "d11",
+      "decision": "Ang ships no ang.json; bootstrap keeps asking each feature question and writes a root ang.json. Ang's opinion: intent defaults to on (bootstrap then drafts 10k/intent.md, so validate passes); streams defaults to off. The loader's default for a missing key stays off. Personal keys (pilot, host) go to ang.local.json via the tailoring step. Zac's call, 2026-11-16",
+      "evidence": "origins/shipped-config-defaults/shaping-content/fresh-install-defaults.md",
+      "from": "shipped-config-defaults"
+    },
+    {
+      "id": "d12",
+      "decision": "This repo gets its own real config (intent true, streams false; host orca local) replacing the src symlink — the repo is a user of Ang, not the default",
+      "evidence": "origins/shipped-config-defaults/shaping-content/fresh-install-defaults.md",
+      "from": "shipped-config-defaults"
+    }
+  ],
+  "lineage": [
+    {
+      "date": "2026-11-16",
+      "event": "created in planning"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] created in shaping"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] from raw: opening-ang.md, bootstrap-leftovers.md (fast-tracked to shaping)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] decided: Ship DDD/Onion/TDD/Atomic Design/Lean as defaults — predictable output out of the box; dissenters raise a workflow improvement"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] decided: Partner In Crime ships as the default output style, minus the ADHD label — Zac's call"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] decided: Generic rule wording is team-neutral; tailoring adds solo framing — Ang serves solo and teams"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] decided: Pilot name via a hook-injected 'pilot' feature, not templating — spike passed 4/4; skills, rules and future features stay untouched"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] replaced k4: Pilot name is an optional 'pilot' feature in ang.json (default null = off), injected by SessionStart/SubagentStart hooks; no per-skill templating → Pilot name is an optional 'pilot' feature (default null = off), injected by SessionStart/SubagentStart hooks; set per user in ang.local.json by the tailoring command; no per-skill templating"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] decided: Tailoring is its own re-runnable command that /bootstrap-repo invokes — teammates joining a bootstrapped repo need a route in"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] decided: Ang writes only inside the repo, never ~/.claude — Ang is bounded to one repo; Zac's call"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] decided: Config moves to root ang.json (committed defaults) + gitignored ang.local.json overriding personal keys only (pilot, host); intent and streams are project-locked — per-user keys must not leak into team repos"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] decided: Output style: up to 4 canned styles, Partner In Crime recommended default, plus a bounded under-a-minute interview (4–5 questions) as option 5 that suggests raising a workflow improvement — most users take a default"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] decided: Cut per-user intent garnish and configurable config path — YAGNI, teams aren't in the release goal; extends-style shared config sent to docs-website to spike"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[generic-personal-defaults] status → ready-for-planning: Approach decided and spiked (pilot hook 4/4), tailoring command and config split settled; only u5 reference sweep remains, which is story-level"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "merged generic-personal-defaults from shaping into origins/"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[shipped-config-defaults] created in shaping"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[shipped-config-defaults] decided: Streams ship off by default, whatever happens to ang.json — Zac's requirement"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[shipped-config-defaults] from raw: opening-ang.md, bootstrap-leftovers.md (fast-tracked to shaping)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[shipped-config-defaults] removed k3: ang.json moves to the repo root with a gitignored ang.local.json overlay for personal keys (decided in generic-personal-defaults)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[shipped-config-defaults] decided: Ship no ang.json; feature-module defaults are the shipped defaults and bootstrap writes the user's config — a missing file already means all off, and a shipped file would duplicate defaults and collide with the user's committed one"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[shipped-config-defaults] decided: This repo gets its own real config (intent true, streams false; host orca local) replacing the src symlink — the repo is a user of Ang, not the default"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[shipped-config-defaults] status → ready-for-planning: Ship no ang.json decided and proven by fresh-install validate check; only open point is agreeing the config path with generic-personal-defaults at planning"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[shipped-config-defaults] replaced d2: Ship no ang.json; feature-module defaults are the shipped defaults and bootstrap writes the user's config — a missing file already means all off, and a shipped file would duplicate defaults and collide with the user's committed one → Ang ships no ang.json; bootstrap always writes a root ang.json with intent and streams off, and personal keys (pilot, host) go to ang.local.json via the tailoring step — Zac's call, 2026-11-16; the fresh-install check shows no-file and all-off both pass validate"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[shipped-config-defaults] replaced d2: Ang ships no ang.json; bootstrap always writes a root ang.json with intent and streams off, and personal keys (pilot, host) go to ang.local.json via the tailoring step — Zac's call, 2026-11-16; the fresh-install check shows no-file and all-off both pass validate → Ang ships no ang.json; bootstrap keeps asking each feature question and writes a root ang.json. Ang's opinion: intent defaults to on (bootstrap then drafts 10k/intent.md, so validate passes); streams defaults to off. The loader's default for a missing key stays off. Personal keys (pilot, host) go to ang.local.json via the tailoring step. Zac's call, 2026-11-16"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "merged shipped-config-defaults from shaping into origins/"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "removed k10: Neither: ang.json moves to the repo root (committed defaults) with a gitignored ang.local.json overlay for personal keys (decided in generic-personal-defaults)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "removed k9: intent: true without 10k/intent.md fails library validate on a fresh install"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced k11: Ship no ang.json: feature defaults (all off) pass validate on a fresh install; shipping today's file fails it → Fresh install: shipping today's ang.json (intent true, no 10k/intent.md) fails validate; shipping none (features all off) passes"
+    }
+  ],
+  "type": "technical"
+}

@@ -49,9 +49,9 @@ Claude Code only gitignores `settings.local.json` when it creates the file itsel
 - **Anything under `~/.claude`:** out of scope. Ang is bounded to one repo.
 
 ## Related
-- [Where the personal line sits](personal-line.md)
-- [Pilot name without templating](pilot-name.md)
-- [Brief](brief.md)
-- [Hub](../README.md)
-- [Shipped config and defaults](/project-context/shaping/shipped-config-defaults/README.md)
+- [Where the personal line sits](./personal-line.md)
+- [Pilot name without templating](./pilot-name.md)
+- [Brief](./brief.md)
+- [Hub](../../../README.md)
+- [Shipped config and defaults](/project-context/planning/generic-defaults/README.md)
 - [Docs website](/project-context/ideas/docs-website/README.md)

@@ -18,7 +18,7 @@ There's no templating. An optional `pilot` key in `.claude/ang.json` (default `n
 ## How it works
 - `.claude/ang/features/pilot/feature.mjs` takes `null` or a non-empty name. It is on when the value is a string, its banner note is the name, and `rule(name)` builds the rule text.
 - The feature system gains one hook point: a feature may export `rule(value)` in place of a static `rule.md`. That's about 10 lines in `features.mjs` and `commands/session.mjs`.
-- The value lives in the gitignored root `ang.local.json`. The [tailoring command](tailoring.md), which is part of this item and which `/bootstrap-repo` invokes, asks for it.
+- The value lives in the gitignored root `ang.local.json`. The [tailoring command](./tailoring.md), which is part of this item and which `/bootstrap-repo` invokes, asks for it.
 
 ## Evidence
 See the [spike](../spikes/pilot-feature/README.md). With the name set, 3 of 3 fresh sessions and 2 of 2 subagents used "Zac" unprompted. Controls with it unset used no name. Unset validates clean, and bad values are rejected.
@@ -29,6 +29,6 @@ See the [spike](../spikes/pilot-feature/README.md). With the name set, 3 of 3 fr
 
 ## Related
 - [Spike](../spikes/pilot-feature/README.md)
-- [Where the personal line sits](personal-line.md)
-- [Brief](brief.md)
-- [Hub](../README.md)
+- [Where the personal line sits](./personal-line.md)
+- [Brief](./brief.md)
+- [Hub](../../../README.md)

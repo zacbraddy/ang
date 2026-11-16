@@ -16,5 +16,5 @@ The README's quick start and a clean first run depend on it. ADR 0002 assumes An
 
 ## Related
 - [ADR 0002: zero-dependency library script](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)
-- [Shipped config and defaults](/project-context/shaping/shipped-config-defaults/README.md)
+- [Shipped config and defaults](/project-context/planning/generic-defaults/README.md)
 - [Repo README](/project-context/shaping/repo-readme/README.md)

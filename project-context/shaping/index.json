@@ -1,63 +1,5 @@
 [
   {
-    "title": "Generic personal rule and output style",
-    "path": "project-context/shaping/generic-personal-defaults/README.md",
-    "shortDescription": "Ship generic defaults for the personal rule and output style, plus a step that tailors them to the pilot",
-    "tags": [
-      "open-source",
-      "distribution",
-      "brand-voice"
-    ]
-  },
-  {
-    "title": "Generic personal rule and output style, brief",
-    "path": "project-context/shaping/generic-personal-defaults/shaping-content/brief.md",
-    "shortDescription": "Zac's requirements for shipping generic versions of his personal rule and output style",
-    "tags": [
-      "open-source",
-      "distribution"
-    ]
-  },
-  {
-    "title": "Where the personal line sits",
-    "path": "project-context/shaping/generic-personal-defaults/shaping-content/personal-line.md",
-    "shortDescription": "Line-by-line verdict on what stays in the generic personal rule and output style, and what the tailoring step owns",
-    "tags": [
-      "open-source",
-      "distribution",
-      "brand-voice"
-    ]
-  },
-  {
-    "title": "Pilot name without templating",
-    "path": "project-context/shaping/generic-personal-defaults/shaping-content/pilot-name.md",
-    "shortDescription": "The pilot's name ships as an optional Ang feature injected by hooks, so skills, rules and future features never template it",
-    "tags": [
-      "distribution",
-      "repo-structure",
-      "brand-voice"
-    ]
-  },
-  {
-    "title": "Tailoring step and per-user config",
-    "path": "project-context/shaping/generic-personal-defaults/shaping-content/tailoring.md",
-    "shortDescription": "A re-runnable tailoring command writes per-user settings into gitignored local files in the repo, and bootstrap invokes it",
-    "tags": [
-      "distribution",
-      "repo-structure",
-      "brand-voice"
-    ]
-  },
-  {
-    "title": "Pilot feature spike",
-    "path": "project-context/shaping/generic-personal-defaults/spikes/pilot-feature/README.md",
-    "shortDescription": "Throwaway spike proving a pilot-name Ang feature reaches sessions and subagents with no per-skill templating",
-    "tags": [
-      "distribution",
-      "repo-structure"
-    ]
-  },
-  {
     "title": "Repo README",
     "path": "project-context/shaping/repo-readme/README.md",
     "shortDescription": "A short whistle-stop README covering concepts, key commands and a quick start",
@@ -72,32 +14,6 @@
     "shortDescription": "What the repo README must and mustn't be",
     "tags": [
       "documentation"
-    ]
-  },
-  {
-    "title": "Shipped config and defaults",
-    "path": "project-context/shaping/shipped-config-defaults/README.md",
-    "shortDescription": "Separate this repo's ang.json from the shipped default and lock safe defaults (streams off)",
-    "tags": [
-      "distribution",
-      "repo-structure"
-    ]
-  },
-  {
-    "title": "Shipped config and defaults, brief",
-    "path": "project-context/shaping/shipped-config-defaults/shaping-content/brief.md",
-    "shortDescription": "Where ang.json lives and which defaults ship",
-    "tags": [
-      "distribution"
-    ]
-  },
-  {
-    "title": "Shipped config defaults, fresh-install check",
-    "path": "project-context/shaping/shipped-config-defaults/shaping-content/fresh-install-defaults.md",
-    "shortDescription": "Ang ships no ang.json; bootstrap writes one, defaulting intent on and streams off",
-    "tags": [
-      "distribution",
-      "repo-structure"
     ]
   }
 ]
