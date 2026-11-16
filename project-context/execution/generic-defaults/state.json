@@ -137,7 +137,7 @@
     },
     {
       "id": "d8",
-      "decision": "Output style: 5 canned styles plus a bounded under-a-minute interview (4–5 questions) that suggests raising a workflow improvement. The tailoring command shows all 6 as one numbered list, with Partner In Crime as 1, the recommended default, and the user replies with a number. Not a question dialog: it caps at 4 options, and splitting the list hides choices with no way back. Zac's call, 2026-11-16",
+      "decision": "Output style: 5 canned styles plus a bounded under-a-minute interview (4–5 questions) whose style stays personal to the user. The tailoring command shows all 6 as one numbered list, with Partner In Crime as 1, the recommended default, and the user replies with a number. Not a question dialog: it caps at 4 options, and splitting the list hides choices with no way back. Zac's call, 2026-11-16",
       "evidence": "output-styles.md",
       "from": "generic-personal-defaults"
     },
@@ -356,6 +356,10 @@
     {
       "date": "2026-11-16",
       "event": "moved planning → execution"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced d8: Output style: 5 canned styles plus a bounded under-a-minute interview (4–5 questions) that suggests raising a workflow improvement. The tailoring command shows all 6 as one numbered list, with Partner In Crime as 1, the recommended default, and the user replies with a number. Not a question dialog: it caps at 4 options, and splitting the list hides choices with no way back. Zac's call, 2026-11-16 → Output style: 5 canned styles plus a bounded under-a-minute interview (4–5 questions) whose style stays personal to the user. The tailoring command shows all 6 as one numbered list, with Partner In Crime as 1, the recommended default, and the user replies with a number. Not a question dialog: it caps at 4 options, and splitting the list hides choices with no way back. Zac's call, 2026-11-16"
     }
   ],
   "type": "technical"

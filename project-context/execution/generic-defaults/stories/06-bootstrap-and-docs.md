@@ -20,7 +20,7 @@ A fresh install is generic and valid end to end. Bootstrapping a scratch repo yi
 - The docs edits below are made, and `validate` passes.
 
 ## Rough scope
-- `bootstrap-repo` skill: write root `ang.json`, skip local keys (as `session features` marks them) and invoke `/tailor-ang` (d5, d11).
+- `bootstrap-repo` skill: write root `ang.json`, skip local keys (as `session features` marks them) and invoke `/tailor-ang` (d5, d11). `/tailor-ang` hands back without its own review step, so bootstrap's closing report lists its files with the rest and tells the user to quit and restart Claude Code to pick up the banner, rule and style.
 - `10k/technical/project-structure.md`: config location, the symlink note in its Dragons section, output styles now tracked, and the rules row.
 - ADR 0001: the host is named in `ang.local.json`.
 - ADR 0002: Summary and Standing list `node:child_process` and `node:test`.

@@ -2,7 +2,7 @@
 title: /tailor-ang
 shortDescription: A re-runnable skill that writes every per-user choice (host, pilot, output style, personal rule) into gitignored local files
 tags: [distribution, brand-voice]
-status: ready
+status: done
 owner: both
 dependsOn: [01, 02, 03, 04]
 ---
@@ -27,19 +27,19 @@ A teammate joining a bootstrapped repo runs `/tailor-ang` and gets their own nam
 ## Acceptance criteria
 - Given a repo whose `.gitignore` lacks a local pattern, when the skill starts, then it appends the missing patterns (unanchored: `ang.local.json`, `settings.local.json`, `*.local.md`) before anything else is written, creating `.gitignore` if it's absent.
 - Given `TERM_PROGRAM=Orca` or `ORCA_WORKTREE_ID` is set, when tailoring runs, then `host` is `"orca"` without asking; otherwise it is `null`.
-- Given the pilot question, when the user answers "skip" or leaves it blank, then `pilot` is `null`.
+- Given the pilot question, when the user answers "skip" or "s", then `pilot` is `null`.
 - Given the style picker, when it shows, then it opens with the low-stakes note and lists 1 to 6 in one plain message, each with its frontmatter `description`, and 1 marked default and recommended.
-- Given an empty reply or "default" to the picker, then option 1 (Partner In Crime) is chosen.
+- Given "default" or "d" to the picker, then option 1 (Partner In Crime) is chosen.
 - Given options 1 to 5, then `outputStyle` in `.claude/settings.local.json` is that style's `name`, and no style file is written.
-- Given option 6, when the user answers the five questions, then the agent proposes a name, previews the whole file, and on confirmation writes `.claude/output-styles/<slug>.local.md`, sets `outputStyle` to its name and suggests raising a workflow improvement.
+- Given option 6, when the user answers the five questions, then the agent proposes a name, previews the whole file, and on confirmation writes `.claude/output-styles/<slug>.local.md`, and sets `outputStyle` to its name.
 - Given option 6 with tone neutral or formal and humour none, then question 5 (serious mode) is not asked.
-- Given an interview answer of "none" or "skip", then the generated file has no line for that axis.
+- Given an interview answer of "none", "skip" or "s", then the generated file has no line for that axis.
 - Given "stop" during the style interview, then no style file is written, Partner In Crime is chosen, and the agent says so.
 - Given the rule interview, when the repo has detectable languages or frameworks, then the stack question offers them as suggestions and writes only what the user confirms or types.
 - Given all three rule questions are skipped, then `pilot.local.md` is not written, and any existing one is left alone.
 - Given an existing `.claude/settings.local.json` with other keys (e.g. permissions), when the skill writes, then only `outputStyle` changes.
 - Given an existing local file that isn't valid JSON, then the skill stops before writing it and names the file.
-- Given a re-run, when each question shows, then the current local value is offered as the default, and nothing is overwritten until the preview is confirmed.
+- Given a re-run, when each question shows, then the current local value is offered as the default, kept by replying "keep" or "k", and nothing is overwritten until the preview is confirmed.
 - Given the preview, when the user declines, then nothing is written.
 
 ## Test plan
@@ -67,7 +67,9 @@ A teammate joining a bootstrapped repo runs `/tailor-ang` and gets their own nam
   - `ang.local.json`: `{ "host", "pilot" }`, keeping any other existing keys so `validate` warns about them rather than losing them silently.
   - `settings.local.json`: read, set `outputStyle` and write back.
   - Then run `library validate` and report the result.
-- **Close**: say a new session picks up the banner and style, since output style and rules load at session start.
+- **Close** (Zac, at implementation): run on its own, the skill lists what it wrote and leaves `.gitignore` unstaged for the user to commit or ask for revisions. Inside `/bootstrap-repo` it hands back, and bootstrap's closing report covers review and commit. Either way the user is told to quit and restart Claude Code, because the banner, rule and style load only at startup.
+- **No workflow-improvement nudge** (Zac, at implementation): a custom style is a personal choice, so the interview ends at writing the file. The AC, `output-styles.md` and d8 were updated to match.
+- **Keep and default replies** (Zac, after the smoke test): Claude Code won't send an empty prompt, so a re-run keeps a value with "keep" or "k", the picker takes "default" or "d" for option 1, and "skip" or "s" skips a question. Each question names the short replies that apply.
 - **Out of scope**: `/bootstrap-repo` calling the skill, and the docs and README updates (story 06). No changes to `config.mjs` or the features.
 
 ## Guide
@@ -82,6 +84,15 @@ A teammate joining a bootstrapped repo runs `/tailor-ang` and gets their own nam
 **Agent prepares**: the scratch-repo commands above, and a one-line checklist of the Done-when commands to paste after each run.
 
 **Record afterwards**: in this story's Review section, which runs passed and anything the interview got wrong. No credentials are involved.
+
+## Review
+- **Smoke test, 2026-11-16**: Zac ran both manual runs in a scratch repo, and both passed every Done-when check. Run A picked a shipped style (2) and skipped one rule question. Run B re-ran with the interview, a described tone answer and humour "none".
+- **Interview issue found**: re-run prompts said "Enter keeps it", left over from the question-dialog design. Fixed to "keep"/"k", with "default"/"d" for the picker and "skip"/"s" for consistency. That wording is not yet re-run.
+
+**Code review, 2026-11-16**: ACs, plan and C4 "Files `/tailor-ang` writes" all match; `library validate` passes. No must-fix.
+- **Should-fix**: the "keep"/"k", "default"/"d" and "skip"/"s" replies (`src/.claude/skills/tailor-ang/SKILL.md:10-13`) landed after the smoke test, so the re-run AC has no evidence for them. A two-minute re-run up to the style picker covers it. Accepted without a re-run (Zac): small wording change, scratch repo already removed.
+- **Nit**: `SKILL.md:24` says "six options", but a re-run with a kept local style lists seven. "Too many options for a question dialog" holds either way. Fixed.
+- **Nit**: `SKILL.md:18` matches gitignore lines exactly, so an existing equivalent such as `/ang.local.json` gets a harmless duplicate appended. Checking each target with `git check-ignore` would avoid it, at the cost of a slightly longer step. Left as is.
 
 ## Links
 - [Plan: scope 6](../plan.md)
