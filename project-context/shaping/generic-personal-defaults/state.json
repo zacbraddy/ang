@@ -3,11 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u1",
-      "question": "Where's the line between Zac's personal rule/style and a generic default that keeps their spirit?",
-      "approach": "Work through both files with Zac, line by line"
-    },
-    {
       "id": "u2",
       "question": "Pilot name in ang.json templated into skills: how is it templated, and what's the default when unset?",
       "approach": "Spike templating one skill; check how the harness renders it"
@@ -38,9 +33,31 @@
       "id": "k2",
       "fact": "Shipped settings name the Partner In Crime output style, but src/.claude/output-styles/ is untracked",
       "source": "shaping-content/brief.md"
+    },
+    {
+      "id": "k3",
+      "fact": "Only pilot facts (identity, stack) are personal; opinionated methods ship as defaults",
+      "source": "shaping-content/personal-line.md",
+      "answers": "Where's the line between Zac's personal rule/style and a generic default that keeps their spirit?"
     }
   ],
-  "decisions": [],
+  "decisions": [
+    {
+      "id": "d1",
+      "decision": "Ship DDD/Onion/TDD/Atomic Design/Lean as defaults — predictable output out of the box; dissenters raise a workflow improvement",
+      "evidence": "shaping-content/personal-line.md"
+    },
+    {
+      "id": "d2",
+      "decision": "Partner In Crime ships as the default output style, minus the ADHD label — Zac's call",
+      "evidence": "shaping-content/personal-line.md"
+    },
+    {
+      "id": "d3",
+      "decision": "Generic rule wording is team-neutral; tailoring adds solo framing — Ang serves solo and teams",
+      "evidence": "shaping-content/personal-line.md"
+    }
+  ],
   "lineage": [
     {
       "date": "2026-11-16",
@@ -49,6 +66,18 @@
     {
       "date": "2026-11-16",
       "event": "from raw: opening-ang.md, bootstrap-leftovers.md (fast-tracked to shaping)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Ship DDD/Onion/TDD/Atomic Design/Lean as defaults — predictable output out of the box; dissenters raise a workflow improvement"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Partner In Crime ships as the default output style, minus the ADHD label — Zac's call"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Generic rule wording is team-neutral; tailoring adds solo framing — Ang serves solo and teams"
     }
   ]
 }

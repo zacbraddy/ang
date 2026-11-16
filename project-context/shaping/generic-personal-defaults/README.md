@@ -13,6 +13,7 @@ Generic defaults are a release goal in the intent, and today a fresh clone names
 
 ## What's here
 - [Brief](shaping-content/brief.md): the requirements as Zac stated them, plus the related bootstrap finding
+- [Where the personal line sits](shaping-content/personal-line.md): what ships in the generic defaults and what tailoring owns
 
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)

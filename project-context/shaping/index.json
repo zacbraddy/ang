@@ -19,6 +19,16 @@
     ]
   },
   {
+    "title": "Where the personal line sits",
+    "path": "project-context/shaping/generic-personal-defaults/shaping-content/personal-line.md",
+    "shortDescription": "Line-by-line verdict on what stays in the generic personal rule and output style, and what the tailoring step owns",
+    "tags": [
+      "open-source",
+      "distribution",
+      "brand-voice"
+    ]
+  },
+  {
     "title": "Repo README",
     "path": "project-context/shaping/repo-readme/README.md",
     "shortDescription": "A short whistle-stop README covering concepts, key commands and a quick start",
