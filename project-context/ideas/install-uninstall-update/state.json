@@ -1,0 +1,44 @@
+{
+  "status": "active",
+  "statusNote": "",
+  "unknowns": [
+    {
+      "id": "u1",
+      "question": "Install route: plugin marketplace, copy script or degit-style clone, given users must own and edit their copy?",
+      "approach": "Research Claude Code plugin editability; compare options against ADR 0002"
+    },
+    {
+      "id": "u2",
+      "question": "How does project-context/README.md reach a user's install, and should library init copy it?",
+      "approach": ""
+    },
+    {
+      "id": "u3",
+      "question": "Is an uninstall command worth having? If so, what does it remove and never remove?",
+      "approach": ""
+    },
+    {
+      "id": "u4",
+      "question": "Is an update command worth having, given users diverge by design?",
+      "approach": ""
+    }
+  ],
+  "knowns": [
+    {
+      "id": "k1",
+      "fact": "Requirements and options as Zac framed them",
+      "source": "ideas-content/brief.md"
+    }
+  ],
+  "decisions": [],
+  "lineage": [
+    {
+      "date": "2026-11-16",
+      "event": "created in ideas"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "from raw: bootstrap-leftovers.md"
+    }
+  ]
+}

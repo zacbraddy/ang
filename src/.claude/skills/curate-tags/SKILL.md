@@ -1,6 +1,6 @@
 ---
 name: curate-tags
-description: Consolidates near-duplicate and low-value tags so the tag set stays small and useful, rewriting every affected document. Use when the user runs /curate-tags or the tag count passes 50.
+description: Consolidates near-duplicate and low-value tags so the tag set stays small and useful, rewriting every affected document. Use when the user runs /curate-tags; library validate suggests it once the tag count passes 50.
 disable-model-invocation: true
 ---
 

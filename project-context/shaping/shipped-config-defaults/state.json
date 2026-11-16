@@ -1,0 +1,49 @@
+{
+  "status": "active",
+  "statusNote": "",
+  "unknowns": [
+    {
+      "id": "u1",
+      "question": "Where should this repo's own ang.json live vs the shipped default: a moved file, or created by bootstrap?",
+      "approach": "Check how /bootstrap-repo and session features use ang.json"
+    },
+    {
+      "id": "u2",
+      "question": "Which intent and host defaults should ship so validate passes on a fresh install?",
+      "approach": ""
+    }
+  ],
+  "knowns": [
+    {
+      "id": "k1",
+      "fact": "ang.json is a symlink into src/, so this repo's config is the shipped default",
+      "source": "shaping-content/brief.md"
+    },
+    {
+      "id": "k2",
+      "fact": "intent: true without 10k/intent.md fails library validate on a fresh install",
+      "source": "shaping-content/brief.md"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "d1",
+      "decision": "Streams ship off by default, whatever happens to ang.json — Zac's requirement",
+      "evidence": "shaping-content/brief.md"
+    }
+  ],
+  "lineage": [
+    {
+      "date": "2026-11-16",
+      "event": "created in shaping"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Streams ship off by default, whatever happens to ang.json — Zac's requirement"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "from raw: opening-ang.md, bootstrap-leftovers.md (fast-tracked to shaping)"
+    }
+  ]
+}

@@ -23,6 +23,22 @@
     ]
   },
   {
+    "tag": "distribution",
+    "shortDescription": "How Ang lands in a user's repo: install, update, uninstall and the defaults it ships with",
+    "department": [
+      "technical",
+      "product"
+    ]
+  },
+  {
+    "tag": "documentation",
+    "shortDescription": "Ang's user-facing docs: repo README and documentation website",
+    "department": [
+      "product",
+      "marketing"
+    ]
+  },
+  {
     "tag": "open-source",
     "shortDescription": "Releasing and running Ang as an open-source project: licence, contributions, maintenance stance",
     "department": [

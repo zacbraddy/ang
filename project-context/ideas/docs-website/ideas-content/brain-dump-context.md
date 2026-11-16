@@ -1,6 +1,14 @@
-Ok let's get started with the brain dump for the work I'm wanting to do to open source Ang. As per the first principles of this framework, this document is an unfiltered stream of consciousness with very little order or structure waiting to be refined into discrete directions to take in order to move towards the fuzzy and (at this point) nebulous north star goals that I'm wanting to achieve so let's jump in.
+---
+title: Brain dump context (verbatim)
+shortDescription: Zac's own words on what Ang is, its history, motivations, principles, his usage and raw files, kept as docs source and voice sample
+tags: [documentation, product-vision, brand-voice]
+---
+# Brain dump context (verbatim)
 
-# What is Ang?
+## Summary
+Copied verbatim from Zac's opening brain dump (raw `opening-ang.md`, commit 11e2abf) at his request, so the docs site keeps his voice and nothing is lost to summarising. Trim it when writing pages. Where it describes how Ang works, check the framework files: they win where the two differ (for example, the evidence tiers here are misremembered).
+
+## What is Ang?
 
 ## Overview
 
@@ -262,56 +270,8 @@ This is one thing that raw files provide an answer for but equally, not every pr
 
 The point here is that the raw files exist in the workflow to essentially take any unstructured input that Ang's pilot thinks might be relevant to the project that Ang is working on and help with the process of structuring the thoughts within and providing guidance on how that new information materially affects the project if at all and then providing a suggested pathway for how to begin moving forward in a way that acknowledges this changing delivery environment.
 
-# What are we going to do?
 
-So, that is a huge amount of context to ingest and the reason for providing it all is to support the ideas that I have so far, at a high level, for how I want to move the project forward for turning Ang into a proper open source framework. Of course there may be other work streams that might be relevant to include as part of this project that I'm happy to hear about but below are the ones that I think show merit and are probably worth working on even if during the refinement of the ideas we determine that actually they might not be worth doing at all.
-
-## Personal rule and output style
-
-Within the repo you'll notice a couple of files that are in the unstaged set of changes, being `src/.claude/rules/working-with-zac.md` and `src/.claude/output-styles/partner-in-crime.md` these are files that currently exist in my working copy of Ang and the reason they aren't checked in is because they are very tailored towards me and how I like to see Ang working. While Ang does have the facility to allow for workflow improvements I still think that really these elements should be getting shipped as part of the baseline of what Ang is, but I don't need every Ang agent referring to every user as Zac! So I think some work has to be done to largely keep to the spirit of what these files imply but they made need to be made a little more generically applicable to all users. I will have my opinions on where the correct line lies for this but I'd like to work on finding this with an agent. Also one of the previous commits went through the files and changed within the skills all the instances where I've been referred to by name to simply "the user". This was done so that I wasn't checking these in with my name directly and getting off to a bad start, but also because the differences in usage made them difficult to identify, some had the user, other's had Zac and I think there still exists a number of instances where the skills refer to "me" meaning the Ang user referred to in the first person.
-
-Still one feature of Ang as I've been using that I quite enjoy is the personalisation, Ang agents refer to me as Zac and the conversation flows a lot better with this personalisation in place. So as part of this work we may want to consider adding a property to the ang.json to refer to the name of the pilot of Ang so that other users can enjoy this too. I suspect that we could then just template the name in all the appropriate skills etc. to facilitate this being a seamless change. If we do go down this templating route then I suspect we might need to ensure that the workflow improvement workflows are able to ensure that new features it builds are built in a way that honours this as part of the Ang system and also we are going to have to consider what the default might be if the user doesn't want to personalise the framework and finally it needs to be considered as part of the bootstrap-repo and of course any other areas of the Ang system that I haven't thought of.
-
-Essentially when it comes to the requirements for this task around the unstaged files we need to get to a point where these can be checked in such that we are able to:
-
-- Ship generic defaults for both.
-- Add an Ang workflow step that generates a version tailored to the user.
-- Have `/bootstrap-repo` offer a choice: take the defaults or customise them from the start.
-
-## Where `ang.json` lives
-
-A simple one here: `.claude/ang.json` is a symlink into `src/`, so this repo's config and the default that ships are the same file. We need to move it elsewhere, or have bootstrap create it.
-
-## Streams off by default
-
-Streams must not ship turned on. It is set to `"streams": false` for the initial check-in; make sure that stays the default whatever happens to `ang.json`.
-
-## `/curate-tags` description
-
-The description says "Use when … the tag count passes 50", but the skill has `disable-model-invocation: true`, so the model can never invoke it. In practice, `library validate` warns once the count passes 50 and the user runs the command.
-
-- Suggested fix: keep the flag and reword the description: "Use when the user runs /curate-tags; library validate suggests it once the tag count passes 50."
-- Keeping the flag matches the 15 other user-started skills and stops a sweeping rewrite landing in an unrelated session's diff.
-
-## Ang needs a documentation website
-
-There are a lot of concepts to grasp within Ang in order to use it effectively, simple though the framework may be. We need a way to transfer this knowledge to potential users of Ang. This task I believe has two streams to attack that can be separate or might be a single stream:
-
-1. We need a streamlined, simple and easy to follow [README.md](http://README.md) for the repo that allows people considering Ang in their workflow something that they can easily read and grasp the high level concepts so that they can decide if Ang is right for them and their circumstances. This should **not** be a comprehensive all singing, all dancing run down of every little thing that Ang can do and it's intentions an purpose. Rather it should be a high-level whistle stop tour of the main concepts the important commands and a quick start so that people can get down to trying it.
-2. We need a full and comprehensive documentation website to allow users to deep dive into Ang, it's usage, concepts, ambitions, motivations etc. to allow users who have tried it out and want to go deeper.
-
-The readme I think is fairly well spec'd as is in the point above so we maybe don't need to go deeper there but let me add a little more flesh to the bones on the documentation website. First and foremost I'd like to have a clean, fresh, simple design we don't need to go overboard on this front but I'd like it to be pleasant to look at but be functional and easy to use. Light and dark mode with system as the default should go with out saying but here we are! Equally though I'd really prefer if we avoid designing and building it from scratch. Not only because I don't really want to have an obviously AI-slop design which LLMs are so great at creating but also because I don't want to have to invest to much effort in the build and design of the documentation. I know there are plenty of out of the box frameworks available for creating documentation that can make repeatably good looking and functional documentation websites and that is most likely our best direction to head. But we'll need to have a look around and see what is best in class and universally liked in 2026, if we just end up with docusaurus in the end then so be it but just because that's the only one in your model's training data doesn't inherently make it the best!
-
-We also need to consider hosting. I don't mind if we think it's best to grab a domain and host the site, then I'm open to that. However, that is obviously going to require me to keep paying for the domain and we'll probably have to set up some CI/CD etc which is extra effort. I've never used github pages before and I wonder if that might be good solution if we can support it in a way that produces results I'm happy with and avoid some of the downsides of self hosting. Again, this is likely going to be something worth researching to find the best suited solution.
-
-As I've mentioned for the content of the website you should be able to combine a heap of the context above along with an investigation into the Ang files themselves to produce a pretty comprehensive documentation website. I know that ideate requires the deletion of this file and a summarisation of it's context but it might be worth in this instance just chunking up the relevant parts and providing them verbatim to the context sub-libraries of the appropriate work streams to ensure that not too much context is lost in the translation of the summaries between here and the point at which we are having agents actually building pages. This is especially true because I should mention this file has a great amount of content which serves as an example of nature speaking tone when I'm writing and how I like to convey ideas. Although it is definitely overly verbose at times and that can afford to be trimmed down so as not to flood the audience with information I'd really like to have the documentation that is generate maintain my voice and the spirit of how I like to convey ideas shine through prominently.
-
-I should mention that as part of the documentation and possibly the readme it would be great to take the opportunity to briefly advertise myself and We Right Code so that Ang can stand as not only a useful open source project but also somewhat of a portfolio piece! At very least a link to my CV website [https://zackerthehacker.com](https://zackerthehacker.com) and some mention of We Right Code and the stuff I do with it and that Ang was developed as part of my work under We Right Code would be really helpful. We Right Code doesn't yet have a website so there's nothing to link to there right now. Again, we don't have to shove this in people's faces it's not like it has to be super prominent or mentioned ad nauseam but a mention so that people who are interested are able to easily find it would be great.
-
-## Ang is going to be open sourced
-
-I've never actually attempted to **properly** release a repo I own as open source. I've worked in the open source community long enough to know that there are definitely accepted standards and things I like to see when I'm looking through open sourced project and I also know that the very nature of Ang means not every one of these standards are going to fit Ang perfectly and will either need to be modified or dropped. Also I don't want Ang to necessarily feel like it needs to suit the high standards set by repositories like React etc. I'm not a huge corporation and have no interest in pretending to be one! So I think it's going to be worth doing some research on open sourced projects particularly ones that aren't afraid to use a little whimsy interest me as that suits my style and persona very well, and see what they're doing and which parts of their process we could afford to lift.
-
-I've already added the MIT license to Ang and I'm happy enough with that, I was considering WTFPL for a while but ended up deciding that there was no reason to be edgy just for the sake of it. I honestly don't think there's any real need for things liek PR or issue templates unless they're absolute no brainers to implement, even then we don't need to invest too much time in those. Same thing can be said for a CONTRIBUTORS.md. All of this is because as you've seen from the context in this document the entire core of what Ang is means that if we've done things right, these should never happen at a volume where investing time them really matters! You could say a similar thing about CI/CD I don't think there's any real value in linting markdown files although perhaps the code files could use it, I guess I'm on the fence about how much time we invest in ensuring that code quality in the repo is a first class citizen, I wouldn't say I'm completely against it but I'd need to convinced of it's value.
-
-Really what this work stream represents in my head right now is that I need to discover what sort of things I might need to consider before pushing this project properly out as an open sourced project, then which of them I think suits Ang to implement, which of them I'd like to change to suit my style and which of them I think we really don't need and should be dropped, and from there we need to go about implementing these things.
+## Related
+- [Docs website brief](brief.md)
+- [What Ang is](/project-context/10k/product/what-ang-is.md)
+- [First principles](/project-context/10k/product/first-principles.md)

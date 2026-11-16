@@ -1,0 +1,44 @@
+{
+  "status": "active",
+  "statusNote": "",
+  "unknowns": [
+    {
+      "id": "u1",
+      "question": "Which docs framework is best in class and widely liked in 2026?",
+      "approach": "Desk research beyond Docusaurus; compare looks, light/dark, effort"
+    },
+    {
+      "id": "u2",
+      "question": "Hosting: GitHub Pages or a domain plus hosting, and what does each cost in money and effort?",
+      "approach": ""
+    },
+    {
+      "id": "u3",
+      "question": "Information architecture: which pages, and how does the brain-dump content map onto them?",
+      "approach": ""
+    }
+  ],
+  "knowns": [
+    {
+      "id": "k1",
+      "fact": "Requirements: clean simple design, light/dark defaulting to system, existing framework, Zac's voice, brief attribution",
+      "source": "ideas-content/brief.md"
+    },
+    {
+      "id": "k2",
+      "fact": "Where the brain dump describes how Ang works and the files differ, the files are truth (e.g. evidence tiers)",
+      "source": "ideas-content/brief.md"
+    }
+  ],
+  "decisions": [],
+  "lineage": [
+    {
+      "date": "2026-11-16",
+      "event": "created in ideas"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "from raw: opening-ang.md (verbatim context kept in ideas-content/brain-dump-context.md)"
+    }
+  ]
+}

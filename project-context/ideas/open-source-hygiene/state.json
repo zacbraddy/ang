@@ -1,0 +1,39 @@
+{
+  "status": "active",
+  "statusNote": "",
+  "unknowns": [
+    {
+      "id": "u1",
+      "question": "Is quality tooling for the Ang repo worth it: none, B (zero-dep node --check/--test in CI) or C (dev-only full kit)?",
+      "approach": "Weigh against intent ('CI needs convincing') and ADR 0002"
+    },
+    {
+      "id": "u2",
+      "question": "Which standards do small, whimsical open-source projects keep, and which suit Ang?",
+      "approach": "Survey a handful of such repos"
+    },
+    {
+      "id": "u3",
+      "question": "Should the generic personal rule still push /bootstrap-quality on repos lacking tooling?",
+      "approach": "Answer after the tooling question; feeds generic-personal-defaults"
+    }
+  ],
+  "knowns": [
+    {
+      "id": "k1",
+      "fact": "Stance: MIT decided; templates/CONTRIBUTORS only if no-brainers; no markdown linting",
+      "source": "ideas-content/brief.md"
+    }
+  ],
+  "decisions": [],
+  "lineage": [
+    {
+      "date": "2026-11-16",
+      "event": "created in ideas"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "from raw: opening-ang.md, bootstrap-leftovers.md"
+    }
+  ]
+}

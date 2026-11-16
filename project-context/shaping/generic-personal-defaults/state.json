@@ -1,0 +1,54 @@
+{
+  "status": "active",
+  "statusNote": "",
+  "unknowns": [
+    {
+      "id": "u1",
+      "question": "Where's the line between Zac's personal rule/style and a generic default that keeps their spirit?",
+      "approach": "Work through both files with Zac, line by line"
+    },
+    {
+      "id": "u2",
+      "question": "Pilot name in ang.json templated into skills: how is it templated, and what's the default when unset?",
+      "approach": "Spike templating one skill; check how the harness renders it"
+    },
+    {
+      "id": "u3",
+      "question": "What does the tailoring step look like, and how does /bootstrap-repo offer defaults vs customise?",
+      "approach": ""
+    },
+    {
+      "id": "u4",
+      "question": "How does the workflow-improvement flow keep new features honouring pilot-name templating?",
+      "approach": ""
+    },
+    {
+      "id": "u5",
+      "question": "Which references to the pilot ('the user', 'me', 'Zac') remain in skills, and should they be made consistent?",
+      "approach": "Grep src/.claude; at import the stance was first-person 'me' is fine"
+    }
+  ],
+  "knowns": [
+    {
+      "id": "k1",
+      "fact": "Requirements: ship generic defaults, add a tailoring step, /bootstrap-repo offers defaults or customise",
+      "source": "shaping-content/brief.md"
+    },
+    {
+      "id": "k2",
+      "fact": "Shipped settings name the Partner In Crime output style, but src/.claude/output-styles/ is untracked",
+      "source": "shaping-content/brief.md"
+    }
+  ],
+  "decisions": [],
+  "lineage": [
+    {
+      "date": "2026-11-16",
+      "event": "created in shaping"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "from raw: opening-ang.md, bootstrap-leftovers.md (fast-tracked to shaping)"
+    }
+  ]
+}
