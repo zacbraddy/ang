@@ -53,5 +53,5 @@ Claude Code only gitignores `settings.local.json` when it creates the file itsel
 - [Pilot name without templating](./pilot-name.md)
 - [Brief](./brief.md)
 - [Hub](../../../README.md)
-- [Shipped config and defaults](/project-context/planning/generic-defaults/README.md)
+- [Shipped config and defaults](/project-context/execution/generic-defaults/README.md)
 - [Docs website](/project-context/ideas/docs-website/README.md)

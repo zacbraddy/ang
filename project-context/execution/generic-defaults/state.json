@@ -85,6 +85,11 @@
       "fact": "No literal pilot name outside working-with-zac.md. 'me' (invoker voice in skills) vs 'the user' (agents, features, scripts) both read right solo or team, so no mass rewrite. Fix two 'my rules' pointers (review-story, write-story) to name engineering-defaults.md",
       "source": "person-references.md",
       "answers": "Which references to the pilot ('the user', 'me', 'Zac') remain in skills, and should they be made consistent?"
+    },
+    {
+      "id": "k16",
+      "fact": "Tests run with node --test 'src/.claude/**/*.test.mjs' (Node 21+ for globs); a bare directory argument fails on Node 22 and would miss ang/features/pilot tests. Checked 2026-11-16 on Node 22.19",
+      "source": "plan.md"
     }
   ],
   "decisions": [
@@ -184,6 +189,11 @@
       "id": "d17",
       "decision": "Tests use built-in node:test beside the code (*.test.mjs); loadConfig splits into a pure mergeConfig plus an IO wrapper so merge rules are unit-tested; validate warns when ang.local.json exists but isn't gitignored. Why: ADR 0002 bans deps, and the merge is the logic worth driving test-first",
       "evidence": "plan.md"
+    },
+    {
+      "id": "d18",
+      "decision": "mergeConfig(shared, local) takes parsed JSON (undefined for a missing file) and returns { config, errors, warnings }; loadConfig owns file reads and invalid-JSON errors; the gitignore check lives in validate, not the loader. Why: keeps every merge rule pure and unit-testable, and keeps git IO off the session-start hook path",
+      "evidence": "c4/4-code.md"
     }
   ],
   "lineage": [
@@ -338,6 +348,14 @@
     {
       "date": "2026-11-16",
       "event": "decided: Tests use built-in node:test beside the code (*.test.mjs); loadConfig splits into a pure mergeConfig plus an IO wrapper so merge rules are unit-tested; validate warns when ang.local.json exists but isn't gitignored. Why: ADR 0002 bans deps, and the merge is the logic worth driving test-first"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: mergeConfig(shared, local) takes parsed JSON (undefined for a missing file) and returns { config, errors, warnings }; loadConfig owns file reads and invalid-JSON errors; the gitignore check lives in validate, not the loader. Why: keeps every merge rule pure and unit-testable, and keeps git IO off the session-start hook path"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "moved planning → execution"
     }
   ],
   "type": "technical"

@@ -32,7 +32,7 @@ There is no per-feature flag. `config.mjs` holds a `LOCAL_KEYS` constant (`host`
 - Why not a flag on each feature module: with four features, a flag adds a field to every feature forever and pays nothing back. Flipping it would also mean editing shipped Ang source, which unlocks the key for the whole team and is lost on update. Team-controlled overrides are parked in [parked work](/project-context/ideas/parked.md).
 
 ## Gitignore gap
-This repo has no `.gitignore`. `.claude/settings.local.json` is ignored here only through Zac's global git ignore, which a fresh user won't have. The tailoring command must create or append the repo `.gitignore` entries for `ang.local.json`, `.claude/settings.local.json` and the personal rule overlay (known k7).
+This repo has no `.gitignore`. `.claude/settings.local.json` is ignored here only through Zac's global git ignore, which a fresh user won't have. The tailoring command must create or append the repo `.gitignore` entries using the unanchored patterns in the plan's Approach (`ang.local.json`, `settings.local.json`, `*.local.md`), so files under the symlinked `src/.claude/` are covered too (known k7).
 
 ## This repo's own switch (decision d12)
 Delete the `.claude/ang.json` symlink and `src/.claude/ang.json` (Ang ships none, decision d11). Add a root `ang.json` with `{ "intent": true, "streams": false }` and a gitignored `ang.local.json` with `{ "host": "orca" }`.

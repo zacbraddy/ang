@@ -33,10 +33,10 @@ Copied `src/.claude` and `src/project-context` (what an install ships) into a sc
 ## What this repo needs instead
 
 - Delete `src/.claude/ang.json` and the `.claude/ang.json` symlink.
-- Give this repo its own real config: `intent: true`, `streams: false` committed; `host: "orca"` in the gitignored local overlay once that exists. The move to the repo root and the overlay land with [generic personal defaults](/project-context/planning/generic-defaults/README.md); until then a real (non-symlinked) `.claude/ang.json` does the job.
+- Give this repo its own real config: `intent: true`, `streams: false` committed; `host: "orca"` in the gitignored local overlay once that exists. The move to the repo root and the overlay land with [generic personal defaults](/project-context/execution/generic-defaults/README.md); until then a real (non-symlinked) `.claude/ang.json` does the job.
 
 ## Related
 
 - [Brief](./brief.md)
-- [Tailoring](/project-context/planning/generic-defaults/origins/generic-personal-defaults/shaping-content/tailoring.md)
+- [Tailoring](/project-context/execution/generic-defaults/origins/generic-personal-defaults/shaping-content/tailoring.md)
 - [Hub](../../../README.md)

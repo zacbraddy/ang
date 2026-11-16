@@ -26,6 +26,7 @@ A fresh install of Ang becomes generic and valid. It ships a team-neutral rule (
 8. **10k and shipped docs**:
    - `10k/technical/project-structure.md`: the config location, the Dragons note about the symlink, output styles no longer untracked, and the rules row.
    - ADR 0001: "`ang.json` names it" becomes `ang.local.json`.
+   - ADR 0002: the Summary and Standing say the script imports only `node:fs` and `node:path`. Refresh them to list `node:child_process` (the `git check-ignore` warning) and `node:test` (tests). The Decision, built-ins only, already covers both.
    - The Ang config section of `src/project-context/README.md`: the two files, `LOCAL_KEYS`, dropped-key warnings, and a pointer to the parked team overrides.
 
 ## Out of scope
@@ -65,14 +66,14 @@ A fresh install of Ang becomes generic and valid. It ships a team-neutral rule (
 
 ## Success measures
 - **Fresh install:** a copy of `src/.claude` and `src/project-context` with no config passes `library validate` and shows the banner `no optional features on`.
-- **No pilot name in shipped files:** `grep -ri zac src/` matches nothing.
+- **No pilot name in shipped files:** `git grep -il zac -- src/` matches nothing. Tracked files only: in this repo, gitignored local files such as `pilot.local.md` land physically under `src/` through the symlinks.
 - **The default style resolves:** `settings.json`'s `outputStyle` names a style that exists in `src/.claude/output-styles/`.
 - **Tracked files stay untouched:** after `/tailor-ang` on a bootstrapped repo, `git status` shows no tracked changes beyond `.gitignore`, and every file it wrote is ignored.
 - **Dropped keys warn:** an `ang.local.json` holding `intent` triggers a `validate` warning naming the key, and the merged config ignores it.
 - **This repo still works:** sessions here show `Ang: intent · host (orca) · pilot (Zac)`, and `validate` passes.
 
 ## Test strategy
-Built-in `node:test` and `node:assert` only, run with `node --test src/.claude/scripts/`. No `package.json` and no dependencies (ADR 0002). Tests sit beside the code as `*.test.mjs`.
+Built-in `node:test` and `node:assert` only, run with `node --test 'src/.claude/**/*.test.mjs'`. The quoted glob matters: Node 22 treats a bare directory argument as a test file and fails, and the pilot feature's tests live outside `scripts/`. Glob arguments need Node 21 or later. No `package.json` and no dependencies (ADR 0002). Tests sit beside the code as `*.test.mjs`.
 
 **Unit tests (most of them), written test-first:**
 - `mergeConfig`:
@@ -83,7 +84,7 @@ Built-in `node:test` and `node:assert` only, run with `node --test src/.claude/s
   - an unknown key, or a bad value in either file, gives an error naming the file;
   - a local file that isn't an object gives an error.
 - Pilot feature `check` and `on`: `null` and a valid name pass; `""`, whitespace and numbers are rejected.
-- `featureRule`: prefers `rule(value)` over `rule.md`, and returns nothing for an off feature.
+- `featureRule` prefers `rule(value)` over `rule.md`; session output skips the rules of off features.
 - `session features` output marks local keys.
 
 **Integration tests (a few), each spawning the CLI against a temp project via `CLAUDE_PROJECT_DIR`:**
@@ -109,6 +110,7 @@ Built-in `node:test` and `node:assert` only, run with `node --test src/.claude/s
 - [Config move blast radius](config-move.md)
 - [Canned output styles](output-styles.md)
 - [Person references](person-references.md)
+- [C4: context](c4/1-context.md), [containers](c4/2-containers.md), [components](c4/3-components.md), [code](c4/4-code.md)
 - [Tailoring and config overlay](origins/generic-personal-defaults/shaping-content/tailoring.md)
 - [Delivery intent](/project-context/10k/intent.md)
 - [Project structure](/project-context/10k/technical/project-structure.md)
