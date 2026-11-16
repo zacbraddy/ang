@@ -74,6 +74,14 @@
     ]
   },
   {
+    "title": "Canned output styles",
+    "path": "project-context/planning/generic-defaults/output-styles.md",
+    "shortDescription": "The five output styles Ang ships, what each is for, and the numbered list the tailoring command picks from",
+    "tags": [
+      "distribution"
+    ]
+  },
+  {
     "title": "Generic defaults",
     "path": "project-context/planning/generic-defaults/README.md",
     "shortDescription": "Ship generic, Zac-free defaults (rule, output style, config) plus a tailoring command that writes per-user choices locally",
