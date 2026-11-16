@@ -38,11 +38,11 @@ project-context/
 
 ## Ang config
 
-`.claude/ang.json` switches Ang's optional behaviour per project: `{ "intent": bool, "streams": bool, "host": null | "orca" }` (`host` names the workspace host, which `/bootstrap-repo` detects). A missing file means everything is off. `/bootstrap-repo` writes it; `validate` rejects unknown keys and values. Flipping a key is the whole change; it takes effect next session.
+Root `ang.json` switches Ang's optional behaviour per project: `{ "intent": bool, "streams": bool, "host": null | "orca" }`. It is committed and `/bootstrap-repo` writes it. A gitignored `ang.local.json` beside it holds personal settings and may set only `host` (the workspace host, which `/tailor-ang` detects) and `pilot`; it overrides `ang.json` for those keys. Any other key in it is dropped and `validate` warns about it by name. Team-controlled overrides are parked in `/project-context/ideas/parked.md`. Missing files mean everything is off. `validate` rejects unknown keys and values in either file. Flipping a key is the whole change; it takes effect next session.
 
 Each optional feature owns `.claude/ang/features/<key>/`: `feature.mjs` (its key, `validate` checks, commands, bootstrap question, and its config value and on-check when it isn't a plain boolean), `rule.md` (always-on guidance), `steps/<skill>.md` (steps it adds to a skill), `agents/<agent>.md` (subagent add-ons) and `conventions.md` (its library conventions; read it when working with that feature). Off means invisible: nothing feature-specific lives in `.claude/rules/`, skill or agent bodies, or this README.
 
-Agents never read `ang.json`. Hooks and injections deliver what is on:
+Agents never read `ang.json` or `ang.local.json`. Hooks and injections deliver what is on:
 - SessionStart runs `session banner`: one line naming only what is on (e.g. `Ang: intent · host (orca)`), then each on feature's `rule.md`. `host` is on only when it is also detected in the session's environment, so the same repo works in a plain terminal.
 - SubagentStart runs `session subagent`: on features' `rule.md` plus their `agents/<agent-type>.md`.
 - Skills carry `` !`ang-context-manager.mjs session steps <skill>` ``, which prints on features' steps for that skill, or nothing.

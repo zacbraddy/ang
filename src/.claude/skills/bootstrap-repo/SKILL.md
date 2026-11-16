@@ -51,7 +51,7 @@ Write each batch once I agree.
 
 !`node .claude/scripts/ang-context-manager.mjs session features`
 
-**Ang config.** Write `.claude/ang.json` (`project-context/README.md`, Ang config) with every feature key above, from my answer or your detection.
+**Ang config.** Write root `ang.json` (`project-context/README.md`, Ang config) with every feature key above that isn't marked personal, from my answer or your detection. Personal keys belong in `ang.local.json`, which `/tailor-ang` writes; skip them here.
 
 ## 5. Write
 - Every doc: frontmatter (`title`, `shortDescription`, `tags`), `## Summary` first, `## Related` last. Each Summary says what its facts actually rest on: my statements of intent (ET 1, said as such), the code they describe as backticked repo paths (`src/db/sqlite.ts`), or research with its date, tier and status. A doc that mixes sources says so per section or per fact.

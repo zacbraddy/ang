@@ -6,4 +6,4 @@ disable-model-invocation: true
 
 # /read-mail
 
-Follow `.claude/ang/features/streams/read-mail.md`. If `.claude/ang.json` doesn't have `streams: true`, say streams mode is off and stop.
+Follow `.claude/ang/features/streams/read-mail.md`. If root `ang.json` doesn't have `streams: true`, say streams mode is off and stop.

@@ -1,6 +1,7 @@
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
-import { CTX, DEPARTMENTS, EPIC_TYPES, ITEM_STATUSES, PROJECT, STORY_OWNERS, STORY_STATUSES, TAG_LIMIT } from '../paths.mjs';
+import { CTX, DEPARTMENTS, EPIC_TYPES, ITEM_STATUSES, LOCAL_FILE, PROJECT, STORY_OWNERS, STORY_STATUSES, TAG_LIMIT } from '../paths.mjs';
 import { isUrl, read, rel, walk } from '../util.mjs';
 import { loadConfig } from '../config/config.mjs';
 import { FEATURES, onFeatures } from '../features.mjs';
@@ -90,10 +91,17 @@ function checkStateFile(file, errors) {
   if (!fs.existsSync(path.join(item, 'README.md'))) errors.push(`${rel(item)}: item has state.json but no README.md hub`);
 }
 
+// Status 1 is git's "not ignored"; no git, no repo or any other failure says nothing.
+function localFileIgnoreWarning() {
+  if (!fs.existsSync(LOCAL_FILE)) return [];
+  const { status } = spawnSync('git', ['check-ignore', '-q', LOCAL_FILE], { cwd: PROJECT });
+  return status === 1 ? [`${rel(LOCAL_FILE)} is not gitignored; it holds personal settings, add it to .gitignore`] : [];
+}
+
 // Prints warnings, errors and ready triggers. Returns true when valid.
 export function validateLibrary() {
-  const { config, errors } = loadConfig();
-  const report = { errors, warnings: [] };
+  const { config, errors, warnings } = loadConfig();
+  const report = { errors, warnings: [...warnings, ...localFileIgnoreWarning()] };
   FEATURES.forEach((f) => errors.push(...f.validate(!!config[f.key])));
   const onWithWarnings = onFeatures(config).filter((f) => f.warnings);
   onWithWarnings.forEach((f) => report.warnings.push(...f.warnings()));

@@ -7,9 +7,9 @@ every agent's events. This is the setup that gives Ang agents the most out of it
 for ohnvm but meant to travel with Ang when Ang gets its own repo.
 
 Streams mode itself (the `ang/streams` registry, the user-approved mailbox and read-only peeking
-at other streams' branches) is the `streams` feature: set `"streams": true` in `.claude/ang.json`,
+at other streams' branches) is the `streams` feature: set `"streams": true` in root `ang.json`,
 and see `.claude/ang/features/streams/conventions.md`. The Orca power-ups are the `host` feature:
-`"host": "orca"` in `.claude/ang.json`, on only in sessions Orca launched. Its host-neutral actions
+`"host": "orca"` in the gitignored `ang.local.json`, on only in sessions Orca launched. Its host-neutral actions
 (say status, set stage, ask for the user, create and remove stream workspace) and their Orca commands
 are in `.claude/ang/features/host/rule.md`; skills call them at their checkpoints.
 

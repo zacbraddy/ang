@@ -1,5 +1,5 @@
 import fs from 'node:fs';
-import { bannerLine, loadConfig } from '../config/config.mjs';
+import { bannerLine, LOCAL_KEYS, loadConfig } from '../config/config.mjs';
 import { FEATURES, featureText, onFeatures } from '../features.mjs';
 
 // Here be dragons: these commands feed hooks and skill `!` injections. A failing `!` command aborts the whole skill,
@@ -61,10 +61,11 @@ export default [
   },
   {
     noun: 'session', verb: 'features', args: [], flags: [],
-    summary: 'every feature\'s .claude/ang.json key, bootstrap question and default (for /bootstrap-repo)',
+    summary: 'every feature\'s ang.json key, bootstrap question and default (for /bootstrap-repo)',
     run() {
       for (const { key, bootstrap } of FEATURES) {
-        console.log(`- **${key}** (default ${bootstrap.default}): ${bootstrap.question}`);
+        const personal = LOCAL_KEYS.includes(key) ? ' — personal, set by `/tailor-ang`' : '';
+        console.log(`- **${key}** (default ${bootstrap.default}): ${bootstrap.question}${personal}`);
         console.log(`  If yes: ${bootstrap.ifYes}`);
       }
     },

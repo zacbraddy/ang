@@ -24,7 +24,7 @@ export default {
   commands: [],
   bootstrap: {
     question: 'Does this project want a delivery intent: a `10k/intent.md` holding how the user means work to be delivered right now, and why? It pays off on product work built from shaky facts, where discovery dominates, and gets in the way on a contract working through a team\'s tickets.',
-    default: false,
+    default: true,
     ifYes: 'Draft `10k/intent.md` with the user from their own words, in the shape `.claude/ang/features/intent/conventions.md` gives, and propose it with the next batch of 10k docs.',
   },
 };

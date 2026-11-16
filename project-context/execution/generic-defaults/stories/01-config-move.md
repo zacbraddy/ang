@@ -2,7 +2,7 @@
 title: Config move, test harness and this repo's own config
 shortDescription: Root ang.json plus a gitignored ang.local.json limited to LOCAL_KEYS, the first node:test tests, and this repo's own config replacing the src symlink
 tags: [repo-structure, distribution]
-status: ready
+status: done
 owner: agent
 dependsOn: []
 ---
@@ -54,6 +54,19 @@ A local key other than `host` or `pilot` is dropped, and `validate` warns about 
 - **This repo**: `git rm src/.claude/ang.json` and the `.claude/ang.json` symlink; add root `ang.json`, `ang.local.json` and `.gitignore` with unanchored `ang.local.json`, `settings.local.json`, `*.local.md`. Leave unstaged.
 - **Out of scope**: the pilot feature, `featureRule`/`onRules()` and the subagent rule (02); `session.test.mjs` (02 creates it); `10k/technical/project-structure.md` and ADR 0001 wording (06); `/tailor-ang` writing `.gitignore` entries for users (05).
 - **After landing**: flag `/bootstrap-quality` once, per the plan.
+
+## Review
+All Done-when evidence holds: 20/20 tests pass, both old config files are gone, `ang.local.json` is gitignored, the banner reads `Ang: intent · host (orca)`, `validate` passes and the grep is empty. Acceptance criteria are met and the code matches the C4 code table.
+
+**Must-fix:** none.
+
+**Should-fix:**
+- `src/.claude/ang/features/intent/conventions.md:3` says "opt-in per project", but the same sentence now says `/bootstrap-repo` defaults to yes. Reword it to "switched per project", or similar, so the two halves agree.
+
+**Nit:**
+- `src/.claude/scripts/ang/config/config.mjs:18`: the `validKeys` comment restates the code rather than flagging a dragon. Drop it, or keep only the out-param note ("pushes to `errors`").
+- `src/.claude/scripts/cli.test.mjs:413`: the plan's case is a local `intent`; the test uses `streams`. The behaviour is the same, so leave it unless you want the test to match the plan literally.
+- There's still no lint, format, pre-commit or CI setup here. The plan says to flag `/bootstrap-quality` once after landing, so this is that flag.
 
 ## Links
 - [Plan: scope 1–2, approach, test strategy](../plan.md)

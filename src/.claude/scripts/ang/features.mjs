@@ -1,6 +1,6 @@
 // Every Ang feature module, each declared in .claude/ang/features/<key>/feature.mjs as
 // { key, dir, validate(on) → errors[], warnings?() → warnings[] (when on), banner?(value) → text after its banner key,
-//   config?: { default, check(value) → error | null } (when its .claude/ang.json value isn't a boolean),
+//   config?: { default, check(value) → error | null } (when its ang.json value isn't a boolean),
 //   on?(value) → is it on (default: the value is truthy), commands, bootstrap: { question, default, ifYes } }.
 // Its folder may also hold rule.md (printed by the SessionStart banner), steps/<skill>.md (printed by `session steps`),
 // agents/<agent-type>.md (injected by the SubagentStart hook) and conventions.md (its part of the library conventions).

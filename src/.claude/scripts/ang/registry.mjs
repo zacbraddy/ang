@@ -2,7 +2,7 @@
 // Dispatch, --help and usage errors are all built from these declarations, so a command's signature lives in one place.
 //   args:  [{ name, enum?, optional?, variadic? }] in positional order; a variadic arg must be last
 //   flags: [{ name, value?, enum?, required? }]; a flag without `value` is a boolean switch
-//   feature: the .claude/ang.json key that must be on for the command to exist
+//   feature: the ang.json key that must be on for the command to exist
 import { SCRIPT } from './paths.mjs';
 import { fail } from './util.mjs';
 
@@ -83,7 +83,7 @@ export function dispatch(allCommands, config, argv) {
   if (!command) {
     const isOff = (c) => !enabled.includes(c) && c.noun === noun;
     const disabled = allCommands.find((c) => isOff(c) && (c.verb === verb || !nounCommands.length));
-    if (disabled) fail(`${noun} commands need "${disabled.feature}": true in .claude/ang.json`);
+    if (disabled) fail(`${noun} commands need "${disabled.feature}": true in ang.json`);
     if (!nounCommands.length) fail(`unknown command "${noun}" — run ${SCRIPT} --help`);
     if (!wantsHelp) console.error(verb ? `✖ unknown command "${noun} ${verb}"` : `✖ ${noun} needs a verb`);
     printHelp(nounCommands);
