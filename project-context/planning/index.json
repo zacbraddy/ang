@@ -1,5 +1,14 @@
 [
   {
+    "title": "Config move blast radius",
+    "path": "project-context/planning/generic-defaults/config-move.md",
+    "shortDescription": "Everything that reads or names .claude/ang.json today, and how ang.local.json is limited to personal keys",
+    "tags": [
+      "distribution",
+      "repo-structure"
+    ]
+  },
+  {
     "title": "Generic personal rule and output style, brief",
     "path": "project-context/planning/generic-defaults/origins/generic-personal-defaults/shaping-content/brief.md",
     "shortDescription": "Zac's requirements for shipping generic versions of his personal rule and output style",

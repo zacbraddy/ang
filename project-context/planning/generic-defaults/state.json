@@ -3,11 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u2",
-      "question": "Blast radius of moving config to root ang.json + ang.local.json: what reads .claude/ang.json today (script loader, hooks, skills, bootstrap, validate, docs), and where the per-feature 'overridable' flag lives",
-      "approach": "Grep src/ and .claude/scripts for ang.json; read the feature loader"
-    },
-    {
       "id": "u3",
       "question": "What are the other up-to-3 canned output styles beside Partner In Crime?",
       "approach": "Draft 2-3 contrasting candidates (e.g. terse, teaching, formal) and ask Zac"
@@ -83,6 +78,12 @@
       "source": "origins/shipped-config-defaults/shaping-content/fresh-install-defaults.md",
       "answers": "Which intent and host defaults should ship so validate passes on a fresh install?",
       "from": "shipped-config-defaults"
+    },
+    {
+      "id": "k12",
+      "fact": "Config move is small: one path constant (paths.mjs) and one loader (loadConfig, 3 callers), plus about 10 wording edits. The repo has no .gitignore, so tailoring must add the entries",
+      "source": "config-move.md",
+      "answers": "Blast radius of moving config to root ang.json + ang.local.json: what reads .claude/ang.json today (script loader, hooks, skills, bootstrap, validate, docs), and where the per-feature 'overridable' flag lives"
     }
   ],
   "decisions": [
@@ -157,6 +158,11 @@
       "decision": "This repo gets its own real config (intent true, streams false; host orca local) replacing the src symlink — the repo is a user of Ang, not the default",
       "evidence": "origins/shipped-config-defaults/shaping-content/fresh-install-defaults.md",
       "from": "shipped-config-defaults"
+    },
+    {
+      "id": "d13",
+      "decision": "ang.local.json is limited by a LOCAL_KEYS constant (host, pilot) in config.mjs, not a per-feature flag: the merge drops any other local key, so the config is always valid. validate warns about each dropped key, and the Ang config docs state the rule. Team-controlled overrides are parked. Why: a flag wouldn't pay off with 4 features, and flipping it means forking Ang. Zac's call",
+      "evidence": "config-move.md"
     }
   ],
   "lineage": [
@@ -271,6 +277,18 @@
     {
       "date": "2026-11-16",
       "event": "replaced k11: Ship no ang.json: feature defaults (all off) pass validate on a fresh install; shipping today's file fails it → Fresh install: shipping today's ang.json (intent true, no 10k/intent.md) fails validate; shipping none (features all off) passes"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced k12: Small: one path constant (paths.mjs) and one loader (loadConfig, 3 callers) plus about 10 wording edits. No overridable flag exists; proposed personal: true on the feature module (host, pilot), with loadConfig merging ang.local.json and erroring on project-locked keys. Repo has no .gitignore, so tailoring must add entries → Config move is small: one path constant (paths.mjs) and one loader (loadConfig, 3 callers), plus about 10 wording edits. The repo has no .gitignore, so tailoring must add the entries"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: ang.local.json is limited by a LOCAL_KEYS constant (host, pilot) in config.mjs, not a per-feature flag: the merge drops any other local key, so the config is always valid, and validate warns about each dropped key. Team-controlled overrides are parked. Why: a flag wouldn't pay off with 4 features, and flipping it means forking Ang. Zac's call"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced d13: ang.local.json is limited by a LOCAL_KEYS constant (host, pilot) in config.mjs, not a per-feature flag: the merge drops any other local key, so the config is always valid, and validate warns about each dropped key. Team-controlled overrides are parked. Why: a flag wouldn't pay off with 4 features, and flipping it means forking Ang. Zac's call → ang.local.json is limited by a LOCAL_KEYS constant (host, pilot) in config.mjs, not a per-feature flag: the merge drops any other local key, so the config is always valid. validate warns about each dropped key, and the Ang config docs state the rule. Team-controlled overrides are parked. Why: a flag wouldn't pay off with 4 features, and flipping it means forking Ang. Zac's call"
     }
   ],
   "type": "technical"

@@ -12,6 +12,7 @@ Technical epic: make a fresh install of Ang generic and valid. Ang ships a team-
 Generic defaults are a release goal in the [delivery intent](/project-context/10k/intent.md). Today a fresh install inherits Zac's config, fails `validate` and names an output style it doesn't ship.
 
 ## What's here
+- [Config move blast radius](config-move.md): what reads `ang.json` today and how the local file is limited to personal keys
 - `plan.md`, `c4/` and `stories/`: not written yet
 - [Origin: generic personal rule and output style](origins/generic-personal-defaults/shaping-content/brief.md): [personal line](origins/generic-personal-defaults/shaping-content/personal-line.md), [pilot name](origins/generic-personal-defaults/shaping-content/pilot-name.md), [tailoring and config overlay](origins/generic-personal-defaults/shaping-content/tailoring.md), [pilot feature spike](origins/generic-personal-defaults/spikes/pilot-feature/README.md)
 - [Origin: shipped config and defaults](origins/shipped-config-defaults/shaping-content/brief.md): [fresh-install defaults](origins/shipped-config-defaults/shaping-content/fresh-install-defaults.md)
