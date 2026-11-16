@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "e7ff32",
+    "from": "open-source-hygiene",
+    "to": "install-uninstall-update",
+    "sent": "2026-11-16",
+    "text": "Settled: Ang's minimum supported Node is the current LTS, Node 26 today, bumped each October together with engines, .node-version and CI (open-source-hygiene d11, shaping-content/node-version.md). Releases will be git tags with generated GitHub Releases. u12 (stamping the tag into install.sh) stays with you, since it lives with the script."
+  }
+]
