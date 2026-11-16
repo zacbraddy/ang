@@ -90,5 +90,14 @@
     "tags": [
       "distribution"
     ]
+  },
+  {
+    "title": "Shipped config defaults, fresh-install check",
+    "path": "project-context/shaping/shipped-config-defaults/shaping-content/fresh-install-defaults.md",
+    "shortDescription": "Ang ships no ang.json; bootstrap writes one, defaulting intent on and streams off",
+    "tags": [
+      "distribution",
+      "repo-structure"
+    ]
   }
 ]

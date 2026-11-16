@@ -1,13 +1,7 @@
 {
-  "status": "active",
-  "statusNote": "",
-  "unknowns": [
-    {
-      "id": "u2",
-      "question": "Which intent and host defaults should ship so validate passes on a fresh install?",
-      "approach": ""
-    }
-  ],
+  "status": "ready-for-planning",
+  "statusNote": "Ship no ang.json decided and proven by fresh-install validate check; only open point is agreeing the config path with generic-personal-defaults at planning",
+  "unknowns": [],
   "knowns": [
     {
       "id": "k1",
@@ -24,6 +18,12 @@
       "fact": "Neither: ang.json moves to the repo root (committed defaults) with a gitignored ang.local.json overlay for personal keys (decided in generic-personal-defaults)",
       "source": "/project-context/shaping/generic-personal-defaults/shaping-content/tailoring.md",
       "answers": "Where should this repo's own ang.json live vs the shipped default: a moved file, or created by bootstrap?"
+    },
+    {
+      "id": "k4",
+      "fact": "Ship no ang.json: feature defaults (all off) pass validate on a fresh install; shipping today's file fails it",
+      "source": "shaping-content/fresh-install-defaults.md",
+      "answers": "Which intent and host defaults should ship so validate passes on a fresh install?"
     }
   ],
   "decisions": [
@@ -31,6 +31,16 @@
       "id": "d1",
       "decision": "Streams ship off by default, whatever happens to ang.json — Zac's requirement",
       "evidence": "shaping-content/brief.md"
+    },
+    {
+      "id": "d2",
+      "decision": "Ang ships no ang.json; bootstrap keeps asking each feature question and writes a root ang.json. Ang's opinion: intent defaults to on (bootstrap then drafts 10k/intent.md, so validate passes); streams defaults to off. The loader's default for a missing key stays off. Personal keys (pilot, host) go to ang.local.json via the tailoring step. Zac's call, 2026-11-16",
+      "evidence": "shaping-content/fresh-install-defaults.md"
+    },
+    {
+      "id": "d3",
+      "decision": "This repo gets its own real config (intent true, streams false; host orca local) replacing the src symlink — the repo is a user of Ang, not the default",
+      "evidence": "shaping-content/fresh-install-defaults.md"
     }
   ],
   "lineage": [
@@ -49,6 +59,26 @@
     {
       "date": "2026-11-16",
       "event": "removed k3: ang.json moves to the repo root with a gitignored ang.local.json overlay for personal keys (decided in generic-personal-defaults)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Ship no ang.json; feature-module defaults are the shipped defaults and bootstrap writes the user's config — a missing file already means all off, and a shipped file would duplicate defaults and collide with the user's committed one"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: This repo gets its own real config (intent true, streams false; host orca local) replacing the src symlink — the repo is a user of Ang, not the default"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "status → ready-for-planning: Ship no ang.json decided and proven by fresh-install validate check; only open point is agreeing the config path with generic-personal-defaults at planning"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced d2: Ship no ang.json; feature-module defaults are the shipped defaults and bootstrap writes the user's config — a missing file already means all off, and a shipped file would duplicate defaults and collide with the user's committed one → Ang ships no ang.json; bootstrap always writes a root ang.json with intent and streams off, and personal keys (pilot, host) go to ang.local.json via the tailoring step — Zac's call, 2026-11-16; the fresh-install check shows no-file and all-off both pass validate"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "replaced d2: Ang ships no ang.json; bootstrap always writes a root ang.json with intent and streams off, and personal keys (pilot, host) go to ang.local.json via the tailoring step — Zac's call, 2026-11-16; the fresh-install check shows no-file and all-off both pass validate → Ang ships no ang.json; bootstrap keeps asking each feature question and writes a root ang.json. Ang's opinion: intent defaults to on (bootstrap then drafts 10k/intent.md, so validate passes); streams defaults to off. The loader's default for a missing key stays off. Personal keys (pilot, host) go to ang.local.json via the tailoring step. Zac's call, 2026-11-16"
     }
   ]
 }
