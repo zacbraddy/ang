@@ -3,19 +3,14 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u3",
-      "question": "Should the generic personal rule still push /bootstrap-quality on repos lacking tooling?",
-      "approach": "Answer after the tooling question; feeds generic-personal-defaults"
-    },
-    {
-      "id": "u5",
-      "question": "Which ESLint plugins does the community treat as sane defaults for plain Node ESM (zero-dep CLI, node:test tests)?",
-      "approach": "Research: survey widely used configs and plugin adoption; shaping picks the set"
-    },
-    {
       "id": "u6",
       "question": "How should Ang guard against agent-written PRs/issues and forkers PR-ing upstream by accident (template wording, collaborators-only settings)?",
       "approach": "Decide in shaping alongside the template kit"
+    },
+    {
+      "id": "u7",
+      "question": "What minimum Node version does Ang support? Docs say 21+, but the code uses import.meta.dirname, which eslint-plugin-n flags below 22.16; the root package.json engines field must state it",
+      "approach": ""
     }
   ],
   "knowns": [
@@ -46,6 +41,18 @@
       "fact": "Tests stay on node:test beside the code and ship with installs (install stream's call); Vitest would make every install need a package. Tooling lives in a private dev-only root package.json; ADR 0002 gets amended to allow it",
       "source": "shaping-content/test-runner.md",
       "answers": "How do Vitest tests coexist with tests that ship in src/ (users have no Vitest), and does ADR 0002 need amending for a dev-only root package.json?"
+    },
+    {
+      "id": "k6",
+      "fact": "Sane-default ESLint set for plain Node ESM: @eslint/js recommended, eslint-plugin-n flat/recommended-module, eslint-plugin-regexp flat/recommended, eslint-config-prettier/flat last, plus globals; all ESLint 10-ready and probe on Ang's code found only real issues",
+      "source": "shaping-content/eslint-plugins.md",
+      "answers": "Which ESLint plugins does the community treat as sane defaults for plain Node ESM (zero-dep CLI, node:test tests)?"
+    },
+    {
+      "id": "k7",
+      "fact": "No: shipped Ang drops the /bootstrap-quality nudge; /bootstrap-repo offers tooling up front, declining is a decision, and /trigger covers reminders (Zac, 2026-11-16)",
+      "source": "shaping-content/bootstrap-quality-nudge.md",
+      "answers": "Should the generic personal rule still push /bootstrap-quality on repos lacking tooling?"
     }
   ],
   "decisions": [
@@ -88,6 +95,16 @@
       "id": "d8",
       "decision": "Root package.json is private and dev-only (ESLint, Prettier, Husky, lint-staged) with npm test = node --test 'src/.claude/**/*.test.mjs'; amend ADR 0002 when it is built",
       "evidence": "shaping-content/test-runner.md"
+    },
+    {
+      "id": "d9",
+      "decision": "ESLint set: @eslint/js + n (no-process-exit off, prefer-node-protocol on) + regexp + eslint-config-prettier, globals.node; unicorn, jsdoc, security, import(-x), promise and all-in-one configs dropped — too noisy or churny under zero warnings, lagging ESLint 10, or adding nothing on Ang's code",
+      "evidence": "shaping-content/eslint-plugins.md"
+    },
+    {
+      "id": "d10",
+      "decision": "Remove the 'flag it once and suggest /bootstrap-quality' line from the shipped engineering-defaults rule and 'flag that instead' from the bootstrap-quality description — Ang agents don't nag, and one repo's tooling choice binds no other install (Zac, 2026-11-16)",
+      "evidence": "shaping-content/bootstrap-quality-nudge.md"
     }
   ],
   "lineage": [
@@ -158,6 +175,14 @@
     {
       "date": "2026-11-16",
       "event": "replaced u5: Which ESLint plugins does the community treat as sane defaults for plain Node ESM (zero-dep CLI, node:test or Vitest)? → Which ESLint plugins does the community treat as sane defaults for plain Node ESM (zero-dep CLI, node:test tests)?"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: ESLint set: @eslint/js + n (no-process-exit off, prefer-node-protocol on) + regexp + eslint-config-prettier, globals.node; unicorn, jsdoc, security, import(-x), promise and all-in-one configs dropped — too noisy or churny under zero warnings, lagging ESLint 10, or adding nothing on Ang's code"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "decided: Remove the 'flag it once and suggest /bootstrap-quality' line from the shipped engineering-defaults rule and 'flag that instead' from the bootstrap-quality description — Ang agents don't nag, and one repo's tooling choice binds no other install (Zac, 2026-11-16)"
     }
   ]
 }

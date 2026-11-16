@@ -32,6 +32,23 @@
     ]
   },
   {
+    "title": "Dropping the /bootstrap-quality nudge",
+    "path": "project-context/shaping/open-source-hygiene/shaping-content/bootstrap-quality-nudge.md",
+    "shortDescription": "Why shipped Ang stops suggesting /bootstrap-quality on repos that lack quality tooling",
+    "tags": [
+      "open-source"
+    ]
+  },
+  {
+    "title": "ESLint plugins for the Ang repo",
+    "path": "project-context/shaping/open-source-hygiene/shaping-content/eslint-plugins.md",
+    "shortDescription": "Which ESLint presets count as sane defaults for plain Node ESM, tested against Ang's own code under a zero-warnings policy",
+    "tags": [
+      "open-source",
+      "tech-stack"
+    ]
+  },
+  {
     "title": "Test runner for the Ang repo",
     "path": "project-context/shaping/open-source-hygiene/shaping-content/test-runner.md",
     "shortDescription": "Why the quality kit keeps node:test instead of Vitest, and how a dev-only root package.json sits beside ADR 0002",

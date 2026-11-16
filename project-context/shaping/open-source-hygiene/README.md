@@ -6,7 +6,7 @@ tags: [open-source]
 # Open-source hygiene, Ang-sized
 
 ## Summary
-Zac has never properly released a repo as open source. Research small, whimsical open-source projects to see which accepted standards suit Ang, adapted or dropped, without pretending to be React. MIT is decided. PR and issue templates are in, to steer contributions toward Ang's first principles and open conversation. The repo gets the full quality kit (ESLint, Prettier, Husky, lint-staged and CI), dev-only in a private root `package.json`, keeping `node:test` because tests ship with installs, with auto-fix, zero warnings and no markdown linting, and the README gets status badges. Comparable small repos keep a thin kit: "fork it" guidance in the README, issue templates that route chat to Discussions, and usually no code of conduct, SECURITY.md or CONTRIBUTING.
+Zac has never properly released a repo as open source. Research small, whimsical open-source projects to see which accepted standards suit Ang, adapted or dropped, without pretending to be React. MIT is decided. PR and issue templates are in, to steer contributions toward Ang's first principles and open conversation. The repo gets the full quality kit (ESLint, Prettier, Husky, lint-staged and CI), dev-only in a private root `package.json`, keeping `node:test` because tests ship with installs, with auto-fix, zero warnings and no markdown linting, and the README gets status badges. ESLint runs `@eslint/js`, `n`, `regexp` and `eslint-config-prettier`, a set tested against Ang's own code. Shipped Ang stops nudging pilots toward `/bootstrap-quality`. Comparable small repos keep a thin kit: "fork it" guidance in the README, issue templates that route chat to Discussions, and usually no code of conduct, SECURITY.md or CONTRIBUTING.
 
 ## Why it matters
 The tagged release needs a decided, Ang-sized hygiene checklist, and the shipped rule's push for `/bootstrap-quality` should agree with what the Ang repo itself does.
@@ -16,6 +16,8 @@ The tagged release needs a decided, Ang-sized hygiene checklist, and the shipped
 - [Quality tooling](ideas-content/quality-tooling.md): evidence and Zac's decision for the full kit
 - [Hygiene survey](ideas-content/hygiene-survey.md): what 17 small or whimsical repos keep, and three candidate kits for Ang
 - [Test runner](shaping-content/test-runner.md): why `node:test` stays and Vitest is out
+- [ESLint plugins](shaping-content/eslint-plugins.md): the preset set, probed on Ang's code
+- [Dropping the /bootstrap-quality nudge](shaping-content/bootstrap-quality-nudge.md): why shipped Ang stops suggesting it
 
 ## Related
 - [Repo README (shaping)](/project-context/shaping/repo-readme/README.md): where the badges will sit
