@@ -24,7 +24,7 @@ A fresh install is generic and valid end to end. Bootstrapping a scratch repo yi
 - `10k/technical/project-structure.md`: config location, the symlink note in its Dragons section, output styles now tracked, and the rules row.
 - ADR 0001: the host is named in `ang.local.json`.
 - ADR 0002: Summary and Standing list `node:child_process` and `node:test`.
-- `src/project-context/README.md`, Ang config section: the two files, `LOCAL_KEYS`, dropped-key warnings, and a pointer to the parked team overrides.
+- `src/project-context/README.md`, Ang config section: the two files, `LOCAL_KEYS`, dropped-key warnings, and a pointer to the parked team overrides. Also say every `/tailor-ang` choice is easy to change later: `/output-style` switches styles, and re-running `/tailor-ang` redoes any choice or builds a custom style.
 
 ## Links
 - [Plan: scope 7–8, success measures](../plan.md)

@@ -39,7 +39,7 @@ For people who want to follow the reasoning as it happens.
 
 ## Picker flow
 A numbered list in a plain message, not a question dialog. The dialog can't hold six choices. Splitting the list across two dialogs hides the later options, so a user who rejects them all has no way back to the interview.
-1. The agent lists every option in one round: a number, a name and a one-line description each. Partner In Crime is 1, marked as the default and recommended. Styles 2 to 5 follow, and 6 is "Interview me".
+1. The agent says up front that this is a low-stakes choice: Claude Code's `/output-style` switches between the shipped styles at any time, and re-running `/tailor-ang` builds a custom one later. Then it lists every option in one round: a number, a name and a one-line description each. Partner In Crime is 1, marked as the default and recommended. Styles 2 to 5 follow, and 6 is "Interview me".
 2. The user replies with a number. An empty reply or "default" means 1.
 3. **Interview (6)**: as specified in tailoring, it writes a gitignored `.claude/output-styles/<name>.local.md` and suggests raising a workflow improvement.
 
