@@ -148,5 +148,59 @@
       "brand-voice",
       "repo-structure"
     ]
+  },
+  {
+    "title": "Config move, test harness and this repo's own config",
+    "path": "project-context/execution/generic-defaults/stories/01-config-move.md",
+    "shortDescription": "Root ang.json plus a gitignored ang.local.json limited to LOCAL_KEYS, the first node:test tests, and this repo's own config replacing the src symlink",
+    "tags": [
+      "repo-structure",
+      "distribution"
+    ]
+  },
+  {
+    "title": "Pilot feature",
+    "path": "project-context/execution/generic-defaults/stories/02-pilot-feature.md",
+    "shortDescription": "Promote the pilot-feature spike so the pilot's name reaches sessions and subagents through the existing hooks",
+    "tags": [
+      "distribution"
+    ]
+  },
+  {
+    "title": "Generic rule and pointer fixes",
+    "path": "project-context/execution/generic-defaults/stories/03-generic-rule.md",
+    "shortDescription": "Ship team-neutral engineering-defaults.md in place of working-with-zac.md, move Zac's identity to his gitignored pilot.local.md, and fix the two \"my rules\" pointers",
+    "tags": [
+      "distribution",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "Output styles",
+    "path": "project-context/execution/generic-defaults/stories/04-output-styles.md",
+    "shortDescription": "Commit the five canned output styles, with Partner In Crime as the default and without the ADHD label",
+    "tags": [
+      "distribution",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "/tailor-ang",
+    "path": "project-context/execution/generic-defaults/stories/05-tailor-ang.md",
+    "shortDescription": "A re-runnable skill that writes every per-user choice (host, pilot, output style, personal rule) into gitignored local files",
+    "tags": [
+      "distribution",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "Bootstrap and docs",
+    "path": "project-context/execution/generic-defaults/stories/06-bootstrap-and-docs.md",
+    "shortDescription": "/bootstrap-repo writes a root ang.json and invokes /tailor-ang; 10k, ADRs and the shipped README describe the finished shape",
+    "tags": [
+      "distribution",
+      "documentation",
+      "repo-structure"
+    ]
   }
 ]
