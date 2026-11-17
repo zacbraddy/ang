@@ -3,12 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u4",
-      "question": "What does taking only chosen parts of a release look like in the escape hatch: per file, per feature or per changelog entry, and how does the version record show a partial upgrade?",
-      "approach": "",
-      "from": "install-uninstall-update"
-    },
-    {
       "id": "u5",
       "question": "When install.sh runs in a subdirectory of a git repo, does it install at the repo root (git rev-parse --show-toplevel) or stop and ask the user to cd there? And should it warn when the working tree has uncommitted changes, so the install's changes can be reviewed on their own?",
       "approach": "",
@@ -54,7 +48,7 @@
     },
     {
       "id": "k5",
-      "fact": "Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges (the local changelog he also wanted is parked, d10)",
+      "fact": "Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, an escape hatch that warns before oversized upgrades, and a fast path for simple merges (the local changelog is parked, d10; pick-the-parts options are parked, d26)",
       "source": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
       "from": "install-uninstall-update"
     },
@@ -174,7 +168,7 @@
     },
     {
       "id": "d9",
-      "decision": "The upgrade skill merges file by file, three-way, against the version.json SHA, with git merge-file. Fast path when no file needs judgement. Guided merge when a handful do (clean merges reread against upstream's diff, conflicts resolved with the user, conflict-deletes checked as moves). Escape hatch before writing anything when many files conflict or there's no version record. The 'many' threshold rests on two spike runs; tune it on real upgrades",
+      "decision": "The upgrade skill merges file by file, three-way, against the version.json SHA, with git merge-file. Fast path when no file needs judgement. Guided merge when a handful do (clean merges reread against upstream's diff, conflicts resolved with the user, conflict-deletes checked as moves). Escape hatch before writing anything when many files conflict or there's no version record: it warns of the size of the job and the user goes ahead or stops (d26). The 'many' threshold rests on two spike runs; tune it on real upgrades",
       "evidence": "origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md",
       "from": "install-uninstall-update"
     },
@@ -261,6 +255,11 @@
       "id": "d25",
       "decision": "Release notes are written in Zac's public voice from 10k voice-and-attribution: conversational, opinionated, humorous with a bit of whimsy, trimmed, not corporate, with an emoji per heading. Breaking changes and fixes stay plain-spoken. The upgrade guide has no voice: it's for an agent (Zac's call)",
       "evidence": "/project-context/10k/marketing/voice-and-attribution.md"
+    },
+    {
+      "id": "d26",
+      "decision": "Upgrades are all or nothing: no partial upgrades, so every upgrade ends in a stable state and version.json always names one release. The escape hatch warns that the upgrade is big and how big, and the user decides whether to go ahead. Partial upgrades are parked with a wake condition (Zac's call: a feature nobody has asked for, and its version record needs per-file bases)",
+      "evidence": "/project-context/ideas/parked.md"
     }
   ],
   "lineage": [
@@ -503,6 +502,22 @@
     {
       "date": "2026-11-17",
       "event": "decided: Release notes are written in Zac's public voice from 10k voice-and-attribution: conversational, opinionated, humorous with a bit of whimsy, trimmed, not corporate, with an emoji per heading. Breaking changes and fixes stay plain-spoken. The upgrade guide has no voice: it's for an agent (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Upgrades are all or nothing: no partial upgrades, so every upgrade ends in a stable state and version.json always names one release. The escape hatch warns that the upgrade is big and how big, and the user decides whether to go ahead. Partial upgrades are parked with a wake condition (Zac's call: a feature nobody has asked for, and its version record needs per-file bases)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "removed u4: What does taking only chosen parts of a release look like in the escape hatch: per file, per feature or per changelog entry, and how does the version record show a partial upgrade?"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced d9: The upgrade skill merges file by file, three-way, against the version.json SHA, with git merge-file. Fast path when no file needs judgement. Guided merge when a handful do (clean merges reread against upstream's diff, conflicts resolved with the user, conflict-deletes checked as moves). Escape hatch before writing anything when many files conflict or there's no version record. The 'many' threshold rests on two spike runs; tune it on real upgrades → The upgrade skill merges file by file, three-way, against the version.json SHA, with git merge-file. Fast path when no file needs judgement. Guided merge when a handful do (clean merges reread against upstream's diff, conflicts resolved with the user, conflict-deletes checked as moves). Escape hatch before writing anything when many files conflict or there's no version record: it warns of the size of the job and the user goes ahead or stops (d26). The 'many' threshold rests on two spike runs; tune it on real upgrades"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k5: Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges (the local changelog he also wanted is parked, d10) → Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, an escape hatch that warns before oversized upgrades, and a fast path for simple merges (the local changelog is parked, d10; pick-the-parts options are parked, d26)"
     }
   ],
   "type": "technical"

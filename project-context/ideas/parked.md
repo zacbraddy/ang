@@ -23,6 +23,11 @@ A `localOverrides` list in `ang.json` (e.g. `["intent"]`) that lets the team all
 - **Wake condition:** guided merges keep stalling because nobody remembers why a local change was made.
 - **Source:** cut in shaping on 2026-11-16, not from a raw file. Zac's call after the [upgrade merge spike](/project-context/planning/install-upgrade-release/origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md), which found every local edit without a changelog.
 
+### Partial upgrades
+The upgrade skill's escape hatch would offer to take only part of a release: the skill groups the release into changes using the release notes, upgrade guide and diff, and the user picks which to take. `.claude/ang/version.json` would then need a per-file base for every taken file, or the next upgrade merges against the wrong base, and untaken files either never update or show false conflicts. Today upgrades are all or nothing. The escape hatch warns that a big upgrade will take a while and the user decides whether to go ahead, so every upgrade ends in a stable state.
+- **Wake condition:** users ask to take part of a release, because a full upgrade is too costly with their local improvements.
+- **Source:** cut in planning on 2026-11-17, not from a raw file. Zac's call: a feature nobody has asked for, and its version-record design was contortion for a "hat on a hat". See the [install, upgrade and release epic](/project-context/planning/install-upgrade-release/README.md).
+
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)
 - [ADR 0003: Per-user config overlay](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md)
