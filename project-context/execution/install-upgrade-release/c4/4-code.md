@@ -29,9 +29,9 @@ Every module here is new except the entry point. The shapes come from the two me
 | `commands/settings.mjs` | `settings merge --base <file\|none> --ours <file> --theirs <file>` | Reads, merges, writes `--ours` in place with stable key order, prints conflicts as JSON. Exit 0 on success, even with conflicts |
 | `commands/version.mjs` | `version show` | Prints the `VersionRecord`, or `none` with exit 0 (no record is an escape-hatch input, not an error) |
 | | `version write --ref <tag> --sha <sha>` | Writes `.claude/ang/version.json` with `installedAt` set now |
-| `upgrade/guides.mjs` | `parseGuide(markdown) → UpgradeGuide` | Splits on the four headings; "None" means empty; a missing heading is an error |
+| `upgrade/guides.mjs` | `parseGuide(markdown) → UpgradeGuide` | Splits on Moves, Migrations, Retired and Notes for the merge; "None" means empty; `from: none` parses to `null`; a missing heading is an error |
 | | `chainGuides(fetchGuide, installedTag, targetTag) → UpgradeGuide[]` | Follows `from:` back from the target, then returns oldest first. `fetchGuide` is injected so unit tests run in memory |
-| | `fetchGuide(tag) → string` | `fetch` from `raw.githubusercontent.com/zacbraddy/ang/<target>/releases/upgrades/<tag>.md`; 404 is an error |
+| | `githubGuideFetcher(targetTag) → fetchGuide(tag) → Promise<string>` | `fetch` from `raw.githubusercontent.com/zacbraddy/ang/<target>/releases/upgrades/<tag>.md`; 404 is an error |
 | `upgrade/classify.mjs` | `applyMoves(baseFiles, guides) → FileMap` | Renames base paths through every guide's Moves, oldest first |
 | | `classifyFile(base, ours, theirs) → { category, hunks, merged }` | The spike's decision table, one file at a time |
 | | `mergeFile(ours, base, theirs) → { merged, hunks }` | `git merge-file -p`; its exit code is the conflict count |
