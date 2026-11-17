@@ -1,13 +1,7 @@
 {
-  "status": "active",
-  "statusNote": "",
-  "unknowns": [
-    {
-      "id": "u2",
-      "question": "Which concepts and commands make the cut for a whistle-stop tour?",
-      "approach": ""
-    }
-  ],
+  "status": "ready-for-planning",
+  "statusNote": "Scope, concepts, command cut and quick start all decided; no open unknowns; no tech choices to spike",
+  "unknowns": [],
   "knowns": [
     {
       "id": "k1",
@@ -19,6 +13,12 @@
       "fact": "Quick start is `curl -fsSL https://github.com/zacbraddy/ang/releases/latest/download/install.sh | sh`; prerequisites Node 26+ with npm/npx; README says nothing about the release process",
       "source": "https://github.com/zacbraddy/ang/blob/6cf9987923a73fb7e1ac4d742f2010010522eb4c/project-context/planning/install-upgrade-release/release-process-proposal.md",
       "answers": "What's the quick start? Depends on the install route"
+    },
+    {
+      "id": "k3",
+      "fact": "README covers 4 concepts (funnel, context library, starter-not-loaf, streams in one line) and 13 commands: /bootstrap-repo and /tailor-ang in quick start, the funnel as a stage|question|command table, /raise-workflow-improvement and /improve-workflow for bending Ang; the rest goes to the docs site",
+      "source": "shaping-content/content-cut.md",
+      "answers": "Which concepts and commands make the cut for a whistle-stop tour?"
     }
   ],
   "decisions": [
@@ -26,6 +26,11 @@
       "id": "d1",
       "decision": "Kept separate from the docs website so the README isn't held up by site research — agreed in /ideate 2026-11-16",
       "evidence": "shaping-content/brief.md"
+    },
+    {
+      "id": "d2",
+      "decision": "Funnel shown as a one-row-per-stage table with every stage command — Zac's pick so readers can run a full loop from the README alone",
+      "evidence": "shaping-content/content-cut.md"
     }
   ],
   "lineage": [
@@ -40,6 +45,14 @@
     {
       "date": "2026-11-16",
       "event": "from raw: opening-ang.md (fast-tracked to shaping)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Funnel shown as a one-row-per-stage table with every stage command — Zac's pick so readers can run a full loop from the README alone"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "status → ready-for-planning: Scope, concepts, command cut and quick start all decided; no open unknowns; no tech choices to spike"
     }
   ]
 }

@@ -319,5 +319,13 @@
     "tags": [
       "documentation"
     ]
+  },
+  {
+    "title": "Repo README, content cut",
+    "path": "project-context/shaping/repo-readme/shaping-content/content-cut.md",
+    "shortDescription": "Which concepts and commands the whistle-stop README covers, and what goes to the docs site",
+    "tags": [
+      "documentation"
+    ]
   }
 ]
