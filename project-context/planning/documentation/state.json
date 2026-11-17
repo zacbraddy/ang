@@ -9,12 +9,6 @@
       "from": "docs-website"
     },
     {
-      "id": "u5",
-      "question": "Wider design direction beyond colour (type, spacing, imagery, home-page layout): what do designers currently rate as modern and clean for developer-tool docs? Research it when planning makes concrete design decisions, so the findings are fresh",
-      "approach": "Desk research per the evidence standard; builds on origins/docs-website/shaping-content/colour-palette.md",
-      "from": "docs-website"
-    },
-    {
       "id": "u2",
       "question": "Does an extends-style shared ang.json work for teams across repos? Spike it, then document it as the team pattern",
       "approach": "Spike; see k6",
@@ -113,6 +107,17 @@
       "fact": "Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), about 19 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list",
       "source": "information-architecture.md",
       "answers": "Information architecture: which pages, and how does the brain-dump content map onto them?"
+    },
+    {
+      "id": "k20",
+      "fact": "Platforms (install-upgrade-release d37): macOS, Linux and Windows through WSL (Windows Subsystem for Linux), with the one-liner, Claude Code and Node 26 all inside WSL; install.sh stops under Git Bash, MSYS or Cygwin. Native Windows is untested, best effort, needs Git for Windows and a 6-step manual install (giget, settings merge, version write). The README install section carries a one-line WSL note; Quick start carries platforms and the native Windows steps, re-checked against shipped files at build",
+      "source": "https://github.com/zacbraddy/ang/blob/794b106cdbf5c358fbb429572c684f387f959a9a/project-context/execution/install-upgrade-release/state.json"
+    },
+    {
+      "id": "k21",
+      "fact": "Design direction mapped (2026-11-17): measured dev-tool docs agree on 16px body, line-height 1.5–1.75, 65–80ch lines and 4px spacing steps, all within Starlight's defaults (16px, 1.75, 45rem, system fonts); typefaces have no consensus (system stack, Inter, Geist all ship); home pages put the install command near the top and show the product, docs-first homes skip social proof; Starlight's hero has no code slot and OG images need a plugin; Mermaid (astro-mermaid) is the diagram option that follows light/dark. AI-look markers beyond Anthropic's own list are single-source and unverified. Mapped, not chosen",
+      "source": "design-direction.md",
+      "answers": "Wider design direction beyond colour (type, spacing, imagery, home-page layout): what do designers currently rate as modern and clean for developer-tool docs? Research it when planning makes concrete design decisions, so the findings are fresh"
     }
   ],
   "decisions": [

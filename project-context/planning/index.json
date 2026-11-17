@@ -1,5 +1,14 @@
 [
   {
+    "title": "Design direction research",
+    "path": "project-context/planning/documentation/design-direction.md",
+    "shortDescription": "What current dev-tool docs ship for type, spacing, imagery and home-page layout, and what Starlight gives out of the box, mapped for the docs site",
+    "tags": [
+      "documentation",
+      "brand-voice"
+    ]
+  },
+  {
     "title": "Docs site information architecture",
     "path": "project-context/planning/documentation/information-architecture.md",
     "shortDescription": "The docs site's sidebar groups and pages, and which source material each page draws from",
