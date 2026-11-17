@@ -1,9 +1,1 @@
-[
-  {
-    "id": "6e1dd4",
-    "from": "install-uninstall-update",
-    "to": "documentation",
-    "sent": "2026-11-17",
-    "text": "Install, upgrade and release decided (d16, d17): the README install line is `curl -fsSL https://github.com/zacbraddy/ang/releases/latest/download/install.sh | sh`, a release asset that always installs the latest published release. The prerequisites are Node 26+ with npm/npx. v1.0.0 is the first non-pre-release and marks the intent's finish line. Nothing about the release process goes in the README."
-  }
-]
+[]
