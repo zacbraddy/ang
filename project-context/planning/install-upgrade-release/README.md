@@ -23,6 +23,7 @@ The README's quick start, and a clean first run for every new user, depend on th
   - [Install script spike](origins/install-uninstall-update/shaping-content/install-script-spike.md): pinning, the settings merge and the version record
   - [Upgrade merge spike](origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md): the three-way merge on an improved instance
 - [Release practice research](release-practice-research.md): how open-source projects version, write notes, ship upgrade guidance and pin install scripts, and where Ang departs
+- [Release process proposal](release-process-proposal.md): first draft of the release process for Zac to cut down, its changes to the install and upgrade plans, and what it asks of day-to-day development
 
 ## Related
 - [ADR 0002: zero-dependency library script](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)

@@ -94,5 +94,14 @@
       "distribution",
       "open-source"
     ]
+  },
+  {
+    "title": "Release process proposal",
+    "path": "project-context/planning/install-upgrade-release/release-process-proposal.md",
+    "shortDescription": "Release process for a solo maintainer - a /cut-release skill fed by a deterministic change manifest, separate human release notes and agent upgrade guides, a tag-triggered GitHub Actions job for the mechanics, a seeded fixture repo for upgrade rehearsals, and Zac pressing Publish himself",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
   }
 ]
