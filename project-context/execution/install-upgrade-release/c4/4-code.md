@@ -48,9 +48,11 @@ Every module here is new except the entry point. The shapes come from the two me
 | Function | Responsibility |
 |---|---|
 | `TAG=` / `SHA=` | Empty in the repo copy; `release.yml` fills both in the asset (d16) |
-| `resolve_target "$1"` | Stamped and no argument: use the stamp. Argument: `GET /releases/tags/$1`, fail on a draft or unknown tag. Unstamped and no argument: stop with the one-liner (d28) |
-| `check_prereqs`, `check_repo`, `check_clean`, `check_not_installed`, `check_collisions`, `check_settings` | One d12 check each, each printing what's wrong and how to fix it |
-| `copy_in` | giget into `mktemp -d`, then copy into the repo |
+| `require_target "$@"` | Unstamped and no argument: stop with the one-liner (d28), before any check |
+| `resolve_target "$@"` | Stamped and no argument: use the stamp. Argument: `GET /releases/tags/$1`, fail on a draft or unknown tag, then resolve its commit SHA. Runs after `check_prereqs`, since it needs node |
+| `check_prereqs`, `check_repo`, `check_clean`, `check_not_installed`, `check_settings`, `check_collisions` | One d12 check each, each printing what's wrong and how to fix it. `check_prereqs` also stops under Git Bash, MSYS or Cygwin (d37); `check_collisions` runs against the downloaded tree |
+| `download` | giget into `mktemp -d`, before `check_collisions` |
+| `copy_in` | Moves the tree's `settings.json` aside, then copies the tree into the repo |
 | `merge_settings` | Writes `.claude/settings.json.pre-ang` if absent, then `node .claude/scripts/ang-context-manager.mjs settings merge --base none …` |
 | `record_and_report` | `version write`, then prints the version, location and next step |
 

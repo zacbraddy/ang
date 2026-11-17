@@ -17,6 +17,7 @@ Pushing a `v*` tag runs `node --test` on Node 26 (the link drift test included),
 ## Rough scope
 - `.github/workflows/release.yml` and `releases/notes/`.
 - The YAML isn't unit-tested; its first real run is story 11.
+- Run the tests by glob, e.g. `node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'`. Bare `node --test` skips test files under dot folders, so it misses everything in `src/.claude/` (on 2026-11-17 it ran 31 of 87 tests). The plan's test strategy and the C4 `release.yml` rows say bare `node --test` and need the same change.
 
 ## Related
 - [C4 components: repo-only release tooling](../c4/3-components.md)

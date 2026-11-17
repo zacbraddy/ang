@@ -33,6 +33,11 @@ Each release would also rehearse upgrades that skip releases, starting from olde
 - **Wake condition:** work starts on a project or task meant to ship as Ang's first minor or patch release. Adopting semver sets the expectation that upgrades across several non-breaking versions work.
 - **Source:** parked in planning on 2026-11-17, not from a raw file. Zac's call. See the [release process proposal](/project-context/execution/install-upgrade-release/release-process-proposal.md). The fixture is tagged at every release, so the history to test from builds up anyway.
 
+### Shell-free hook commands
+Ang's hooks in `settings.json` would use Claude Code's exec form (`"command": "node"` with an `args` list, where `${CLAUDE_PROJECT_DIR}` is substituted as a plain string) instead of a shell command line. Today each hook is `node "$CLAUDE_PROJECT_DIR/…"`, which needs a shell to expand the variable. On native Windows Claude Code runs it in Git Bash, or in PowerShell when Git for Windows is missing, where it fails. The exec form runs no shell, so hooks would work either way. Native Windows is untested and best effort (install-upgrade-release d37), so it isn't worth changing Ang's shipped settings yet. The change also goes through the settings merge on every upgrade.
+- **Wake condition:** a native Windows user reports a hook failure, or native Windows moves from best effort to supported.
+- **Source:** parked in execution on 2026-11-17, not from a raw file. Zac's call during [story 03: install.sh](/project-context/execution/install-upgrade-release/stories/03-install-script.md), from Claude Code's hooks docs ("Exec form and shell form").
+
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)
 - [ADR 0003: Per-user config overlay](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md)

@@ -305,6 +305,11 @@
       "id": "d36",
       "decision": "upgrade-ang and the upgrade engine ship in v1.0.0-rc.1, so the fixture (an rc.1 install) already has the skill for the rc.1 to rc.2 rehearsal; only the engine comes from the target. rc.1 waits on the upgrade stories in exchange for a rehearsal that follows the real user path (Zac's call)",
       "evidence": "stories/06-upgrade-ang-skill.md"
+    },
+    {
+      "id": "d37",
+      "decision": "Ang supports macOS, Linux and Windows through WSL, where install.sh, Claude Code and Node 26 all run inside WSL, and install.sh stops under Git Bash, MSYS or Cygwin. Native Windows is untested and best effort: it needs Git for Windows (Claude Code runs Ang's hooks and Bash commands in Git Bash) and the documented manual install. Shell-free hooks are parked (Zac's call)",
+      "evidence": "stories/03-install-script.md"
     }
   ],
   "lineage": [
@@ -627,6 +632,14 @@
     {
       "date": "2026-11-17",
       "event": "status → active: 13 draft stories; next /write-story on 01"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Windows is in scope through WSL only: install.sh, Claude Code and Node 26 all run inside WSL. Native Windows shells (PowerShell, cmd, Git Bash) aren't supported (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced d37: Windows is in scope through WSL only: install.sh, Claude Code and Node 26 all run inside WSL. Native Windows shells (PowerShell, cmd, Git Bash) aren't supported (Zac's call) → Ang supports macOS, Linux and Windows through WSL, where install.sh, Claude Code and Node 26 all run inside WSL, and install.sh stops under Git Bash, MSYS or Cygwin. Native Windows is untested and best effort: it needs Git for Windows (Claude Code runs Ang's hooks and Bash commands in Git Bash) and the documented manual install. Shell-free hooks are parked (Zac's call)"
     }
   ],
   "type": "technical"

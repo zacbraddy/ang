@@ -2,7 +2,7 @@
 title: install.sh installs Ang into a repo
 shortDescription: The root install.sh checks prerequisites, copies src/ in with giget, merges settings and records the installed version
 tags: [distribution, open-source]
-status: ready
+status: done
 owner: agent
 dependsOn: [02]
 ---
@@ -33,6 +33,7 @@ Run with a release tag against a temp git repo, `install.sh` copies `src/` in at
 
 **Checks** (d12). Each stops with exit 1, says what's wrong and how to fix it, and leaves the repo untouched.
 - Given node older than 26, or no `npx`, when it runs, then it names what's missing.
+- Given Git Bash, MSYS or Cygwin on Windows (`uname -s`), when it runs, then it says Ang on Windows runs inside WSL and how to set that up (d37).
 - Given a folder outside any git repo, when it runs, then it says to run it from a git repo's root.
 - Given a subdirectory of a git repo, when it runs, then it names the root to `cd` to.
 - Given uncommitted or untracked changes, when it runs, then it asks for a clean working tree.
@@ -71,7 +72,7 @@ Run with a release tag against a temp git repo, `install.sh` copies `src/` in at
 - **`resolve_target`** uses `node -e` with `fetch`, so there's no curl or jq dependency.
   - First `GET /repos/$REPO/releases/tags/$TAG`. A 404, or `draft: true`, means the tag isn't a published release. A 403 or 429 with `x-ratelimit-remaining: 0` means the rate limit (60 an hour unauthenticated). A thrown fetch error means the network.
   - Then `GET /repos/$REPO/commits/$TAG` with `accept: application/vnd.github.sha` for the full SHA, as the spike did. The release's `target_commitish` can be a branch name, so it isn't used.
-- **`check_prereqs`**: `node -p 'process.versions.node'` major ≥ 26 (k9) and `command -v npx`.
+- **`check_prereqs`**: `uname -s` isn't `MINGW*`, `MSYS*` or `CYGWIN*` (d37), `node -p 'process.versions.node'` major ≥ 26 (k9) and `command -v npx`.
 - **`check_repo`**: `git rev-parse --show-toplevel` must equal `pwd -P`.
 - **`check_clean`**: `git status --porcelain` is empty.
 - **`check_not_installed`**: checks for `.claude/ang/version.json`.
@@ -93,6 +94,22 @@ Run with a release tag against a temp git repo, `install.sh` copies `src/` in at
   - The README one-liner text (documentation stream).
   - Uninstall (d2).
   - Shellcheck, which isn't installed here and is quality tooling's job.
+- **As built**:
+  - The unstamped-and-no-tag stop (`require_target`) runs first, then `check_prereqs`, then `resolve_target`, so a missing or old node is named before the API lookup needs it.
+  - The giget step is its own `download` function ahead of `check_collisions`; `copy_in` only copies.
+  - `project-context/` and same-named skills are listed as folders, not file by file.
+  - The `node` snippets are quoted heredocs (`node - <<'JS'`) rather than `node -e`, so their messages can use apostrophes.
+  - Done-when evidence: a hand-stamped copy (`v0.0.0-story3`, `06719e8`) piped into `sh -s` with the real `npx` installed into a fresh repo; `version show`, `library init` and `library validate` passed.
+
+## Review
+Every acceptance line has a passing test (22 of 22; 88 of 88 across the repo by glob), and the unstamped `sh install.sh` exits 1 with the one-liner. No must-fix.
+
+**Should-fix**
+- `c4/4-code.md:51-55`: the install.sh table still has `resolve_target` making the unstamped stop and `copy_in` running giget, and no Windows check. The as-built split (`require_target`, `download`, the `uname` check in `check_prereqs`) belongs there, since stories 05 and 08 read C4, not this story.
+
+**Nit**
+- `scripts/install.test.mjs:68-70`: dropping every `PATH` folder that holds `node` or `npx` also drops `git`, `cp` and the rest when they share a folder (Homebrew's `/opt/homebrew/bin`, apt's `/usr/bin`). Fine under nvm and setup-node's tool cache, which is everywhere it runs today.
+- `install.sh:111-115`: a user file where Ang ships a folder (a file named `docs`, say) passes `check_collisions`, then `cp -R` fails partway and leaves a partial install. Rare.
 
 ## Related
 - [Plan: install](../plan.md)
