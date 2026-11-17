@@ -3,12 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u5",
-      "question": "When install.sh runs in a subdirectory of a git repo, does it install at the repo root (git rev-parse --show-toplevel) or stop and ask the user to cd there? And should it warn when the working tree has uncommitted changes, so the install's changes can be reviewed on their own?",
-      "approach": "",
-      "from": "install-uninstall-update"
-    },
-    {
       "id": "u8",
       "question": "How are the per-entry symlinks for src/ skills and agents kept in step: a script that creates them by glob, and does library validate or a test flag a src/ entry with no link at the root?",
       "approach": "release-process-proposal.md"
@@ -186,7 +180,7 @@
     },
     {
       "id": "d12",
-      "decision": "install.sh checks before copying anything and stops with a plain message saying what's wrong and how to fix it: node >=26 (k9) and npx, inside a git repo, Ang not already installed (points to upgrade), no collisions with existing project-context/ or same-named skills, rules or agents, settings.json parses, and the ref resolves (says which of network, rate limit or bad ref failed). On success it prints version, location and next step. No OS, disk or permission checks (Zac's call)",
+      "decision": "install.sh checks before copying anything and stops with a plain message saying what's wrong and how to fix it: node >=26 (k9) and npx, inside a git repo and at its root (from a subdirectory it names the root to cd to, since /project-context/ links only resolve there), a clean working tree, Ang not already installed (points to upgrade), no collisions with existing project-context/ or same-named skills, rules or agents, settings.json parses, and the ref resolves (says which of network, rate limit or bad ref failed). On success it prints version, location and next step. No OS, disk or permission checks (Zac's call)",
       "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
       "from": "install-uninstall-update"
     },
@@ -518,6 +512,14 @@
     {
       "date": "2026-11-17",
       "event": "replaced k5: Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges (the local changelog he also wanted is parked, d10) → Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, an escape hatch that warns before oversized upgrades, and a fast path for simple merges (the local changelog is parked, d10; pick-the-parts options are parked, d26)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced d12: install.sh checks before copying anything and stops with a plain message saying what's wrong and how to fix it: node >=26 (k9) and npx, inside a git repo, Ang not already installed (points to upgrade), no collisions with existing project-context/ or same-named skills, rules or agents, settings.json parses, and the ref resolves (says which of network, rate limit or bad ref failed). On success it prints version, location and next step. No OS, disk or permission checks (Zac's call) → install.sh checks before copying anything and stops with a plain message saying what's wrong and how to fix it: node >=26 (k9) and npx, inside a git repo and at its root (from a subdirectory it names the root to cd to, since /project-context/ links only resolve there), a clean working tree, Ang not already installed (points to upgrade), no collisions with existing project-context/ or same-named skills, rules or agents, settings.json parses, and the ref resolves (says which of network, rate limit or bad ref failed). On success it prints version, location and next step. No OS, disk or permission checks (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "removed u5: When install.sh runs in a subdirectory of a git repo, does it install at the repo root (git rev-parse --show-toplevel) or stop and ask the user to cd there? And should it warn when the working tree has uncommitted changes, so the install's changes can be reviewed on their own?"
     }
   ],
   "type": "technical"

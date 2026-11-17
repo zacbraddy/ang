@@ -18,6 +18,8 @@ The [bake-off](./copy-in-spike.md) found that the copy-in tools need `--force` a
 - **It fails early and says why.** Zac's call (2026-11-17): before copying anything, the script checks and stops with a plain message naming what's wrong and how to fix it:
   - node at the supported minimum (not just present) and npx available;
   - the current directory is inside a git repo, since Ang's workflow leaves changes unstaged for review and makes no sense outside one;
+  - the current directory is the repo root (`git rev-parse --show-toplevel`); from a subdirectory it stops and names the root to `cd` to. Ang's library links start with `/project-context/`, so they only resolve from the root (Zac's call, 2026-11-17);
+  - the working tree is clean, so the install's changes can be reviewed and backed out on their own in git, as with the upgrade skill (Zac's call, 2026-11-17);
   - Ang isn't already installed (`.claude/ang/version.json` exists): re-running would overwrite local workflow improvements, so it points to the upgrade skill;
   - nothing would be overwritten: an existing `project-context/` or skills, rules or agents named like Ang's are listed and the install stops;
   - an existing `.claude/settings.json` parses, so the merge can't fail halfway or drop the user's settings;
