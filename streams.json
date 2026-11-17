@@ -4,11 +4,5 @@
     "branch": "stream/install-uninstall-update",
     "worktree": "/home/zacbraddy/orca/workspaces/ang/install-uninstall-update",
     "focus": "How Ang gets into a project, and whether uninstall and update commands are worth having (ideas/install-uninstall-update)"
-  },
-  {
-    "slug": "open-source-hygiene",
-    "branch": "stream/open-source-hygiene",
-    "worktree": "/home/zacbraddy/orca/workspaces/ang/open-source-hygiene",
-    "focus": "Which open-source standards Ang adopts, adapts or drops, including the repo's own quality tooling (ideas/open-source-hygiene)"
   }
 ]
