@@ -145,6 +145,39 @@
     ]
   },
   {
+    "title": "Starlight bake-off spike",
+    "path": "project-context/shaping/docs-website/spikes/starlight/README.md",
+    "shortDescription": "The shared bake-off pages on Starlight 0.42.8 and Astro 7.4.5, with an unused Pages deploy workflow to measure upkeep",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Commands",
+    "path": "project-context/shaping/docs-website/spikes/starlight/site/src/content/docs/commands.md",
+    "shortDescription": "Bake-off page: Ang commands in tables, a definition list and code blocks",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Ang's first principles",
+    "path": "project-context/shaping/docs-website/spikes/starlight/site/src/content/docs/first-principles.md",
+    "shortDescription": "Bake-off page: long prose on Ang's first principles, trimmed from the brain dump",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Ang",
+    "path": "project-context/shaping/docs-website/spikes/starlight/site/src/content/docs/index.md",
+    "shortDescription": "Bake-off page: Ang pitch, what you get, install snippet",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
     "title": "Open-source hygiene, brief",
     "path": "project-context/shaping/open-source-hygiene/ideas-content/brief.md",
     "shortDescription": "Zac's stance on open-source standards and the deferred quality-tooling options",

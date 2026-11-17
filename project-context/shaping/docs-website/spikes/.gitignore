@@ -2,3 +2,5 @@ vendor/
 _site/
 node_modules/
 .bundle/
+dist/
+.astro/
