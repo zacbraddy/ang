@@ -6,7 +6,7 @@ tags: [documentation]
 # Information architecture
 
 ## Summary
-Zac agreed this page map on 2026-11-17. There are six sidebar groups and about 19 pages. The "Draws from" column tells the agents building each page where to look. A page exists only if it clears the bar below. The brain dump is a voice sample and a quarry for a few lines, not a list of pages. Where the brain dump and the shipped files disagree on how Ang behaves, the shipped files win ([brief](origins/docs-website/ideas-content/brief.md), Accuracy rule).
+Zac agreed this page map on 2026-11-17. There are six sidebar groups and about 18 pages. The "Draws from" column tells the agents building each page where to look. A page exists only if it clears the bar below. The brain dump is a voice sample and a quarry for a few lines, not a list of pages. Where the brain dump and the shipped files disagree on how Ang behaves, the shipped files win ([brief](origins/docs-website/ideas-content/brief.md), Accuracy rule).
 
 ## What earns a page
 A page or a passage earns its place only if someone using Ang needs it to do one of these:
@@ -38,7 +38,6 @@ Zac's history with other frameworks and his own usage fail this bar. They surviv
 | Reference | Agents | `src/.claude/agents/` (context-scout, prioritiser, stage-gate) |
 | | `ang-context-manager.mjs` | Its `--help` output |
 | | Config | `ang.json` and the feature modules: host, intent, pilot, streams |
-| | Team config pattern | The shared `ang.json` "extends" spike (unknown u2); the page waits on it |
 | Why Ang | First principles | One tight page. For each principle, what it means for the user and how Ang carries it out; none of the essay. Sources: [first principles](/project-context/10k/product/first-principles.md), brain dump *Ang's first principles* for voice |
 | | Credits | Attribution to Zac and We Right Code, linking https://zackerthehacker.com ([voice and attribution](/project-context/10k/marketing/voice-and-attribution.md)) |
 
