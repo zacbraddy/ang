@@ -3,12 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u1",
-      "question": "Information architecture: which pages, and how does the brain-dump content map onto them?",
-      "approach": "",
-      "from": "docs-website"
-    },
-    {
       "id": "u3",
       "question": "Should the site publish agent-readable docs (llms.txt) for Claude Code users? If so, does a Starlight plugin cover it?",
       "approach": "Ask Zac; check Starlight's plugin list",
@@ -113,6 +107,12 @@
       "fact": "Address is zacbraddy.github.io/ang/ (Starlight site '/ang/' base) for now — Zac's pick, 2026-11-17. A custom domain is parked with a wake condition; when it wakes, the move is a site/base config change plus a link sweep, so pages should avoid hard-coding the /ang/ prefix",
       "source": "/project-context/ideas/parked.md",
       "answers": "Address: zacbraddy.github.io/ang or a custom domain on Pages? Decide before building, since the base path changes config and links"
+    },
+    {
+      "id": "k19",
+      "fact": "Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), about 19 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list",
+      "source": "information-architecture.md",
+      "answers": "Information architecture: which pages, and how does the brain-dump content map onto them?"
     }
   ],
   "decisions": [
@@ -133,6 +133,11 @@
       "decision": "Framework is Starlight — Zac's pick on looks, plus active maintenance and backing outweigh VitePress's cheaper changes, frozen base and unknown v2 migration",
       "evidence": "origins/docs-website/shaping-content/effort.md",
       "from": "docs-website"
+    },
+    {
+      "id": "d5",
+      "decision": "Commands docs as 5 grouped pages (one anchor per command). Why Ang is first principles plus credits; Zac's history and personal usage fail the user-value bar and survive only as a few lines on Home and Quick start (Zac, 2026-11-17)",
+      "evidence": "information-architecture.md"
     }
   ],
   "lineage": [
@@ -287,6 +292,18 @@
     {
       "date": "2026-11-17",
       "event": "replaced d1: README and site are one epic, README sequenced first so it can ship without waiting on site research; the README links out to the site for depth (Zac, 2026-11-17, replacing the ideas-stage split) → README and site are one epic, with the README sequenced first so it ships without waiting on site research; the README links out to the site for depth (Zac, 2026-11-17)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Commands docs as 5 grouped pages (one anchor per command), and the brain-dump story as 3 Why Ang pages plus credits (Zac, 2026-11-17)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced d5: Commands docs as 5 grouped pages (one anchor per command), and the brain-dump story as 3 Why Ang pages plus credits (Zac, 2026-11-17) → Commands docs as 5 grouped pages (one anchor per command). Why Ang is first principles plus credits; Zac's history and personal usage fail the user-value bar and survive only as a few lines on Home and Quick start (Zac, 2026-11-17)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k19: Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), about 21 pages; each page names its source, and pages are rewritten in Zac's voice, not pasted → Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), about 19 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list"
     }
   ],
   "type": "mixed"
