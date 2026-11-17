@@ -18,6 +18,7 @@ All of the merge logic lives in the library script (`ang-context-manager.mjs`), 
 - **Shared merge core in the library script:**
   - `settings merge` is the three-way JSON merge from the [settings merge spike](settings-merge-spike.md). It is the install merge when the base is empty (d7, k15).
   - an `upgrade` command group: file-by-file classification and `git merge-file` (d9), reading the upgrade guides, and the escape-hatch sizing.
+  - `version show` and `version write`, the only way install and upgrade read or write `version.json` (d35).
 - **`install.sh`** at the repo root, unstamped there, which stops without a tag (d28). It runs every check in d12, backs up settings (d4), merges settings, writes `version.json`, and prints the version, location and next step.
 - **`upgrade-ang` skill** (ships in `src/`): the checks in d13, a fetch of the target and base trees, the target's engine (d29), the three paths (d9, d26) and a closing summary.
 - **Release process:** `releases/notes/` and `releases/upgrades/` (k12), `release-manifest`, `release-scout`, `/cut-release` (d15, d18 to d20, d23, d25), and the release workflow in `.github/workflows/` (d16, d21).
@@ -58,13 +59,13 @@ flowchart LR
 - **Two ways to get the script:**
   - the README one-liner fetches the release asset, stamped with `TAG` and `SHA`, so a default install makes no API call (d16, d28);
   - `| sh -s -- <tag>` calls `GET /releases/tags/{tag}`, which resolves the SHA and confirms the tag is a published release (d14).
-- **Order:** all d12 checks first, before anything is written. Then giget copies `src/` at the SHA (d6). Then `settings merge` runs with an empty base, after a single `.claude/settings.json.pre-ang` backup (d4, d7). Last, `version.json { ref, sha, installedAt }` is written (k7).
+- **Order:** all d12 checks first, before anything is written. Then giget copies `src/` at the SHA (d6). Then `settings merge` runs with an empty base, after a single `.claude/settings.json.pre-ang` backup (d4, d7). Last, `version write` records `version.json { ref, sha, installedAt }` (k7, d35).
 - **Settings merge:** the copied tree's own `ang-context-manager.mjs` runs it, so the install and the release it installs always agree on the merge.
 
 ### Upgrade
 - **Checks first (d13):** the target exists and is newer, the tree is clean, and the prerequisites are present. A missing or unknown `version.json` goes to the escape hatch (d8).
 - **Fetch three trees into a temp folder with giget:** the target (theirs) at the target tag, and the base at the `version.json` SHA. The instance (ours) is the working tree. The target tree carries its own `ang-context-manager.mjs`, and the skill runs **that** engine (d29), so no separate engine download is needed.
-- **Fetch every upgrade guide in (installed, target]**, oldest first, from `raw.githubusercontent.com` at the target tag (k12, proposal change D). A missing guide is an error.
+- **Fetch every upgrade guide in (installed, target]** from `raw.githubusercontent.com` at the target tag, by following each guide's `from:` line back from the target's guide, then applying them oldest first (k12, d34). A missing guide or broken chain is an error.
 - **Classify and size:** the engine sorts files into the spike's categories (k8). It applies the guides' moves before classifying, so a move is no longer read as a deletion. It then sizes the job:
   - **fast path:** no file needs judgement; write and summarise;
   - **guided merge:** a handful of files do. The skill rereads clean merges against upstream's diff and the guide's Retired entries (catching semantic staleness), resolves conflicts with the user, and checks conflict-deletes as possible moves;
@@ -78,7 +79,7 @@ This follows the [release process proposal](release-process-proposal.md) as agre
 
 ## Sequencing
 1. **Repo layout and link script (d24).** This comes first, because every repo-only skill, agent and script below needs a home that doesn't ship.
-2. **`settings merge`** in the library script, test-first from the spike's four scenarios. Install and upgrade both depend on it.
+2. **`settings merge` and `version show`/`version write`** in the library script, test-first from the spike's four scenarios. Install and upgrade both depend on them.
 3. **`install.sh`** with its checks, the tag-required repo copy and the API override. Its tests stub giget at the boundary.
 4. **Release mechanics:** the `releases/` folders and the release workflow. In parallel, Zac's GitHub setup story (d30).
 5. **`release-manifest`, `release-scout`, then `/cut-release`.**
@@ -114,7 +115,8 @@ Every test uses `node:test`, beside the code it tests. Zero dependencies, run wi
 | Level | What | Notes |
 |---|---|---|
 | Unit (most) | `settings merge`: the spike's four scenarios, plus empty base equals the install merge, plus a no-op re-run | Pure function over three JSON objects |
-| Unit | Upgrade file classification, applying guide moves, escape-hatch sizing, parsing the upgrade guide (sections, "None", missing file is an error) | Inputs are in-memory file maps |
+| Unit | `version show` with and without a record, `version write` | Temp folder |
+| Unit | Upgrade file classification, applying guide moves, escape-hatch sizing, parsing the upgrade guide (sections, "None", missing file is an error), chaining guides by `from:` with an injected fetch | Inputs are in-memory file maps |
 | Unit (repo-only) | Link drift: missing and dangling per-entry links | Lives in `scripts/`, never ships |
 | Integration | `upgrade` engine over three temp git trees: one case per category, and a move declared in a guide | The spike's harness, turned into tests |
 | Integration | `install.sh` against temp git repos, with `npx` stubbed on `PATH` to copy a local `src/`: every d12 check, the settings backup and merge, the version record, and no tag on the repo copy | Mocks giget and GitHub at the boundary |

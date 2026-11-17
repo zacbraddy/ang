@@ -21,17 +21,17 @@ A `localOverrides` list in `ang.json` (e.g. `["intent"]`) that lets the team all
 ### Local changelog of workflow improvements
 `/raise-workflow-improvement` and `/improve-workflow` would keep a local version and changelog of the improvements made in an instance, so an upgrading agent can see why each local change was made. The upgrade skill already gets *what* changed by diffing the instance against the release recorded in `.claude/ang/version.json`. Only the *why* is missing, and in a guided merge the user is there to supply it.
 - **Wake condition:** guided merges keep stalling because nobody remembers why a local change was made.
-- **Source:** cut in shaping on 2026-11-16, not from a raw file. Zac's call after the [upgrade merge spike](/project-context/planning/install-upgrade-release/origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md), which found every local edit without a changelog.
+- **Source:** cut in shaping on 2026-11-16, not from a raw file. Zac's call after the [upgrade merge spike](/project-context/execution/install-upgrade-release/origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md), which found every local edit without a changelog.
 
 ### Partial upgrades
 The upgrade skill's escape hatch would offer to take only part of a release: the skill groups the release into changes using the release notes, upgrade guide and diff, and the user picks which to take. `.claude/ang/version.json` would then need a per-file base for every taken file, or the next upgrade merges against the wrong base, and untaken files either never update or show false conflicts. Today upgrades are all or nothing. The escape hatch warns that a big upgrade will take a while and the user decides whether to go ahead, so every upgrade ends in a stable state.
 - **Wake condition:** users ask to take part of a release, because a full upgrade is too costly with their local improvements.
-- **Source:** cut in planning on 2026-11-17, not from a raw file. Zac's call: a feature nobody has asked for, and its version-record design was contortion for a "hat on a hat". See the [install, upgrade and release epic](/project-context/planning/install-upgrade-release/README.md).
+- **Source:** cut in planning on 2026-11-17, not from a raw file. Zac's call: a feature nobody has asked for, and its version-record design was contortion for a "hat on a hat". See the [install, upgrade and release epic](/project-context/execution/install-upgrade-release/README.md).
 
 ### Gapped-version upgrade rehearsals
 Each release would also rehearse upgrades that skip releases, starting from older tags of the upgrade fixture repo: for example, from the last major through every minor and patch since. That would show users can upgrade across several non-breaking versions in one go. Today a release rehearses only the upgrade from the previous release. While every release is a major, every upgrade is breaking anyway, so the only path to assure is the one from the previous major. Users who jump several majors upgrade one major at a time, naming each release tag as the target.
 - **Wake condition:** work starts on a project or task meant to ship as Ang's first minor or patch release. Adopting semver sets the expectation that upgrades across several non-breaking versions work.
-- **Source:** parked in planning on 2026-11-17, not from a raw file. Zac's call. See the [release process proposal](/project-context/planning/install-upgrade-release/release-process-proposal.md). The fixture is tagged at every release, so the history to test from builds up anyway.
+- **Source:** parked in planning on 2026-11-17, not from a raw file. Zac's call. See the [release process proposal](/project-context/execution/install-upgrade-release/release-process-proposal.md). The fixture is tagged at every release, so the history to test from builds up anyway.
 
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)

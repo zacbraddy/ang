@@ -290,6 +290,16 @@
       "id": "d33",
       "decision": "upgrade-ang is plumbing, like install.sh and the release pipeline, not a fifth feature, so what-ang-is stays at four features (Zac's call)",
       "evidence": "/project-context/10k/product/what-ang-is.md"
+    },
+    {
+      "id": "d34",
+      "decision": "The upgrade finds the guides in (installed, target] by following each guide's from: line back from the target's guide, fetched raw at the target tag, so no GitHub API call lists releases. A wrong from: line breaks the chain, and the fixture rehearsal catches it before release (Zac agreed)",
+      "evidence": "c4/4-code.md"
+    },
+    {
+      "id": "d35",
+      "decision": "version.json is read and written only through core 'version show' and 'version write' commands in the library script, which install.sh and upgrade-ang both use, so there is one record format and one place to test it (Zac agreed)",
+      "evidence": "c4/4-code.md"
     }
   ],
   "lineage": [
@@ -592,6 +602,18 @@
     {
       "date": "2026-11-17",
       "event": "decided: upgrade-ang is plumbing, like install.sh and the release pipeline, not a fifth feature, so what-ang-is stays at four features (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: The upgrade finds the guides in (installed, target] by following each guide's from: line back from the target's guide, fetched raw at the target tag, so no GitHub API call lists releases. A wrong from: line breaks the chain, and the fixture rehearsal catches it before release (Zac agreed)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: version.json is read and written only through core 'version show' and 'version write' commands in the library script, which install.sh and upgrade-ang both use, so there is one record format and one place to test it (Zac agreed)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "moved planning → execution"
     }
   ],
   "type": "technical"

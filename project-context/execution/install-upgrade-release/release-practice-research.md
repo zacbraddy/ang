@@ -113,5 +113,5 @@ tags: [distribution, open-source]
 - **Create the release as a draft (`gh release create --draft`) and publish after Zac's edit:** the `releases/latest` and `releases/tags/{tag}` endpoints don't return drafts, so nothing installs it early.
 
 ## Related
-- [Install, upgrade and release epic](/project-context/planning/install-upgrade-release/README.md)
-- [Install and upgrade direction](/project-context/planning/install-upgrade-release/origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md)
+- [Install, upgrade and release epic](/project-context/execution/install-upgrade-release/README.md)
+- [Install and upgrade direction](/project-context/execution/install-upgrade-release/origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md)
