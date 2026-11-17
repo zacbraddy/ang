@@ -253,6 +253,15 @@
     ]
   },
   {
+    "title": "Documentation epic plan",
+    "path": "project-context/planning/documentation/plan.md",
+    "shortDescription": "Scope, approach, sequencing, risks, tests, deliverables and candidate ADRs for the README rewrite and the Starlight docs site",
+    "tags": [
+      "documentation",
+      "open-source"
+    ]
+  },
+  {
     "title": "Documentation",
     "path": "project-context/planning/documentation/README.md",
     "shortDescription": "The docs epic, covering the whistle-stop repo README first, then the Starlight docs site on GitHub Pages",

@@ -3,12 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u2",
-      "question": "Does an extends-style shared ang.json work for teams across repos? Spike it, then document it as the team pattern",
-      "approach": "Spike; see k6",
-      "from": "docs-website"
-    },
-    {
       "id": "u6",
       "question": "Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/, and do starlight-llms-txt's links in /ang/llms.txt carry the /ang/ base? Written, never run",
       "approach": "Run it once on a branch or the first real build; see origins/docs-website/spikes/starlight/deploy.yml",
@@ -39,12 +33,6 @@
       "id": "k5",
       "fact": "Where the brain dump describes how Ang works and the files differ, the files are truth (e.g. evidence tiers)",
       "source": "origins/docs-website/ideas-content/brief.md",
-      "from": "docs-website"
-    },
-    {
-      "id": "k6",
-      "fact": "An \"extends\"-style shared config (e.g. a team's base ang.json) is the team answer to a configurable config path. Sent here to spike as a documented pattern, not built into Ang",
-      "source": "https://github.com/zacbraddy/ang/blob/e34550491f625b84a6013a30e16438245bc62468/project-context/execution/generic-defaults/origins/generic-personal-defaults/shaping-content/tailoring.md",
       "from": "docs-website"
     },
     {
@@ -112,6 +100,17 @@
       "fact": "starlight-llms-txt 0.12.0 (Sep 2026, by delucis of the Starlight team; peers Astro ^7, Starlight >=0.41) generates llms.txt (link index), llms-full.txt (all pages) and llms-small.txt (minified) from one plugin line plus Astro's site option; customSets can cut per-group files. Its docs never mention Astro's base, though its own site runs under a /starlight-llms-txt/ base on Pages",
       "source": "https://delucis.github.io/starlight-llms-txt/configuration/",
       "answers": "Should the site publish agent-readable docs (llms.txt) for Claude Code users? If so, does a Starlight plugin cover it?"
+    },
+    {
+      "id": "k23",
+      "fact": "ang.json can't carry an extends key: the loader errors on any key that isn't a feature (intent, streams, host, pilot), and ADR 0003 merges only ang.json and the local keys of ang.local.json. A team base config needs code or a pattern that lives outside ang.json",
+      "source": "/src/.claude/scripts/ang/config/config.mjs"
+    },
+    {
+      "id": "k24",
+      "fact": "JSON has no extends, so a shared base ang.json for teams would need loader code (k23). Zac parked it rather than build it, and the Team config pattern page is cut (2026-11-17)",
+      "source": "/project-context/ideas/parked.md",
+      "answers": "Team config pattern: ang.json rejects an extends key (k23), so is it a small feature, a pattern that lives outside ang.json, or a cut page parked with a wake condition? Settle before plan step 6"
     }
   ],
   "decisions": [
@@ -162,6 +161,11 @@
       "id": "d10",
       "decision": "The site publishes agent-readable docs (llms.txt, llms-full.txt, llms-small.txt) via starlight-llms-txt with default output, no custom sets (Zac, 2026-11-17)",
       "evidence": "https://delucis.github.io/starlight-llms-txt/getting-started/"
+    },
+    {
+      "id": "d11",
+      "decision": "No Team config pattern page: a shared base ang.json isn't free, so it's parked with a wake condition rather than built or documented (Zac, 2026-11-17)",
+      "evidence": "/project-context/ideas/parked.md"
     }
   ],
   "lineage": [
@@ -360,6 +364,22 @@
     {
       "date": "2026-11-17",
       "event": "replaced u6: Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/? Written, never run → Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/, and do starlight-llms-txt's links in /ang/llms.txt carry the /ang/ base? Written, never run"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u2: Does an extends-style shared ang.json work for teams across repos? Spike it, then document it as the team pattern → Team config pattern: ang.json rejects an extends key (k23), so is it a small feature, a pattern that lives outside ang.json, or a cut page parked with a wake condition? Settle before plan step 6; approach: Spike; see k6 → Question for Zac; see k6, k23"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: No Team config pattern page: a shared base ang.json isn't free, so it's parked with a wake condition rather than built or documented (Zac, 2026-11-17)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k24: JSON has no extends, so a shared base ang.json would need loader code (k23). The Team config pattern page is cut and the idea parked → JSON has no extends, so a shared base ang.json for teams would need loader code (k23). Zac parked it rather than build it, and the Team config pattern page is cut (2026-11-17); source: Zac, 2026-11-17 → /project-context/ideas/parked.md"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "removed k6: An \"extends\"-style shared config (e.g. a team's base ang.json) is the team answer to a configurable config path. Sent here to spike as a documented pattern, not built into Ang"
     }
   ],
   "type": "mixed"

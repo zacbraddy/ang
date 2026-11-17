@@ -11,7 +11,8 @@ Delivers two release goals from the intent as one unit: a whistle-stop README (c
 ## What's here
 - [Information architecture](information-architecture.md): the page map and where each page draws from
 - [Design direction](design-direction.md): type, spacing, imagery and home-page layout research behind the design choices (decisions d6–d9 in `state.json`)
-- `plan.md` and `c4/`: to be written in planning
+- [Plan](plan.md): scope, sequencing, risks, test strategy, who does what and candidate ADRs
+- `c4/`: to be written in planning
 - [README brief](origins/repo-readme/shaping-content/brief.md) and [content cut](origins/repo-readme/shaping-content/content-cut.md): what the README covers and leaves to the site
 - [Site brief](origins/docs-website/ideas-content/brief.md): Zac's requirements; [bake-off](origins/docs-website/shaping-content/bake-off.md), [effort](origins/docs-website/shaping-content/effort.md), [hosting](origins/docs-website/shaping-content/hosting.md) and [colour palette](origins/docs-website/shaping-content/colour-palette.md) hold the shaping evidence; [brain dump](origins/docs-website/ideas-content/brain-dump-context.md) is the source material and a voice sample
 
