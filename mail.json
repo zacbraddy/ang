@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "e953a9",
+    "from": "install-uninstall-update",
+    "to": "documentation",
+    "sent": "2026-11-17",
+    "text": "Windows is supported through WSL only (install-upgrade-release d37). The README's install section should tell Windows users to run the one-liner inside WSL, with Node 26 installed in WSL rather than on Windows. PowerShell, cmd and Git Bash aren't supported; install.sh stops under Git Bash and says to use WSL."
+  }
+]
