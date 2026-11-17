@@ -1,9 +1,1 @@
-[
-  {
-    "id": "0fb625",
-    "from": "install-uninstall-update",
-    "to": "documentation",
-    "sent": "2026-11-17",
-    "text": "Follow-up to e953a9: platform stance widened (install-upgrade-release d37). Docs should say Ang supports macOS, Linux and Windows through WSL (run the one-liner, Claude Code and Node 26 inside WSL). Native Windows is untested and best effort: it needs Git for Windows, because Claude Code runs Ang hooks and Bash commands in Git Bash, and without it hooks fail in PowerShell. Manual install for native Windows (PowerShell is fine): 1) clean git repo, at its root, Node 26. 2) If .claude/settings.json exists, copy it to .claude/settings.json.pre-ang and to a scratch file. 3) npx giget@3.3.1 gh:zacbraddy/ang/src#<tag> . --force 4) If you had settings: node .claude/scripts/ang-context-manager.mjs settings merge --base none --ours <scratch> --theirs .claude/settings.json, then move the scratch file to .claude/settings.json. 5) git ls-remote https://github.com/zacbraddy/ang \"refs/tags/<tag>^{}\" for the commit SHA, then node .claude/scripts/ang-context-manager.mjs version write --ref <tag> --sha <sha> (without it /upgrade-ang goes straight to its escape hatch). 6) git status: any tracked file shown as modified, rather than new, was overwritten; restore it with git checkout and rename yours. Then /bootstrap-repo as usual."
-  }
-]
+[]
