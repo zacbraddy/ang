@@ -6,7 +6,7 @@ tags: [documentation, tech-stack]
 # Docs site visual bake-off
 
 ## Summary
-Each candidate gets the same 3 pages in its own session, light and dark, so Zac can judge the looks side by side. Done so far: **Just the Docs** and **native Pages themes** (both 2026-11-17). Zac's view of Just the Docs: "a reasonable first outing", with some clunky design edges he'd clean up during the build. The native themes look cleaner and less rough to him; cayman is his favourite look, but only minima has a nav bar, and a baseline nav would have to be built in for the site to be usable. He'll compare properly once the whole field is built. Still to build: Starlight and VitePress. The spike also disproved a research claim: Just the Docs *can* follow the system's dark-mode setting with no JavaScript and no flicker.
+Each candidate gets the same 3 pages in its own session, light and dark, so Zac can judge the looks side by side. Done so far: **Just the Docs**, **native Pages themes** and **Starlight** (all 2026-11-17). **Starlight is Zac's favourite so far**: the best design, with nav and search built in and a layout any developer will recognise, though its colours are ugly and would need real tinkering. Zac's view of Just the Docs: "a reasonable first outing", with some clunky design edges he'd clean up during the build. The native themes look cleaner and less rough to him; cayman is his favourite look, but only minima has a nav bar, and a baseline nav would have to be built in for the site to be usable. He'll compare properly once the whole field is built. Still to build: VitePress. The spike also disproved a research claim: Just the Docs *can* follow the system's dark-mode setting with no JavaScript and no flicker.
 
 ## Method
 - **Shared pages** live in [`spikes/_content/`](../spikes/_content/). Each candidate copies them and only adds its own front matter and link fixes, so the words stay the same everywhere:
@@ -49,9 +49,27 @@ Spike: [`spikes/pages-native/`](../spikes/pages-native/README.md). Four themes b
 
 **Zac's verdict (ET 1):** all 4 look nice and clean, more so than Just the Docs, whose design feels rougher. **cayman** is his favourite look and feel. He likes minima's nav bar, though. With no nav, the others are "VERY awkward" to move around, so a baseline nav would have to go into the build for the docs to be usable at all. Missing search "kind of sucks", but it might come back with a little work. And even if it doesn't, a first-time visitor won't know it was ever an option: the gap only shows because of the side-by-side comparison.
 
+## Starlight (2026-11-17)
+Spike: [`spikes/starlight/`](../spikes/starlight/README.md). Starlight 0.42.8 on Astro 7.4.5, both pinned to releases at least 2 weeks old.
+
+| Measure | Result (ET 1, spike) |
+|---|---|
+| Build | Worked first time once `@astrojs/markdown-remark` was added (see the plugin row below). About 1.6s per build, 8s including `npm install` in `node:22` Docker; 281 packages, 215 MB of `node_modules` |
+| Config and custom code | 41 lines in all: a 6-line `package.json`, a 5-line `content.config.ts` and a 24-line `astro.config.mjs`, 9 of them a remark plugin that turns `page.md` links into routes. Plus a 6-line footer override for attribution. Without the link plugin, which only exists because the spike's source sits in `project-context/`, it's 32 |
+| Follows the system light/dark setting | Yes, out of the box, with no code |
+| Toggle | Built in: an Auto / Light / Dark dropdown in the header |
+| Sidebar and search | Built in. Search is Pagefind, which is indexed at build time and runs in the browser. There's also an "On this page" table of contents and next/previous page links |
+| Phone width | Hamburger nav plus an "On this page" dropdown; wide tables wrap rather than scroll |
+| Deploy on Pages | A 31-line Actions workflow (`withastro/action@v6`, `actions/deploy-pages@v5`), written but not run. It's the upkeep the Jekyll candidates don't need |
+| Rough edges seen | Definition lists aren't supported, so they render as plain `term : text` lines. The note callout is a plain blockquote, because Starlight's callouts need `:::note` syntax. Each page's body H1 had to move into `title`, or it showed twice. `.md` links aren't rewritten, so a plugin is needed while the source lives in `project-context/` |
+| Framework churn already visible | Astro 7 made Sätteri its default Markdown engine, so remark plugins now need `@astrojs/markdown-remark` installed separately. It's one example of the breaking releases flagged in [hosting](hosting.md) |
+
+**Zac's verdict (ET 1):** "The colours are fucking ugly as fuck but the design itself is the best so far." He likes having the nav and search there. The layout is the standard docs-site shape anyone who's spent time in software development will know, and he counts that as a plus. It's his favourite so far, but going with it would definitely mean time spent tinkering with the colours.
+
 ## Unknown unknowns
 - The spike sites are served from the root with no base path. At `zacbraddy.github.io/ang/`, each candidate also needs its base path set (u7).
 - If a native theme goes forward, adding a nav bar (and maybe search) to a theme like cayman hasn't been measured. It would mean overriding the theme's layout.
+- If Starlight goes forward, recolouring it hasn't been measured. Its theme is driven by CSS custom properties (`--sl-color-*`), so a custom stylesheet is the likely route, but the effort and the result are unproven.
 - The Home page's install snippet is a placeholder until the [install, uninstall and update idea](/project-context/ideas/install-uninstall-update/README.md) settles how Ang is installed.
 
 ## Related

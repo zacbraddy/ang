@@ -4,7 +4,7 @@
   "unknowns": [
     {
       "id": "u6",
-      "question": "Visual bake-off: which candidate's look does Zac pick? Same 3 shared pages (spikes/_content/) in each, light and dark; Zac gives his view in his own words and compares the whole field at the end (no per-criterion scores). Done: Just the Docs, native Pages themes. Left: Starlight, VitePress. One session per candidate",
+      "question": "Visual bake-off: which candidate's look does Zac pick? Same 3 shared pages (spikes/_content/) in each, light and dark; Zac gives his view in his own words and compares the whole field at the end (no per-criterion scores). Done: Just the Docs, native Pages themes, Starlight. Left: VitePress. One session per candidate",
       "approach": "Spike, separate sessions; see shaping-content/bake-off.md"
     },
     {
@@ -65,6 +65,11 @@
       "id": "k7",
       "fact": "Native Pages bundled themes (primer, minima, cayman, slate) build first time on the github-pages gem v233 from 7 lines of config. None has dark mode or search; only minima has nav. Zac: cleaner and less rough than Just the Docs, cayman is his favourite look, but a baseline nav would have to be built in for the site to be usable; missing search is a gap first-time visitors won't notice",
       "source": "shaping-content/bake-off.md"
+    },
+    {
+      "id": "k8",
+      "fact": "Starlight 0.42.8 on Astro 7.4.5 builds first time in about 1.6s from 41 lines of config and code (32 without a link plugin only the spike needs); system light/dark with an Auto/Light/Dark switcher, sidebar, Pagefind search and on-this-page nav all built in. Attribution needs a 6-line footer override. Remark plugins need @astrojs/markdown-remark since Astro 7's new default Markdown engine. Deploy on Pages: a 31-line Actions workflow. No definition lists; callouts need :::note syntax. Zac: his favourite so far — the best design, and nav, search and a layout every developer knows are pluses — but the colours are ugly and would need real tinkering",
+      "source": "shaping-content/bake-off.md"
     }
   ],
   "decisions": [],
@@ -108,6 +113,14 @@
     {
       "date": "2026-11-17",
       "event": "replaced u6: Visual bake-off: which candidate's look does Zac pick? Same 3 shared pages (spikes/_content/) in each, light and dark; Zac gives his view in his own words and compares the whole field at the end (no per-criterion scores). Done: Just the Docs. Left: native Pages (whichever bundled theme shows it best, picked in that session), Starlight, VitePress. One session per candidate → Visual bake-off: which candidate's look does Zac pick? Same 3 shared pages (spikes/_content/) in each, light and dark; Zac gives his view in his own words and compares the whole field at the end (no per-criterion scores). Done: Just the Docs, native Pages themes. Left: Starlight, VitePress. One session per candidate"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u6: Visual bake-off: which candidate's look does Zac pick? Same 3 shared pages (spikes/_content/) in each, light and dark; Zac gives his view in his own words and compares the whole field at the end (no per-criterion scores). Done: Just the Docs, native Pages themes. Left: Starlight, VitePress. One session per candidate → Visual bake-off: which candidate's look does Zac pick? Same 3 shared pages (spikes/_content/) in each, light and dark; Zac gives his view in his own words and compares the whole field at the end (no per-criterion scores). Done: Just the Docs, native Pages themes, Starlight. Left: VitePress. One session per candidate"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k8: Starlight 0.42.8 on Astro 7.4.5 builds first time in about 1.6s from 26 lines of config; system light/dark with an Auto/Light/Dark switcher, sidebar, Pagefind search and on-this-page nav all built in, no code. Custom code: a 6-line footer for attribution and an 8-line plugin turning page.md links into routes (needs @astrojs/markdown-remark since Astro 7's new default Markdown engine). Deploy on Pages: a 31-line Actions workflow. No definition lists; callouts need :::note syntax. Zac: his favourite so far — the best design, and nav, search and a layout every developer knows are pluses — but the colours are ugly and would need real tinkering → Starlight 0.42.8 on Astro 7.4.5 builds first time in about 1.6s from 41 lines of config and code (32 without a link plugin only the spike needs); system light/dark with an Auto/Light/Dark switcher, sidebar, Pagefind search and on-this-page nav all built in. Attribution needs a 6-line footer override. Remark plugins need @astrojs/markdown-remark since Astro 7's new default Markdown engine. Deploy on Pages: a 31-line Actions workflow. No definition lists; callouts need :::note syntax. Zac: his favourite so far — the best design, and nav, search and a layout every developer knows are pluses — but the colours are ugly and would need real tinkering"
     }
   ]
 }
