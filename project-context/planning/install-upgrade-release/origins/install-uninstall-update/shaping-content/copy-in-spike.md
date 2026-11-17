@@ -43,7 +43,7 @@ The two tools tie on every measure.
 Neither breaks anything. Zac's call: the tests stay in. A local workflow improvement may change shipped scripts, and having the tests on hand lets the user check that change.
 
 ## What the clobber costs
-Ang's `settings.json` carries the hooks that keep indexes fresh, the banner, its permissions and the default output style. The user loses whatever theirs had. In a git repo the old file is one `git diff .claude/settings.json` away, but leaving the merge to the user is easy to miss. Zac chose to wrap the copy-in in a shipped `install.sh` that backs up the user's file and merges the two with node (see [Install script and upgrade ambition](install-and-upgrade-direction.md)).
+Ang's `settings.json` carries the hooks that keep indexes fresh, the banner, its permissions and the default output style. The user loses whatever theirs had. In a git repo the old file is one `git diff .claude/settings.json` away, but leaving the merge to the user is easy to miss. Zac chose to wrap the copy-in in a shipped `install.sh` that backs up the user's file and merges the two with node (see [Install script and upgrade ambition](./install-and-upgrade-direction.md)).
 
 A file with the same path as an Ang file (for example a user skill called `retro`) would also be overwritten. That is the same mechanism, but the settings merge doesn't cover it. Whether `install.sh` should detect and warn about clashes like this is a detail for planning.
 
@@ -52,7 +52,7 @@ A file with the same path as an Ang file (for example a user skill called `retro
 - **The shipped `settings.json` sets `outputStyle`** to Partner In Crime. `/tailor-ang` overrides it per user, so it's fine, but it's one more thing a user's settings lose to the clobber.
 
 ## Related
-- [Install script and upgrade ambition](install-and-upgrade-direction.md)
+- [Install script and upgrade ambition](./install-and-upgrade-direction.md)
 - [Spike README](../spikes/copy-in/README.md)
 - [Install route landscape](../ideas-content/install-route.md)
-- [Hub](../README.md)
+- [Hub](../../../README.md)

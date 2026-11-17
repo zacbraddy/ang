@@ -19,4 +19,4 @@ Findings, run on 2026-11-16 at `cd1b825`: every measure passed, with installs ta
 
 ## Related
 - [Install script spike](../../shaping-content/install-script-spike.md)
-- [Hub](../../README.md)
+- [Hub](../../../../README.md)

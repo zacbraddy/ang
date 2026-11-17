@@ -105,7 +105,7 @@ Option 1 matches the delivery intent most closely ("build the least", no maintai
 28. "Subagents don't inherit .claude/rules" (#61467 mirror): https://claudeissues.com/issue/61467. 2026. ET 2 (mirror of a user report)
 
 ## Related
-- [Brief](brief.md)
-- [Hub](../README.md)
+- [Brief](./brief.md)
+- [Hub](../../../README.md)
 - [ADR 0002: zero-dependency library script](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)
 - [Delivery intent](/project-context/10k/intent.md)

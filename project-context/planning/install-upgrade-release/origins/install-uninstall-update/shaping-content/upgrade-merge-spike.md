@@ -12,7 +12,7 @@ Spiked on 2026-11-16, answering how an upgrade merges upstream around local impr
 - **Two things counts can't catch.** A clean merge can be semantically stale: the merged text still said "my testing rules", which upstream had retired elsewhere. And an upstream *move* looks like a deletion: `.claude/ang.json` moved to the repo root, so the instance's local `streams: true` would be lost.
 
 ## Setup
-- [`run.sh`](../spikes/upgrade-merge/run.sh) installs `src/` at `d1c64e3` (before the generic-defaults epic) into a fake project with `git archive`. A local `git archive` stands in for giget, since the install route was [already spiked](install-script-spike.md). It writes `version.json` and makes 6 local improvements:
+- [`run.sh`](../spikes/upgrade-merge/run.sh) installs `src/` at `d1c64e3` (before the generic-defaults epic) into a fake project with `git archive`. A local `git archive` stands in for giget, since the install route was [already spiked](./install-script-spike.md). It writes `version.json` and makes 6 local improvements:
   1. a line added to `review-story`, away from upstream's change, plus a line that reuses wording upstream retired;
   2. an edit to `write-story` on the same line upstream changed;
   3. an edit to `retro`, which upstream never touched;
@@ -60,6 +60,6 @@ Measures:
 
 ## Related
 - [Spike README](../spikes/upgrade-merge/README.md)
-- [Install script spike](install-script-spike.md)
-- [Install script and upgrade ambition](install-and-upgrade-direction.md)
-- [Hub](../README.md)
+- [Install script spike](./install-script-spike.md)
+- [Install script and upgrade ambition](./install-and-upgrade-direction.md)
+- [Hub](../../../README.md)

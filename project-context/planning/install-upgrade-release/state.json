@@ -1,0 +1,347 @@
+{
+  "status": "active",
+  "statusNote": "",
+  "unknowns": [
+    {
+      "id": "u1",
+      "question": "What must each upstream release publish (tags, generated notes, and declared moves and migrations such as ang.json leaving .claude/) for an upgrading agent to know what changed? A file-level merge can't see moves",
+      "approach": "origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "u2",
+      "question": "What is the release-cutting process: a checklist or a small script, covering stamping the tag into install.sh before tagging, tagging, publishing the generated GitHub Release and whatever u1 says each release must publish?",
+      "approach": "origins/install-uninstall-update/shaping-content/install-script-spike.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "u3",
+      "question": "How does an upgrade update Ang's own settings entries without duplicating them? The user-favouring install merge would append a changed Ang hook beside the old one (candidate: diff against the previous release's settings.json found by the recorded SHA)",
+      "approach": "origins/install-uninstall-update/shaping-content/install-script-spike.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "u4",
+      "question": "What does taking only chosen parts of a release look like in the escape hatch: per file, per feature or per changelog entry, and how does the version record show a partial upgrade?",
+      "approach": "",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "u5",
+      "question": "When install.sh runs in a subdirectory of a git repo, does it install at the repo root (git rev-parse --show-toplevel) or stop and ask the user to cd there? And should it warn when the working tree has uncommitted changes, so the install's changes can be reviewed on their own?",
+      "approach": "",
+      "from": "install-uninstall-update"
+    }
+  ],
+  "knowns": [
+    {
+      "id": "k1",
+      "fact": "Requirements and options as Zac framed them",
+      "source": "origins/install-uninstall-update/ideas-content/brief.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "k2",
+      "fact": "Gitignored *.local.* files (pilot.local.md, local styles) sit physically under src/.claude/ in this repo through the symlinks. Git never ships them, but any install route that copies src/ from disk would. Keeping them out of a release is this epic's job (giget fetches from GitHub, so it holds as long as releases are cut from git)",
+      "source": "https://github.com/zacbraddy/ang/blob/e34550491f625b84a6013a30e16438245bc62468/project-context/execution/generic-defaults/plan.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "k3",
+      "fact": "Copy-in fits, plugin doesn't: plugins can't ship rules or permissions, wipe user edits on update and namespace skills; candidates are plain degit/giget copy-in, copy-in plus a hash-manifest update, or copier",
+      "source": "origins/install-uninstall-update/ideas-content/install-route.md",
+      "answers": "Install route: plugin marketplace, copy script or degit-style clone, given users must own and edit their copy?",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "k4",
+      "fact": "Copying src/ brings project-context/README.md along with .claude/, so an install gets the conventions doc without library init copying it",
+      "source": "origins/install-uninstall-update/shaping-content/copy-in-spike.md",
+      "answers": "How does project-context/README.md reach a user's install, and should library init copy it?",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "k5",
+      "fact": "Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges (the local changelog he also wanted is parked, d10)",
+      "source": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "k6",
+      "fact": "install.sh lives at the repo root, outside src/, so the copy-in never ships it. Users pipe it from raw.githubusercontent.com/zacbraddy/ang/<ref>/install.sh to sh. The ref is stamped into the script, with an optional argument to override it. Spiked: install.sh never appears in an installed tree",
+      "source": "origins/install-uninstall-update/shaping-content/install-script-spike.md",
+      "answers": "Where does install.sh live and how is it fetched (repo root rather than src/, URL pinned to a release tag) so it never ships into installs itself?",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "k7",
+      "fact": "install.sh resolves the ref to a full SHA through GitHub's API, installs that SHA and writes .claude/ang/version.json { ref, sha, installedAt }. Spiked: the record matched git rev-parse on every run",
+      "source": "origins/install-uninstall-update/shaping-content/install-script-spike.md",
+      "answers": "Where and in what form does an install record its Ang version (tag, commit SHA), and how does an upgrade baseline an instance with no record, such as ohnvm?",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "k8",
+      "fact": "A file-by-file three-way merge (base: the version.json SHA; git merge-file where both changed) sorts every file into one category. Across 28 upstream-changed files and 6 local improvements, only 4 files needed judgement. Conflicted files are the cost signal; fast-path and new-file counts are nearly free. Clean merges can still be semantically stale, and upstream moves look like deletions",
+      "source": "origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md",
+      "answers": "How would an upgrade skill merge upstream changes around local improvements: what makes a merge simple versus too much (the escape hatch), and what does taking only chosen parts look like?",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "k9",
+      "fact": "Minimum supported Node is the current LTS (long-term support release), Node 26 today, bumped each October with engines, .node-version and CI (open-source-hygiene d11). install.sh and the documented prerequisite check for >=26, not just that node exists",
+      "source": "https://github.com/zacbraddy/ang/blob/stream/open-source-hygiene/project-context/shaping/open-source-hygiene/shaping-content/node-version.md",
+      "answers": "What minimum Node version do the documented install prerequisite and install.sh's node check state? It waits on open-source-hygiene's u7: docs say 21+, but the code's import.meta.dirname needs 22.16+. install.sh itself needs only 18+ (fetch). Once it's settled, install.sh should check the version, not just that node exists",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "k10",
+      "fact": "Releases are git tags with generated GitHub Releases and no hand-kept changelog (open-source-hygiene d13). Generated notes can't declare moves or migrations, so u1's answer must come from something other than a changelog",
+      "source": "https://github.com/zacbraddy/ang/blob/stream/open-source-hygiene/project-context/shaping/open-source-hygiene/state.json",
+      "from": "install-uninstall-update"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "d1",
+      "decision": "Install by copy-in of src/ (giget/degit --force) wrapped in a shipped install.sh, so the install is one copy-pasteable line. The script protects the user's .claude/settings.json and carries future install changes to every new user (Zac's call)",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d2",
+      "decision": "No uninstall command: removing a vanilla install is deleting skills, rules and project-context/, and local workflow improvements make automating it unreliable. Easy by hand, hard to automate (Zac's call)",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d3",
+      "decision": "The upgrade skill is in scope for this epic and is to be built. Zac's deliberate exception to the intent's build-the-least: real value, and it belongs to the same logical unit of work as install, however big it has grown",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d4",
+      "decision": "install.sh merges an existing .claude/settings.json with node (already required, no jq dependency) and first keeps a backup of the user's original, in case the merge drops properties that mattered (Zac's call)",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d5",
+      "decision": "Tests ship with installs: a local workflow improvement may change shipped scripts, and having the tests on hand lets the user run them to check (Zac's call)",
+      "evidence": "origins/install-uninstall-update/shaping-content/copy-in-spike.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d6",
+      "decision": "giget stays, run through npx and pinned to giget@3.3.1; the README and docs list node with npm/npx as the prerequisite. Zac's call: node is already required, giget carries features we'd otherwise hand-roll, and documenting npm/npx beats also leaning on curl and tar inside the script",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-script-spike.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d7",
+      "decision": "The install's settings merge favours the user: their values win, Ang adds only missing keys, arrays are unioned, and only the first backup (.claude/settings.json.pre-ang) is kept, so re-runs are no-ops. Spiked: the user's outputStyle, model, deny rule and hook all survived, with no duplicates on re-run",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-script-spike.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d8",
+      "decision": "No pre-open-source upgrade path: the skill isn't designed around instances like ohnvm, because only Zac has them and only until he upgrades them. A missing version record never hard-stops an upgrade, so an LLM-run upgrade of ohnvm may succeed by accident (Zac's call)",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d9",
+      "decision": "The upgrade skill merges file by file, three-way, against the version.json SHA, with git merge-file. Fast path when no file needs judgement. Guided merge when a handful do (clean merges reread against upstream's diff, conflicts resolved with the user, conflict-deletes checked as moves). Escape hatch before writing anything when many files conflict or there's no version record. The 'many' threshold rests on two spike runs; tune it on real upgrades",
+      "evidence": "origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d10",
+      "decision": "No local changelog of workflow improvements in v1: diffing the instance against the version.json SHA already shows what changed locally, and the user supplies the why during a guided merge. Parked with a wake condition (Zac's call)",
+      "evidence": "/project-context/ideas/parked.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d11",
+      "decision": "Cutting a release is in scope for this epic: the repeatable process (stamp the tag into install.sh, tag, publish the generated GitHub Release, plus whatever u1 settles) belongs here, since install.sh and the upgrade skill consume releases (Zac's call)",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d12",
+      "decision": "install.sh checks before copying anything and stops with a plain message saying what's wrong and how to fix it: node >=26 (k9) and npx, inside a git repo, Ang not already installed (points to upgrade), no collisions with existing project-context/ or same-named skills, rules or agents, settings.json parses, and the ref resolves (says which of network, rate limit or bad ref failed). On success it prints version, location and next step. No OS, disk or permission checks (Zac's call)",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
+      "from": "install-uninstall-update"
+    },
+    {
+      "id": "d13",
+      "decision": "The upgrade skill checks before writing anything and stops with a plain message when: already on the target release, the target is older (downgrade), the working tree is dirty, or prerequisites are missing. A missing or unknown version record goes to the escape hatch, not a stop (d8). It finishes with a from/to, clean-vs-judgement summary and how to review (Zac's call)",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
+      "from": "install-uninstall-update"
+    }
+  ],
+  "lineage": [
+    {
+      "date": "2026-11-17",
+      "event": "created in planning"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] created in ideas"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] from raw: bootstrap-leftovers.md"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] moved ideas → shaping"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] decided: Install by plain copy-in of src/ (npx giget or degit, --force). Both work in about 4s and leave a valid library, so no installer needs building. Picking between the two tools is cosmetic"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] replaced d1: Install by plain copy-in of src/ (npx giget or degit, --force). Both work in about 4s and leave a valid library, so no installer needs building. Picking between the two tools is cosmetic → Install by copy-in of src/ (giget/degit --force) wrapped in a shipped install.sh, so the install is one copy-pasteable line. The script protects the user's .claude/settings.json and carries future install changes to every new user (Zac's call); evidence: shaping-content/copy-in-spike.md → shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] decided: No uninstall command: removing a vanilla install is deleting skills, rules and project-context/, and local workflow improvements make automating it unreliable. Easy by hand, hard to automate (Zac's call)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] removed u5: How does an install into a project that has its own .claude/settings.json keep the user's settings? copy-in --force overwrites it. Lean: a quick-start line to commit first and merge back from git diff"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] removed u3: Is an uninstall command worth having? If so, what does it remove and never remove?"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] replaced u4: Is an update command worth having, given users diverge by design? → Is an upgrade skill worth building, and as part of the first release or after it? Zac's ambition: merge upstream releases around local workflow improvements, with an escape hatch and a fast path; approach:  → shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] decided: The upgrade skill is in scope for this item and is to be built. Zac's deliberate exception to the intent's build-the-least: real value, and it belongs to the same logical unit of work as install, however big it has grown"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] removed u4: Is an upgrade skill worth building, and as part of the first release or after it? Zac's ambition: merge upstream releases around local workflow improvements, with an escape hatch and a fast path"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] decided: install.sh merges an existing .claude/settings.json with node (already required, no jq dependency) and first keeps a backup of the user's original, in case the merge drops properties that mattered (Zac's call)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] removed u5: How does install.sh handle an existing .claude/settings.json: rename it and leave the merge to the user, or merge it (jq if present, or node, which Ang already requires)?"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] decided: Tests ship with installs: a local workflow improvement may change shipped scripts, and having the tests on hand lets the user run them to check (Zac's call)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] decided: giget stays, run through npx and pinned to giget@3.3.1; the README and docs list node with npm/npx as the prerequisite. Zac's call: node is already required, giget carries features we'd otherwise hand-roll, and documenting npm/npx beats also leaning on curl and tar inside the script"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] decided: The install's settings merge favours the user: their values win, Ang adds only missing keys, arrays are unioned, and only the first backup (.claude/settings.json.pre-ang) is kept, so re-runs are no-ops. Spiked: the user's outputStyle, model, deny rule and hook all survived, with no duplicates on re-run"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] replaced k5: Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, a local changelog of workflow improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges. Motivating case: ohnvm's pre-open-source Ang → Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, a local changelog of workflow improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] decided: No pre-open-source upgrade path: the skill isn't designed around instances like ohnvm, because only Zac has them and only until he upgrades them. A missing version record never hard-stops an upgrade, so an LLM-run upgrade of ohnvm may succeed by accident (Zac's call)"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] removed u11: How does the upgrade skill baseline an instance with no version record, such as ohnvm (candidate: hash its files against past tags' trees and pick the closest)?"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] decided: The upgrade skill merges file by file, three-way, against the version.json SHA, with git merge-file. Fast path when no file needs judgement. Guided merge when a handful do (clean merges reread against upstream's diff, conflicts resolved with the user, conflict-deletes checked as moves). Escape hatch before writing anything when many files conflict or there's no version record. The 'many' threshold rests on two spike runs; tune it on real upgrades"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] replaced u10: What must each upstream release publish (tags, changelog) for an upgrading agent to know what changed? → What must each upstream release publish (tags, changelog, and declared moves and migrations such as ang.json leaving .claude/) for an upgrading agent to know what changed? A file-level merge can't see moves; approach:  → shaping-content/upgrade-merge-spike.md"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] status → ready-for-planning: Install route, settings merge, version record and upgrade merge are all spiked or Zac's call; remaining unknowns are release-format, settings-upgrade and escape-hatch design detail for planning, plus Node minimum blocked on open-source-hygiene with a best guess"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] removed u8: How would the workflow-improvement workflow keep a local version and changelog of improvements that an upgrading agent can reason over?"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "[install-uninstall-update] decided: No local changelog of workflow improvements in v1: diffing the instance against the version.json SHA already shows what changed locally, and the user supplies the why during a guided merge. Parked with a wake condition (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "[install-uninstall-update] decided: Cutting a release is in scope for this item: the repeatable process (stamp the tag into install.sh, tag, publish the generated GitHub Release, plus whatever u10 settles) belongs here, since install.sh and the upgrade skill consume releases (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "[install-uninstall-update] replaced u12: Each release must stamp its tag into install.sh before tagging. Is that a manual step in the release checklist, or a small script, and does it fold into what each release publishes (u10)? → What is the release-cutting process: a checklist or a small script, covering stamping the tag into install.sh before tagging, tagging, publishing the generated GitHub Release and whatever u10 says each release must publish?"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "[install-uninstall-update] status → ready-for-planning: Install route, settings merge, version record, upgrade merge and Node minimum are all settled; remaining unknowns are release format and the release-cutting process, settings upgrade and escape-hatch detail for planning"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "[install-uninstall-update] decided: install.sh runs preflight checks before copying anything and stops with a plain message saying what's wrong and how to fix it: node >=26 (k9), npx available, and the current directory inside a git repo (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "[install-uninstall-update] replaced d12: install.sh runs preflight checks before copying anything and stops with a plain message saying what's wrong and how to fix it: node >=26 (k9), npx available, and the current directory inside a git repo (Zac's call) → install.sh checks before copying anything and stops with a plain message saying what's wrong and how to fix it: node >=26 (k9) and npx, inside a git repo, Ang not already installed (points to upgrade), no collisions with existing project-context/ or same-named skills, rules or agents, settings.json parses, and the ref resolves (says which of network, rate limit or bad ref failed). On success it prints version, location and next step. No OS, disk or permission checks (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "[install-uninstall-update] decided: The upgrade skill checks before writing anything and stops with a plain message when: already on the target release, the target is older (downgrade), the working tree is dirty, or prerequisites are missing. A missing or unknown version record goes to the escape hatch, not a stop (d8). It finishes with a from/to, clean-vs-judgement summary and how to review (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "merged install-uninstall-update from shaping into origins/"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u1: What must each upstream release publish (tags, changelog, and declared moves and migrations such as ang.json leaving .claude/) for an upgrading agent to know what changed? A file-level merge can't see moves → What must each upstream release publish (tags, generated notes, and declared moves and migrations such as ang.json leaving .claude/) for an upgrading agent to know what changed? A file-level merge can't see moves; approach: shaping-content/upgrade-merge-spike.md → origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u2: What is the release-cutting process: a checklist or a small script, covering stamping the tag into install.sh before tagging, tagging, publishing the generated GitHub Release and whatever u10 says each release must publish? → What is the release-cutting process: a checklist or a small script, covering stamping the tag into install.sh before tagging, tagging, publishing the generated GitHub Release and whatever u1 says each release must publish?; approach: shaping-content/install-script-spike.md → origins/install-uninstall-update/shaping-content/install-script-spike.md"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u3: approach: shaping-content/install-script-spike.md → origins/install-uninstall-update/shaping-content/install-script-spike.md"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k10: Releases are git tags with generated GitHub Releases and no hand-kept changelog (open-source-hygiene d13). Generated notes can't declare moves or migrations, so u10's answer must come from something other than a changelog → Releases are git tags with generated GitHub Releases and no hand-kept changelog (open-source-hygiene d13). Generated notes can't declare moves or migrations, so u1's answer must come from something other than a changelog"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k2: Gitignored *.local.* files (pilot.local.md, local styles) sit physically under src/.claude/ in this repo through the symlinks. Git never ships them, but any install route that copies src/ from disk would. Keeping them out of a release is this item's job → Gitignored *.local.* files (pilot.local.md, local styles) sit physically under src/.claude/ in this repo through the symlinks. Git never ships them, but any install route that copies src/ from disk would. Keeping them out of a release is this epic's job (giget fetches from GitHub, so it holds as long as releases are cut from git)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k5: Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, a local changelog of workflow improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges → Zac's upgrade ambition: a recorded installed version, an upgrade skill that merges upstream around local improvements, an escape hatch for oversized upgrades with pick-the-parts options, and a fast path for simple merges (the local changelog he also wanted is parked, d10)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced d3: The upgrade skill is in scope for this item and is to be built. Zac's deliberate exception to the intent's build-the-least: real value, and it belongs to the same logical unit of work as install, however big it has grown → The upgrade skill is in scope for this epic and is to be built. Zac's deliberate exception to the intent's build-the-least: real value, and it belongs to the same logical unit of work as install, however big it has grown"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced d11: Cutting a release is in scope for this item: the repeatable process (stamp the tag into install.sh, tag, publish the generated GitHub Release, plus whatever u10 settles) belongs here, since install.sh and the upgrade skill consume releases (Zac's call) → Cutting a release is in scope for this epic: the repeatable process (stamp the tag into install.sh, tag, publish the generated GitHub Release, plus whatever u1 settles) belongs here, since install.sh and the upgrade skill consume releases (Zac's call)"
+    }
+  ],
+  "type": "technical"
+}

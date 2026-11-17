@@ -12,4 +12,4 @@ Throwaway. `run.sh <scratch-dir> [base-ref] [target-ref]` installs `src/` at `d1
 
 ## Related
 - [Findings](../../shaping-content/upgrade-merge-spike.md)
-- [Hub](../../README.md)
+- [Hub](../../../../README.md)

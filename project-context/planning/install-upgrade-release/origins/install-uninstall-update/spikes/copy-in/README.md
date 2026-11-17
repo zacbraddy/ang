@@ -12,4 +12,4 @@ Findings, run on 2026-11-16: both tools work in about 4 seconds, both need `--fo
 
 ## Related
 - [Copy-in bake-off](../../shaping-content/copy-in-spike.md)
-- [Hub](../../README.md)
+- [Hub](../../../../README.md)

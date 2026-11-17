@@ -41,6 +41,6 @@ The merged settings kept every user value. Ang's `outputStyle` didn't replace `E
 
 ## Related
 - [Spike README](../spikes/install-script/README.md)
-- [Install script and upgrade ambition](install-and-upgrade-direction.md)
-- [Copy-in bake-off](copy-in-spike.md)
-- [Hub](../README.md)
+- [Install script and upgrade ambition](./install-and-upgrade-direction.md)
+- [Copy-in bake-off](./copy-in-spike.md)
+- [Hub](../../../README.md)

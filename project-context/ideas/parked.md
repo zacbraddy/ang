@@ -21,7 +21,7 @@ A `localOverrides` list in `ang.json` (e.g. `["intent"]`) that lets the team all
 ### Local changelog of workflow improvements
 `/raise-workflow-improvement` and `/improve-workflow` would keep a local version and changelog of the improvements made in an instance, so an upgrading agent can see why each local change was made. The upgrade skill already gets *what* changed by diffing the instance against the release recorded in `.claude/ang/version.json`. Only the *why* is missing, and in a guided merge the user is there to supply it.
 - **Wake condition:** guided merges keep stalling because nobody remembers why a local change was made.
-- **Source:** cut in shaping on 2026-11-16, not from a raw file. Zac's call after the [upgrade merge spike](/project-context/shaping/install-uninstall-update/shaping-content/upgrade-merge-spike.md), which found every local edit without a changelog.
+- **Source:** cut in shaping on 2026-11-16, not from a raw file. Zac's call after the [upgrade merge spike](/project-context/planning/install-upgrade-release/origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md), which found every local edit without a changelog.
 
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)
