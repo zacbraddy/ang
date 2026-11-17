@@ -81,14 +81,8 @@
     },
     {
       "id": "k15",
-      "fact": "Dev-tool palettes mapped as 5 candidates with contrast checked (Geist mono + blue, Linear periwinkle, Primer blue, Radix slate + jade, Radix sand + orange); slate + jade used for the recolour test, not yet chosen for the site",
+      "fact": "Dev-tool palettes mapped as 5 candidates with contrast checked (Geist mono + blue, Linear periwinkle, Primer blue, Radix slate + jade, Radix sand + orange)",
       "source": "origins/docs-website/shaping-content/colour-palette.md",
-      "from": "docs-website"
-    },
-    {
-      "id": "k16",
-      "fact": "Zac's first impression of palette 4 (Radix slate + jade) on the recolour test: looks nice. An observation made before the wider design research (u5), not a palette decision",
-      "source": "origins/docs-website/shaping-content/effort.md",
       "from": "docs-website"
     },
     {
@@ -143,6 +137,26 @@
       "id": "d5",
       "decision": "Commands docs as 5 grouped pages (one anchor per command). Why Ang is first principles plus credits; Zac's history and personal usage fail the user-value bar and survive only as a few lines on Home and Quick start (Zac, 2026-11-17)",
       "evidence": "information-architecture.md"
+    },
+    {
+      "id": "d6",
+      "decision": "Palette is Radix slate + jade (candidate 4): light bg #fcfcfd, text #1c2024, accent #208368; dark bg #111113, text #edeef0, accent #1fd8a4. Set via Starlight's --sl-color-* variables in customCss. Light accent sits right at AA (4.5:1), so any tint change needs a contrast re-check (Zac, 2026-11-17)",
+      "evidence": "origins/docs-website/shaping-content/colour-palette.md"
+    },
+    {
+      "id": "d7",
+      "decision": "Typefaces are Geist for body and headings and Geist Mono for code, self-hosted from Fontsource and set via --sl-font, --sl-font-mono and Expressive Code's --ec-* font variables. Text size, line-height and width stay at Starlight's defaults (Zac, 2026-11-17)",
+      "evidence": "design-direction.md"
+    },
+    {
+      "id": "d8",
+      "decision": "Home is Starlight's splash template: hero with title, tagline and 2 buttons; the curl install one-liner in a terminal code block below it (no Hero override); a short what-it-does paragraph; LinkCards to Start here, Concepts and Commands. No social proof, no feature-card grid (Zac, 2026-11-17)",
+      "evidence": "design-direction.md"
+    },
+    {
+      "id": "d9",
+      "decision": "Diagrams use Mermaid via astro-mermaid, registered before Starlight, so they follow the light/dark switch (Zac, 2026-11-17)",
+      "evidence": "design-direction.md"
     }
   ],
   "lineage": [
@@ -309,6 +323,30 @@
     {
       "date": "2026-11-17",
       "event": "replaced k19: Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), about 21 pages; each page names its source, and pages are rewritten in Zac's voice, not pasted → Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), about 19 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Palette is Radix slate + jade (candidate 4): light bg #fcfcfd, text #1c2024, accent #208368; dark bg #111113, text #edeef0, accent #1fd8a4. Set via Starlight's --sl-color-* variables in customCss. Light accent sits right at AA (4.5:1), so any tint change needs a contrast re-check (Zac, 2026-11-17)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Typefaces are Geist for body and headings and Geist Mono for code, self-hosted from Fontsource and set via --sl-font, --sl-font-mono and Expressive Code's --ec-* font variables. Text size, line-height and width stay at Starlight's defaults (Zac, 2026-11-17)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Home is Starlight's splash template: hero with title, tagline and 2 buttons; the curl install one-liner in a terminal code block below it (no Hero override); a short what-it-does paragraph; LinkCards to Start here, Concepts and Commands. No social proof, no feature-card grid (Zac, 2026-11-17)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Diagrams use Mermaid via astro-mermaid, registered before Starlight, so they follow the light/dark switch (Zac, 2026-11-17)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k15: Dev-tool palettes mapped as 5 candidates with contrast checked (Geist mono + blue, Linear periwinkle, Primer blue, Radix slate + jade, Radix sand + orange); slate + jade used for the recolour test, not yet chosen for the site → Dev-tool palettes mapped as 5 candidates with contrast checked (Geist mono + blue, Linear periwinkle, Primer blue, Radix slate + jade, Radix sand + orange)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "removed k16: Zac's first impression of palette 4 (Radix slate + jade) on the recolour test: looks nice. An observation made before the wider design research (u5), not a palette decision"
     }
   ],
   "type": "mixed"
