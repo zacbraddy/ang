@@ -15,6 +15,10 @@ Models in 2026 are good. The more directives you pile on, the more you cap them 
 
 ### Lean context
 
+<StageCard stage="Shaping" command="/shape-ideas">
+  Answers one "how could we?" per session, through a spike, an experiment or research.
+</StageCard>
+
 Guarding the context window is at the core of getting good results. Most frameworks split work into small sessions; Ang goes further and treats **curating** the context library as a first-class job.
 
 - `10k/` holds the high-level truth every session should know.

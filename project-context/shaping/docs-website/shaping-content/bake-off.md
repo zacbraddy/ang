@@ -6,7 +6,7 @@ tags: [documentation, tech-stack]
 # Docs site visual bake-off
 
 ## Summary
-Each candidate got the same 3 pages in its own session, light and dark, so Zac could judge the looks side by side. All four are built (2026-11-17): **Just the Docs**, **native Pages themes**, **Starlight** and **VitePress**. **Zac's pick on looks is Starlight**, with VitePress close behind. Both share the standard docs-site layout he rates as the best design in the field, and both have colours he finds horrible. They're close enough that looks no longer decide between them: effort to implement, maintain, extend and modify does. Just the Docs was "a reasonable first outing" with clunky edges. The native themes looked cleaner (cayman his favourite), but only minima has nav and none has search or dark mode. The spike also disproved a research claim: Just the Docs *can* follow the system's dark-mode setting with no JavaScript and no flicker.
+Each candidate got the same 3 pages in its own session, light and dark, so Zac could judge the looks side by side. All four are built (2026-11-17): **Just the Docs**, **native Pages themes**, **Starlight** and **VitePress**. **Zac's pick on looks is Starlight**, with VitePress close behind. Both share the standard docs-site layout he rates as the best design in the field, and both have colours he finds horrible. They're close enough that looks no longer decide between them: effort to implement, maintain, extend and modify does. That was measured in the [effort bake-off](effort.md), which ended with Zac choosing Starlight. Just the Docs was "a reasonable first outing" with clunky edges. The native themes looked cleaner (cayman his favourite), but only minima has nav and none has search or dark mode. The spike also disproved a research claim: Just the Docs *can* follow the system's dark-mode setting with no JavaScript and no flicker.
 
 ## Method
 - **Shared pages** live in [`spikes/_content/`](../spikes/_content/). Each candidate copies them and only adds its own front matter and link fixes, so the words stay the same everywhere:
@@ -90,10 +90,10 @@ If he had to pick, he'd still choose Starlight. But Starlight and VitePress are 
 ## Unknown unknowns
 - The spike sites are served from the root with no base path. At `zacbraddy.github.io/ang/`, each candidate also needs its base path set (u7).
 - If a native theme goes forward, adding a nav bar (and maybe search) to a theme like cayman hasn't been measured. It would mean overriding the theme's layout.
-- Recolouring hasn't been measured for either frontrunner. Both themes are driven by CSS custom properties (Starlight `--sl-color-*`, VitePress `--vp-c-*`), so a custom stylesheet is the likely route for both, but the effort and the result are unproven.
 - The Home page's install snippet in the spikes is a placeholder. The real one is now settled: the `curl … install.sh | sh` one-liner, with Node 26+ as the prerequisite and uninstalling by hand documented on this site (k10 in `state.json`).
 
 ## Related
 - [Hub](../README.md)
+- [Effort bake-off](effort.md)
 - [Hosting](hosting.md)
 - [Framework landscape](../ideas-content/framework-landscape.md)
