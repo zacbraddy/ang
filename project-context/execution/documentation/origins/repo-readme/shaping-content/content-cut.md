@@ -31,4 +31,4 @@ A one-line funnel diagram with five headline commands. It was leaner, but reader
 ## Related
 - [Hub](../../../README.md)
 - [Brief](./brief.md)
-- [Docs website](/project-context/planning/documentation/README.md)
+- [Docs website](/project-context/execution/documentation/README.md)

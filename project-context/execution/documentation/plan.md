@@ -10,7 +10,7 @@ The README is rewritten first and ships on its own. Then a Starlight site goes u
 
 ## Scope
 - **README** (`README.md` at the root): the 4 concepts and 13 commands in the [content cut](origins/repo-readme/shaping-content/content-cut.md), the funnel table (d2), the install one-liner with its one-line WSL (Windows Subsystem for Linux) note (k13, k20), an "and a few more" pointer, the attribution line and a link to the site.
-- **Docs site** (`docs/`): Starlight with the palette (d6), Geist typefaces (d7), the splash home (d8), Mermaid diagrams (d9), llms.txt output (d10), an attribution footer and the ~18 pages in the [page map](information-architecture.md).
+- **Docs site** (`docs/`): Starlight with the palette (d6), Geist typefaces (d7), the splash home (d8), Mermaid diagrams (d9), llms.txt output (d10), an attribution footer and the 20 pages in the [page map](information-architecture.md).
 - **Deploy**: `.github/workflows/deploy-docs.yml`, which builds `docs/` and publishes it to Pages on pushes to `main` that touch `docs/**`.
 
 ## Out of scope
@@ -22,7 +22,8 @@ The README is rewritten first and ships on its own. Then a Starlight site goes u
 
 ## Approach
 - **Site source lives in a root `docs/`, outside `src/`**, so the installer never copies it. It has its own `package.json` and lockfile, with exact versions pinned. Nothing at the repo root depends on it.
-- **Start from the spike, not from it as-is.** Move to the current Starlight (0.43.x) and Astro 7. Keep `theme.css` (d6) and `Footer.astro`. Drop the link-rewriting remark plugin, `@astrojs/markdown-remark` and `remark-definition-list`. Pages link with relative route links (`../concepts/funnel/`), which work under any base path, so a later custom domain needs no link sweep (k18). Callouts use Starlight's `:::note` syntax.
+- **Root `docs/` is the site; `src/docs/procedures/` is shipped how-tos.** Same folder name, different jobs: page sources cite `src/docs/…` by full path so the two never blur.
+- **Start from the spike, not from it as-is.** Move to the current Starlight (0.43.x) and Astro 7. Keep `theme.css` (d6) and `Footer.astro`. Drop the link-rewriting remark plugin, `@astrojs/markdown-remark` and `remark-definition-list`. Pages link with relative route links (`../../concepts/funnel/` from any page in a group folder, since every page URL ends in a slash), which work under any base path, so a later custom domain needs no link sweep (k18). Callouts use Starlight's `:::note` syntax.
 - **Integrations, in this order:** `astro-mermaid` before Starlight (d9), then Starlight with `starlight-llms-txt` as a plugin (d10). Fonts come from `@fontsource/geist` and `@fontsource/geist-mono` through `customCss` (d7).
 - **Sources and accuracy:** each page draws from the sources in the page map. Where the brain dump and the shipped files differ, the files win (k5). The streams page summarises `src/docs/procedures/running-ang-streams-in-orca.md` and links to it on GitHub, so the steps live in one place. Node is given as 26+ (install k13), not the 21+ in `10k/technical/project-structure.md`, which lags.
 - **Voice:** Zac's voice, trimmed ([voice and attribution](/project-context/10k/marketing/voice-and-attribution.md)). The brain dump is a voice sample, not a page list (k19).
@@ -53,7 +54,7 @@ There is almost no code here, so the pyramid is nearly flat.
 - **Build gate:** `astro build` runs in the deploy workflow, and a failed build blocks the deploy. Astro and Starlight already fail on broken config and invalid frontmatter.
 - **Smoke check after the first deploy (u6):** the home page, one deep page, search, the light/dark switch, `/ang/llms.txt`, and that every link in llms.txt resolves.
 - **Story review:** the spike's `shoot.mjs` takes light/dark and desktop/phone screenshots of each new page. The reviewer checks every claim on a page against the shipped files it cites, and checks internal links by clicking through the built site.
-- **No link-checker plugin.** `starlight-links-validator` broke on the Astro 7 upgrade ([upkeep](origins/docs-website/shaping-content/upkeep.md)), and relative links plus a review click-through cover ~18 pages.
+- **No link-checker plugin.** `starlight-links-validator` broke on the Astro 7 upgrade ([upkeep](origins/docs-website/shaping-content/upkeep.md)), and relative links plus a review click-through cover 20 pages.
 
 ## Deliverables and who does what
 | Deliverable | Agent | Zac |
@@ -61,7 +62,7 @@ There is almost no code here, so the pyramid is nearly flat.
 | README rewrite | Drafts it from the content cut | Reviews the voice; merges |
 | `docs/` site and its config | Builds it | Reviews screenshots |
 | `.github/workflows/deploy-docs.yml` | Writes it | Sets the repo's Pages source to GitHub Actions (one-off, in GitHub settings) |
-| ~18 pages | Drafts each from its sources | Reviews the voice and cuts |
+| 20 pages | Drafts each from its sources | Reviews the voice and cuts |
 | Badge trigger | Adds it in step 1 | — |
 
 Tools and services: GitHub Pages and GitHub Actions (free), Starlight, Astro, Pagefind (built in), Fontsource, `astro-mermaid` and `starlight-llms-txt`. There are no accounts to open and nothing to pay for.
@@ -72,7 +73,7 @@ Tools and services: GitHub Pages and GitHub Actions (free), Starlight, Astro, Pa
 - A reader can install Ang and run one full funnel loop from the README alone (d2).
 - Every link in `/ang/llms.txt` resolves.
 - No page contradicts the shipped files at the time of review.
-- The epic adds no files under `src/`, and its only workflow is `deploy-docs.yml`.
+- The epic adds no files under `src/`, and its only new workflow is `deploy-docs.yml`.
 
 ## Candidate ADRs
 1. **The docs site lives in a root `docs/` with its own dependencies and never ships.** This narrows ADR 0002 (zero-dependency library script) to what ships under `src/`. Open-source-hygiene d8 plans the same change for a dev-only root `package.json`, so the two should land as one amendment.
@@ -83,6 +84,7 @@ Tools and services: GitHub Pages and GitHub Actions (free), Starlight, Astro, Pa
 ## Related
 - [Hub](README.md)
 - [Information architecture](information-architecture.md)
+- [C4: context](c4/1-context.md), [containers](c4/2-containers.md), [components](c4/3-components.md), [code](c4/4-code.md)
 - [Design direction](design-direction.md)
 - [Starlight spike](origins/docs-website/spikes/starlight/README.md)
 - [Delivery intent](/project-context/10k/intent.md)

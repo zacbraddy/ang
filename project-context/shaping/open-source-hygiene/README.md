@@ -22,7 +22,7 @@ The tagged release needs a decided, Ang-sized hygiene checklist, and the shipped
 - [What the templates are for](shaping-content/pr-template-purpose.md): a nudge, not a guard, and what the PR template asks
 
 ## Related
-- [Repo README (shaping)](/project-context/planning/documentation/README.md): where the badges will sit
+- [Repo README (shaping)](/project-context/execution/documentation/README.md): where the badges will sit
 - [Business constraints](/project-context/10k/business-constraints.md)
 - [Delivery intent](/project-context/10k/intent.md)
 - [ADR 0002: zero-dependency library script](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)

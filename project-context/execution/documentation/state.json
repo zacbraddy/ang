@@ -5,7 +5,7 @@
     {
       "id": "u6",
       "question": "Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/, and do starlight-llms-txt's links in /ang/llms.txt carry the /ang/ base? Written, never run",
-      "approach": "Run it once on a branch or the first real build; see origins/docs-website/spikes/starlight/deploy.yml",
+      "approach": "Answered by the step 2 walking skeleton. Best guess: yes, the plugin's own site runs under a base on Pages (k22). If the links lack /ang/, the story picks between a post-build rewrite of the three files and dropping the plugin, and brings that choice to Zac",
       "from": "docs-website"
     }
   ],
@@ -80,7 +80,7 @@
     },
     {
       "id": "k19",
-      "fact": "Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), about 19 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list",
+      "fact": "Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 20 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list",
       "source": "information-architecture.md",
       "answers": "Information architecture: which pages, and how does the brain-dump content map onto them?"
     },
@@ -380,6 +380,18 @@
     {
       "date": "2026-11-17",
       "event": "removed k6: An \"extends\"-style shared config (e.g. a team's base ang.json) is the team answer to a configurable config path. Sent here to spike as a documented pattern, not built into Ang"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k19: Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), about 19 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list → Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 20 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "moved planning → execution"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u6: approach: Run it once on a branch or the first real build; see origins/docs-website/spikes/starlight/deploy.yml → Answered by the step 2 walking skeleton. Best guess: yes, the plugin's own site runs under a base on Pages (k22). If the links lack /ang/, the story picks between a post-build rewrite of the three files and dropping the plugin, and brings that choice to Zac"
     }
   ],
   "type": "mixed"

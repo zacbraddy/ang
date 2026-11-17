@@ -6,7 +6,7 @@ tags: [documentation]
 # Information architecture
 
 ## Summary
-Zac agreed this page map on 2026-11-17. There are six sidebar groups and about 18 pages. The "Draws from" column tells the agents building each page where to look. A page exists only if it clears the bar below. The brain dump is a voice sample and a quarry for a few lines, not a list of pages. Where the brain dump and the shipped files disagree on how Ang behaves, the shipped files win ([brief](origins/docs-website/ideas-content/brief.md), Accuracy rule).
+Zac agreed this page map on 2026-11-17. There are six sidebar groups and 20 pages. The "Draws from" column tells the agents building each page where to look. A page exists only if it clears the bar below. The brain dump is a voice sample and a quarry for a few lines, not a list of pages. Where the brain dump and the shipped files disagree on how Ang behaves, the shipped files win ([brief](origins/docs-website/ideas-content/brief.md), Accuracy rule).
 
 ## What earns a page
 A page or a passage earns its place only if someone using Ang needs it to do one of these:
