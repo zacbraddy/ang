@@ -170,5 +170,121 @@
       "distribution",
       "open-source"
     ]
+  },
+  {
+    "title": "Per-entry links for repo-only tooling",
+    "path": "project-context/execution/install-upgrade-release/stories/01-per-entry-links.md",
+    "shortDescription": "Root .claude/skills and .claude/agents become real folders of per-entry links into src/, kept honest by a link script and a drift test",
+    "tags": [
+      "repo-structure",
+      "distribution"
+    ]
+  },
+  {
+    "title": "Settings merge and version record commands",
+    "path": "project-context/execution/install-upgrade-release/stories/02-settings-merge-and-version-record.md",
+    "shortDescription": "The library script gains the shared three-way settings merge and the version show/write commands that install and upgrade both use",
+    "tags": [
+      "distribution",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "install.sh installs Ang into a repo",
+    "path": "project-context/execution/install-upgrade-release/stories/03-install-script.md",
+    "shortDescription": "The root install.sh checks prerequisites, copies src/ in with giget, merges settings and records the installed version",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Upgrade guide format and chaining",
+    "path": "project-context/execution/install-upgrade-release/stories/04-upgrade-guide-chaining.md",
+    "shortDescription": "Fixes the per-release upgrade guide format and adds upgrade guides, which fetches and chains every guide between two tags",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Upgrade plan and apply engine",
+    "path": "project-context/execution/install-upgrade-release/stories/05-upgrade-engine.md",
+    "shortDescription": "The deterministic upgrade engine classifies every file across base, instance and target, sizes the job and applies settled files",
+    "tags": [
+      "distribution"
+    ]
+  },
+  {
+    "title": "upgrade-ang skill",
+    "path": "project-context/execution/install-upgrade-release/stories/06-upgrade-ang-skill.md",
+    "shortDescription": "The shipped upgrade-ang skill drives an upgrade end to end, running the target release's engine and taking the fast path, guided merge or escape hatch",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "GitHub release guard rails",
+    "path": "project-context/execution/install-upgrade-release/stories/07-github-release-guard-rails.md",
+    "shortDescription": "Zac turns on immutable releases and adds a v* tag ruleset on the Ang repo, guided by this story",
+    "tags": [
+      "open-source",
+      "distribution"
+    ]
+  },
+  {
+    "title": "Release workflow",
+    "path": "project-context/execution/install-upgrade-release/stories/08-release-workflow.md",
+    "shortDescription": "A tag-triggered GitHub Actions job tests, smoke-installs, stamps install.sh and creates the draft release",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "release-manifest script",
+    "path": "project-context/execution/install-upgrade-release/stories/09-release-manifest.md",
+    "shortDescription": "A repo-only script that builds a deterministic release manifest from git alone",
+    "tags": [
+      "distribution",
+      "repo-structure"
+    ]
+  },
+  {
+    "title": "release-scout and /cut-release",
+    "path": "project-context/execution/install-upgrade-release/stories/10-release-scout-and-cut-release.md",
+    "shortDescription": "The repo-only release-scout agent and /cut-release skill that take a release from preflight to post-publish with Zac making every decision",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Cut v1.0.0-rc.1",
+    "path": "project-context/execution/install-upgrade-release/stories/11-cut-rc1.md",
+    "shortDescription": "The first release, cut with /cut-release, proving the job, the stamp, the publish flow and a live one-liner install",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Fixture repo created and seeded",
+    "path": "project-context/execution/install-upgrade-release/stories/12-fixture-repo.md",
+    "shortDescription": "Zac creates the upgrade fixture repo from an rc.1 install and seeds it once with representative local edits",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Cut v1.0.0-rc.2 with rehearsal",
+    "path": "project-context/execution/install-upgrade-release/stories/13-cut-rc2-with-rehearsal.md",
+    "shortDescription": "The second release, cut with the first real rc.1 to rc.2 fixture upgrade rehearsal, closing the epic",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
   }
 ]

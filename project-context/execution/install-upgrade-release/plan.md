@@ -83,12 +83,12 @@ This follows the [release process proposal](release-process-proposal.md) as agre
 3. **`install.sh`** with its checks, the tag-required repo copy and the API override. Its tests stub giget at the boundary.
 4. **Release mechanics:** the `releases/` folders and the release workflow. In parallel, Zac's GitHub setup story (d30).
 5. **`release-manifest`, `release-scout`, then `/cut-release`.**
-6. **Cut `v1.0.0-rc.1`.** This proves the job, the stamp, the publish flow and a live one-liner install.
-7. **Fixture repo story:** Zac creates and seeds it from `rc.1` (k17).
-8. **`upgrade` engine and the `upgrade-ang` skill.** They can start after step 2, but they can only be proven end to end after step 7.
-9. **Cut `v1.0.0-rc.2` with the `rc.1` to `rc.2` rehearsal.** This is the epic's finish line.
+6. **`upgrade` engine and the `upgrade-ang` skill.** They can start after step 2, and they ship in `rc.1`: the fixture is an `rc.1` install, so the rehearsal needs the skill already in its tree. Only the engine comes from the target (d29).
+7. **Cut `v1.0.0-rc.1`.** This proves the job, the stamp, the publish flow and a live one-liner install.
+8. **Fixture repo story:** Zac creates and seeds it from `rc.1` (k17).
+9. **Cut `v1.0.0-rc.2` with the `rc.1` to `rc.2` rehearsal.** This is the epic's finish line, and the first end-to-end proof of the upgrade.
 
-Steps 3 to 5 and step 8 can run in parallel once step 2 lands.
+Steps 3 to 6 can run in parallel once step 2 lands.
 
 ## Risks
 | Risk | Mitigation |

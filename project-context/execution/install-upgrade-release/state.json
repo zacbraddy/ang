@@ -1,6 +1,6 @@
 {
   "status": "active",
-  "statusNote": "",
+  "statusNote": "13 draft stories; next /write-story on 01",
   "unknowns": [],
   "knowns": [
     {
@@ -300,6 +300,11 @@
       "id": "d35",
       "decision": "version.json is read and written only through core 'version show' and 'version write' commands in the library script, which install.sh and upgrade-ang both use, so there is one record format and one place to test it (Zac agreed)",
       "evidence": "c4/4-code.md"
+    },
+    {
+      "id": "d36",
+      "decision": "upgrade-ang and the upgrade engine ship in v1.0.0-rc.1, so the fixture (an rc.1 install) already has the skill for the rc.1 to rc.2 rehearsal; only the engine comes from the target. rc.1 waits on the upgrade stories in exchange for a rehearsal that follows the real user path (Zac's call)",
+      "evidence": "stories/06-upgrade-ang-skill.md"
     }
   ],
   "lineage": [
@@ -614,6 +619,14 @@
     {
       "date": "2026-11-17",
       "event": "moved planning → execution"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: upgrade-ang and the upgrade engine ship in v1.0.0-rc.1, so the fixture (an rc.1 install) already has the skill for the rc.1 to rc.2 rehearsal; only the engine comes from the target. rc.1 waits on the upgrade stories in exchange for a rehearsal that follows the real user path (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "status → active: 13 draft stories; next /write-story on 01"
     }
   ],
   "type": "technical"

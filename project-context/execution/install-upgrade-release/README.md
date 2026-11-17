@@ -22,6 +22,7 @@ The README's quick start, and a clean first run for every new user, depend on th
   - [Copy-in bake-off](origins/install-uninstall-update/shaping-content/copy-in-spike.md): degit vs giget
   - [Install script spike](origins/install-uninstall-update/shaping-content/install-script-spike.md): pinning, the settings merge and the version record
   - [Upgrade merge spike](origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md): the three-way merge on an improved instance
+- [Stories](stories/01-per-entry-links.md): 13 stories, from the repo layout (01) to cutting `v1.0.0-rc.2` with its rehearsal (13)
 - [Plan](plan.md): scope, approach, sequencing, risks, success measures, test strategy and candidate ADRs
 - [C4 diagrams](c4/1-context.md): [context](c4/1-context.md), [containers](c4/2-containers.md), [components](c4/3-components.md) and [code](c4/4-code.md), each marking new, changed and existing
 - [Settings merge spike](settings-merge-spike.md): the three-way `settings.json` merge an upgrade runs, and how it doubles as the install merge
