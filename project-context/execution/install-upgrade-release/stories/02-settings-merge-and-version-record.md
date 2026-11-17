@@ -2,7 +2,7 @@
 title: Settings merge and version record commands
 shortDescription: The library script gains the shared three-way settings merge and the version show/write commands that install and upgrade both use
 tags: [distribution, tech-stack]
-status: draft
+status: ready
 owner: agent
 dependsOn: []
 ---
@@ -18,6 +18,51 @@ Install and upgrade share one `settings.json` merge and one way of reading and w
 ## Rough scope
 - `settings/merge.mjs` (`mergeSettings`, `mergeArray`, `SKIPPED_KEYS`), `commands/settings.mjs`, `commands/version.mjs`, and the entry point's imports.
 - Unit tests beside the code with `node:test`.
+
+## Done when
+- `node --test 'src/.claude/**/*.test.mjs'` passes, including new tests for every acceptance line below.
+- `node .claude/scripts/ang-context-manager.mjs --help` lists `settings merge`, `version show` and `version write` as core commands, with no feature flag needed.
+- Running the spike's vanilla scenario through the CLI (`settings merge --base <base> --ours <copy> --theirs <target>`) leaves the copy byte-identical to the target, and running it a second time changes nothing.
+- In a temp project, `version show` prints `none`, `version write --ref v1.0.0 --sha <40 hex>` creates `.claude/ang/version.json`, and `version show` then prints that record.
+
+## Acceptance criteria
+- Given the spike's vanilla scenario (user file equals base), when `mergeSettings` runs, then the result equals the target exactly and there are no conflicts.
+- Given the spike's customised scenario, when it runs, then the user's `model`, deny rule and `Stop` hook survive, Ang's three additions arrive once, the two removals happen, and the only conflict (`outputStyle`) is dropped by `SKIPPED_KEYS`.
+- Given the spike's edited scenario, when it runs, then the user's PostToolUse matcher is kept and one conflict is reported at `["hooks", "SessionStart"]` with both replacement entries in the output.
+- Given no record (`base` of `{}`), when it runs, then it reproduces the install merge (d7): the user's values win, missing keys and array entries are added, nothing is removed.
+- Given any scenario's output, when it is merged again against the same base and target, then nothing changes.
+- Given a key the user deleted that is still in base and target, when it runs, then it stays deleted.
+- Given array entries that differ only in key order, when they are compared, then they count as the same entry.
+- Given `--base none` and no file at `--ours`, when `settings merge` runs, then `--ours` is created holding the target.
+- Given a merge with conflicts, when `settings merge` runs, then it writes `--ours`, prints the conflicts as a JSON array on stdout and exits 0. With no conflicts it prints `[]`.
+- Given a missing `--theirs` or `--base` file, or a file that isn't valid JSON, when `settings merge` runs, then it fails with exit 1 naming the file, and `--ours` is untouched.
+- Given no `.claude/ang/version.json`, when `version show` runs, then it prints `none` and exits 0.
+- Given a record, when `version show` runs, then it prints the record as JSON and exits 0.
+- Given `--ref` and a 40-character hex `--sha`, when `version write` runs, then it writes `{ ref, sha, installedAt }` (ISO timestamp), creating `.claude/ang/` if needed and replacing any old record.
+- Given a `--sha` that isn't 40 hex characters, when `version write` runs, then it fails with exit 1 and writes nothing.
+
+## Test plan
+- **Unit** (`ang/settings/merge.test.mjs`): `mergeSettings` and `mergeArray` as pure functions. Port the spike's four scenarios and its checks from `spikes/settings-merge/scenarios.mjs`, with the base inlined as a fixture (not read from git history), plus the deleted-key, key-order and re-run lines.
+- **CLI** (add to `cli.test.mjs`, reusing its `project()` helper, because `paths.mjs` reads `CLAUDE_PROJECT_DIR` at import time): `settings merge` writing in place, the JSON output, the missing `--ours` file and the bad-input failures. Also `version show` with and without a record, and `version write` with good and bad SHAs.
+- **Won't test**: the registry's handling of `--help`, unknown flags and required flags (already covered), `writeJson` formatting, or the exact `installedAt` value (only that it parses as a date).
+
+## Implementation notes
+- **Files**, all under `src/.claude/scripts/` and shipped (c4/4-code.md):
+  - New `ang/settings/merge.mjs`: `mergeSettings`, `mergeArray`, `SKIPPED_KEYS`.
+  - New `ang/commands/settings.mjs` and `ang/commands/version.mjs`.
+  - `paths.mjs` gains `VERSION_FILE` (`.claude/ang/version.json` under `PROJECT`).
+  - `ang-context-manager.mjs` adds both command arrays to the core `commands` list. They are not feature-gated, because a fresh install has no `ang.json` yet (c4/3-components.md).
+- **`mergeSettings(base, ours, theirs) → { merged, conflicts }`**: start from the spike's `merge.mjs`.
+  - Objects merge key by key. A plain value takes theirs when ours still equals base, keeps ours when only the user changed it, and keeps ours with a conflict when both changed it.
+  - Arrays are sets of whole entries (`mergeArray`). Base entries missing from theirs are removed, theirs entries missing from base are added, and the user's own entries stay. A base entry missing from both ours and theirs is a conflict, and both replacements stay in the output.
+  - Drop the spike's added/removed/updated report. Nothing downstream uses it.
+- **Entry equality** compares canonical JSON, with keys sorted recursively. That settles the spike's open question (spike.md:45) cheaply, whether or not the editor reorders keys.
+- **Stable key order** means the user's keys in their order, then new Ang keys in the target's order (the spike's `new Set([...ours, ...theirs])`). Re-runs give the same bytes, and the user's diff stays small.
+- **Conflict shape** follows C4's `MergeConflict { path: string[], base, ours, theirs }`, not the spike's dotted string, so keys that contain dots stay unambiguous. Array conflicts carry `base` (the entry), `ours` (user entries not in base) and `theirs` (target entries not in base). `SKIPPED_KEYS` filtering happens in `mergeSettings` on the top-level key.
+- **Writing with conflicts**: C4 says to write in place and exit 0. That is safe because a scalar conflict keeps the user's value and an array conflict keeps both entries. Resolving conflicts with the user is story 06's job (and install.sh's reporting is story 03's).
+- **`--base none`** means `{}`. A missing `--ours` file also means `{}`, so install.sh can call the merge whether or not the repo already has a `settings.json`. A missing `--theirs` or `--base` file is an error.
+- **`version show`** prints `JSON.stringify(record, null, 2)` or `none`. **`version write`** accepts any non-empty `--ref`, and the SHA must match `/^[0-9a-f]{40}$/` (k7: install records a full SHA). It writes through `writeJson` after `mkdirSync(..., { recursive: true })`.
+- **Out of scope**: the `.pre-ang` backup (install.sh, story 03), resolving conflicts and finding the base tree (story 06), and `version.json` handling in the upgrade classifier (story 05).
 
 ## Related
 - [Settings merge spike](../settings-merge-spike.md)
