@@ -2,7 +2,7 @@
 title: Per-entry links for repo-only tooling
 shortDescription: Root .claude/skills and .claude/agents become real folders of per-entry links into src/, kept honest by a link script and a drift test
 tags: [repo-structure, distribution]
-status: ready
+status: done
 owner: agent
 dependsOn: []
 ---
@@ -47,7 +47,20 @@ Every shipped skill and agent still resolves from the repo root exactly as befor
 - **CLI** (command-line wrapper): when run directly, it plans and applies against the repo root and prints one line per change, or that nothing changed. It exits non-zero on conflicts.
 - **One-off conversion**: `git rm` the two whole-folder links `.claude/skills` and `.claude/agents`, create real folders in their place, then run the script once. The script itself doesn't handle "root folder is a link", because after this story that never happens.
 - **Edge cases**: a gitignored `*.local.md` agent in `src/` gets a root link whose name is also gitignored, which is fine. `rules`, `output-styles`, `ang` and `settings.json` stay whole-folder links, because d24 covers only skills and agents.
+- **Plan shape as built**: `create` holds `{ path, target }` (absolute link path, target relative to the link's folder); `remove` and `conflicts` hold absolute paths.
 - **Out of scope**: wiring the test into the release job (story 08, which needs an explicit glob, because bare `node --test` skips dot-folders and finds no `scripts/` tests on its own), the `/cut-release` preflight warning (story 10) and updating `10k/technical/project-structure.md` (deferred to `/retro` per plan.md).
+
+## Review
+Done-when evidence holds: 9/9 `scripts/` tests and 37/37 `src/` tests pass, the script prints "links in sync", git stores every entry as mode 120000, and the drift test fails on a deleted link and on a dangling one (both checked, then restored). Every acceptance line has a test, and the code matches C4 and the plan.
+
+**Must-fix**: none.
+
+**Should-fix**
+- `stories/01-per-entry-links.md:51`: the "Conversion used `rm`" note is session history (and no longer true once staged). Drop it.
+
+**Nits**
+- `scripts/link-entries.mjs:10`: `entries()` picks up dotfiles, so a stray `.DS_Store` in `src/.claude/skills` would get a root link. Filter names starting with `.`.
+- `scripts/link-entries.mjs:33`: `present.includes(name) && !plan.remove.includes(link)` reads backwards. Planning create alongside remove in the first loop, plus a "missing" check in the second, would read straighter.
 
 ## Related
 - [Plan: scope and sequencing](../plan.md)

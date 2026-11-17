@@ -57,7 +57,7 @@ Every module here is new except the entry point. The shapes come from the two me
 ## Repo-only (`scripts/`, root `.claude/`)
 | Module | Function | Responsibility |
 |---|---|---|
-| `scripts/link-entries.mjs` | `planLinks(srcDir, rootDir) → { create, remove }` | Compares `src/.claude/{skills,agents}` entries with root links; anything that isn't a link is repo-only and left alone |
+| `scripts/link-entries.mjs` | `planLinks(srcDir, rootDir) → { create, remove, conflicts }` | Compares `src/.claude/{skills,agents}` entries with root links; anything that isn't a link is repo-only and left alone, and reported as a conflict if it shares a `src/` entry's name |
 | | `applyLinks(plan)` | Creates relative links, removes dangling ones |
 | `scripts/link-entries.test.mjs` | drift test | Fails when `planLinks` on the real repo isn't empty |
 | `scripts/release-manifest.mjs` | `buildManifest(fromTag, toRef) → Manifest` | `git diff -M --numstat`, `git log`, `retro: archive` commits, `10k/` paths, `--help` diff, settings diff. Deterministic |
