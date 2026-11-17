@@ -11,8 +11,9 @@ import trigger from './ang/commands/trigger.mjs';
 import session from './ang/commands/session.mjs';
 import settings from './ang/commands/settings.mjs';
 import version from './ang/commands/version.mjs';
+import upgrade from './ang/commands/upgrade.mjs';
 import { FEATURES } from './ang/features.mjs';
 
 const featureCommands = FEATURES.flatMap((f) => f.commands.map((c) => ({ ...c, feature: f.key })));
-const commands = [...library, ...item, ...state, ...tag, ...trigger, ...session, ...settings, ...version, ...featureCommands];
+const commands = [...library, ...item, ...state, ...tag, ...trigger, ...session, ...settings, ...version, ...upgrade, ...featureCommands];
 dispatch(commands, loadConfig().config, process.argv.slice(2));

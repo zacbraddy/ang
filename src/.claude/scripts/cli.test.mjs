@@ -1,7 +1,8 @@
 import { after, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
+import http from 'node:http';
 import os from 'node:os';
 import path from 'node:path';
 
@@ -168,4 +169,56 @@ test('version show fails naming a corrupt record', () => {
   const { status, out } = project({ '.claude/ang/version.json': '{ nope' }).run('version', 'show');
   assert.equal(status, 1, out);
   assert.match(out, /version\.json: invalid JSON/);
+});
+
+// spawnSync blocks the event loop, so a server in this process could never answer it: these runs spawn asynchronously.
+function runAsync(args, env) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ang-cli-'));
+  dirs.push(dir);
+  return new Promise((resolve) => {
+    const child = spawn(process.execPath, [CLI, ...args], { cwd: dir, env: { ...process.env, CLAUDE_PROJECT_DIR: dir, ...env } });
+    let stdout = '';
+    let stderr = '';
+    child.stdout.on('data', (chunk) => (stdout += chunk));
+    child.stderr.on('data', (chunk) => (stderr += chunk));
+    child.on('close', (status) => resolve({ status, stdout, stderr }));
+  });
+}
+
+async function serveGuides(guides) {
+  const server = http.createServer((req, res) => {
+    const body = guides[req.url];
+    res.writeHead(body ? 200 : 404).end(body ?? 'Not Found');
+  });
+  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
+  after(() => server.close());
+  return `http://127.0.0.1:${server.address().port}`;
+}
+
+const upgradeGuide = (version, from) =>
+  `# Upgrade guide ${version}\nfrom: ${from}\n## Moves\n- None\n## Migrations\n- None\n## Retired\n- None\n## Notes for the merge\n- None\n`;
+const AT_V120 = '/zacbraddy/ang/v1.2.0/releases/upgrades';
+
+test('upgrade --help lists upgrade guides', () => {
+  const { status, out } = project().run('upgrade', '--help');
+  assert.equal(status, 0, out);
+  assert.match(out, /upgrade guides --from <tag> --to <tag>/);
+});
+
+test('upgrade guides prints the chain oldest first as JSON', async () => {
+  const base = await serveGuides({
+    [`${AT_V120}/v1.1.0.md`]: upgradeGuide('v1.1.0', 'v1.0.0'),
+    [`${AT_V120}/v1.2.0.md`]: upgradeGuide('v1.2.0', 'v1.1.0'),
+  });
+  const { status, stdout, stderr } = await runAsync(['upgrade', 'guides', '--from', 'v1.0.0', '--to', 'v1.2.0'], { ANG_GITHUB_RAW: base });
+  assert.equal(status, 0, stderr);
+  assert.deepEqual(JSON.parse(stdout).map((g) => [g.version, g.from]), [['v1.1.0', 'v1.0.0'], ['v1.2.0', 'v1.1.0']]);
+});
+
+test('upgrade guides fails naming a missing guide', async () => {
+  const base = await serveGuides({ [`${AT_V120}/v1.2.0.md`]: upgradeGuide('v1.2.0', 'v1.1.0') });
+  const { status, stdout, stderr } = await runAsync(['upgrade', 'guides', '--from', 'v1.0.0', '--to', 'v1.2.0'], { ANG_GITHUB_RAW: base });
+  assert.equal(status, 1);
+  assert.equal(stdout, '');
+  assert.match(stderr, /^✖ no upgrade guide for v1\.1\.0 at v1\.2\.0/);
 });

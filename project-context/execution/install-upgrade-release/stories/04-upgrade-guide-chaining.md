@@ -2,7 +2,7 @@
 title: Upgrade guide format and chaining
 shortDescription: Fixes the per-release upgrade guide format and adds upgrade guides, which fetches and chains every guide between two tags
 tags: [distribution, open-source]
-status: ready
+status: done
 owner: agent
 dependsOn: []
 ---
@@ -88,11 +88,28 @@ Every release gets an upgrade guide in `releases/upgrades/` that starts with a `
 - **Command**: `{ noun: 'upgrade', verb: 'guides', flags: [from, to] both required }`. The registry calls `run` without awaiting it, so `run` returns `chainGuides(...).then(print).catch((e) => fail(e.message))` to keep rejections from going unhandled. Output is `JSON.stringify(guides, null, 2)`, the file story 05's `--guides` reads.
 - **Here be dragons**: `cli.test.mjs`'s `project().run` uses `spawnSync`, which blocks the event loop, so a `node:http` server in the test process can never answer. The CLI tests need an async spawn (or the server in a child process).
 - **C4**: `c4/3-components.md` and `c4/4-code.md` updated in this session for the heading name, `from: none` and the fetcher factory.
+- **Implemented**:
+  - Headings out of order throw too ("in that order" from the format), alongside missing and repeated ones.
+  - `cli.test.mjs` gained `runAsync` (async `spawn`) for the two `upgrade guides` runs; the existing sync `project().run` is unchanged.
+  - `scripts/install.test.mjs` copies `git ls-files src`, so it fails with `ERR_MODULE_NOT_FOUND` for `upgrade.mjs` until the new files are tracked. With them committed in a scratch copy, the full suite passes (108/108).
 - **Out of scope**:
   - Writing any real guide (story 11 for rc.1; `/cut-release` drafts later ones, story 10).
   - Applying moves, and reading Retired during the merge (stories 05 and 06).
   - Checking that the target is newer than the installed tag, and the escape hatch on a broken chain (story 06).
   - Release notes in `releases/notes/` (story 10).
+
+## Review
+Done-when evidence present: 108/108 tests pass (76 in `src/.claude`, 32 in `scripts/`) now that the files are staged, and `upgrade --help` lists `upgrade guides`. Every acceptance line has a test. Conforms to plan and C4.
+
+**Must-fix:** none.
+
+**Should-fix**
+- `releases/upgrades/README.md:5`: "check a new guide with `upgrade guides` before tagging" can't be done, because the fetcher reads at the target tag, which doesn't exist until it's tagged (and `ANG_GITHUB_RAW` is undocumented on purpose). Drop the sentence or say the check comes with `/cut-release` (story 10).
+- `src/.claude/scripts/ang/upgrade/guides.mjs:39`: an empty `from:` parses to `from: ''`, so the chain then fetches `.md` and fails with a confusing "no upgrade guide for  at …". Throw on an empty `from:` instead (one line, plus a case in the missing-`from:` test).
+
+**Nit**
+- `guides.mjs:1-2`: the module header restates the story rather than a dragon. Could go; the `chainGuides` and fetcher comments do earn their place.
+- `guides.mjs:21`: `None` alongside other entries is kept as a literal `"None"` entry. Harmless, not worth a rule yet.
 
 ## Related
 - [Plan: upgrade](../plan.md)
