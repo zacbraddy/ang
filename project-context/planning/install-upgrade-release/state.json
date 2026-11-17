@@ -3,11 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u8",
-      "question": "How are the per-entry symlinks for src/ skills and agents kept in step: a script that creates them by glob, and does library validate or a test flag a src/ entry with no link at the root?",
-      "approach": "release-process-proposal.md"
-    },
-    {
       "id": "u9",
       "question": "What does the fixture repo's seed contain, and how is it generated? Zac's call: generated with a library such as faker, never written by an LLM, because reasoned content could carry sensitive training data into a public repo. Still open: which local edits, rules, settings and project-context/ docs make a representative instance, and whether a seeded generator script reproduces it deterministically",
       "approach": "release-process-proposal.md"
@@ -109,6 +104,12 @@
       "fact": "Spiked: a three-way JSON merge of settings.json (base: Ang's settings at the version.json SHA, fetched with the file-merge base) replaces changed Ang hooks and permissions with no duplicates or stale entries, keeps every user value and re-runs as a no-op. Arrays are sets of whole entries; a base entry missing from both sides is a conflict for the guided merge. With an empty base it reproduces the install merge (d7) exactly, so install and upgrade can share one implementation in the library script. No record degrades to the install merge (stale entries stay), which fits the escape hatch. outputStyle conflicts are noise to skip (tailor-ang owns it); key order may need normalising",
       "source": "settings-merge-spike.md",
       "answers": "How does an upgrade update Ang's own settings entries without duplicating them? The user-favouring install merge would append a changed Ang hook beside the old one (candidate: diff against the previous release's settings.json found by the recorded SHA)"
+    },
+    {
+      "id": "k16",
+      "fact": "A repo-only link script in a root scripts/ folder globs src/.claude/skills and src/.claude/agents, creates missing relative per-entry links and removes dangling ones, and re-runs as a no-op. A repo-only node --test fails on drift; it runs in the v* release CI job and /cut-release preflight lists drift as a warning. Not library validate: it ships, and this check is about the Ang repo's own layout (Zac's call)",
+      "source": "release-process-proposal.md",
+      "answers": "How are the per-entry symlinks for src/ skills and agents kept in step: a script that creates them by glob, and does library validate or a test flag a src/ entry with no link at the root?"
     }
   ],
   "decisions": [
@@ -242,7 +243,7 @@
     },
     {
       "id": "d24",
-      "decision": "Repo-only skills, agents and scripts sit beside the shipped ones without shipping: the root .claude/skills and .claude/agents become real folders that symlink each src/ entry one by one (by glob if possible), plus the repo-only entries (Zac's call)",
+      "decision": "Repo-only skills and agents sit beside the shipped ones without shipping: the root .claude/skills and .claude/agents become real folders that symlink each src/ entry one by one, plus the repo-only entries. Repo-only scripts (release-manifest, the link script) live in a root scripts/ folder instead, so .claude/scripts stays a whole-folder symlink (Zac's call)",
       "evidence": "release-process-proposal.md"
     },
     {
@@ -520,6 +521,10 @@
     {
       "date": "2026-11-17",
       "event": "removed u5: When install.sh runs in a subdirectory of a git repo, does it install at the repo root (git rev-parse --show-toplevel) or stop and ask the user to cd there? And should it warn when the working tree has uncommitted changes, so the install's changes can be reviewed on their own?"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced d24: Repo-only skills, agents and scripts sit beside the shipped ones without shipping: the root .claude/skills and .claude/agents become real folders that symlink each src/ entry one by one (by glob if possible), plus the repo-only entries (Zac's call) → Repo-only skills and agents sit beside the shipped ones without shipping: the root .claude/skills and .claude/agents become real folders that symlink each src/ entry one by one, plus the repo-only entries. Repo-only scripts (release-manifest, the link script) live in a root scripts/ folder instead, so .claude/scripts stays a whole-folder symlink (Zac's call)"
     }
   ],
   "type": "technical"
