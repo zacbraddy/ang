@@ -1,0 +1,72 @@
+{
+  "status": "active",
+  "statusNote": "",
+  "unknowns": [
+    {
+      "id": "u2",
+      "question": "Hosting: what can GitHub Pages do on its own (built-in Jekyll, themes, plain Markdown) against the brief, and how does it compare with a framework on Pages or a domain plus hosting, in money and effort?",
+      "approach": ""
+    },
+    {
+      "id": "u3",
+      "question": "Information architecture: which pages, and how does the brain-dump content map onto them?",
+      "approach": ""
+    },
+    {
+      "id": "u4",
+      "question": "Does an extends-style shared ang.json work for teams across repos? Spike it, then document it as the team pattern",
+      "approach": "Spike; see /project-context/shaping/generic-personal-defaults/shaping-content/tailoring.md"
+    },
+    {
+      "id": "u5",
+      "question": "Should the site publish agent-readable docs (llms.txt) for Claude Code users, and does that sway the framework pick?",
+      "approach": "Ask Zac; check each frontrunner's plugin"
+    }
+  ],
+  "knowns": [
+    {
+      "id": "k1",
+      "fact": "Requirements: clean simple design, light/dark defaulting to system, existing framework, Zac's voice, brief attribution",
+      "source": "ideas-content/brief.md"
+    },
+    {
+      "id": "k2",
+      "fact": "Where the brain dump describes how Ang works and the files differ, the files are truth (e.g. evidence tiers)",
+      "source": "ideas-content/brief.md"
+    },
+    {
+      "id": "k3",
+      "fact": "An \"extends\"-style shared config (e.g. a team's base ang.json) is the team answer to a configurable config path. Sent here to spike as a documented pattern, not built into Ang",
+      "source": "https://github.com/zacbraddy/ang/blob/e34550491f625b84a6013a30e16438245bc62468/project-context/execution/generic-defaults/origins/generic-personal-defaults/shaping-content/tailoring.md"
+    },
+    {
+      "id": "k4",
+      "fact": "2026 docs field mapped: Starlight and VitePress show the strongest health, popularity and GitHub Pages deploy signals; Zensical looks finished but needs Python and is in beta; Mintlify and GitBook host sites on their own platforms. Observations, not a choice",
+      "source": "ideas-content/framework-landscape.md",
+      "answers": "Which docs framework is best in class and widely liked in 2026?"
+    }
+  ],
+  "decisions": [],
+  "lineage": [
+    {
+      "date": "2026-11-16",
+      "event": "created in ideas"
+    },
+    {
+      "date": "2026-11-16",
+      "event": "from raw: opening-ang.md (verbatim context kept in ideas-content/brain-dump-context.md)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "moved ideas → shaping"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k4: Starlight and VitePress lead for a small Markdown site on GitHub Pages, with Zensical as a Python wildcard; Docusaurus and hosted Mintlify/GitBook don't fit. Shaping spikes Starlight vs VitePress → 2026 docs field mapped: Starlight and VitePress show the strongest health, popularity and GitHub Pages deploy signals; Zensical looks finished but needs Python and is in beta; Mintlify and GitBook host sites on their own platforms. Observations, not a choice"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u2: Hosting: GitHub Pages or a domain plus hosting, and what does each cost in money and effort? → Hosting: what can GitHub Pages do on its own (built-in Jekyll, themes, plain Markdown) against the brief, and how does it compare with a framework on Pages or a domain plus hosting, in money and effort?"
+    }
+  ]
+}

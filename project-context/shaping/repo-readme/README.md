@@ -15,6 +15,6 @@ It's the first thing a potential user reads, and it's a release goal in the inte
 - [Brief](shaping-content/brief.md)
 
 ## Related
-- [Documentation website](/project-context/ideas/docs-website/README.md)
+- [Documentation website](/project-context/shaping/docs-website/README.md)
 - [ADR 0005: Install by copy-in](/project-context/10k/technical/adrs/0005-install-by-copy-in-from-releases.md)
 - [Voice and attribution](/project-context/10k/marketing/voice-and-attribution.md)
