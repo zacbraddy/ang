@@ -103,5 +103,23 @@
       "distribution",
       "open-source"
     ]
+  },
+  {
+    "title": "Settings merge spike",
+    "path": "project-context/planning/install-upgrade-release/settings-merge-spike.md",
+    "shortDescription": "A three-way JSON merge of .claude/settings.json, based on Ang's settings at the installed SHA, upgraded changed hooks and permissions with no duplicates or stale entries, kept every user value, flagged hooks both sides edited, and reproduces the install merge exactly when the base is empty",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Settings merge spike code",
+    "path": "project-context/planning/install-upgrade-release/spikes/settings-merge/README.md",
+    "shortDescription": "Throwaway three-way merge of .claude/settings.json and the harness that upgrades four user scenarios with it",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
   }
 ]

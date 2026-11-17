@@ -3,12 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u3",
-      "question": "How does an upgrade update Ang's own settings entries without duplicating them? The user-favouring install merge would append a changed Ang hook beside the old one (candidate: diff against the previous release's settings.json found by the recorded SHA)",
-      "approach": "origins/install-uninstall-update/shaping-content/install-script-spike.md",
-      "from": "install-uninstall-update"
-    },
-    {
       "id": "u4",
       "question": "What does taking only chosen parts of a release look like in the escape hatch: per file, per feature or per changelog entry, and how does the version record show a partial upgrade?",
       "approach": "",
@@ -121,6 +115,12 @@
       "fact": "/cut-release runs: preflight warnings, then release-manifest and release-scout gather, then a version proposal Zac accepts or revises, then the notes and upgrade guide drafted and approved with Zac, then the fixture rehearsal, then commit, tag and push on an explicit go. A v* tag triggers the GitHub Actions job (tests, smoke install, stamp the install.sh asset, draft release). The skill opens the draft in the browser, Zac presses Publish, and post-publish checks follow (live one-liner install, fixture upgrade committed)",
       "source": "release-process-proposal.md",
       "answers": "What the release skill does, step by step: version scheme and bump, the log summary, the shape of the notes draft, the upgrade guidance spec, the install.sh stamp, tag and gh publish. Depends on the release-practice research and u1"
+    },
+    {
+      "id": "k15",
+      "fact": "Spiked: a three-way JSON merge of settings.json (base: Ang's settings at the version.json SHA, fetched with the file-merge base) replaces changed Ang hooks and permissions with no duplicates or stale entries, keeps every user value and re-runs as a no-op. Arrays are sets of whole entries; a base entry missing from both sides is a conflict for the guided merge. With an empty base it reproduces the install merge (d7) exactly, so install and upgrade can share one implementation in the library script. No record degrades to the install merge (stale entries stay), which fits the escape hatch. outputStyle conflicts are noise to skip (tailor-ang owns it); key order may need normalising",
+      "source": "settings-merge-spike.md",
+      "answers": "How does an upgrade update Ang's own settings entries without duplicating them? The user-favouring install merge would append a changed Ang hook beside the old one (candidate: diff against the previous release's settings.json found by the recorded SHA)"
     }
   ],
   "decisions": [

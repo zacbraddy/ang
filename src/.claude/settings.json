@@ -2,8 +2,7 @@
   "outputStyle": "Partner In Crime",
   "permissions": {
     "allow": [
-      "Bash(node .claude/scripts/ang-context-manager.mjs:*)",
-      "Bash(jq:*)"
+      "Bash(node .claude/scripts/ang-context-manager.mjs:*)"
     ]
   },
   "hooks": {
