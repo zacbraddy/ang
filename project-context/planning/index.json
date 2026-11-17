@@ -85,5 +85,14 @@
       "distribution",
       "open-source"
     ]
+  },
+  {
+    "title": "Release practice research",
+    "path": "project-context/planning/install-upgrade-release/release-practice-research.md",
+    "shortDescription": "How widely used open-source projects version, document, publish and pin releases, and where Ang's LLM-drafted release process departs from that convention",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
   }
 ]

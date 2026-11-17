@@ -4,13 +4,13 @@
   "unknowns": [
     {
       "id": "u1",
-      "question": "What must each upstream release publish (tags, generated notes, and declared moves and migrations such as ang.json leaving .claude/) for an upgrading agent to know what changed? A file-level merge can't see moves",
+      "question": "Where the per-release upgrade guidance lives and what it contains: a GitHub Release asset, or a root-level release/ folder (outside src/) that holds each release's notes and upgrade guidance and feeds the Release body. Never inside src/. The upgrade skill already calls the releases API for its already-on-latest check. Depends on the release-practice research",
       "approach": "origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md",
       "from": "install-uninstall-update"
     },
     {
       "id": "u2",
-      "question": "What is the release-cutting process: a checklist or a small script, covering stamping the tag into install.sh before tagging, tagging, publishing the generated GitHub Release and whatever u1 says each release must publish?",
+      "question": "What the release skill does, step by step: version scheme and bump, the log summary, the shape of the notes draft, the upgrade guidance spec, the install.sh stamp, tag and gh publish. Depends on the release-practice research and u1",
       "approach": "origins/install-uninstall-update/shaping-content/install-script-spike.md",
       "from": "install-uninstall-update"
     },
@@ -99,6 +99,12 @@
       "fact": "Releases are git tags with generated GitHub Releases and no hand-kept changelog (open-source-hygiene d13). Generated notes can't declare moves or migrations, so u1's answer must come from something other than a changelog",
       "source": "https://github.com/zacbraddy/ang/blob/stream/open-source-hygiene/project-context/shaping/open-source-hygiene/state.json",
       "from": "install-uninstall-update"
+    },
+    {
+      "id": "k11",
+      "fact": "Researched: semver at 0.x (minor bump for breaking changes pre-1.0). Copy-in tools (copier _migrations, Angular ng update) keep cumulative, version-keyed migration data in the versioned tree and run every step between installed and target, and none studied reads Release bodies at upgrade time. Every mainstream release tool needs Conventional Commits, changeset files or labelled PRs, so an LLM draft fits Ang. LLM-drafted notes exist (copilot-release-notes, communique) and always need human review. No install script studied checks that a ref is a release, so Ang's tags-only check is its own. Cheap to adopt: immutable releases, a release-body skeleton with Breaking changes first, per-version guidance, draft-then-publish. Not yet worth it: CHANGELOG.md, checksums, signing",
+      "source": "release-practice-research.md",
+      "answers": "How do widely used open-source projects manage releases (versioning, changelog vs release notes, upgrade and migration guides, release assets, release tooling, install scripts pinned to tags), and where would Ang's release skill depart from that convention?"
     }
   ],
   "decisions": [
@@ -179,6 +185,16 @@
       "decision": "The upgrade skill checks before writing anything and stops with a plain message when: already on the target release, the target is older (downgrade), the working tree is dirty, or prerequisites are missing. A missing or unknown version record goes to the escape hatch, not a stop (d8). It finishes with a from/to, clean-vs-judgement summary and how to review (Zac's call)",
       "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
       "from": "install-uninstall-update"
+    },
+    {
+      "id": "d14",
+      "decision": "install.sh and the upgrade skill install and upgrade only to published releases, never a bare SHA or branch. The default target is the latest release, and an override must name a release tag. The resolved SHA is still recorded beside the tag as the merge base. Zac raised this during the install spike, and the upgrade guidance needs it: it is written per release (Zac's call)",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md"
+    },
+    {
+      "id": "d15",
+      "decision": "A release skill that lives only in the Ang repo (it doesn't ship in src/) cuts each release. It summarises the git log since the last release, drafts human-readable release notes and the upgrade guidance, edits them with Zac in a markdown draft, then stamps install.sh, tags and publishes with gh. The prose is drafted by an LLM and edited by Zac, which is what open-source-hygiene d13's 'no hand-kept changelog' meant: nothing written by hand (Zac's call)",
+      "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md"
     }
   ],
   "lineage": [
@@ -341,6 +357,22 @@
     {
       "date": "2026-11-17",
       "event": "replaced d11: Cutting a release is in scope for this item: the repeatable process (stamp the tag into install.sh, tag, publish the generated GitHub Release, plus whatever u10 settles) belongs here, since install.sh and the upgrade skill consume releases (Zac's call) → Cutting a release is in scope for this epic: the repeatable process (stamp the tag into install.sh, tag, publish the generated GitHub Release, plus whatever u1 settles) belongs here, since install.sh and the upgrade skill consume releases (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: install.sh and the upgrade skill install and upgrade only to published releases, never a bare SHA or branch. The default target is the latest release, and an override must name a release tag. The resolved SHA is still recorded beside the tag as the merge base. Zac raised this during the install spike, and the upgrade guidance needs it: it is written per release (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: A release skill that lives only in the Ang repo (it doesn't ship in src/) cuts each release. It summarises the git log since the last release, drafts human-readable release notes and the upgrade guidance, edits them with Zac in a markdown draft, then stamps install.sh, tags and publishes with gh. The prose is drafted by an LLM and edited by Zac, which is what open-source-hygiene d13's 'no hand-kept changelog' meant: nothing written by hand (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u1: What must each upstream release publish (tags, generated notes, and declared moves and migrations such as ang.json leaving .claude/) for an upgrading agent to know what changed? A file-level merge can't see moves → Where the per-release upgrade guidance lives and what it contains: a GitHub Release asset, or a root-level release/ folder (outside src/) that holds each release's notes and upgrade guidance and feeds the Release body. Never inside src/. The upgrade skill already calls the releases API for its already-on-latest check. Depends on the release-practice research"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u2: What is the release-cutting process: a checklist or a small script, covering stamping the tag into install.sh before tagging, tagging, publishing the generated GitHub Release and whatever u1 says each release must publish? → What the release skill does, step by step: version scheme and bump, the log summary, the shape of the notes draft, the upgrade guidance spec, the install.sh stamp, tag and gh publish. Depends on the release-practice research and u1"
     }
   ],
   "type": "technical"
