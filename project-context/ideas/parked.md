@@ -18,6 +18,11 @@ A `localOverrides` list in `ang.json` (e.g. `["intent"]`) that lets the team all
 - **Wake condition:** a user asks to override a project-wide key (`intent`, `streams` or a future one) for themselves only.
 - **Source:** parked in planning on 2026-11-16, not from a raw file. See [Config move blast radius](https://github.com/zacbraddy/ang/blob/e34550491f625b84a6013a30e16438245bc62468/project-context/execution/generic-defaults/config-move.md) (at `e345504`) and [ADR 0003](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md).
 
+### Custom domain for the docs site
+Move the Ang docs site from `zacbraddy.github.io/ang/` to a custom domain on GitHub Pages (about $10–12 a year, plus DNS and a TXT record that must stay in place). The move means changing Starlight's `site` and `base` config and sweeping any links that hard-code the `/ang/` prefix.
+- **Wake condition:** Ang has outside users or contributors finding it through the docs, or We Right Code wants a branded URL to market it under.
+- **Source:** parked in planning on 2026-11-17, not from a raw file. See [Docs site hosting](/project-context/planning/documentation/origins/docs-website/shaping-content/hosting.md).
+
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)
 - [ADR 0003: Per-user config overlay](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md)

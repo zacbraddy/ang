@@ -3,12 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u4",
-      "question": "Address: zacbraddy.github.io/ang or a custom domain on Pages? Decide before building, since the base path changes config and links",
-      "approach": "Ask Zac; see origins/docs-website/shaping-content/hosting.md",
-      "from": "docs-website"
-    },
-    {
       "id": "u1",
       "question": "Information architecture: which pages, and how does the brain-dump content map onto them?",
       "approach": "",
@@ -113,6 +107,12 @@
       "id": "k17",
       "fact": "README status badges (open-source-hygiene d2) need the CI that the open-source-hygiene item builds; that item is planned as its own epic, so badges are a cross-epic dependency",
       "source": "/project-context/shaping/open-source-hygiene/README.md"
+    },
+    {
+      "id": "k18",
+      "fact": "Address is zacbraddy.github.io/ang/ (Starlight site '/ang/' base) for now — Zac's pick, 2026-11-17. A custom domain is parked with a wake condition; when it wakes, the move is a site/base config change plus a link sweep, so pages should avoid hard-coding the /ang/ prefix",
+      "source": "/project-context/ideas/parked.md",
+      "answers": "Address: zacbraddy.github.io/ang or a custom domain on Pages? Decide before building, since the base path changes config and links"
     }
   ],
   "decisions": [
