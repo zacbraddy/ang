@@ -6,7 +6,7 @@ tags: [documentation, tech-stack]
 # Docs site visual bake-off
 
 ## Summary
-Each candidate gets the same 3 pages in its own session, light and dark, so Zac can judge the looks side by side. Done so far: **Just the Docs**, **native Pages themes** and **Starlight** (all 2026-11-17). **Starlight is Zac's favourite so far**: the best design, with nav and search built in and a layout any developer will recognise, though its colours are ugly and would need real tinkering. Zac's view of Just the Docs: "a reasonable first outing", with some clunky design edges he'd clean up during the build. The native themes look cleaner and less rough to him; cayman is his favourite look, but only minima has a nav bar, and a baseline nav would have to be built in for the site to be usable. He'll compare properly once the whole field is built. Still to build: VitePress. The spike also disproved a research claim: Just the Docs *can* follow the system's dark-mode setting with no JavaScript and no flicker.
+Each candidate got the same 3 pages in its own session, light and dark, so Zac could judge the looks side by side. All four are built (2026-11-17): **Just the Docs**, **native Pages themes**, **Starlight** and **VitePress**. **Zac's pick on looks is Starlight**, with VitePress close behind. Both share the standard docs-site layout he rates as the best design in the field, and both have colours he finds horrible. They're close enough that looks no longer decide between them: effort to implement, maintain, extend and modify does. Just the Docs was "a reasonable first outing" with clunky edges. The native themes looked cleaner (cayman his favourite), but only minima has nav and none has search or dark mode. The spike also disproved a research claim: Just the Docs *can* follow the system's dark-mode setting with no JavaScript and no flicker.
 
 ## Method
 - **Shared pages** live in [`spikes/_content/`](../spikes/_content/). Each candidate copies them and only adds its own front matter and link fixes, so the words stay the same everywhere:
@@ -66,11 +66,32 @@ Spike: [`spikes/starlight/`](../spikes/starlight/README.md). Starlight 0.42.8 on
 
 **Zac's verdict (ET 1):** "The colours are fucking ugly as fuck but the design itself is the best so far." He likes having the nav and search there. The layout is the standard docs-site shape anyone who's spent time in software development will know, and he counts that as a plus. It's his favourite so far, but going with it would definitely mean time spent tinkering with the colours.
 
+## VitePress (2026-11-17)
+Spike: [`spikes/vitepress/`](../spikes/vitepress/README.md). VitePress 1.6.4, the latest stable release (Aug 2025).
+
+| Measure | Result (ET 1, spike) |
+|---|---|
+| Build | Worked first time. About 3.1s per build, 11s including `npm install` in `node:22` Docker; 75 packages, 102 MB of `node_modules` (Starlight: 215 MB) |
+| Config and custom code | 30 lines in all: a 6-line `package.json`, a 17-line `.vitepress/config.mjs`, and a 7-line theme override (a 4-line `theme/index.js` and a 3-line stylesheet) to show the attribution footer |
+| Follows the system light/dark setting | Yes, out of the box, with no code |
+| Toggle | Built in: a light/dark switch in the header. Two states only, with no "Auto" option to go back to following the system |
+| Sidebar and search | Built in. Search is local (MiniSearch, indexed at build time, runs in the browser). Also an "On this page" list and next/previous page links |
+| Links | `page.md` links are rewritten to routes out of the box, so no plugin is needed while the source lives in `project-context/` |
+| Phone width | Menu and "On this page" bar under the header; wide tables wrap, code blocks scroll sideways inside their own box |
+| Deploy on Pages | A 41-line Actions workflow (`actions/setup-node@v7`, `actions/upload-pages-artifact@v5`, `actions/deploy-pages@v5`), written but not run. VitePress has no ready-made action like Astro's, so it's 10 lines longer than Starlight's |
+| Rough edges seen | The default theme hides its footer on any page with a sidebar, so the attribution needs the override above, and the first try lost to the theme's scoped CSS. Definition lists aren't supported, so they render as plain `term : text` lines. The note callout is a plain blockquote, because VitePress callouts need `::: tip` or `> [!NOTE]` syntax |
+| Framework churn already visible | v2 has been in alpha since Jan 2025 (alpha.21 in Oct 2026) and stable 1.x hasn't had a release since Aug 2025, so a major upgrade is still ahead |
+
+**Zac's verdict (ET 1):** it looks good too. The colours are horrible again, but the design is along the same lines as Starlight's and looks pretty alright.
+
+## Zac's view of the whole field (ET 1)
+If he had to pick, he'd still choose Starlight. But Starlight and VitePress are close enough on design that looks aren't a factor worth weighing between them. The choice comes down to the effort each takes to implement, maintain, extend and otherwise modify.
+
 ## Unknown unknowns
 - The spike sites are served from the root with no base path. At `zacbraddy.github.io/ang/`, each candidate also needs its base path set (u7).
 - If a native theme goes forward, adding a nav bar (and maybe search) to a theme like cayman hasn't been measured. It would mean overriding the theme's layout.
-- If Starlight goes forward, recolouring it hasn't been measured. Its theme is driven by CSS custom properties (`--sl-color-*`), so a custom stylesheet is the likely route, but the effort and the result are unproven.
-- The Home page's install snippet is a placeholder until the [install, uninstall and update idea](/project-context/ideas/install-uninstall-update/README.md) settles how Ang is installed.
+- Recolouring hasn't been measured for either frontrunner. Both themes are driven by CSS custom properties (Starlight `--sl-color-*`, VitePress `--vp-c-*`), so a custom stylesheet is the likely route for both, but the effort and the result are unproven.
+- The Home page's install snippet in the spikes is a placeholder. The real one is now settled: the `curl … install.sh | sh` one-liner, with Node 26+ as the prerequisite and uninstalling by hand documented on this site (k10 in `state.json`).
 
 ## Related
 - [Hub](../README.md)

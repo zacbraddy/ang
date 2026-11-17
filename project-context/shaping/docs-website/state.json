@@ -3,9 +3,9 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u6",
-      "question": "Visual bake-off: which candidate's look does Zac pick? Same 3 shared pages (spikes/_content/) in each, light and dark; Zac gives his view in his own words and compares the whole field at the end (no per-criterion scores). Done: Just the Docs, native Pages themes, Starlight. Left: VitePress. One session per candidate",
-      "approach": "Spike, separate sessions; see shaping-content/bake-off.md"
+      "id": "u8",
+      "question": "Starlight or VitePress: which takes less effort to implement, maintain, extend and modify for this site? Covers recolouring each (neither measured), callout and definition-list handling, upgrade churn (Astro's breaking majors vs VitePress v2 still in alpha) and Pages deploy upkeep",
+      "approach": "Spike or bake-off; see shaping-content/bake-off.md"
     },
     {
       "id": "u3",
@@ -70,9 +70,26 @@
       "id": "k8",
       "fact": "Starlight 0.42.8 on Astro 7.4.5 builds first time in about 1.6s from 41 lines of config and code (32 without a link plugin only the spike needs); system light/dark with an Auto/Light/Dark switcher, sidebar, Pagefind search and on-this-page nav all built in. Attribution needs a 6-line footer override. Remark plugins need @astrojs/markdown-remark since Astro 7's new default Markdown engine. Deploy on Pages: a 31-line Actions workflow. No definition lists; callouts need :::note syntax. Zac: his favourite so far — the best design, and nav, search and a layout every developer knows are pluses — but the colours are ugly and would need real tinkering",
       "source": "shaping-content/bake-off.md"
+    },
+    {
+      "id": "k9",
+      "fact": "Visual bake-off done (Just the Docs, native Pages themes, Starlight, VitePress). Zac's pick on looks: Starlight, with VitePress close behind; both share the best design in the field and both need recolouring. VitePress 1.6.4 builds first time from 30 lines (7 of them a footer override, since the default theme hides its footer beside a sidebar), 3.1s builds, 102 MB node_modules, light/dark and local search built in, a 41-line Pages workflow; v2 has been in alpha since Jan 2025",
+      "source": "shaping-content/bake-off.md",
+      "answers": "Visual bake-off: which candidate's look does Zac pick? Same 3 shared pages (spikes/_content/) in each, light and dark; Zac gives his view in his own words and compares the whole field at the end (no per-criterion scores). Done: Just the Docs, native Pages themes, Starlight. Left: VitePress. One session per candidate"
+    },
+    {
+      "id": "k10",
+      "fact": "Install is the one-liner curl -fsSL https://github.com/zacbraddy/ang/releases/latest/download/install.sh | sh (or releases/download/{tag}/install.sh for a set version); prerequisite Node 26+ with npm/npx. No uninstall command: removing Ang by hand is a docs page this site owns",
+      "source": "https://github.com/zacbraddy/ang/blob/c289cabcc7f68e066e1eb8f537f8c1ef2edf500d/project-context/execution/install-upgrade-release/plan.md"
     }
   ],
-  "decisions": [],
+  "decisions": [
+    {
+      "id": "d1",
+      "decision": "Frontrunners are Starlight and VitePress — Zac rates their designs best in the field and close enough that looks don't decide between them; Starlight is his pick if looks alone decided",
+      "evidence": "shaping-content/bake-off.md"
+    }
+  ],
   "lineage": [
     {
       "date": "2026-11-16",
@@ -121,6 +138,10 @@
     {
       "date": "2026-11-17",
       "event": "replaced k8: Starlight 0.42.8 on Astro 7.4.5 builds first time in about 1.6s from 26 lines of config; system light/dark with an Auto/Light/Dark switcher, sidebar, Pagefind search and on-this-page nav all built in, no code. Custom code: a 6-line footer for attribution and an 8-line plugin turning page.md links into routes (needs @astrojs/markdown-remark since Astro 7's new default Markdown engine). Deploy on Pages: a 31-line Actions workflow. No definition lists; callouts need :::note syntax. Zac: his favourite so far — the best design, and nav, search and a layout every developer knows are pluses — but the colours are ugly and would need real tinkering → Starlight 0.42.8 on Astro 7.4.5 builds first time in about 1.6s from 41 lines of config and code (32 without a link plugin only the spike needs); system light/dark with an Auto/Light/Dark switcher, sidebar, Pagefind search and on-this-page nav all built in. Attribution needs a 6-line footer override. Remark plugins need @astrojs/markdown-remark since Astro 7's new default Markdown engine. Deploy on Pages: a 31-line Actions workflow. No definition lists; callouts need :::note syntax. Zac: his favourite so far — the best design, and nav, search and a layout every developer knows are pluses — but the colours are ugly and would need real tinkering"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Frontrunners are Starlight and VitePress — Zac rates their designs best in the field and close enough that looks don't decide between them; Starlight is his pick if looks alone decided"
     }
   ]
 }
