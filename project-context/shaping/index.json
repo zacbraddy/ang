@@ -37,6 +37,15 @@
     ]
   },
   {
+    "title": "Docs site hosting, GitHub Pages and the alternatives",
+    "path": "project-context/shaping/docs-website/shaping-content/hosting.md",
+    "shortDescription": "What GitHub Pages does on its own against the brief, compared in money and effort with Pages plus a framework, a custom domain and other hosts",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
     "title": "Open-source hygiene, brief",
     "path": "project-context/shaping/open-source-hygiene/ideas-content/brief.md",
     "shortDescription": "Zac's stance on open-source standards and the deferred quality-tooling options",
