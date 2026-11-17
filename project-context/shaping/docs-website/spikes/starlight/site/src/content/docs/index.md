@@ -8,7 +8,7 @@ tags: [documentation]
 
 Ang is a lean, AI-assisted development workflow for Claude Code. You drive; it helps. It takes work from a rough thought to shipped code, one small session at a time, without drowning your agents in their own paperwork.
 
-[Get started](commands.md) · [Why Ang exists](first-principles.md)
+[Get started](commands.md) · [Why Ang exists](first-principles.mdx)
 
 ## Why another framework?
 
@@ -31,4 +31,6 @@ claude
 /bootstrap-repo
 ```
 
-> **Note:** Ang runs inside Claude Code. It works fine on its own and gets a bit nicer inside Orca.
+:::note
+Ang runs inside Claude Code. It works fine on its own and gets a bit nicer inside Orca.
+:::

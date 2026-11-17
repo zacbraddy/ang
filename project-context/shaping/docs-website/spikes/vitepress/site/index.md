@@ -32,4 +32,6 @@ claude
 /bootstrap-repo
 ```
 
-> **Note:** Ang runs inside Claude Code. It works fine on its own and gets a bit nicer inside Orca.
+::: info Note
+Ang runs inside Claude Code. It works fine on its own and gets a bit nicer inside Orca.
+:::

@@ -61,4 +61,6 @@ node .claude/scripts/ang-context-manager.mjs state show docs-website
 node .claude/scripts/ang-context-manager.mjs library validate
 ```
 
-> **Tip:** `--help` lists every command.
+:::tip
+`--help` lists every command.
+:::

@@ -1,0 +1,12 @@
+---
+interface Props { stage: string; command: string }
+const { stage, command } = Astro.props;
+---
+<div class="stage-card">
+  <p class="stage-card__head"><span class="stage-card__stage">{stage}</span> <code>{command}</code></p>
+  <slot />
+</div>
+<style>
+  .stage-card { border: 1px solid var(--sl-color-gray-5); border-left: 4px solid var(--sl-color-accent); border-radius: 0.5rem; padding: 0.75rem 1rem; }
+  .stage-card__stage { font-weight: 600; color: var(--sl-color-white); }
+</style>

@@ -46,9 +46,36 @@
     ]
   },
   {
+    "title": "Colour palette research",
+    "path": "project-context/shaping/docs-website/shaping-content/colour-palette.md",
+    "shortDescription": "What designers in 2025–2026 rate as modern, clean tech palettes, with candidate palettes for the docs site",
+    "tags": [
+      "documentation",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "Starlight and VitePress effort bake-off",
+    "path": "project-context/shaping/docs-website/shaping-content/effort.md",
+    "shortDescription": "The same 4 changes made to both frontrunners, measured, plus upkeep research and Zac's call for Starlight",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
     "title": "Docs site hosting, GitHub Pages and the alternatives",
     "path": "project-context/shaping/docs-website/shaping-content/hosting.md",
     "shortDescription": "What GitHub Pages does on its own against the brief, compared in money and effort with Pages plus a framework, a custom domain and other hosts",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Starlight and VitePress upkeep",
+    "path": "project-context/shaping/docs-website/shaping-content/upkeep.md",
+    "shortDescription": "Breaking releases, migration effort, maintenance health and Pages workflow upkeep for Starlight and VitePress, Nov 2024 to Nov 2026",
     "tags": [
       "documentation",
       "tech-stack"
@@ -157,14 +184,6 @@
     "title": "Commands",
     "path": "project-context/shaping/docs-website/spikes/starlight/site/src/content/docs/commands.md",
     "shortDescription": "Bake-off page: Ang commands in tables, a definition list and code blocks",
-    "tags": [
-      "documentation"
-    ]
-  },
-  {
-    "title": "Ang's first principles",
-    "path": "project-context/shaping/docs-website/spikes/starlight/site/src/content/docs/first-principles.md",
-    "shortDescription": "Bake-off page: long prose on Ang's first principles, trimmed from the brain dump",
     "tags": [
       "documentation"
     ]
