@@ -3,11 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u1",
-      "question": "What's the quick start? Depends on the install route",
-      "approach": "Wait on install-uninstall-update"
-    },
-    {
       "id": "u2",
       "question": "Which concepts and commands make the cut for a whistle-stop tour?",
       "approach": ""
@@ -18,6 +13,12 @@
       "id": "k1",
       "fact": "Scope: main concepts, key commands, quick start, brief attribution; not comprehensive",
       "source": "shaping-content/brief.md"
+    },
+    {
+      "id": "k2",
+      "fact": "Quick start is `curl -fsSL https://github.com/zacbraddy/ang/releases/latest/download/install.sh | sh`; prerequisites Node 26+ with npm/npx; README says nothing about the release process",
+      "source": "https://github.com/zacbraddy/ang/blob/6cf9987923a73fb7e1ac4d742f2010010522eb4c/project-context/planning/install-upgrade-release/release-process-proposal.md",
+      "answers": "What's the quick start? Depends on the install route"
     }
   ],
   "decisions": [

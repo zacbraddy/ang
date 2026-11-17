@@ -1,5 +1,42 @@
 [
   {
+    "title": "Brain dump context (verbatim)",
+    "path": "project-context/shaping/docs-website/ideas-content/brain-dump-context.md",
+    "shortDescription": "Zac's own words on what Ang is, its history, motivations, principles, his usage and raw files, kept as docs source and voice sample",
+    "tags": [
+      "documentation",
+      "product-vision",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "Documentation website, brief",
+    "path": "project-context/shaping/docs-website/ideas-content/brief.md",
+    "shortDescription": "Zac's requirements for the docs site's design, framework, hosting and content",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Docs framework landscape, 2026",
+    "path": "project-context/shaping/docs-website/ideas-content/framework-landscape.md",
+    "shortDescription": "Which static docs frameworks lead in November 2026, how healthy and liked they are, and which to spike in shaping",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Documentation website",
+    "path": "project-context/shaping/docs-website/README.md",
+    "shortDescription": "A comprehensive docs site in Zac's voice, built on an existing docs framework",
+    "tags": [
+      "documentation",
+      "open-source",
+      "brand-voice"
+    ]
+  },
+  {
     "title": "Open-source hygiene, brief",
     "path": "project-context/shaping/open-source-hygiene/ideas-content/brief.md",
     "shortDescription": "Zac's stance on open-source standards and the deferred quality-tooling options",
