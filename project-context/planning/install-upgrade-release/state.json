@@ -44,7 +44,7 @@
     },
     {
       "id": "k7",
-      "fact": "install.sh resolves the ref to a full SHA through GitHub's API, installs that SHA and writes .claude/ang/version.json { ref, sha, installedAt }. Spiked: the record matched git rev-parse on every run",
+      "fact": "install.sh installs a full SHA and writes .claude/ang/version.json { ref, sha, installedAt }. Spiked: resolving the ref through GitHub's API and installing that SHA kept the record matching git rev-parse on every run. Under d28 the default install takes the SHA from its stamp instead of the API",
       "source": "origins/install-uninstall-update/shaping-content/install-script-spike.md",
       "answers": "Where and in what form does an install record its Ang version (tag, commit SHA), and how does an upgrade baseline an instance with no record, such as ohnvm?",
       "from": "install-uninstall-update"
@@ -260,6 +260,36 @@
       "id": "d27",
       "decision": "Each release rehearses only the upgrade from the previous release. Users jumping several majors upgrade one major at a time, naming each release tag as the target; d14's tag override and d13's no-downgrade stop already allow that, with latest as the default target. Rehearsals that skip releases are parked until the first minor or patch release (Zac's call: while every release is a major, every upgrade is breaking anyway)",
       "evidence": "/project-context/ideas/parked.md"
+    },
+    {
+      "id": "d28",
+      "decision": "A default install makes no GitHub API call: the release asset's stamp carries TAG and SHA. A tag override calls GET /releases/tags/{tag}, which resolves the SHA and checks it's a published release. The repo's own install.sh is unstamped and stops without a tag argument, pointing at the release-asset one-liner (Zac's call)",
+      "evidence": "release-process-proposal.md"
+    },
+    {
+      "id": "d29",
+      "decision": "An upgrade runs the target release's merge engine, fetched at the target tag, not the installed one's, so merge fixes reach users on the upgrade that ships them and the engine always reads the target's upgrade guide format (Zac's call)",
+      "evidence": "release-process-proposal.md"
+    },
+    {
+      "id": "d30",
+      "decision": "Zac turns on immutable releases and adds a v* tag ruleset once, guided by a story. A broken release or install.sh is fixed only by a patch release, never by editing a published asset (Zac's call)",
+      "evidence": "release-process-proposal.md"
+    },
+    {
+      "id": "d31",
+      "decision": "The delivery intent ends at the first public release, v1.0.0, the point where Zac announces Ang on socials, not at the first tag. rc pre-releases weren't considered when the intent was written and don't end it. The next intent comes later, when Zac wants a new feature or issues and PRs prompt one (Zac's call)",
+      "evidence": "/project-context/10k/intent.md"
+    },
+    {
+      "id": "d32",
+      "decision": "The release process, fixture repo and upgrade skill are within the intent's and business constraints' 'bare minimum', which means the minimum for a process that is comfortable to maintain and operate, not the least effort or fewest dependencies. No exception or ADR is needed (Zac's call)",
+      "evidence": "release-process-proposal.md"
+    },
+    {
+      "id": "d33",
+      "decision": "upgrade-ang is plumbing, like install.sh and the release pipeline, not a fifth feature, so what-ang-is stays at four features (Zac's call)",
+      "evidence": "/project-context/10k/product/what-ang-is.md"
     }
   ],
   "lineage": [
@@ -534,6 +564,34 @@
     {
       "date": "2026-11-17",
       "event": "decided: Each release rehearses only the upgrade from the previous release. Users jumping several majors upgrade one major at a time, naming each release tag as the target; d14's tag override and d13's no-downgrade stop already allow that, with latest as the default target. Rehearsals that skip releases are parked until the first minor or patch release (Zac's call: while every release is a major, every upgrade is breaking anyway)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k7: install.sh resolves the ref to a full SHA through GitHub's API, installs that SHA and writes .claude/ang/version.json { ref, sha, installedAt }. Spiked: the record matched git rev-parse on every run → install.sh installs a full SHA and writes .claude/ang/version.json { ref, sha, installedAt }. Spiked: resolving the ref through GitHub's API and installing that SHA kept the record matching git rev-parse on every run. Under d28 the default install takes the SHA from its stamp instead of the API"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: A default install makes no GitHub API call: the release asset's stamp carries TAG and SHA. A tag override calls GET /releases/tags/{tag}, which resolves the SHA and checks it's a published release. The repo's own install.sh is unstamped and stops without a tag argument, pointing at the release-asset one-liner (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: An upgrade runs the target release's merge engine, fetched at the target tag, not the installed one's, so merge fixes reach users on the upgrade that ships them and the engine always reads the target's upgrade guide format (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Zac turns on immutable releases and adds a v* tag ruleset once, guided by a story. A broken release or install.sh is fixed only by a patch release, never by editing a published asset (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: The delivery intent ends at the first public release, v1.0.0, the point where Zac announces Ang on socials, not at the first tag. rc pre-releases weren't considered when the intent was written and don't end it. The next intent comes later, when Zac wants a new feature or issues and PRs prompt one (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: The release process, fixture repo and upgrade skill are within the intent's and business constraints' 'bare minimum', which means the minimum for a process that is comfortable to maintain and operate, not the least effort or fewest dependencies. No exception or ADR is needed (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: upgrade-ang is plumbing, like install.sh and the release pipeline, not a fifth feature, so what-ang-is stays at four features (Zac's call)"
     }
   ],
   "type": "technical"

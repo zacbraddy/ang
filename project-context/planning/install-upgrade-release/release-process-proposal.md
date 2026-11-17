@@ -191,19 +191,19 @@ If the job fails, nothing is published. The skill reports the failure. Zac fixes
 | # | Change | Replaces | Status |
 |---|---|---|---|
 | A | `install.sh` ships as a release asset, stamped with `TAG` and `SHA` by the release job. The README one-liner uses `releases/latest/download/install.sh`. A specific version comes from `releases/download/{tag}/install.sh` | k6 (known 6): stamping committed to the repo before tagging | Agreed |
-| B | A default install makes no API call to resolve the ref, because the SHA is in the stamp. An override calls `GET /releases/tags/{tag}`, which also checks that it's a published release | k7: always resolve the ref through the API | Proposed |
-| C | The repo's own `install.sh` is unstamped and needs a tag argument | — | Proposed |
+| B | A default install makes no API call to resolve the ref, because the SHA is in the stamp. An override calls `GET /releases/tags/{tag}`, which also checks that it's a published release | k7: always resolve the ref through the API | Agreed |
+| C | The repo's own `install.sh` is unstamped and needs a tag argument | — | Agreed |
 | D | The upgrade skill fetches each `releases/upgrades/v*.md` in (installed, target] on its own, oldest first, e.g. from `raw.githubusercontent.com/zacbraddy/ang/{target-tag}/releases/upgrades/{v}.md`. That URL isn't a REST API call, so it doesn't count against the 60-call limit | u1 | Agreed |
-| E | The upgrade runs the **target** release's merge engine, not the installed one's | — | Proposed |
+| E | The upgrade runs the **target** release's merge engine, not the installed one's | — | Agreed |
 
 ## Changes to how Ang is developed
 | Change | Effort | Status |
 |---|---|---|
 | Cut releases from the head of main. Other streams can carry on, and they show only as warnings | None | Agreed |
 | No commit convention, changeset files or pull request labels | None | Agreed |
-| One-time GitHub setup: turn on immutable releases, plus a tag ruleset for `v*` | About 5 minutes in the GitHub UI, by Zac | Proposed |
+| One-time GitHub setup: turn on immutable releases, plus a tag ruleset for `v*` | About 5 minutes in the GitHub UI, by Zac | Agreed |
 | Create the fixture repo once, guided by a story, and keep its seeded edits working as `src/` evolves | Once, plus the occasional fixture fix | Agreed |
-| A broken `install.sh` is fixed by a patch release, never by editing the asset | None: the asset is locked | Proposed |
+| A broken `install.sh` is fixed by a patch release, never by editing the asset | None: the asset is locked | Agreed |
 | **Repo-only skills, agents and scripts need a home.** The root `.claude/skills` and `.claude/agents` are whole-folder symlinks into `src/`, so anything placed there ships. They become real folders that link each `src/` entry one by one, beside the repo-only entries. Repo-only scripts go in a root `scripts/` folder, so `.claude/scripts` stays a whole-folder symlink. A link script in `scripts/` globs `src/` and creates missing links and removes dangling ones (a no-op on re-run). A repo-only `node --test` fails on drift in the release CI job, and `/cut-release` preflight lists drift as a warning. `library validate` stays out of it, because it ships | A one-off layout change, plus re-running the link script after adding a skill or agent | Agreed |
 
 ## Not proposed, and why

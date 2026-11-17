@@ -22,6 +22,7 @@ The README's quick start, and a clean first run for every new user, depend on th
   - [Copy-in bake-off](origins/install-uninstall-update/shaping-content/copy-in-spike.md): degit vs giget
   - [Install script spike](origins/install-uninstall-update/shaping-content/install-script-spike.md): pinning, the settings merge and the version record
   - [Upgrade merge spike](origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md): the three-way merge on an improved instance
+- [Plan](plan.md): scope, approach, sequencing, risks, success measures, test strategy and candidate ADRs
 - [Settings merge spike](settings-merge-spike.md): the three-way `settings.json` merge an upgrade runs, and how it doubles as the install merge
 - [Release practice research](release-practice-research.md): how open-source projects version, write notes, ship upgrade guidance and pin install scripts, and where Ang departs
 - [Release process proposal](release-process-proposal.md): first draft of the release process for Zac to cut down, its changes to the install and upgrade plans, and what it asks of day-to-day development

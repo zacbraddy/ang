@@ -78,6 +78,15 @@
     ]
   },
   {
+    "title": "Install, upgrade and release plan",
+    "path": "project-context/planning/install-upgrade-release/plan.md",
+    "shortDescription": "Scope, approach, sequencing, risks, success measures, test strategy and candidate ADRs for the one-line install, the upgrade skill and the release process",
+    "tags": [
+      "distribution",
+      "open-source"
+    ]
+  },
+  {
     "title": "Install, upgrade and release",
     "path": "project-context/planning/install-upgrade-release/README.md",
     "shortDescription": "Technical epic delivering the one-line install.sh, the upgrade skill and the process for cutting the releases they consume",
