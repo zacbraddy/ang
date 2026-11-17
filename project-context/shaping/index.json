@@ -37,12 +37,78 @@
     ]
   },
   {
+    "title": "Docs site visual bake-off",
+    "path": "project-context/shaping/docs-website/shaping-content/bake-off.md",
+    "shortDescription": "The same 3 pages built in each docs-site candidate for Zac to judge by eye, with setup, measurements and his verdict per candidate",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
     "title": "Docs site hosting, GitHub Pages and the alternatives",
     "path": "project-context/shaping/docs-website/shaping-content/hosting.md",
     "shortDescription": "What GitHub Pages does on its own against the brief, compared in money and effort with Pages plus a framework, a custom domain and other hosts",
     "tags": [
       "documentation",
       "tech-stack"
+    ]
+  },
+  {
+    "title": "Commands",
+    "path": "project-context/shaping/docs-website/spikes/_content/commands.md",
+    "shortDescription": "Bake-off page: Ang commands in tables, a definition list and code blocks",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "First principles",
+    "path": "project-context/shaping/docs-website/spikes/_content/first-principles.md",
+    "shortDescription": "Bake-off page: long prose on Ang's first principles, trimmed from the brain dump",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Home",
+    "path": "project-context/shaping/docs-website/spikes/_content/index.md",
+    "shortDescription": "Bake-off page: Ang pitch, what you get, install snippet",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Just the Docs bake-off spike",
+    "path": "project-context/shaping/docs-website/spikes/just-the-docs/README.md",
+    "shortDescription": "The shared bake-off pages on Just the Docs v0.12.0 via GitHub Pages' own Jekyll gem, with system dark mode added",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Commands",
+    "path": "project-context/shaping/docs-website/spikes/just-the-docs/site/commands.md",
+    "shortDescription": "Bake-off page: Ang commands in tables, a definition list and code blocks",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "First principles",
+    "path": "project-context/shaping/docs-website/spikes/just-the-docs/site/first-principles.md",
+    "shortDescription": "Bake-off page: long prose on Ang's first principles, trimmed from the brain dump",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Home",
+    "path": "project-context/shaping/docs-website/spikes/just-the-docs/site/index.md",
+    "shortDescription": "Bake-off page: Ang pitch, what you get, install snippet",
+    "tags": [
+      "documentation"
     ]
   },
   {

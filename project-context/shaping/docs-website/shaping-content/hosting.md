@@ -6,7 +6,7 @@ tags: [documentation, tech-stack]
 # Docs site hosting
 
 ## Summary
-Desk research on 2026-11-17. **Pages on its own can't meet the brief's dark-mode requirement.** Its built-in Jekyll build is frozen on Jekyll 3.10, and none of its 14 bundled themes has dark mode, search or a docs sidebar. The best docs theme it can load, Just the Docs, adds a sidebar and search but has no dark mode that follows the system setting; getting one needs custom JavaScript, and that flickers. Starlight and VitePress meet the brief out of the box and still deploy to Pages for $0. The cost is a GitHub Actions workflow of about 37 lines, plus upkeep: GitHub forces a change to the workflow about once a year, and the frameworks have breaking releases. A custom domain on Pages adds only the registration fee, about $10–12 a year. Moving to another host adds an account, a build integration and that host's terms changes for no gain the brief asks for. These are observations; Zac makes the hosting call. A visual bake-off, in its own session, will inform it.
+Desk research on 2026-11-17. Pages' built-in Jekyll build is frozen on Jekyll 3.10, and none of its 14 bundled themes has dark mode, search or a docs sidebar. The best docs theme it can load, Just the Docs, adds a sidebar and search but has no dark mode that follows the system setting out of the box. The bake-off spike found it takes one extra stylesheet link, with no JavaScript and no flicker ([bake-off](bake-off.md)). Starlight and VitePress meet the brief out of the box and still deploy to Pages for $0. The cost is a GitHub Actions workflow of about 37 lines, plus upkeep: GitHub forces a change to the workflow about once a year, and the frameworks have breaking releases. A custom domain on Pages adds only the registration fee, about $10–12 a year. Moving to another host adds an account, a build integration and that host's terms changes for no gain the brief asks for. These are observations; Zac makes the hosting call. A visual bake-off ([bake-off](bake-off.md)) is informing it.
 
 ET (evidence tier) follows the [Evidence standard](/project-context/README.md). Claims from vendors and theme authors are ET 1 that a feature exists, and ET 3 at best that it's easy or looks good.
 
@@ -21,9 +21,9 @@ ET (evidence tier) follows the [Evidence standard](/project-context/README.md). 
 - **Plain Markdown with no config (ET 1):** the primer theme turns README.md into the index page and fixes up `.md` links. The result is a single light-only column, like a GitHub README, with no navigation or search.
 - **Any theme hosted on GitHub** can be loaded with `remote_theme`, as long as it only needs whitelisted plugins (ET 1).
 - **Just the Docs** (v0.12.0, 2026-01-23, 9.2k stars, actively maintained, ET 1):
-  - **On the built-in build:** its dependencies are all whitelisted, so it works there on paper (pin `@v0.12.0`). Untested.
+  - **On the built-in build:** its dependencies are all whitelisted, and the bake-off spike built it first time with the `github-pages` gem v233 pinned to `@v0.12.0` (ET 1).
   - **Sidebar and search:** both built in. Search uses lunr, with no plugin.
-  - **Dark mode:** the colour scheme is fixed at build time to light, dark or a custom scheme. Following the system setting has been an open request since 2019 (#234). A toggle needs your own button calling `jtd.setTheme()`, and community workarounds report flicker (#1223, comment from 2026-02).
+  - **Dark mode:** the colour scheme is fixed at build time to light, dark or a custom scheme. Following the system setting has been an open request since 2019 (#234). A toggle needs your own button calling `jtd.setTheme()`, and community workarounds report flicker (#1223, comment from 2026-02). The bake-off spike sidestepped both by loading the dark stylesheet again with `media="(prefers-color-scheme: dark)"`: the system setting is followed with no JavaScript, and a 15-line toggle that runs before the page draws doesn't flash (ET 1, [bake-off](bake-off.md)).
   - **Upgrades:** v0.11 → v0.12 needed migration steps for a footer regression.
 - **jekyll-vitepress-theme** copies the VitePress look onto Jekyll, but it needs Jekyll 4.3+, so it needs Actions anyway. It's young: created March 2026, 73 stars (ET 1).
 
@@ -55,7 +55,7 @@ ET (evidence tier) follows the [Evidence standard](/project-context/README.md). 
 ## Comparison
 | Option | Money a year | Setup | Ongoing upkeep | Dark mode (system default plus toggle) | Search and sidebar | Main risks |
 |---|---|---|---|---|---|---|
-| Pages, built-in Jekyll, Just the Docs | $0 | Low: `_config.yml` and nav front matter, no workflow | Low: pin the theme tag | **No**: fixed scheme, or custom JavaScript with flicker | Yes | Jekyll 3.10 frozen and "no longer being updated" |
+| Pages, built-in Jekyll, Just the Docs | $0 | Low: `_config.yml` and nav front matter, no workflow | Low: pin the theme tag | Not built in. One extra stylesheet link follows the system setting; the toggle needs about 15 lines of JavaScript (spike) | Yes | Jekyll 3.10 frozen and "no longer being updated" |
 | Pages plus Starlight or VitePress via Actions | $0 | Medium: workflow, `base` path, Node project | Medium: roughly yearly forced action bumps, framework breaking releases | Yes | Yes | Workflow breaks on GitHub deprecations; Starlight 0.x; VitePress 2 migration |
 | Custom domain on Pages (either build) | About $10–12 | Plus DNS, TXT record, HTTPS | Renew the domain, keep DNS | As the build | As the build | Domain takeover if Pages is turned off; `base` change if switched later |
 | Domain plus another host | About $10–12, host free | Medium: account, integration, DNS, framework | Host terms changes plus framework upkeep | As the framework | As the framework | Netlify pauses at the cap; Vercel non-commercial; a second vendor |
