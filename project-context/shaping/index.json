@@ -112,6 +112,39 @@
     ]
   },
   {
+    "title": "Native Pages themes bake-off spike",
+    "path": "project-context/shaping/docs-website/spikes/pages-native/README.md",
+    "shortDescription": "The shared bake-off pages under 4 of GitHub Pages' bundled themes (primer, minima, cayman, slate) on its own Jekyll gem",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Commands",
+    "path": "project-context/shaping/docs-website/spikes/pages-native/site/commands.md",
+    "shortDescription": "Bake-off page: Ang commands in tables, a definition list and code blocks",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "First principles",
+    "path": "project-context/shaping/docs-website/spikes/pages-native/site/first-principles.md",
+    "shortDescription": "Bake-off page: long prose on Ang's first principles, trimmed from the brain dump",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Home",
+    "path": "project-context/shaping/docs-website/spikes/pages-native/site/index.md",
+    "shortDescription": "Bake-off page: Ang pitch, what you get, install snippet",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
     "title": "Open-source hygiene, brief",
     "path": "project-context/shaping/open-source-hygiene/ideas-content/brief.md",
     "shortDescription": "Zac's stance on open-source standards and the deferred quality-tooling options",
