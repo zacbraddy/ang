@@ -1,5 +1,13 @@
 [
   {
+    "title": "Docs site information architecture",
+    "path": "project-context/planning/documentation/information-architecture.md",
+    "shortDescription": "The docs site's sidebar groups and pages, and which source material each page draws from",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
     "title": "Brain dump context (verbatim)",
     "path": "project-context/planning/documentation/origins/docs-website/ideas-content/brain-dump-context.md",
     "shortDescription": "Zac's own words on what Ang is, its history, motivations, principles, his usage and raw files, kept as docs source and voice sample",
