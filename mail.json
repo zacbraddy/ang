@@ -1,9 +1,1 @@
-[
-  {
-    "id": "6bcea6",
-    "from": "install-uninstall-update",
-    "to": "documentation",
-    "sent": "2026-11-17",
-    "text": "From install-uninstall-update: the install one-liner is `curl -fsSL https://github.com/zacbraddy/ang/releases/latest/download/install.sh | sh`. It needs node 26+ with npm/npx (d16, k9). A specific version uses `releases/download/{tag}/install.sh`. There's no uninstall command; removing Ang is by hand (d2). Source: project-context/planning/install-upgrade-release/plan.md"
-  }
-]
+[]
