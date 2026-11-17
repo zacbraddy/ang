@@ -9,8 +9,10 @@ import state from './ang/commands/state.mjs';
 import tag from './ang/commands/tag.mjs';
 import trigger from './ang/commands/trigger.mjs';
 import session from './ang/commands/session.mjs';
+import settings from './ang/commands/settings.mjs';
+import version from './ang/commands/version.mjs';
 import { FEATURES } from './ang/features.mjs';
 
 const featureCommands = FEATURES.flatMap((f) => f.commands.map((c) => ({ ...c, feature: f.key })));
-const commands = [...library, ...item, ...state, ...tag, ...trigger, ...session, ...featureCommands];
+const commands = [...library, ...item, ...state, ...tag, ...trigger, ...session, ...settings, ...version, ...featureCommands];
 dispatch(commands, loadConfig().config, process.argv.slice(2));

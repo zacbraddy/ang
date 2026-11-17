@@ -7,6 +7,7 @@ export const TRIGGERS_FILE = path.join(CTX, 'triggers.json');
 export const TRIGGER_DIR = path.join(CTX, 'triggers');
 export const CONFIG_FILE = path.join(PROJECT, 'ang.json');
 export const LOCAL_FILE = path.join(PROJECT, 'ang.local.json');
+export const VERSION_FILE = path.join(PROJECT, '.claude', 'ang', 'version.json');
 export const SCRIPT = 'ang-context-manager.mjs';
 
 export const STAGES = ['ideas', 'shaping', 'planning', 'execution', 'retro', '10k'];

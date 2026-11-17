@@ -2,7 +2,7 @@
 title: Settings merge and version record commands
 shortDescription: The library script gains the shared three-way settings merge and the version show/write commands that install and upgrade both use
 tags: [distribution, tech-stack]
-status: ready
+status: done
 owner: agent
 dependsOn: []
 ---
@@ -62,7 +62,24 @@ Install and upgrade share one `settings.json` merge and one way of reading and w
 - **Writing with conflicts**: C4 says to write in place and exit 0. That is safe because a scalar conflict keeps the user's value and an array conflict keeps both entries. Resolving conflicts with the user is story 06's job (and install.sh's reporting is story 03's).
 - **`--base none`** means `{}`. A missing `--ours` file also means `{}`, so install.sh can call the merge whether or not the repo already has a `settings.json`. A missing `--theirs` or `--base` file is an error.
 - **`version show`** prints `JSON.stringify(record, null, 2)` or `none`. **`version write`** accepts any non-empty `--ref`, and the SHA must match `/^[0-9a-f]{40}$/` (k7: install records a full SHA). It writes through `writeJson` after `mkdirSync(..., { recursive: true })`.
+- **Implemented**: `cli.test.mjs`'s `project()` helper now creates parent folders, so a test can seed `.claude/ang/version.json`.
+- **Implemented**: with no base (`--base none`), a top-level or nested plain value where the user and Ang differ is kept as the user's and reported as a conflict (`outputStyle` excepted). Story 03 decides how install.sh shows these.
+- **Implemented**: an array entry both sides removed is a conflict only when each side added entries the other lacks, and `ours`/`theirs` hold just those. Re-running a merge reports no new conflicts.
+- **Implemented**: the shipped `settings.json` is formatted as `writeJson` writes it, so a vanilla merge gives the shipped bytes.
 - **Out of scope**: the `.pre-ang` backup (install.sh, story 03), resolving conflicts and finding the base tree (story 06), and `version.json` handling in the upgrade classifier (story 05).
+
+## Review
+53 tests pass, `--help` lists the three commands as core, and the `version` Done-when runs clean in a temp project. Two gaps against the Done-when and acceptance criteria. Must-fix and both should-fixes applied (56 tests pass); the nit is left.
+
+**Must-fix**
+- `src/.claude/scripts/ang/settings/merge.mjs:219`: an entry both sides removed is always a conflict, even with no replacements. Running the vanilla scenario a second time through the CLI (base `6cf9987`) reports `{ path: ["permissions","allow"], base: "Bash(jq:*)", ours: [], theirs: [] }`, and any user who deleted an entry Ang also dropped gets the same false conflict. Fix: `ours`/`theirs` hold only the non-base entries the other side lacks, and the conflict is reported only when both are non-empty. That also removes the re-run caveat this story had left for story 06.
+
+**Should-fix**
+- Done-when line 3: the CLI vanilla run gives the target's content but not its bytes, because `writeJson` reformats the hand-inlined `hooks` arrays in `src/.claude/settings.json`. Every user's first install or upgrade then rewrites those lines. Fix: format the shipped `settings.json` as `writeJson` does.
+- `src/.claude/scripts/ang/commands/version.mjs:165`: a corrupt `version.json` throws a raw stack trace. Fix: move `settings.mjs`'s `readJson` into `util.mjs` and use it in both commands.
+
+**Nit**
+- `merge.mjs:231`: when Ang drops a key the user has edited (`theirs` undefined, `ours` ≠ `base`), the user's whole value stays, Ang's stale array entries included. No planned change hits this. Leave it.
 
 ## Related
 - [Settings merge spike](../settings-merge-spike.md)
