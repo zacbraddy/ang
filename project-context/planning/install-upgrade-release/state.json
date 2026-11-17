@@ -1,13 +1,7 @@
 {
   "status": "active",
   "statusNote": "",
-  "unknowns": [
-    {
-      "id": "u9",
-      "question": "What does the fixture repo's seed contain, and how is it generated? Zac's call: generated with a library such as faker, never written by an LLM, because reasoned content could carry sensitive training data into a public repo. Still open: which local edits, rules, settings and project-context/ docs make a representative instance, and whether a seeded generator script reproduces it deterministically",
-      "approach": "release-process-proposal.md"
-    }
-  ],
+  "unknowns": [],
   "knowns": [
     {
       "id": "k1",
@@ -110,6 +104,12 @@
       "fact": "A repo-only link script in a root scripts/ folder globs src/.claude/skills and src/.claude/agents, creates missing relative per-entry links and removes dangling ones, and re-runs as a no-op. A repo-only node --test fails on drift; it runs in the v* release CI job and /cut-release preflight lists drift as a warning. Not library validate: it ships, and this check is about the Ang repo's own layout (Zac's call)",
       "source": "release-process-proposal.md",
       "answers": "How are the per-entry symlinks for src/ skills and agents kept in step: a script that creates them by glob, and does library validate or a test flag a src/ entry with no link at the root?"
+    },
+    {
+      "id": "k17",
+      "fact": "The fixture is seeded once, by hand, in the story that creates it, then rolled forward by real upgrades, so there is no maintained or deterministic seed generator (Zac's call: a reseeding setup would need no hosted repo). Any one-off script and its faker dependency stay in the fixture repo, never in Ang. Prose comes from faker, never an LLM. The seed is an rc.1 install plus: one local edit in every shipped area (skills, agents, rules, output-styles, scripts, ang/features, docs, project-context/README.md) so that upstream moves hit an edited file; the upgrade merge spike's five cases (a new local rule, an edit away from upstream's changes, an edit on a high-churn line, a new function in a shipped script, a custom setting plus a hook); a local-only skill and agent; a library built through ang-context-manager.mjs with an item at each stage, a 10k doc, a trigger and state entries, which is what tests library-convention migrations; and a root ang.json with features on. *.local.* files are left out because a clone never carries them",
+      "source": "release-process-proposal.md",
+      "answers": "What does the fixture repo's seed contain, and how is it generated? Zac's call: generated with a library such as faker, never written by an LLM, because reasoned content could carry sensitive training data into a public repo. Still open: which local edits, rules, settings and project-context/ docs make a representative instance, and whether a seeded generator script reproduces it deterministically"
     }
   ],
   "decisions": [
@@ -254,6 +254,11 @@
     {
       "id": "d26",
       "decision": "Upgrades are all or nothing: no partial upgrades, so every upgrade ends in a stable state and version.json always names one release. The escape hatch warns that the upgrade is big and how big, and the user decides whether to go ahead. Partial upgrades are parked with a wake condition (Zac's call: a feature nobody has asked for, and its version record needs per-file bases)",
+      "evidence": "/project-context/ideas/parked.md"
+    },
+    {
+      "id": "d27",
+      "decision": "Each release rehearses only the upgrade from the previous release. Users jumping several majors upgrade one major at a time, naming each release tag as the target; d14's tag override and d13's no-downgrade stop already allow that, with latest as the default target. Rehearsals that skip releases are parked until the first minor or patch release (Zac's call: while every release is a major, every upgrade is breaking anyway)",
       "evidence": "/project-context/ideas/parked.md"
     }
   ],
@@ -525,6 +530,10 @@
     {
       "date": "2026-11-17",
       "event": "replaced d24: Repo-only skills, agents and scripts sit beside the shipped ones without shipping: the root .claude/skills and .claude/agents become real folders that symlink each src/ entry one by one (by glob if possible), plus the repo-only entries (Zac's call) → Repo-only skills and agents sit beside the shipped ones without shipping: the root .claude/skills and .claude/agents become real folders that symlink each src/ entry one by one, plus the repo-only entries. Repo-only scripts (release-manifest, the link script) live in a root scripts/ folder instead, so .claude/scripts stays a whole-folder symlink (Zac's call)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: Each release rehearses only the upgrade from the previous release. Users jumping several majors upgrade one major at a time, naming each release tag as the target; d14's tag override and d13's no-downgrade stop already allow that, with latest as the default target. Rehearsals that skip releases are parked until the first minor or patch release (Zac's call: while every release is a major, every upgrade is breaking anyway)"
     }
   ],
   "type": "technical"

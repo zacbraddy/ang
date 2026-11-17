@@ -28,6 +28,11 @@ The upgrade skill's escape hatch would offer to take only part of a release: the
 - **Wake condition:** users ask to take part of a release, because a full upgrade is too costly with their local improvements.
 - **Source:** cut in planning on 2026-11-17, not from a raw file. Zac's call: a feature nobody has asked for, and its version-record design was contortion for a "hat on a hat". See the [install, upgrade and release epic](/project-context/planning/install-upgrade-release/README.md).
 
+### Gapped-version upgrade rehearsals
+Each release would also rehearse upgrades that skip releases, starting from older tags of the upgrade fixture repo: for example, from the last major through every minor and patch since. That would show users can upgrade across several non-breaking versions in one go. Today a release rehearses only the upgrade from the previous release. While every release is a major, every upgrade is breaking anyway, so the only path to assure is the one from the previous major. Users who jump several majors upgrade one major at a time, naming each release tag as the target.
+- **Wake condition:** work starts on a project or task meant to ship as Ang's first minor or patch release. Adopting semver sets the expectation that upgrades across several non-breaking versions work.
+- **Source:** parked in planning on 2026-11-17, not from a raw file. Zac's call. See the [release process proposal](/project-context/planning/install-upgrade-release/release-process-proposal.md). The fixture is tagged at every release, so the history to test from builds up anyway.
+
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)
 - [ADR 0003: Per-user config overlay](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md)
