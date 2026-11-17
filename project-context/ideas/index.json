@@ -45,22 +45,6 @@
     ]
   },
   {
-    "title": "Open-source hygiene, brief",
-    "path": "project-context/ideas/open-source-hygiene/ideas-content/brief.md",
-    "shortDescription": "Zac's stance on open-source standards and the deferred quality-tooling options",
-    "tags": [
-      "open-source"
-    ]
-  },
-  {
-    "title": "Open-source hygiene, Ang-sized",
-    "path": "project-context/ideas/open-source-hygiene/README.md",
-    "shortDescription": "Which open-source standards Ang should adopt, adapt or drop, including whether the repo needs quality tooling",
-    "tags": [
-      "open-source"
-    ]
-  },
-  {
     "title": "Parked work",
     "path": "project-context/ideas/parked.md",
     "shortDescription": "Doable threads with no value yet, each with the wake condition that would make it worth doing",
