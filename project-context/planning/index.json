@@ -1,1 +1,248 @@
-[]
+[
+  {
+    "title": "Brain dump context (verbatim)",
+    "path": "project-context/planning/documentation/origins/docs-website/ideas-content/brain-dump-context.md",
+    "shortDescription": "Zac's own words on what Ang is, its history, motivations, principles, his usage and raw files, kept as docs source and voice sample",
+    "tags": [
+      "documentation",
+      "product-vision",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "Documentation website, brief",
+    "path": "project-context/planning/documentation/origins/docs-website/ideas-content/brief.md",
+    "shortDescription": "Zac's requirements for the docs site's design, framework, hosting and content",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Docs framework landscape, 2026",
+    "path": "project-context/planning/documentation/origins/docs-website/ideas-content/framework-landscape.md",
+    "shortDescription": "Which static docs frameworks lead in November 2026, how healthy and liked they are, and which to spike in shaping",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Docs site visual bake-off",
+    "path": "project-context/planning/documentation/origins/docs-website/shaping-content/bake-off.md",
+    "shortDescription": "The same 3 pages built in each docs-site candidate for Zac to judge by eye, with setup, measurements and his verdict per candidate",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Colour palette research",
+    "path": "project-context/planning/documentation/origins/docs-website/shaping-content/colour-palette.md",
+    "shortDescription": "What designers in 2025–2026 rate as modern, clean tech palettes, with candidate palettes for the docs site",
+    "tags": [
+      "documentation",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "Starlight and VitePress effort bake-off",
+    "path": "project-context/planning/documentation/origins/docs-website/shaping-content/effort.md",
+    "shortDescription": "The same 4 changes made to both frontrunners, measured, plus upkeep research and Zac's call for Starlight",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Docs site hosting, GitHub Pages and the alternatives",
+    "path": "project-context/planning/documentation/origins/docs-website/shaping-content/hosting.md",
+    "shortDescription": "What GitHub Pages does on its own against the brief, compared in money and effort with Pages plus a framework, a custom domain and other hosts",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Starlight and VitePress upkeep",
+    "path": "project-context/planning/documentation/origins/docs-website/shaping-content/upkeep.md",
+    "shortDescription": "Breaking releases, migration effort, maintenance health and Pages workflow upkeep for Starlight and VitePress, Nov 2024 to Nov 2026",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Commands",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/_content/commands.md",
+    "shortDescription": "Bake-off page: Ang commands in tables, a definition list and code blocks",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "First principles",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/_content/first-principles.md",
+    "shortDescription": "Bake-off page: long prose on Ang's first principles, trimmed from the brain dump",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Home",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/_content/index.md",
+    "shortDescription": "Bake-off page: Ang pitch, what you get, install snippet",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Just the Docs bake-off spike",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/just-the-docs/README.md",
+    "shortDescription": "The shared bake-off pages on Just the Docs v0.12.0 via GitHub Pages' own Jekyll gem, with system dark mode added",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Commands",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/just-the-docs/site/commands.md",
+    "shortDescription": "Bake-off page: Ang commands in tables, a definition list and code blocks",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "First principles",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/just-the-docs/site/first-principles.md",
+    "shortDescription": "Bake-off page: long prose on Ang's first principles, trimmed from the brain dump",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Home",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/just-the-docs/site/index.md",
+    "shortDescription": "Bake-off page: Ang pitch, what you get, install snippet",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Native Pages themes bake-off spike",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/pages-native/README.md",
+    "shortDescription": "The shared bake-off pages under 4 of GitHub Pages' bundled themes (primer, minima, cayman, slate) on its own Jekyll gem",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Commands",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/pages-native/site/commands.md",
+    "shortDescription": "Bake-off page: Ang commands in tables, a definition list and code blocks",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "First principles",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/pages-native/site/first-principles.md",
+    "shortDescription": "Bake-off page: long prose on Ang's first principles, trimmed from the brain dump",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Home",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/pages-native/site/index.md",
+    "shortDescription": "Bake-off page: Ang pitch, what you get, install snippet",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Starlight bake-off spike",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/starlight/README.md",
+    "shortDescription": "The shared bake-off pages on Starlight 0.42.8 and Astro 7.4.5, with an unused Pages deploy workflow to measure upkeep",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Commands",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/starlight/site/src/content/docs/commands.md",
+    "shortDescription": "Bake-off page: Ang commands in tables, a definition list and code blocks",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Ang",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/starlight/site/src/content/docs/index.md",
+    "shortDescription": "Bake-off page: Ang pitch, what you get, install snippet",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "VitePress bake-off spike",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/vitepress/README.md",
+    "shortDescription": "The shared bake-off pages on VitePress 1.6.4, with an unused Pages deploy workflow to measure upkeep",
+    "tags": [
+      "documentation",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Commands",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/vitepress/site/commands.md",
+    "shortDescription": "Bake-off page: Ang commands in tables, a definition list and code blocks",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "First principles",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/vitepress/site/first-principles.md",
+    "shortDescription": "Bake-off page: long prose on Ang's first principles, trimmed from the brain dump",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Home",
+    "path": "project-context/planning/documentation/origins/docs-website/spikes/vitepress/site/index.md",
+    "shortDescription": "Bake-off page: Ang pitch, what you get, install snippet",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Repo README, brief",
+    "path": "project-context/planning/documentation/origins/repo-readme/shaping-content/brief.md",
+    "shortDescription": "What the repo README must and mustn't be",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Repo README, content cut",
+    "path": "project-context/planning/documentation/origins/repo-readme/shaping-content/content-cut.md",
+    "shortDescription": "Which concepts and commands the whistle-stop README covers, and what goes to the docs site",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Documentation",
+    "path": "project-context/planning/documentation/README.md",
+    "shortDescription": "The docs epic, covering the whistle-stop repo README first, then the Starlight docs site on GitHub Pages",
+    "tags": [
+      "documentation",
+      "open-source",
+      "brand-voice"
+    ]
+  }
+]
