@@ -3,12 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u3",
-      "question": "Should the site publish agent-readable docs (llms.txt) for Claude Code users? If so, does a Starlight plugin cover it?",
-      "approach": "Ask Zac; check Starlight's plugin list",
-      "from": "docs-website"
-    },
-    {
       "id": "u2",
       "question": "Does an extends-style shared ang.json work for teams across repos? Spike it, then document it as the team pattern",
       "approach": "Spike; see k6",
@@ -16,7 +10,7 @@
     },
     {
       "id": "u6",
-      "question": "Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/? Written, never run",
+      "question": "Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/, and do starlight-llms-txt's links in /ang/llms.txt carry the /ang/ base? Written, never run",
       "approach": "Run it once on a branch or the first real build; see origins/docs-website/spikes/starlight/deploy.yml",
       "from": "docs-website"
     }
@@ -112,6 +106,12 @@
       "fact": "Design direction mapped (2026-11-17): measured dev-tool docs agree on 16px body, line-height 1.5–1.75, 65–80ch lines and 4px spacing steps, all within Starlight's defaults (16px, 1.75, 45rem, system fonts); typefaces have no consensus (system stack, Inter, Geist all ship); home pages put the install command near the top and show the product, docs-first homes skip social proof; Starlight's hero has no code slot and OG images need a plugin; Mermaid (astro-mermaid) is the diagram option that follows light/dark. AI-look markers beyond Anthropic's own list are single-source and unverified. Mapped, not chosen",
       "source": "design-direction.md",
       "answers": "Wider design direction beyond colour (type, spacing, imagery, home-page layout): what do designers currently rate as modern and clean for developer-tool docs? Research it when planning makes concrete design decisions, so the findings are fresh"
+    },
+    {
+      "id": "k22",
+      "fact": "starlight-llms-txt 0.12.0 (Sep 2026, by delucis of the Starlight team; peers Astro ^7, Starlight >=0.41) generates llms.txt (link index), llms-full.txt (all pages) and llms-small.txt (minified) from one plugin line plus Astro's site option; customSets can cut per-group files. Its docs never mention Astro's base, though its own site runs under a /starlight-llms-txt/ base on Pages",
+      "source": "https://delucis.github.io/starlight-llms-txt/configuration/",
+      "answers": "Should the site publish agent-readable docs (llms.txt) for Claude Code users? If so, does a Starlight plugin cover it?"
     }
   ],
   "decisions": [
@@ -157,6 +157,11 @@
       "id": "d9",
       "decision": "Diagrams use Mermaid via astro-mermaid, registered before Starlight, so they follow the light/dark switch (Zac, 2026-11-17)",
       "evidence": "design-direction.md"
+    },
+    {
+      "id": "d10",
+      "decision": "The site publishes agent-readable docs (llms.txt, llms-full.txt, llms-small.txt) via starlight-llms-txt with default output, no custom sets (Zac, 2026-11-17)",
+      "evidence": "https://delucis.github.io/starlight-llms-txt/getting-started/"
     }
   ],
   "lineage": [
@@ -347,6 +352,14 @@
     {
       "date": "2026-11-17",
       "event": "removed k16: Zac's first impression of palette 4 (Radix slate + jade) on the recolour test: looks nice. An observation made before the wider design research (u5), not a palette decision"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "decided: The site publishes agent-readable docs (llms.txt, llms-full.txt, llms-small.txt) via starlight-llms-txt with default output, no custom sets (Zac, 2026-11-17)"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u6: Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/? Written, never run → Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/, and do starlight-llms-txt's links in /ang/llms.txt carry the /ang/ base? Written, never run"
     }
   ],
   "type": "mixed"
