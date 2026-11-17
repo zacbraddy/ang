@@ -16,4 +16,4 @@ Zac's spec (2026-11-13): a streamlined, simple, easy-to-follow README for people
 
 ## Related
 - [Hub](../../../README.md)
-- [Brain dump context](/project-context/planning/documentation/origins/docs-website/ideas-content/brain-dump-context.md)
+- [Brain dump context](/project-context/execution/documentation/origins/docs-website/ideas-content/brain-dump-context.md)
