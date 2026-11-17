@@ -14,6 +14,7 @@ Each candidate gets the same 3 pages in its own session, light and dark, so Zac 
   - **First principles**: long prose with headings, quotes and a table, trimmed from the brain dump.
   - **Commands**: wide tables, a definition list and code blocks.
 - **Attribution** goes in each framework's own footer, not in the page content.
+- **Library frontmatter:** `library validate` scans spike folders too, so the pages carry `title`, `shortDescription` and `tags` (frameworks ignore what they don't use), and link to each other with `.md`. Each spike also deletes its dependency folders (`vendor/`, `node_modules/`) after building, because the validator would otherwise walk into them.
 - **Judging:** Zac looks over the running site and gives his view in his own words. He turned down 1–5 scores per criterion, preferring to compare the whole field at the end.
 - **Measured per candidate:** whether the build works, how long it takes, lines of config and custom code, how system light/dark is handled, and screenshots in light and dark at 1440px and 390px wide.
 - **Tools:** [`spikes/_tools/shoot.mjs`](../spikes/_tools/shoot.mjs) takes the screenshots. Run it through `mcr.microsoft.com/playwright:v1.55.0-noble` in Docker, because Playwright's Chromium can't run on the host (system libraries are missing). Serve each built site with `python3 -m http.server`.
@@ -35,7 +36,7 @@ Spike: [`spikes/just-the-docs/`](../spikes/just-the-docs/README.md).
 
 ## Unknown unknowns
 - The spike sites are served from the root with no base path. At `zacbraddy.github.io/ang/`, each candidate also needs its base path set (u7).
-- Install instructions don't exist anywhere in the repo yet, so the Home page's install snippet is a placeholder.
+- The Home page's install snippet is a placeholder until the [install, uninstall and update idea](/project-context/ideas/install-uninstall-update/README.md) settles how Ang is installed.
 
 ## Related
 - [Hub](../README.md)

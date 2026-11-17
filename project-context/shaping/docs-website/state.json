@@ -4,8 +4,8 @@
   "unknowns": [
     {
       "id": "u6",
-      "question": "Visual bake-off: which candidate's look does Zac pick? Build the same 3 real pages in each, light and dark, for Zac to judge by eye. Candidates: native Pages (built-in Jekyll with whichever bundled theme shows it at its best, picked in that session), Just the Docs on built-in Pages, Starlight, VitePress. One session per candidate",
-      "approach": "Spike, separate sessions; see shaping-content/hosting.md"
+      "question": "Visual bake-off: which candidate's look does Zac pick? Same 3 shared pages (spikes/_content/) in each, light and dark; Zac gives his view in his own words and compares the whole field at the end (no per-criterion scores). Done: Just the Docs. Left: native Pages (whichever bundled theme shows it best, picked in that session), Starlight, VitePress. One session per candidate",
+      "approach": "Spike, separate sessions; see shaping-content/bake-off.md"
     },
     {
       "id": "u3",
@@ -52,9 +52,14 @@
     },
     {
       "id": "k5",
-      "fact": "Pages' built-in Jekyll (3.10, frozen; best docs theme Just the Docs) gives sidebar and search but no system-default dark mode without custom JS. Starlight or VitePress on Pages via a ~37-line Actions workflow meet the brief for $0, at the cost of roughly yearly forced workflow bumps and framework breaking releases. Custom domain on Pages adds ~$10-12/yr; another host adds a vendor and no gain the brief asks for. Zac leans Pages; anything beyond it must justify its burden",
+      "fact": "Pages' built-in Jekyll (3.10, frozen; best docs theme Just the Docs) gives sidebar and search; Just the Docs follows system dark mode with one extra stylesheet link and no JS (spike). Starlight or VitePress on Pages via a ~37-line Actions workflow meet the brief for $0, at the cost of roughly yearly forced workflow bumps and framework breaking releases. Custom domain on Pages adds ~$10-12/yr; another host adds a vendor and no gain the brief asks for. Zac leans Pages; anything beyond it must justify its burden",
       "source": "shaping-content/hosting.md",
       "answers": "Hosting: what can GitHub Pages do on its own (built-in Jekyll, themes, plain Markdown) against the brief, and how does it compare with a framework on Pages or a domain plus hosting, in money and effort?"
+    },
+    {
+      "id": "k6",
+      "fact": "Just the Docs v0.12.0 builds first time on the github-pages gem v233 (32 lines of config and includes); system dark mode via a media-query stylesheet link, no JS, no flicker; 15-line toggle. Zac: a reasonable first outing, clunky edges to clean up in the build; he'll compare once the field is built",
+      "source": "shaping-content/bake-off.md"
     }
   ],
   "decisions": [],
@@ -86,6 +91,14 @@
     {
       "date": "2026-11-17",
       "event": "replaced u6: Visual bake-off: which candidate's look does Zac pick? Build the same 3 real pages in each, light and dark, for Zac to judge by eye. Candidates: native Pages (built-in Jekyll with a bundled theme, no config beyond picking one), Just the Docs on built-in Pages, Starlight, VitePress. One session per candidate → Visual bake-off: which candidate's look does Zac pick? Build the same 3 real pages in each, light and dark, for Zac to judge by eye. Candidates: native Pages (built-in Jekyll with whichever bundled theme shows it at its best, picked in that session), Just the Docs on built-in Pages, Starlight, VitePress. One session per candidate"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced u6: Visual bake-off: which candidate's look does Zac pick? Build the same 3 real pages in each, light and dark, for Zac to judge by eye. Candidates: native Pages (built-in Jekyll with whichever bundled theme shows it at its best, picked in that session), Just the Docs on built-in Pages, Starlight, VitePress. One session per candidate → Visual bake-off: which candidate's look does Zac pick? Same 3 shared pages (spikes/_content/) in each, light and dark; Zac gives his view in his own words and compares the whole field at the end (no per-criterion scores). Done: Just the Docs. Left: native Pages (whichever bundled theme shows it best, picked in that session), Starlight, VitePress. One session per candidate; approach: Spike, separate sessions; see shaping-content/hosting.md → Spike, separate sessions; see shaping-content/bake-off.md"
+    },
+    {
+      "date": "2026-11-17",
+      "event": "replaced k5: Pages' built-in Jekyll (3.10, frozen; best docs theme Just the Docs) gives sidebar and search but no system-default dark mode without custom JS. Starlight or VitePress on Pages via a ~37-line Actions workflow meet the brief for $0, at the cost of roughly yearly forced workflow bumps and framework breaking releases. Custom domain on Pages adds ~$10-12/yr; another host adds a vendor and no gain the brief asks for. Zac leans Pages; anything beyond it must justify its burden → Pages' built-in Jekyll (3.10, frozen; best docs theme Just the Docs) gives sidebar and search; Just the Docs follows system dark mode with one extra stylesheet link and no JS (spike). Starlight or VitePress on Pages via a ~37-line Actions workflow meet the brief for $0, at the cost of roughly yearly forced workflow bumps and framework breaking releases. Custom domain on Pages adds ~$10-12/yr; another host adds a vendor and no gain the brief asks for. Zac leans Pages; anything beyond it must justify its burden"
     }
   ]
 }
