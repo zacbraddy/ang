@@ -44,7 +44,7 @@ C4Context
 | Ang in the user's repo | changed | Gains `.claude/ang/version.json`, `settings merge`, the `upgrade` command group and the `upgrade-ang` skill |
 | Ang repo | changed | Gains repo-only tooling that never ships: `/cut-release`, `release-scout`, root `scripts/`, `releases/`, `install.sh` and the release workflow (d24) |
 | Claude Code | existing | The only harness ([ADR 0001](/project-context/10k/technical/adrs/0001-claude-code-harness-orca-optional.md)), on both sides |
-| GitHub | new | Draft and published releases with the stamped `install.sh` asset (d16), `GET /releases/tags/{tag}` for overrides (d28), Actions for the release job (d21), `raw.githubusercontent.com` for upgrade guides (k12). Immutable releases and a `v*` tag ruleset are on (d30) |
+| GitHub | new | Draft and published releases with the stamped `install.sh` asset (d16), `GET /releases/tags/{tag}` for overrides (d28), Actions for the release job (d21), `raw.githubusercontent.com` for upgrade guides (k12). Immutable releases are on (d30) |
 | npm registry | new | giget pinned at 3.3.1, run through `npx` (d6). Node with npm/npx is the documented prerequisite (k9) |
 | Git | existing | `git merge-file` does the per-file three-way merge (d9). Release tags are `v1.0.0-rc.N`, then semver (d17) |
 | Fixture repo | new | Created and seeded by Zac from the `rc.1` install (k13, k17); rehearses each release's upgrade from the previous one (d22, d27) |

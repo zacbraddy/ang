@@ -201,7 +201,7 @@ If the job fails, nothing is published. The skill reports the failure. Zac fixes
 |---|---|---|
 | Cut releases from the head of main. Other streams can carry on, and they show only as warnings | None | Agreed |
 | No commit convention, changeset files or pull request labels | None | Agreed |
-| One-time GitHub setup: turn on immutable releases, plus a tag ruleset for `v*` | About 5 minutes in the GitHub UI, by Zac | Agreed |
+| One-time GitHub setup: turn on immutable releases (no `v*` tag ruleset, d30) | One checkbox in the GitHub UI, by Zac | Done |
 | Create the fixture repo once, guided by a story, and keep its seeded edits working as `src/` evolves | Once, plus the occasional fixture fix | Agreed |
 | A broken `install.sh` is fixed by a patch release, never by editing the asset | None: the asset is locked | Agreed |
 | **Repo-only skills, agents and scripts need a home.** The root `.claude/skills` and `.claude/agents` are whole-folder symlinks into `src/`, so anything placed there ships. They become real folders that link each `src/` entry one by one, beside the repo-only entries. Repo-only scripts go in a root `scripts/` folder, so `.claude/scripts` stays a whole-folder symlink. A link script in `scripts/` globs `src/` and creates missing links and removes dangling ones (a no-op on re-run). A repo-only `node --test` fails on drift in the release CI job, and `/cut-release` preflight lists drift as a warning. `library validate` stays out of it, because it ships | A one-off layout change, plus re-running the link script after adding a skill or agent | Agreed |

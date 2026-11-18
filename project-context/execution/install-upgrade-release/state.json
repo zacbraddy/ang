@@ -273,7 +273,7 @@
     },
     {
       "id": "d30",
-      "decision": "Zac turns on immutable releases and adds a v* tag ruleset once, guided by a story. A broken release or install.sh is fixed only by a patch release, never by editing a published asset (Zac's call)",
+      "decision": "Zac turns on immutable releases once, by hand. No v* tag ruleset: immutable releases already lock published tags, and a ruleset would only guard the unpublished window as insurance against a hypothetical, while blocking deletes would break the delete-and-recut path for a failed release run. A broken release or install.sh is fixed only by a patch release, never by editing a published asset (Zac's call)",
       "evidence": "release-process-proposal.md"
     },
     {
@@ -652,6 +652,10 @@
     {
       "date": "2026-11-18",
       "event": "replaced d26: Upgrades are all or nothing: no partial upgrades, so every upgrade ends in a stable state and version.json always names one release. The escape hatch warns that the upgrade is big and how big, and the user decides whether to go ahead. Partial upgrades are parked with a wake condition (Zac's call: a feature nobody has asked for, and its version record needs per-file bases) → Upgrades are all or nothing: no partial upgrades, so every upgrade ends in a stable state and version.json always names one release. Guided with warning says how big the upgrade is and the user decides whether to go ahead. Partial upgrades are parked with a wake condition (Zac's call: a feature nobody has asked for, and its version record needs per-file bases)"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "replaced d30: Zac turns on immutable releases and adds a v* tag ruleset once, guided by a story. A broken release or install.sh is fixed only by a patch release, never by editing a published asset (Zac's call) → Zac turns on immutable releases once, by hand. No v* tag ruleset: immutable releases already lock published tags, and a ruleset would only guard the unpublished window as insurance against a hypothetical, while blocking deletes would break the delete-and-recut path for a failed release run. A broken release or install.sh is fixed only by a patch release, never by editing a published asset (Zac's call)"
     }
   ],
   "type": "technical"

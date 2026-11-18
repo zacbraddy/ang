@@ -227,7 +227,7 @@
   {
     "title": "GitHub release guard rails",
     "path": "project-context/execution/install-upgrade-release/stories/07-github-release-guard-rails.md",
-    "shortDescription": "Zac turns on immutable releases and adds a v* tag ruleset on the Ang repo, guided by this story",
+    "shortDescription": "Zac turned on immutable releases for the Ang repo; the planned v* tag ruleset was dropped",
     "tags": [
       "open-source",
       "distribution"

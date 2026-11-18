@@ -23,7 +23,7 @@ All of the merge logic lives in the library script (`ang-context-manager.mjs`), 
 - **`upgrade-ang` skill** (ships in `src/`): the checks in d13, a fetch of the target and base trees, the target's engine (d29), the four routes (d9, d26) and a closing summary.
 - **Release process:** `releases/notes/` and `releases/upgrades/` (k12), `release-manifest`, `release-scout`, `/cut-release` (d15, d18 to d20, d23, d25), and the release workflow in `.github/workflows/` (d16, d21).
 - **Stories Zac carries out by hand, each guided by a story:**
-  - turning on immutable releases and the `v*` tag ruleset (d30);
+  - turning on immutable releases (d30);
   - creating and seeding the fixture repo from an `rc.1` install (k13, k17, d22).
 - **Cutting `v1.0.0-rc.1` and `rc.2`** with the finished process, as its proof.
 
