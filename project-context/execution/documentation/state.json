@@ -1,14 +1,7 @@
 {
   "status": "active",
   "statusNote": "",
-  "unknowns": [
-    {
-      "id": "u6",
-      "question": "Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/, and do starlight-llms-txt's links in /ang/llms.txt carry the /ang/ base? Written, never run",
-      "approach": "Answered by the step 2 walking skeleton. Best guess: yes, the plugin's own site runs under a base on Pages (k22). If the links lack /ang/, the story picks between a post-build rewrite of the three files and dropping the plugin, and brings that choice to Zac",
-      "from": "docs-website"
-    }
-  ],
+  "unknowns": [],
   "knowns": [
     {
       "id": "k1",
@@ -116,6 +109,12 @@
       "id": "k25",
       "fact": "The user docs need an Upgrading page in Start here. It has to cover what install and upgrade each do, the four upgrade routes (fast, agent-resolved, guided, guided with warning) in the user's terms, that upgrade never commits and how to review or drop the result, why Ang's upgrade is agent-run rather than deterministic, and committing .claude/ang/version.json. No page in the current page map covers this",
       "source": "https://github.com/zacbraddy/ang/blob/stream/install-uninstall-update/project-context/execution/install-upgrade-release/upgrade-routes.md"
+    },
+    {
+      "id": "k26",
+      "fact": "Yes. With the Pages source set to GitHub Actions and stream/documentation allowed on the github-pages environment, deploy-docs.yml (withastro/action@v6 then actions/deploy-pages@v5) built and published the site at https://zacbraddy.github.io/ang/ first time (2026-11-18). starlight-llms-txt 0.12.0 builds its llms.txt links from site + base, so /ang/llms.txt lists https://zacbraddy.github.io/ang/llms-small.txt and .../llms-full.txt, and both resolve on the live site; no rewrite needed",
+      "source": "https://github.com/zacbraddy/ang/actions/runs/44314555360",
+      "answers": "Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/, and do starlight-llms-txt's links in /ang/llms.txt carry the /ang/ base? Written, never run"
     }
   ],
   "decisions": [

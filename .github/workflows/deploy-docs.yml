@@ -1,7 +1,7 @@
 name: Deploy docs
 on:
   push:
-    branches: [main, stream/documentation]
+    branches: [main]
     paths: [docs/**]
   workflow_dispatch:
 permissions:
