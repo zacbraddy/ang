@@ -20,7 +20,6 @@ A table of files rather than a class diagram: the only code is config, one CSS f
 | `docs/src/content/docs/**` | new | Pages, below |
 | `docs/.gitignore` | new | `node_modules/`, `dist/`, `.astro/` |
 | `.github/workflows/deploy-docs.yml` | new | The spike's `deploy.yml`: on push to `main` touching `docs/**` and on manual dispatch; `withastro/action` with `path: docs`, then `actions/deploy-pages` |
-| `project-context/triggers/readme-badges.md` + `triggers.json` entry | new | Adds README status badges once open-source-hygiene's CI exists (k17); added via `ang-context-manager.mjs trigger add` |
 
 ## Content pages
 | Sidebar group | Folder | Slugs |

@@ -14,7 +14,7 @@ The README is rewritten first and ships on its own. Then a Starlight site goes u
 - **Deploy**: `.github/workflows/deploy-docs.yml`, which builds `docs/` and publishes it to Pages on pushes to `main` that touch `docs/**`.
 
 ## Out of scope
-- README status badges. They need the CI (continuous integration) from the open-source-hygiene epic (k17). A trigger adds them once that CI exists.
+- README status badges. They need the CI (continuous integration) from the open-source-hygiene epic, which adds them in the same change as that CI (k17, d12).
 - CONTRIBUTING, the code of conduct and the "fork it" section. Open-source-hygiene builds them; the README links to whichever exist when it ships.
 - A custom domain (k18) and a shared base `ang.json` for teams (d11). Both are parked.
 - Open Graph images, image zoom, terminal recordings, versioned docs and translations. Nothing in the brief asks for them.
@@ -63,7 +63,6 @@ There is almost no code here, so the pyramid is nearly flat.
 | `docs/` site and its config | Builds it | Reviews screenshots |
 | `.github/workflows/deploy-docs.yml` | Writes it | Sets the repo's Pages source to GitHub Actions (one-off, in GitHub settings) |
 | 20 pages | Drafts each from its sources | Reviews the voice and cuts |
-| Badge trigger | Adds it in step 1 | — |
 
 Tools and services: GitHub Pages and GitHub Actions (free), Starlight, Astro, Pagefind (built in), Fontsource, `astro-mermaid` and `starlight-llms-txt`. There are no accounts to open and nothing to pay for.
 

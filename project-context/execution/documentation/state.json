@@ -69,7 +69,7 @@
     },
     {
       "id": "k17",
-      "fact": "README status badges (open-source-hygiene d2) need the CI that the open-source-hygiene item builds; that item is planned as its own epic, so badges are a cross-epic dependency",
+      "fact": "README status badges (open-source-hygiene d2) need the CI that the open-source-hygiene item builds; that item owns adding them alongside its CI",
       "source": "/project-context/shaping/open-source-hygiene/README.md"
     },
     {
@@ -166,6 +166,11 @@
       "id": "d11",
       "decision": "No Team config pattern page: a shared base ang.json isn't free, so it's parked with a wake condition rather than built or documented (Zac, 2026-11-17)",
       "evidence": "/project-context/ideas/parked.md"
+    },
+    {
+      "id": "d12",
+      "decision": "No badge trigger: README status badges are open-source-hygiene's to add (its d2) in the same change as the CI they report on, so this epic files nothing for them (Zac, 2026-11-18)",
+      "evidence": "/project-context/shaping/open-source-hygiene/README.md"
     }
   ],
   "lineage": [
@@ -392,6 +397,14 @@
     {
       "date": "2026-11-17",
       "event": "replaced u6: approach: Run it once on a branch or the first real build; see origins/docs-website/spikes/starlight/deploy.yml → Answered by the step 2 walking skeleton. Best guess: yes, the plugin's own site runs under a base on Pages (k22). If the links lack /ang/, the story picks between a post-build rewrite of the three files and dropping the plugin, and brings that choice to Zac"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "decided: No badge trigger: README status badges are open-source-hygiene's to add (its d2) in the same change as the CI they report on, so this epic files nothing for them (Zac, 2026-11-18)"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "replaced k17: README status badges (open-source-hygiene d2) need the CI that the open-source-hygiene item builds; that item is planned as its own epic, so badges are a cross-epic dependency → README status badges (open-source-hygiene d2) need the CI that the open-source-hygiene item builds; that item owns adding them alongside its CI"
     }
   ],
   "type": "mixed"

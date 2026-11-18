@@ -6,7 +6,7 @@ tags: [documentation, repo-structure]
 # C4 level 2: containers
 
 ## Summary
-In the repo, the epic changes `README.md` and adds two containers: the `docs/` Starlight project and the `deploy-docs.yml` workflow. The `src/` shipped files and `project-context/` are read as sources and stay unchanged, apart from one trigger in the library for README badges. The build produces three served containers on Pages: the HTML pages, the Pagefind search index and the `llms*.txt` files. A "container" here is a separately deployed or loaded unit, matching the [10k containers](/project-context/10k/technical/architecture/2-containers.md).
+In the repo, the epic changes `README.md` and adds two containers: the `docs/` Starlight project and the `deploy-docs.yml` workflow. The `src/` shipped files and `project-context/` are read as sources and stay unchanged. The build produces three served containers on Pages: the HTML pages, the Pagefind search index and the `llms*.txt` files. A "container" here is a separately deployed or loaded unit, matching the [10k containers](/project-context/10k/technical/architecture/2-containers.md).
 
 ## Diagram
 ```mermaid
@@ -22,7 +22,7 @@ C4Container
     Container(docs, "docs/ [new]", "Astro 7 + Starlight, own package.json and lockfile", "Site config, theme, footer override, about 20 content pages")
     Container(workflow, "deploy-docs.yml [new]", "GitHub Actions YAML", "Build job (withastro/action, path docs) and deploy job (deploy-pages)")
     Container(src, "src/ [existing]", "Markdown + Node ESM", "The shipped Ang; source for page claims")
-    ContainerDb(library, "project-context/ [changed]", "Markdown + JSON", "Gains the README badge trigger")
+    ContainerDb(library, "project-context/ [existing]", "Markdown + JSON", "10k docs read as sources for page claims")
   }
 
   Container_Boundary(pagesb, "GitHub Pages: zacbraddy.github.io/ang/ [new]") {
@@ -53,7 +53,7 @@ C4Container
 | `docs/` | new | Outside `src/`, so the installer never copies it. Nothing at the repo root depends on it (candidate ADR 1) |
 | `deploy-docs.yml` | new | Sits beside the install epic's `release.yml` and open-source-hygiene's CI. A failed build blocks the deploy |
 | `src/` | existing | Read, never edited: docs defects become recorded work (candidate ADR 3) |
-| `project-context/` | changed | One trigger: add README badges once open-source-hygiene's CI exists (k17) |
+| `project-context/` | existing | Read only. README badges are open-source-hygiene's to add with its CI (d12, k17) |
 | Pages, search index, llms.txt files | new | All built from `docs/` in one `astro build`; u6 checks they work under the `/ang/` base |
 
 ## Related

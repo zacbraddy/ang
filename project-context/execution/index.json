@@ -306,5 +306,83 @@
       "open-source",
       "brand-voice"
     ]
+  },
+  {
+    "title": "README whistle-stop rewrite",
+    "path": "project-context/execution/documentation/stories/01-readme-rewrite.md",
+    "shortDescription": "The root README becomes the whistle-stop tour, covering 4 concepts, 13 commands, the funnel table, install and a link to the site",
+    "tags": [
+      "documentation",
+      "open-source",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "Site skeleton live on GitHub Pages",
+    "path": "project-context/execution/documentation/stories/02-site-skeleton-live.md",
+    "shortDescription": "A styled Starlight site with the splash home page, deployed by Actions and live at zacbraddy.github.io/ang/, answering u6",
+    "tags": [
+      "documentation",
+      "tech-stack",
+      "open-source"
+    ]
+  },
+  {
+    "title": "Start here pages",
+    "path": "project-context/execution/documentation/stories/03-start-here-pages.md",
+    "shortDescription": "Quick start, Your first loop and Uninstalling pages are live on the site",
+    "tags": [
+      "documentation",
+      "distribution"
+    ]
+  },
+  {
+    "title": "Concepts I, funnel, library and evidence",
+    "path": "project-context/execution/documentation/stories/04-concepts-funnel-library-evidence.md",
+    "shortDescription": "The funnel, Context library and Evidence standard concept pages are live, the funnel with a Mermaid diagram",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Concepts II, triggers, streams and bending",
+    "path": "project-context/execution/documentation/stories/05-concepts-triggers-streams-bending.md",
+    "shortDescription": "The Triggers, Streams & mail and Bending Ang concept pages are live",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Commands, funnel",
+    "path": "project-context/execution/documentation/stories/06-commands-funnel.md",
+    "shortDescription": "One page covering the 9 funnel commands, each under its own anchor",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Commands, library upkeep, setup, streams and bending",
+    "path": "project-context/execution/documentation/stories/07-commands-other-groups.md",
+    "shortDescription": "The four remaining command pages are live, covering 12 commands with one anchor each",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Reference pages",
+    "path": "project-context/execution/documentation/stories/08-reference-pages.md",
+    "shortDescription": "The Agents, ang-context-manager.mjs and Config reference pages are live",
+    "tags": [
+      "documentation"
+    ]
+  },
+  {
+    "title": "Why Ang pages",
+    "path": "project-context/execution/documentation/stories/09-why-ang-pages.md",
+    "shortDescription": "The First principles and Credits pages are live",
+    "tags": [
+      "documentation",
+      "brand-voice"
+    ]
   }
 ]
