@@ -13,7 +13,7 @@ A table of files rather than a class diagram: the only code is config, one CSS f
 |---|---|---|
 | `README.md` | changed | Whistle-stop tour, sections below |
 | `docs/package.json`, `docs/package-lock.json` | new | Exact pins: `astro`, `@astrojs/starlight`, `astro-mermaid`, `starlight-llms-txt`, `@fontsource/geist`, `@fontsource/geist-mono`. Scripts: `build`, `dev` |
-| `docs/astro.config.mjs` | new | `site: 'https://zacbraddy.github.io'`, `base: '/ang'`; integrations `[mermaid(), starlight({ plugins: [starlightLlmsTxt()], … })]`; sidebar of 5 `autogenerate` groups plus Home; `customCss`; `components.Footer` |
+| `docs/astro.config.mjs` | new | `site: 'https://zacbraddy.github.io'`, `base: '/ang'`; integrations `[mermaid(), starlight({ plugins: [starlightLlmsTxt()], … })]`; sidebar of Home plus 5 groups, each `{ label, items: [{ autogenerate: { directory } }] }`; `customCss`; `components.Footer` |
 | `docs/src/content.config.ts` | new | The `docs` collection with Starlight's loader and schema (copied from the spike) |
 | `docs/src/styles/theme.css` | new | Spike palette (d6) plus `--sl-font`, `--sl-font-mono` and Expressive Code's `--ec-*` font variables set to Geist / Geist Mono (d7); imports the Fontsource CSS |
 | `docs/src/components/Footer.astro` | new | Starlight's default footer plus the attribution line (copied from the spike) |

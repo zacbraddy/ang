@@ -5,5 +5,13 @@
     "conditions": [
       "stream:install-uninstall-update:story:install-upgrade-release/06=done"
     ]
+  },
+  {
+    "slug": "docs-site-post-merge-smoke-check",
+    "intent": "Walk Zac through the live docs-site smoke check once the documentation epic is merged to main",
+    "conditions": [
+      "stage:documentation=retro",
+      "custom:stream/documentation is merged into main (git branch -r --merged origin/main lists origin/stream/documentation, or docs/ exists on main)"
+    ]
   }
 ]
