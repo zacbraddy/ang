@@ -32,7 +32,7 @@ The README is rewritten first and ships on its own. Then a Starlight site goes u
 Each step ends with something Zac can see.
 1. **README.** Ships alone (d1). It links to `https://zacbraddy.github.io/ang/` from day one: a dead link for a few days costs less than editing the README again.
 2. **Site skeleton and deploy.** Config, theme, fonts, footer, Mermaid, llms.txt, the splash home page and the workflow. Zac sets the Pages source to GitHub Actions, and the first run answers u6. Nothing else is written until the empty site is live at the real address.
-3. **Start here:** Quick start (with platforms and the native Windows steps checked against the shipped files at build time), Your first loop and Uninstalling.
+3. **Start here:** Quick start (with platforms and the native Windows steps checked against the shipped files at build time), Your first loop, Upgrading and Uninstalling.
 4. **Concepts:** the 6 pages.
 5. **Commands:** the 5 grouped pages.
 6. **Reference and Why Ang:** Agents, `ang-context-manager.mjs`, Config, First principles and Credits.
