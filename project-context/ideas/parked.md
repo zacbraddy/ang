@@ -33,6 +33,11 @@ Each release would also rehearse upgrades that skip releases, starting from olde
 - **Wake condition:** work starts on a project or task meant to ship as Ang's first minor or patch release. Adopting semver sets the expectation that upgrades across several non-breaking versions work.
 - **Source:** parked in planning on 2026-11-17, not from a raw file. Zac's call. See the [release process proposal](/project-context/execution/install-upgrade-release/release-process-proposal.md). The fixture is tagged at every release, so the history to test from builds up anyway.
 
+### Undeclared moves on no-record upgrades
+With no version record, `upgrade plan` runs with `--base none` and can't see a file that upstream moved without a Moves entry. The old path isn't in the target tree, so it's neither in the plan nor removed: the user's edited copy stays at the old path beside the new file, and their edits never reach the new path. With a base, the same move shows up as a `conflict-delete` that `/upgrade-ang` checks for undeclared moves. A fix would have the plan list local files that sit where shipped files used to be, or have the skill look for them on the no-record route.
+- **Wake condition:** a no-record upgrade (a pre-version-record install) leaves an edited file stranded at its old path, or story 13's rehearsal hits it.
+- **Source:** found in execution on 2026-11-18, not from a raw file. The dry run in [story 06: upgrade-ang skill](/project-context/execution/install-upgrade-release/stories/06-upgrade-ang-skill.md) (As built, run 2).
+
 ### Shell-free hook commands
 Ang's hooks in `settings.json` would use Claude Code's exec form (`"command": "node"` with an `args` list, where `${CLAUDE_PROJECT_DIR}` is substituted as a plain string) instead of a shell command line. Today each hook is `node "$CLAUDE_PROJECT_DIR/…"`, which needs a shell to expand the variable. On native Windows Claude Code runs it in Git Bash, or in PowerShell when Git for Windows is missing, where it fails. The exec form runs no shell, so hooks would work either way. Native Windows is untested and best effort (install-upgrade-release d37), so it isn't worth changing Ang's shipped settings yet. The change also goes through the settings merge on every upgrade.
 - **Wake condition:** a native Windows user reports a hook failure, or native Windows moves from best effort to supported.

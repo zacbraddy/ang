@@ -5,6 +5,8 @@ import { applyPlan, checkPlan } from '../upgrade/apply.mjs';
 import { applyMoves, classifyTrees, readTree } from '../upgrade/classify.mjs';
 import { chainGuides, githubGuideFetcher } from '../upgrade/guides.mjs';
 import { chooseRoute } from '../upgrade/size.mjs';
+import { resolveRelease, targetStatus } from '../upgrade/target.mjs';
+import { readVersionRecord } from './version.mjs';
 import { PROJECT } from '../paths.mjs';
 import { fail, readJson } from '../util.mjs';
 
@@ -57,7 +59,24 @@ function plan({ base, target, guides: guidesFile }) {
   }
 }
 
+async function target(tag) {
+  const record = readVersionRecord();
+  const to = await resolveRelease(fetch, tag);
+  const status = targetStatus(record, to);
+  return { status, from: status === 'no-record' ? null : record, to };
+}
+
 export default [
+  {
+    noun: 'upgrade', verb: 'target', args: [],
+    flags: [{ name: 'to', value: 'tag' }],
+    summary: 'resolve the release to upgrade to (latest stable by default) and compare it with the version record; print { status, from, to }',
+    run(_, { to }) {
+      return target(to)
+        .then((result) => console.log(JSON.stringify(result, null, 2)))
+        .catch((error) => fail(error.message));
+    },
+  },
   {
     noun: 'upgrade', verb: 'guides', args: [],
     flags: [{ name: 'from', value: 'tag', required: true }, { name: 'to', value: 'tag', required: true }],

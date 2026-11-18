@@ -2,7 +2,7 @@
 title: upgrade-ang skill
 shortDescription: The shipped upgrade-ang skill drives an upgrade end to end, resolving the target with a new tested upgrade target command, running the target release's engine and taking whichever of the four upgrade routes the plan picks, without ever committing
 tags: [distribution, open-source]
-status: ready
+status: done
 owner: agent
 dependsOn: [02, 05]
 ---
@@ -96,6 +96,44 @@ The judgement half of an upgrade, shipped in `src/` so it is in every install fr
   - tuning `AGENT_RESOLVES_UP_TO` and `WARN_FROM` (story 13);
   - the user docs explaining routes and why the upgrade isn't deterministic (documentation stream, from [upgrade routes](../upgrade-routes.md));
   - pre-open-source upgrades beyond the `no-record` route (d8).
+
+- **Deviations (small)**:
+  - The skill's Checks also check Node 26+, as `install.sh` does: the target engine runs on the user's Node. `install.sh` has no "git missing" message, so the skill's is new wording in the same voice.
+  - `cli.test.mjs`: `serveGuides` is now `serve` (it also serves the stubbed GitHub API), and `runAsync` takes the project's files so `upgrade target` can read a record.
+  - `version show` and `upgrade target` share `readVersionRecord()`, exported from `commands/version.mjs` (d35).
+
+## As built
+**Dry run, 2026-11-18.** Base tree: this branch's `src/` (tracked and new files, no `.local.` files). Target tree: a copy with one change per shape: an appended line in `kill/SKILL.md`, a changed `Next:` line in `implement-story/SKILL.md`, a reworded Spike line in `engineering-defaults.md`, `streams/conventions.md` renamed to `streams-conventions.md` with no Moves entry, a new `.claude/ang/new-in-rc2.md`, and one extra permission in `settings.json`. A hand-built guides JSON stood in for `upgrade guides`, with one Migration (`library index`), one Retired entry ("no polish") and one note. The scratch repo installed the base with an `rc.1` record, then committed local edits: `(local)` on step 1 of `implement-story`, a timebox on the Spike line, a paragraph added to `conventions.md`, and `outputStyle: Terse`.
+
+- **Run 1, `agent-resolved`** (2 conflicted files, 2 hunks, 1 clean merge). Followed the skill from Plan:
+  - The `implement-story` clean merge kept both edits, and the reread against upstream's diff found nothing to fix.
+  - The Spike-line conflict was resolved to upstream's wording plus the user's timebox.
+  - The `conflict-delete` on `conventions.md` matched the target's `streams-conventions.md` byte for byte, so it was an undeclared move. `git merge-file` carried the local paragraph into the new path's `mergedFile`, and the old path was resolved `delete`.
+  - `upgrade apply` wrote 5 files and deleted 1. `settings merge` added the permission and kept `Terse` (silently: `outputStyle` is a skipped key). Then `version write`, the Migration, `library validate` ✔ and the shipped tests (128 pass).
+  - The "no polish" grep found the merged Spike line, for the summary.
+  - Both temp folders were removed, `git diff --cached` was empty and nothing was committed.
+- **Discard:** `git restore . && git clean -fd` returned the tree to clean, as the summary advises.
+- **Run 2, `guided-with-warning`** (`--base none` after committing the record's removal; 3 `conflict-no-base`, 4 hunks).
+  - At Warn the risk was low (wording only, both local customisations survive), so the run went ahead.
+  - Each hunk was settled by its side: upstream's note in `kill`, the user's `(local)`, upstream's `Next:` line, and the combined Spike line. None counted as risky, so there were no questions.
+  - Apply, settings, record, validate and tests all passed. Temp folders removed, `git diff --cached` empty.
+- **Not reached by the dry run** (story 13 proves them for real): `upgrade target` and giget against GitHub, the Checks stops, a risky merge confirmed with the user, an `upgrade apply` refusal, and the unrecoverable-failure handover.
+- **Found:** with no record, an undeclared move of a file the user edited isn't visible in the plan. The old path isn't in the target, so it's neither in the plan nor removed: run 2 left the local `conventions.md` beside the new `streams-conventions.md`, and the user's paragraph never reached the new path. The skill's `conflict-delete` handling only covers runs with a base.
+
+## Review
+Tests pass (128), `upgrade --help` lists `upgrade target`, `library validate` passes, and the dry run covers what it claims. `target.mjs` is tight and matches `install.sh`'s voice.
+
+**Must-fix:** none.
+
+**Should-fix**
+1. `src/.claude/skills/upgrade-ang/SKILL.md:17-22`: the clean-tree check comes before the git prerequisite and passes when `git status --porcelain` "prints nothing". Without git, or outside a git repo, the command fails with empty stdout, so the check passes and the upgrade runs with no `git restore` safety net, the premise the whole skill rests on. Check prerequisites first, and make the clean-tree check require `git status` to succeed (a git repo).
+2. Story line 121: the no-record undeclared-move gap is only noted here, so it's lost when the story closes. Park it in `ideas/parked.md` with a wake condition (e.g. the first no-record upgrade report, or story 13's rehearsal hitting it).
+
+**Nit**
+3. `SKILL.md:77`: Finish's sub-step **Checks** reuses stage 1's name; "Validate" reads clearer when an agent jumps between them.
+4. `SKILL.md:76`: Migrations come from the guides, and a no-record run has none; say so, so the agent doesn't look for a `guides.json` that was never written.
+
+All four fixed: prerequisites and a git-repo check now come before the clean-tree check, the gap is parked as "Undeclared moves on no-record upgrades", and both nits are applied.
 
 ## Related
 - [Plan: upgrade](../plan.md)

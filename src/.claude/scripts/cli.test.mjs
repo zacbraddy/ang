@@ -172,9 +172,13 @@ test('version show fails naming a corrupt record', () => {
 });
 
 // spawnSync blocks the event loop, so a server in this process could never answer it: these runs spawn asynchronously.
-function runAsync(args, env) {
+function runAsync(args, env, files = {}) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ang-cli-'));
   dirs.push(dir);
+  for (const [name, content] of Object.entries(files)) {
+    fs.mkdirSync(path.dirname(path.join(dir, name)), { recursive: true });
+    fs.writeFileSync(path.join(dir, name), JSON.stringify(content));
+  }
   return new Promise((resolve) => {
     const child = spawn(process.execPath, [CLI, ...args], { cwd: dir, env: { ...process.env, CLAUDE_PROJECT_DIR: dir, ...env } });
     let stdout = '';
@@ -185,9 +189,10 @@ function runAsync(args, env) {
   });
 }
 
-async function serveGuides(guides) {
+// Answers each request with the body mapped to its URL, or a 404.
+async function serve(bodies) {
   const server = http.createServer((req, res) => {
-    const body = guides[req.url];
+    const body = bodies[req.url];
     res.writeHead(body ? 200 : 404).end(body ?? 'Not Found');
   });
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
@@ -206,7 +211,7 @@ test('upgrade --help lists upgrade guides', () => {
 });
 
 test('upgrade guides prints the chain oldest first as JSON', async () => {
-  const base = await serveGuides({
+  const base = await serve({
     [`${AT_V120}/v1.1.0.md`]: upgradeGuide('v1.1.0', 'v1.0.0'),
     [`${AT_V120}/v1.2.0.md`]: upgradeGuide('v1.2.0', 'v1.1.0'),
   });
@@ -216,7 +221,7 @@ test('upgrade guides prints the chain oldest first as JSON', async () => {
 });
 
 test('upgrade guides fails naming a missing guide', async () => {
-  const base = await serveGuides({ [`${AT_V120}/v1.2.0.md`]: upgradeGuide('v1.2.0', 'v1.1.0') });
+  const base = await serve({ [`${AT_V120}/v1.2.0.md`]: upgradeGuide('v1.2.0', 'v1.1.0') });
   const { status, stdout, stderr } = await runAsync(['upgrade', 'guides', '--from', 'v1.0.0', '--to', 'v1.2.0'], { ANG_GITHUB_RAW: base });
   assert.equal(status, 1);
   assert.equal(stdout, '');
@@ -352,4 +357,48 @@ test('upgrade plan fails naming a missing folder or an unreadable guides file', 
     assert.equal(status, 1, out);
     assert.match(out, /^✖ .*ang-no-such-folder/m);
   }
+});
+
+const SHA = 'b'.repeat(40);
+const RELEASES = '/repos/zacbraddy/ang/releases';
+const COMMITS = '/repos/zacbraddy/ang/commits';
+const releaseJson = (tag, draft = false) => JSON.stringify({ tag_name: tag, draft });
+const recordAt = (ref) => ({ '.claude/ang/version.json': { ref, sha: 'a'.repeat(40), installedAt: '2026-11-01T00:00:00.000Z' } });
+
+test('upgrade --help lists upgrade target', () => {
+  const { status, out } = project().run('upgrade', '--help');
+  assert.equal(status, 0, out);
+  assert.match(out, /upgrade target \[--to <tag>\]/);
+});
+
+test('upgrade target resolves the latest stable release as an upgrade from the record', async () => {
+  const api = await serve({ [`${RELEASES}/latest`]: releaseJson('v1.1.0'), [`${COMMITS}/v1.1.0`]: SHA });
+  const { status, stdout, stderr } = await runAsync(['upgrade', 'target'], { ANG_GITHUB_API: api }, recordAt('v1.0.0'));
+  assert.equal(status, 0, stderr);
+  const { status: verdict, from, to } = JSON.parse(stdout);
+  assert.equal(verdict, 'upgrade');
+  assert.equal(from.ref, 'v1.0.0');
+  assert.deepEqual(to, { ref: 'v1.1.0', sha: SHA });
+});
+
+test('upgrade target with --to and no record is no-record with a null from', async () => {
+  const api = await serve({ [`${RELEASES}/tags/v1.0.0-rc.2`]: releaseJson('v1.0.0-rc.2'), [`${COMMITS}/v1.0.0-rc.2`]: SHA });
+  const { status, stdout, stderr } = await runAsync(['upgrade', 'target', '--to', 'v1.0.0-rc.2'], { ANG_GITHUB_API: api });
+  assert.equal(status, 0, stderr);
+  assert.deepEqual(JSON.parse(stdout), { status: 'no-record', from: null, to: { ref: 'v1.0.0-rc.2', sha: SHA } });
+});
+
+test('upgrade target fails saying to name a tag when there is no stable release', async () => {
+  const api = await serve({});
+  const { status, stdout, stderr } = await runAsync(['upgrade', 'target'], { ANG_GITHUB_API: api }, recordAt('v1.0.0-rc.1'));
+  assert.equal(status, 1);
+  assert.equal(stdout, '');
+  assert.match(stderr, /^✖ There's no stable Ang release yet[\s\S]*\/upgrade-ang v1\.0\.0-rc\.2/);
+});
+
+test('upgrade target fails on a draft tag as not a published release', async () => {
+  const api = await serve({ [`${RELEASES}/tags/v2.0.0`]: releaseJson('v2.0.0', true), [`${COMMITS}/v2.0.0`]: SHA });
+  const { status, stderr } = await runAsync(['upgrade', 'target', '--to', 'v2.0.0'], { ANG_GITHUB_API: api }, recordAt('v1.0.0'));
+  assert.equal(status, 1);
+  assert.match(stderr, /^✖ v2\.0\.0 isn't a published Ang release/);
 });

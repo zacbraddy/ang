@@ -3,12 +3,16 @@ import path from 'node:path';
 import { VERSION_FILE } from '../paths.mjs';
 import { fail, readJson, rel, writeJson } from '../util.mjs';
 
+// The one reader of the record (d35), shared with upgrade target.
+export const readVersionRecord = () => (fs.existsSync(VERSION_FILE) ? readJson(VERSION_FILE) : null);
+
 export default [
   {
     noun: 'version', verb: 'show', args: [], flags: [],
     summary: 'print the installed Ang version record, or none',
     run() {
-      console.log(fs.existsSync(VERSION_FILE) ? JSON.stringify(readJson(VERSION_FILE), null, 2) : 'none');
+      const record = readVersionRecord();
+      console.log(record ? JSON.stringify(record, null, 2) : 'none');
     },
   },
   {
