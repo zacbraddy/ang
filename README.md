@@ -1,6 +1,8 @@
-<h1 align="center">🚢 🚫 👀 -- Ang: The Last Software Bender -- 🚢 🚫 👀</h1>
+<h1 align="center">🚢🚫👀 | Ang: The Last Software Bender | 🚢🚫👀</h1>
 
 **Avoid Navel Gazing.** A lean, opinionated framework for AI-assisted development. It stops your agents burning tokens until the ocean begins to boil 🌊🔥 and gets them doing actual work instead, all without drowning every session in context!
+<br />
+<br />
 
 ## 🚀 Quick start
 
@@ -13,6 +15,8 @@ curl -fsSL https://github.com/zacbraddy/ang/releases/latest/download/install.sh 
 ```
 
 Then open Claude Code in the repo and run `/bootstrap-repo`. It seeds Ang's view of your project, either from your goals and constraints or by surveying the code you already have, then finishes by tailoring Ang to you. Don't stress about getting the tailoring right first time, because you can tweak it whenever you like with `/tailor-ang`, and anyone joining the repo later doesn't have to miss out on making Ang comfy: they just run `/tailor-ang` and welcome aboard!
+<br />
+<br />
 
 ## 🧠 How it works
 
@@ -21,6 +25,7 @@ Then open Claude Code in the repo and run `/bootstrap-repo`. It seeds Ang's view
 - **If AI frameworks are sourdough bread, Ang is your starter.** It works out the box in a way I think is sensible. Disagree? Cool. When it gets in your way, you raise a workflow improvement and an agent bends Ang to fit your style. Ang isn't *this* repo; Ang is whatever *your* copy of it becomes. You never have to agree with my "stupid" way of doing things. Fix whatever you reckon I got wrong, and now Ang is your perfect framework.
 - **Streams, if you want them.** 🌊 Streams let you run several pieces of work in parallel, one git worktree each, with a mailbox so they can pass notes, cooperate and coordinate. This way you don't discover your agents furiously rowing in opposite directions!
 - **Integrates with your tooling.** Like [Orca](https://github.com/stablyai/orca)? Me too! Ang integrates with it, so out of the box you get all the progress-card goodness from agents working in Orca. Hate Orca, or haven't made your mind up? That's chill, it's optional. 😎
+<br />
 
 ## 📥 The funnel
 
@@ -38,9 +43,10 @@ With Ang you run one command at a time, each in a fresh session, and you stay in
 |           |                                                                                                                                       | Build it (or get walked through it, if it's mine to do)                               | `/implement-story` | The work, test-first, left unstaged for me to look over 👀. Ang knows this is my software, not Ang's, so the final say on what gets checked in, and in what shape, is **always** down to me                                                                                   |
 |           |                                                                                                                                       | Get a second pair of eyes on it                                                       | `/review-story`    | A fresh-eyes review, with its fixes kept separate from the original work, because what gets committed is always my decision, but I've also got better things to do than waste my time searching for sepllnig mistakes and minor cosmetic issues. That's what my agents are for |
 | retro     | "Now we've made progress, what's changed about my project? What's now true and what have I learned or decided that's worth keeping?"  | Wrap up the finished epic                                                             | `/retro`           | What's now true promoted into `10k/`, follow-ups raised, and the rest swept away 🧹                                                                                                                                                                                            |
-
-
+<br />
 And round we go again. That's it. That's Ang. That's the loop! 🔁 What? You were expecting more? Well...
+<br />
+<br />
 
 ## 🪄 Bending Ang
 
@@ -50,20 +56,27 @@ Luckily, this ain't a "me" problem, it's a problem inherent in all AI-assisted d
 
 - `/raise-workflow-improvement`: turns some friction you hit into a concrete change to Ang. Some of these friction points will be obvious enough that you'll want to raise them yourself. But Ang cares about making you comfy, so it also notices you having trouble (or complaining more than usual 😬) and when it does Ang will offer to raise a workflow improvement. This way you can stay focused on what you're doing, but also know that Ang is about to get even better for you. Then, later:
 - `/improve-workflow`: run it in a new session and Ang will have an agent make the changes you want to see in the framework, because that ain't your job, you didn't sign up to be an Ang dev, you just wanted to use it and have it be super useful. Well, now Ang is **your** perfect AI-assisted coding framework.
+<br />
 
 ## 🫶 So much more...
 
 Although Ang wants to stay lean and light-touch, it's ready to drive your software development processes straight out the box. Ang is waiting to show you what else it can do, and will help you discover these features as you work with it if you'd prefer not to have to trawl through docs. Triggers, parked work, item merging, and more, are all things Ang will help you get to grips with as you work.
 
 That said, going in blind can be overwhelming, so if you want to get a full understanding of what Ang can do and the motivations driving the framework...
+<br />
+<br />
 
 ## 📚 Docs
 
 I know you don't want to get drowned in info in a README, but I also know you'll probably want the full rundown of what Ang is and how it can help. So, anything this README skips is at [**zacbraddy.github.io/ang**](https://zacbraddy.github.io/ang/).
+<br />
+<br />
 
 ## 📜 Credits and licence
 
 Ang was developed by [Zac Braddy](https://zackerthehacker.com) and is sponsored by We Right Code.
 
 Ang is licensed under the [MIT licence](LICENSE), so for you that means, like...
-<img src="https://i.imgflip.com/1xvnfi.jpg?a498612" alt="&quot;I made this&quot; meme: one stick figure hands another a thing they made, and the other walks off saying &quot;I made this&quot;" width=136 />
+<br />
+<br />
+<p align="center"><img src="https://i.imgflip.com/1xvnfi.jpg?a498612" alt="&quot;I made this&quot; meme: one stick figure hands another a thing they made, and the other walks off saying &quot;I made this&quot;" width=136 /></p>
