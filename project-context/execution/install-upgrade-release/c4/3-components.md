@@ -27,7 +27,8 @@ C4Component
     Component(registry, "registry.mjs [existing]", "Dispatch", "Declarations, --help, usage errors")
     Component(cmdsettings, "commands/settings.mjs [new]", "Commands", "settings merge")
     Component(cmdversion, "commands/version.mjs [new]", "Commands", "version show, version write")
-    Component(cmdupgrade, "commands/upgrade.mjs [new]", "Commands", "upgrade guides, upgrade plan, upgrade apply")
+    Component(cmdupgrade, "commands/upgrade.mjs [new]", "Commands", "upgrade target, upgrade guides, upgrade plan, upgrade apply")
+    Component(target, "upgrade/target.mjs [new]", "Domain", "Resolves a release tag to its SHA; newer, current or downgrade")
     Component(merge, "settings/merge.mjs [new]", "Domain", "Three-way JSON merge; arrays as sets of whole entries")
     Component(guides, "upgrade/guides.mjs [new]", "Domain", "Chains guides by their from: line, parses sections")
     Component(classify, "upgrade/classify.mjs [new]", "Domain", "Applies guide moves, sorts each file into one category")
@@ -39,12 +40,13 @@ C4Component
 
   Rel(install, cmdsettings, "Empty base")
   Rel(install, cmdversion, "Writes the record")
-  Rel(skill, cmdupgrade, "Runs from the target tree (d29)")
+  Rel(skill, cmdupgrade, "upgrade target from the installed engine; the rest from the target tree (d29)")
   Rel(skill, cmdsettings, "Base = base tree's settings.json")
   Rel(skill, cmdversion, "Reads base SHA, writes new record")
   Rel(entry, registry, "Dispatches")
   Rel(entry, config, "Loads")
   Rel(cmdsettings, merge, "Uses")
+  Rel(cmdupgrade, target, "Uses")
   Rel(cmdupgrade, guides, "Uses")
   Rel(cmdupgrade, classify, "Uses")
   Rel(cmdupgrade, size, "Uses")
@@ -79,13 +81,13 @@ Run top to bottom, piped. Nothing is written before every check passes (d12).
 ## upgrade-ang stages
 | Stage | Status | Deterministic or judgement |
 |---|---|---|
-| Checks (d13): target resolves and is newer, clean tree, prerequisites | new | Deterministic: `version show`, the tag lookup |
+| Checks (d13): clean tree, prerequisites, then `upgrade target` from the installed engine: target resolves (latest stable by default) and is newer | new | Deterministic: `upgrade target` |
 | Fetch target and base trees with giget into a temp folder | new | Deterministic |
 | `upgrade guides`, then `upgrade plan`, from the **target** tree | new | Deterministic |
 | Guided with warning: show the count and a risk assessment, Pilot goes ahead or stops | new | Judgement, the Pilot's |
 | Resolve: reread clean merges against upstream's diff and Retired entries, resolve conflicts, check conflict-deletes as moves. On guided routes, confirm only the risky merges with the Pilot ([upgrade routes](../upgrade-routes.md)) | new | Judgement, the agent's; the Pilot's on risky merges |
 | `upgrade apply`, `settings merge`, `version write` | new | Deterministic |
-| `library validate`, shipped tests, summary (from/to, clean vs judgement, how to review). Changes unstaged | new | Deterministic, then a report |
+| `library validate`, shipped tests, summary (from/to, clean vs judgement, how to review or discard). Changes unstaged. On a failure it can't recover, it reports what went wrong and hands over: fix by hand or discard | new | Deterministic, then a report |
 
 ## Repo-only release tooling
 | Component | Status | Responsibility |

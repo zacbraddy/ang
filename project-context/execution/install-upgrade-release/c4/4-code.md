@@ -40,7 +40,10 @@ Every module here is new except the entry point. The shapes come from the two me
 | | `AGENT_RESOLVES_UP_TO = 5`, `WARN_FROM = 12` | Named constants, tuned after `rc.2` (d9) |
 | `upgrade/apply.mjs` | `checkPlan(entries) → string[]` | Every problem that blocks an apply: an unresolved conflict, a missing `mergedFile`, conflict markers left in a merge to write (`clean-merge`, `conflict`, `conflict-no-base`; upstream bytes may quote a marker), a path outside the project or excluded |
 | | `applyPlan(entries, projectRoot) → { written, deleted, kept }` | Runs only on a plan `checkPlan` passes (d26). Writes and deletes working-tree files with `fs` alone, then removes each `movedFrom`; a moved conflict resolved `keep` is renamed to its new path. Never touches the git index |
-| `commands/upgrade.mjs` | `upgrade guides --from <tag> --to <tag>` | Prints the chain as JSON, or exits 1 naming the missing guide |
+| `upgrade/target.mjs` | `resolveRelease(fetch, tag?) → { ref, sha }` | `/releases/latest` (stable only) or `/releases/tags/{tag}` (drafts rejected), then `/commits/{tag}` for the SHA; `install.sh`'s rate-limit, network and not-published messages |
+| | `compareTags(a, b)`, `targetStatus(record, to) → 'upgrade' \| 'current' \| 'downgrade' \| 'no-record'` | Semantic-version order with prereleases (`rc.1 < rc.2 < 1.0.0`); no record or an unparseable `ref` is `no-record` |
+| `commands/upgrade.mjs` | `upgrade target [--to <tag>]` | Prints `{ status, from, to }`. Runs from the installed engine, because the target isn't fetched yet |
+| | `upgrade guides --from <tag> --to <tag>` | Prints the chain as JSON, or exits 1 naming the missing guide |
 | | `upgrade plan --base <dir\|none> --target <dir> [--guides <file>]` | Reads three trees, classifies, sizes, writes merged files to a temp folder, prints `{ route, entries, tempDir }`. Writes nothing in the project |
 | | `upgrade apply --plan <file>` | Checks then applies a plan the skill has resolved. Any problem exits 1 listing them all, with nothing written. Changes stay unstaged |
 | `ang-context-manager.mjs` | (changed) | Imports `settings`, `version` and `upgrade` command arrays beside the existing ones |

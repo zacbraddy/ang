@@ -17,10 +17,10 @@ All of the merge logic lives in the library script (`ang-context-manager.mjs`), 
 - **Repo layout for repo-only tooling (d24):** the root `.claude/skills` and `.claude/agents` become real folders with per-entry links into `src/`. A root `scripts/` folder holds the link script and `release-manifest`, and a repo-only drift test checks the links.
 - **Shared merge core in the library script:**
   - `settings merge` is the three-way JSON merge from the [settings merge spike](settings-merge-spike.md). It is the install merge when the base is empty (d7, k15).
-  - an `upgrade` command group: file-by-file classification and `git merge-file` (d9), reading the upgrade guides, and sizing the job into a route.
+  - an `upgrade` command group: resolving the target release and checking it's newer (`upgrade target`, run from the installed engine), file-by-file classification and `git merge-file` (d9), reading the upgrade guides, and sizing the job into a route.
   - `version show` and `version write`, the only way install and upgrade read or write `version.json` (d35).
 - **`install.sh`** at the repo root, unstamped there, which stops without a tag (d28). It runs every check in d12, backs up settings (d4), merges settings, writes `version.json`, and prints the version, location and next step.
-- **`upgrade-ang` skill** (ships in `src/`): the checks in d13, a fetch of the target and base trees, the target's engine (d29), the three paths (d9, d26) and a closing summary.
+- **`upgrade-ang` skill** (ships in `src/`): the checks in d13, a fetch of the target and base trees, the target's engine (d29), the four routes (d9, d26) and a closing summary.
 - **Release process:** `releases/notes/` and `releases/upgrades/` (k12), `release-manifest`, `release-scout`, `/cut-release` (d15, d18 to d20, d23, d25), and the release workflow in `.github/workflows/` (d16, d21).
 - **Stories Zac carries out by hand, each guided by a story:**
   - turning on immutable releases and the `v*` tag ruleset (d30);
@@ -63,7 +63,7 @@ flowchart LR
 - **Settings merge:** the copied tree's own `ang-context-manager.mjs` runs it, so the install and the release it installs always agree on the merge.
 
 ### Upgrade
-- **Checks first (d13):** the target exists and is newer, the tree is clean, and the prerequisites are present. A missing or unknown `version.json` goes to guided with warning (d8).
+- **Checks first (d13):** the target exists and is newer, the tree is clean, and the prerequisites are present. A missing or unknown `version.json` goes to guided with warning (d8). `upgrade target` resolves the release and compares it with the record, from the *installed* engine, because the target isn't fetched yet. With no tag named, the target is the latest stable release; prereleases are reached only by naming their tag (Zac's call, 2026-11-18).
 - **Fetch three trees into a temp folder with giget:** the target (theirs) at the target tag, and the base at the `version.json` SHA. The instance (ours) is the working tree. The target tree carries its own `ang-context-manager.mjs`, and the skill runs **that** engine (d29), so no separate engine download is needed.
 - **Fetch every upgrade guide in (installed, target]** from `raw.githubusercontent.com` at the target tag, by following each guide's `from:` line back from the target's guide, then applying them oldest first (k12, d34). A missing guide or broken chain is an error.
 - **Classify and size:** the engine sorts files into the spike's categories (k8). It applies the guides' moves before classifying, so a move is no longer read as a deletion. It then sizes the job:

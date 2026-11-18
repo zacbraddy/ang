@@ -218,7 +218,7 @@
   {
     "title": "upgrade-ang skill",
     "path": "project-context/execution/install-upgrade-release/stories/06-upgrade-ang-skill.md",
-    "shortDescription": "The shipped upgrade-ang skill drives an upgrade end to end, running the target release's engine and taking whichever of the four upgrade routes the plan picks, without ever committing",
+    "shortDescription": "The shipped upgrade-ang skill drives an upgrade end to end, resolving the target with a new tested upgrade target command, running the target release's engine and taking whichever of the four upgrade routes the plan picks, without ever committing",
     "tags": [
       "distribution",
       "open-source"

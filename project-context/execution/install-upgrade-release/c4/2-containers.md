@@ -35,7 +35,7 @@ C4Container
     }
     Container_Boundary(shipped, "src/, ships") {
       Container(scriptsrc, "ang-context-manager.mjs [changed]", "Node ESM, built-ins only", "Adds settings merge and the upgrade command group")
-      Container(upskill, "upgrade-ang [new]", "Skill, Markdown", "Checks, fetch, run the target's engine, three paths, summary")
+      Container(upskill, "upgrade-ang [new]", "Skill, Markdown", "Checks, fetch, run the target's engine, four routes, summary")
     }
   }
 
