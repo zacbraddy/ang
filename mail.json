@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "c25e30",
+    "from": "install-uninstall-update",
+    "to": "documentation",
+    "sent": "2026-11-18",
+    "text": "The upgrade is agent-run and never commits: four routes (fast, agent-resolved, guided, guided with warning), with the user's review and commit as the final say. Users will need this explained, including why Ang's upgrade isn't deterministic. The full context and a list of what the docs should cover are in project-context/execution/install-upgrade-release/upgrade-routes.md on stream/install-uninstall-update."
+  }
+]
