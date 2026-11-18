@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      TAG: ${{ github.ref_name }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Preflight
+        run: |
+          echo "$TAG" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+(-rc\.[0-9]+)?$' \
+            || { echo "::error::$TAG isn't vX.Y.Z or vX.Y.Z-rc.N"; exit 1; }
+          case "$TAG" in *-rc.*) echo "PRERELEASE=--prerelease" >> "$GITHUB_ENV" ;; esac
+
+      - uses: actions/checkout@v7
+
+      - name: Check release notes exist
+        run: |
+          [ -f "releases/notes/$TAG.md" ] || { echo "::error::releases/notes/$TAG.md is missing"; exit 1; }
+
+      - uses: actions/setup-node@v7
+        with:
+          # No .node-version in this repo yet; bump each October (k9).
+          node-version: 26
+
+      - name: Tests
+        # Quoted so node expands the globs: bare `node --test` skips dot folders like src/.claude.
+        run: node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'
+
+      - name: Stamp install.sh
+        run: |
+          sed -e "s/^TAG=\"\"$/TAG=\"$TAG\"/" -e "s/^SHA=\"\"$/SHA=\"$GITHUB_SHA\"/" install.sh > "$RUNNER_TEMP/install.sh"
+          grep -qx "TAG=\"$TAG\"" "$RUNNER_TEMP/install.sh" \
+            && grep -qx "SHA=\"$GITHUB_SHA\"" "$RUNNER_TEMP/install.sh" \
+            || { echo "::error::install.sh no longer has exact TAG=\"\" and SHA=\"\" lines to stamp"; exit 1; }
+
+      - name: Smoke install
+        run: |
+          mkdir "$RUNNER_TEMP/smoke"
+          cd "$RUNNER_TEMP/smoke"
+          git init -q
+          sh "$RUNNER_TEMP/install.sh"
+          node .claude/scripts/ang-context-manager.mjs library init
+          node .claude/scripts/ang-context-manager.mjs library validate
+
+      - name: Create draft release
+        run: |
+          # PRERELEASE is unquoted on purpose: empty for stable tags, so it adds no argument.
+          gh release create "$TAG" "$RUNNER_TEMP/install.sh" --draft --title "$TAG" \
+            --notes-file "releases/notes/$TAG.md" $PRERELEASE

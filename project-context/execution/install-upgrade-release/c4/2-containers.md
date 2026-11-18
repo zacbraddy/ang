@@ -87,7 +87,7 @@ C4Container
 | Root `.claude/skills`, `.claude/agents` | changed | Repo root | From whole-folder symlinks to real folders of per-entry links plus repo-only entries (d24). Drawn in [level 3](3-components.md) |
 | `releases/` | new | Repo root | Human notes (the Release body, d25) and agent-facing upgrade guides, one of each per release (k12) |
 | `install.sh` (repo copy) | new | Repo root | Unstamped. Without a tag it stops and points at the release-asset one-liner (d28) |
-| `release.yml` | new | `.github/workflows/` | On `v*` push: `node --test`, smoke install, stamp, draft release (d21). Separate from open-source hygiene's CI |
+| `release.yml` | new | `.github/workflows/` | On `v*` push: tests (`node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'`), stamp, smoke install with the stamped copy, draft release (d21). Separate from open-source hygiene's CI |
 | GitHub Release + asset | new | GitHub | Drafts are invisible to `releases/latest` until Zac publishes. Immutable once published (d30) |
 | `ang-context-manager.mjs` | changed | `src/`, installed | Gains core (non-feature-gated) `settings merge` and `upgrade` commands, Node built-ins only ([ADR 0002](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)) |
 | `upgrade-ang` | new | `src/.claude/skills/` | The judgement half of an upgrade: rereads clean merges, resolves conflicts, confirms risky merges with the user on guided routes and gives the size warning (d9, d13, d26) |

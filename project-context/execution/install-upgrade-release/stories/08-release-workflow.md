@@ -2,7 +2,7 @@
 title: Release workflow
 shortDescription: A tag-triggered GitHub Actions job tests, smoke-installs, stamps install.sh and creates the draft release
 tags: [distribution, open-source]
-status: ready
+status: done
 owner: agent
 dependsOn: [01, 03]
 ---
@@ -56,11 +56,29 @@ Pushing a `v*` tag runs every test on Node 26, including the link drift test. Th
   - Files are named `vX.Y.Z.md`, or `vX.Y.Z-rc.N.md` for release candidates.
   - Each file is the release's GitHub body, written for people in Zac's voice (d25). The agent-facing upgrade guide goes in `releases/upgrades/`.
   - Give it frontmatter only if the library validator requires it there. `releases/` sits outside `project-context/`, so it probably doesn't.
+- **As built:**
+  - Preflight is split around checkout: the tag-format check is the job's first step, and the notes-file check runs right after `actions/checkout` (it needs the files). Both still fail before setup-node and the tests.
+  - Actions are pinned to `actions/checkout@v7` and `actions/setup-node@v7`, their latest majors on 2026-11-18.
+  - `actionlint` isn't installed here, so the workflow was checked with a YAML parse. The preflight regex, the rc detection and the stamp guard were dry-run locally against good and broken inputs.
+  - The smoke step sets no git identity: a fresh `git init` with nothing committed passes `check_clean` without one. Story 11's run confirms it.
 - **Out of scope:**
   - writing any real notes file (story 11 writes `v1.0.0-rc.1.md`);
   - `/cut-release`'s delete-and-recut path when a run fails (story 10);
   - publishing the draft, which Zac does by hand;
   - the stale `install.sh` element list in `c4/4-code.md:51-56` (flagged in story 03).
+
+## Review
+Evidence and criteria hold: 160 of 160 tests pass with the workflow's glob command, and the library validates. The stamp and smoke steps were dry-run exactly as written against pushed commit `5eac613` with no git identity: install, `library init` and `library validate` all exit 0. The tag only reaches scripts through `env`, never `${{ }}`, so it can't inject. `actions/checkout@v7` and `actions/setup-node@v7` match their latest releases (v7.0.1, v7.1.0).
+
+**Must-fix:** none.
+
+**Should-fix**
+- `release-process-proposal.md:167`: "repeats from step 5" now reads as the job's new step 5 (`gh release create`). It means stage 5 (commit, tag, push), so say "stage 5".
+
+**Nits**
+- `release-process-proposal.md:165`: the `gh release create` line attaches `install.sh`, but the job attaches the stamped copy. Say so.
+- `c4/4-code.md:72`: "Preflight (tag format, notes file), checkout" puts the notes check before checkout; it runs just after. The proposal's step 1 (:160) blurs this the same way, which is harmless at that level.
+- `releases/notes/README.md:3`: "stops before running anything" overstates it, since the tag check and checkout run first. "Before the tests" is accurate.
 
 ## Related
 - [C4 components: repo-only release tooling](../c4/3-components.md)

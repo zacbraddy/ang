@@ -113,7 +113,7 @@ Steps 3 to 6 can run in parallel once step 2 lands.
 - **Release:** `/cut-release` takes `rc.2` from preflight to post-publish, with Zac only making decisions and never typing a git or gh command. The coverage check shows no leftover manifest entries.
 
 ## Test strategy
-Every test uses `node:test`, beside the code it tests. Zero dependencies, run with `node --test`.
+Every test uses `node:test`, beside the code it tests. Zero dependencies, run with `node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'` (quoted so Node expands the globs; bare `node --test` skips dot folders like `src/.claude`).
 
 | Level | What | Notes |
 |---|---|---|

@@ -69,7 +69,7 @@ Every module here is new except the entry point. The shapes come from the two me
 | `scripts/release-manifest.mjs` | `buildManifest(fromTag, toRef) → Manifest` | `git diff -M --numstat`, `git log`, `retro: archive` commits, `10k/` paths, `--help` diff, settings diff. Deterministic |
 | `.claude/skills/cut-release/SKILL.md` | prose | Stages 0 to 8; asks for the go immediately before push; `gh release view --web` |
 | `.claude/agents/release-scout.md` | prose | Reads the manifest and diffs; returns the grouped summary and coverage map |
-| `.github/workflows/release.yml` | job | Checkout, setup-node 26, `node --test`, smoke install with the stamped copy, stamp, draft release |
+| `.github/workflows/release.yml` | job | Tag-format check, checkout, notes-file check, setup-node 26, `node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'`, stamp, smoke install with the stamped copy, draft release |
 | `releases/notes/vX.Y.Z.md`, `releases/upgrades/vX.Y.Z.md` | data | One of each per release; guides start with `from:` so `chainGuides` can walk them |
 
 ## Related

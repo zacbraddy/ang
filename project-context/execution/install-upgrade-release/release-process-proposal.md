@@ -158,12 +158,13 @@ from: v1.0.0
 
 ### 6. Release job (GitHub Actions, on `v*` tag push)
 One short workflow using `actions/checkout`, `actions/setup-node` and the preinstalled `gh`:
-1. Run the tests on Node 26.
-2. **Install smoke test:** run the stamped `install.sh` into a fresh `git init` repo on the runner, then `library init` and `library validate`.
+1. Check the tag is `vX.Y.Z` or `vX.Y.Z-rc.N` and that `releases/notes/$TAG.md` exists.
+2. Run the tests on Node 26.
 3. Stamp a copy of `install.sh` with `TAG` and `SHA`.
-4. `gh release create "$TAG" --draft --notes-file releases/notes/$TAG.md install.sh`. Tags with a `-rc.N` suffix also get `--prerelease`.
+4. **Install smoke test:** run the stamped copy into a fresh `git init` repo on the runner, then `library init` and `library validate`.
+5. `gh release create "$TAG" --draft --notes-file releases/notes/$TAG.md` with the stamped copy of `install.sh` attached. Tags with a `-rc.N` suffix also get `--prerelease`.
 
-If the job fails, nothing is published. The skill reports the failure. Zac fixes it, the skill deletes the tag on his go, and the process repeats from step 5.
+If the job fails, nothing is published. The skill reports the failure. Zac fixes it, the skill deletes the tag on his go, and the process repeats from stage 5.
 
 ### 7. Publish: Zac's click
 - The skill runs `gh release view vX.Y.Z --web` to open the draft in Zac's browser, then tells him to press **Publish** and come back to say it's done. Publishing is a manual click in the GitHub web interface. It isn't a skill step.
