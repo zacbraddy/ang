@@ -73,7 +73,7 @@
     },
     {
       "id": "k19",
-      "fact": "Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 21 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list",
+      "fact": "Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 22 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list",
       "source": "information-architecture.md",
       "answers": "Information architecture: which pages, and how does the brain-dump content map onto them?"
     },
@@ -107,7 +107,7 @@
     },
     {
       "id": "k25",
-      "fact": "The user docs need an Upgrading page in Start here. It has to cover what install and upgrade each do, the four upgrade routes (fast, agent-resolved, guided, guided with warning) in the user's terms, that upgrade never commits and how to review or drop the result, why Ang's upgrade is agent-run rather than deterministic, and committing .claude/ang/version.json. No page in the current page map covers this",
+      "fact": "The user docs need an Upgrading page in Start here, now in the page map and story 03. It covers what install and upgrade each do, the four upgrade routes (fast, agent-resolved, guided, guided with warning) in the user's terms, that upgrade never commits and how to review or drop the result, why Ang's upgrade is agent-run rather than deterministic, and committing .claude/ang/version.json",
       "source": "https://github.com/zacbraddy/ang/blob/stream/install-uninstall-update/project-context/execution/install-upgrade-release/upgrade-routes.md"
     },
     {
@@ -422,6 +422,14 @@
     {
       "date": "2026-11-18",
       "event": "replaced k19: Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 20 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list → Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 21 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "replaced k19: Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 21 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list → Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 22 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "replaced k25: The user docs need an Upgrading page in Start here. It has to cover what install and upgrade each do, the four upgrade routes (fast, agent-resolved, guided, guided with warning) in the user's terms, that upgrade never commits and how to review or drop the result, why Ang's upgrade is agent-run rather than deterministic, and committing .claude/ang/version.json. No page in the current page map covers this → The user docs need an Upgrading page in Start here, now in the page map and story 03. It covers what install and upgrade each do, the four upgrade routes (fast, agent-resolved, guided, guided with warning) in the user's terms, that upgrade never commits and how to review or drop the result, why Ang's upgrade is agent-run rather than deterministic, and committing .claude/ang/version.json"
     }
   ],
   "type": "mixed"

@@ -25,7 +25,7 @@ A table of files rather than a class diagram: the only code is config, one CSS f
 | Sidebar group | Folder | Slugs |
 |---|---|---|
 | Home | `docs/src/content/docs/` | `index.mdx` (splash template; `.mdx` for LinkCards, d8) |
-| Start here | `start-here/` | `quick-start`, `alongside-your-framework`, `first-loop`, `uninstalling` |
+| Start here | `start-here/` | `quick-start`, `alongside-your-framework`, `first-loop`, `upgrading`, `uninstalling` |
 | Concepts | `concepts/` | `funnel`, `context-library`, `evidence-standard`, `triggers`, `streams-and-mail`, `bending-ang` |
 | Commands | `commands/` | `funnel`, `library-upkeep`, `setup`, `streams`, `bending` (one `##` heading per command, so each gets an anchor, d5) |
 | Reference | `reference/` | `agents`, `ang-context-manager`, `config` |
