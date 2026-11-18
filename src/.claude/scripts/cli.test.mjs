@@ -1,6 +1,6 @@
 import { after, test } from 'node:test';
 import assert from 'node:assert/strict';
-import { spawn, spawnSync } from 'node:child_process';
+import { execFileSync, spawn, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import http from 'node:http';
 import os from 'node:os';
@@ -221,4 +221,135 @@ test('upgrade guides fails naming a missing guide', async () => {
   assert.equal(status, 1);
   assert.equal(stdout, '');
   assert.match(stderr, /^✖ no upgrade guide for v1\.1\.0 at v1\.2\.0/);
+});
+
+test('upgrade --help lists upgrade plan and upgrade apply', () => {
+  const { status, out } = project().run('upgrade', '--help');
+  assert.equal(status, 0, out);
+  assert.match(out, /upgrade plan --base <dir\|none> --target <dir> \[--guides <file>\]/);
+  assert.match(out, /upgrade apply --plan <file>/);
+});
+
+const BASE6 = 'one\ntwo\nthree\nfour\nfive\nsix\n';
+function folder(files) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ang-tree-'));
+  dirs.push(dir);
+  for (const [name, content] of Object.entries(files)) {
+    fs.mkdirSync(path.dirname(path.join(dir, name)), { recursive: true });
+    fs.writeFileSync(path.join(dir, name), content);
+  }
+  return dir;
+}
+const snapshotTree = (dir) => Object.fromEntries(fs.readdirSync(dir, { recursive: true, withFileTypes: true })
+  .filter((e) => e.isFile() && !path.relative(dir, e.parentPath).split(path.sep).includes('.git'))
+  .map((e) => [path.relative(dir, path.join(e.parentPath, e.name)), fs.readFileSync(path.join(e.parentPath, e.name), 'utf8')]));
+
+// One file per category the plan can reach, plus a move of .claude/ang.json the user edited.
+function upgradeScenario() {
+  const base = folder({
+    'unchanged.md': 'x', 'fast.md': '1', 'fpd.md': '1', 'keep.md': '1', 'clean.md': BASE6, 'conflict.md': BASE6, 'cdel.md': '1',
+    '.claude/ang.json': '{"a":1}', '.claude/settings.json': '{}',
+  });
+  const target = folder({
+    'unchanged.md': 'x', 'fast.md': '2', 'new.md': 'n', 'keep.md': '1', 'clean.md': BASE6.replace('six', 'SIX'),
+    'conflict.md': BASE6.replace('one', 'uno'), 'ang.json': '{"a":1}', '.claude/settings.json': '{"b":2}',
+  });
+  const proj = project({
+    'unchanged.md': 'x', 'fast.md': '1', 'fpd.md': '1', 'keep.md': 'L', 'clean.md': BASE6.replace('one', 'ONE'),
+    'conflict.md': BASE6.replace('one', 'ONE'), 'cdel.md': 'L', '.claude/ang.json': '{"a":1,"streams":true}',
+    '.claude/settings.json': '{"mine":true}', 'mine.md': 'm',
+  });
+  const git = (...args) => execFileSync('git', ['-C', proj.dir, ...args], { encoding: 'utf8' });
+  git('init', '-q');
+  git('add', '.');
+  git('-c', 'user.name=t', '-c', 'user.email=t@t', 'commit', '-qm', 'init');
+  const guides = folder({ 'guides.json': JSON.stringify([{ version: 'v1.1.0', from: 'v1.0.0', moves: [{ from: '.claude/ang.json', to: 'ang.json', note: '' }], migrations: [], retired: [], notes: [] }]) });
+  return { base, target, proj, git, guidesFile: path.join(guides, 'guides.json') };
+}
+
+test('upgrade plan classifies every file into a temp folder, writing nothing in the project', () => {
+  const { base, target, proj, guidesFile } = upgradeScenario();
+  const before = snapshotTree(proj.dir);
+  const { status, out } = proj.run('upgrade', 'plan', '--base', base, '--target', target, '--guides', guidesFile);
+  assert.equal(status, 0, out);
+  const plan = JSON.parse(out);
+  dirs.push(plan.tempDir);
+  assert.equal(plan.route.route, 'agent-resolved');
+  assert.deepEqual(plan.entries.map((e) => [e.path, e.category]), [
+    ['ang.json', 'keep-local'], ['cdel.md', 'conflict-delete'], ['clean.md', 'clean-merge'], ['conflict.md', 'conflict'],
+    ['fast.md', 'fast-path'], ['fpd.md', 'fast-path-delete'], ['keep.md', 'keep-local'], ['new.md', 'upstream-new'], ['unchanged.md', 'unchanged'],
+  ]);
+  const byPath = Object.fromEntries(plan.entries.map((e) => [e.path, e]));
+  assert.equal(byPath['ang.json'].movedFrom, '.claude/ang.json');
+  for (const [p, bytes] of [['ang.json', '{"a":1,"streams":true}'], ['fast.md', '2'], ['new.md', 'n'], ['clean.md', BASE6.replace('one', 'ONE').replace('six', 'SIX')]]) {
+    assert.ok(byPath[p].mergedFile.startsWith(plan.tempDir), p);
+    assert.equal(fs.readFileSync(byPath[p].mergedFile, 'utf8'), bytes, p);
+  }
+  assert.match(fs.readFileSync(byPath['conflict.md'].mergedFile, 'utf8'), /^<{7} local$/m);
+  assert.deepEqual(snapshotTree(proj.dir), before);
+});
+
+test('upgrade apply refuses an unresolved plan, listing every problem and writing nothing', () => {
+  const { base, target, proj, guidesFile } = upgradeScenario();
+  const plan = JSON.parse(proj.run('upgrade', 'plan', '--base', base, '--target', target, '--guides', guidesFile).out);
+  dirs.push(plan.tempDir);
+  const planFile = path.join(plan.tempDir, 'plan.json');
+  fs.writeFileSync(planFile, JSON.stringify(plan));
+  const before = snapshotTree(proj.dir);
+  const { status, out } = proj.run('upgrade', 'apply', '--plan', planFile);
+  assert.equal(status, 1, out);
+  assert.match(out, /conflict\.md: conflict needs a resolution/);
+  assert.match(out, /cdel\.md: conflict-delete needs a resolution/);
+  assert.deepEqual(snapshotTree(proj.dir), before);
+});
+
+test('upgrade apply writes a resolved plan to the working tree, leaving it unstaged', () => {
+  const { base, target, proj, git, guidesFile } = upgradeScenario();
+  const plan = JSON.parse(proj.run('upgrade', 'plan', '--base', base, '--target', target, '--guides', guidesFile).out);
+  dirs.push(plan.tempDir);
+  for (const entry of plan.entries) {
+    if (entry.path === 'conflict.md') {
+      fs.writeFileSync(entry.mergedFile, BASE6.replace('one', 'ONE uno'));
+      entry.resolution = 'write';
+    }
+    if (entry.path === 'cdel.md') entry.resolution = 'keep';
+  }
+  const planFile = path.join(plan.tempDir, 'plan.json');
+  fs.writeFileSync(planFile, JSON.stringify(plan));
+  const { status, out } = proj.run('upgrade', 'apply', '--plan', planFile);
+  assert.equal(status, 0, out);
+  assert.deepEqual(JSON.parse(out), {
+    written: ['ang.json', 'clean.md', 'conflict.md', 'fast.md', 'new.md'],
+    deleted: ['fpd.md'],
+    kept: ['cdel.md', 'keep.md'],
+  });
+  assert.deepEqual(snapshotTree(proj.dir), {
+    'ang.json': '{"a":1,"streams":true}', 'cdel.md': 'L', 'clean.md': BASE6.replace('one', 'ONE').replace('six', 'SIX'),
+    'conflict.md': BASE6.replace('one', 'ONE uno'), 'fast.md': '2', 'new.md': 'n', 'keep.md': 'L', 'unchanged.md': 'x',
+    '.claude/settings.json': '{"mine":true}', 'mine.md': 'm',
+  });
+  assert.equal(git('diff', '--cached'), '');
+});
+
+test('upgrade plan with --base none classifies without a base and routes guided with warning', () => {
+  const { target, proj } = upgradeScenario();
+  const { status, out } = proj.run('upgrade', 'plan', '--base', 'none', '--target', target);
+  assert.equal(status, 0, out);
+  const plan = JSON.parse(out);
+  dirs.push(plan.tempDir);
+  assert.equal(plan.route.route, 'guided-with-warning');
+  const categories = Object.fromEntries(plan.entries.map((e) => [e.path, e.category]));
+  assert.equal(categories['fast.md'], 'conflict-no-base');
+  assert.equal(categories['unchanged.md'], 'unchanged');
+  assert.equal(categories['new.md'], 'upstream-new');
+});
+
+test('upgrade plan fails naming a missing folder or an unreadable guides file', () => {
+  const { base, target, proj } = upgradeScenario();
+  const missing = path.join(os.tmpdir(), 'ang-no-such-folder');
+  for (const args of [['--base', missing, '--target', target], ['--base', base, '--target', missing], ['--base', base, '--target', target, '--guides', missing]]) {
+    const { status, out } = proj.run('upgrade', 'plan', ...args);
+    assert.equal(status, 1, out);
+    assert.match(out, /^✖ .*ang-no-such-folder/m);
+  }
 });

@@ -2,7 +2,7 @@
 title: Upgrade plan and apply engine
 shortDescription: The deterministic upgrade engine classifies every file across base, instance and target, picks one of the four upgrade routes and applies a resolved plan to the working tree without staging or committing
 tags: [distribution]
-status: ready
+status: done
 owner: agent
 dependsOn: [04]
 ---
@@ -48,7 +48,7 @@ In each line below, `b`, `l` and `t` are the base, local (ours) and target (thei
 
 **Apply** (`checkPlan`, `applyPlan`)
 - Given a conflict entry with no `resolution`, when checked, then the check reports it. When `upgrade apply` runs on that plan, then it exits 1 listing every problem and the project is byte-for-byte unchanged.
-- Given a file to write whose `mergedFile` is missing or still has a `<<<<<<< ` or `>>>>>>> ` line, then the check reports it.
+- Given a file to write whose `mergedFile` is missing, or a merge to write (`clean-merge`, `conflict`, `conflict-no-base`) whose `mergedFile` still has a `<<<<<<< ` or `>>>>>>> ` line, then the check reports it. Upstream bytes are never checked for markers, because a shipped doc may quote one.
 - Given an entry path that's absolute, contains `..` or is excluded, then the check reports it.
 - Given a passing plan, when applied:
   - `fast-path`, `upstream-new` and `clean-merge` write their `mergedFile`;
@@ -56,7 +56,7 @@ In each line below, `b`, `l` and `t` are the base, local (ours) and target (thei
   - a conflict resolved `write` writes its `mergedFile`, `delete` deletes and `keep` leaves the file alone;
   - `unchanged`, `keep-local` and `local-only` touch nothing;
   - parent folders are created as needed.
-- Given an entry with `movedFrom` that was written, when applied, then the old path is deleted.
+- Given an entry with `movedFrom` that was written, when applied, then the old path is deleted. Given a moved conflict resolved `keep`, then the local file is renamed to the new path.
 - Given the project is a git repo with a clean index, when applied, then `git diff --cached` is empty and `git status` shows the changes unstaged.
 - Given a passing plan, when `upgrade apply` runs, then it prints `{ written, deleted, kept }` as JSON and exits 0.
 
@@ -108,6 +108,25 @@ In each line below, `b`, `l` and `t` are the base, local (ours) and target (thei
   - `settings.json` and `version.json` (`settings merge` and `version write`, story 02);
   - Migrations and Retired entries (they're for the skill's judgement);
   - removing folders a delete leaves empty (git doesn't track them).
+- **As built**:
+  - A moved file classed `unchanged` or `keep-local` is written, not left alone. On disk it still sits at the old path, so "touch nothing" would strand it there and leave the new path empty. `classifyTrees` gives it the local bytes as `mergedFile`, and `apply` writes it at the new path and deletes the old one.
+  - `applyMoves` returns `{ files, movedFrom }`, and `mergeFile` takes the path as a fourth argument so its error can name it.
+  - `apply` reports `kept` as the files it left holding local changes: `keep-local`, `local-only` and conflicts resolved `keep`. `unchanged` files aren't listed.
+  - `scripts/install.test.mjs` builds its fake release from `git ls-files src`, so it fails until the new `upgrade/` modules are tracked.
+
+## Review
+Done-when evidence holds: 109 `src` tests and 32 `scripts` tests pass, and `upgrade --help` lists `plan` and `apply`. Every acceptance line has a test.
+
+**Must-fix**
+- `src/.claude/scripts/ang/upgrade/apply.mjs:60`: a moved conflict resolved `keep` leaves the file at its old path. The new path never gets written and the old path drops out of base ∪ target, so later upgrades orphan it. This is the same stranding the as-built note fixed for `keep-local`. Fix: on `keep` with `movedFrom`, rename old → new.
+
+**Should-fix**
+- `c4/4-code.md:35,37,38` has drifted from the as-built shapes: `applyMoves` returns `{ files, movedFrom }`, `mergeFile` takes the path as a fourth argument, and `classifyTrees` takes `movedFrom` and covers base ∪ target, not "any tree".
+
+**Nit**
+- `apply.mjs:43` checks for markers in every write, including the upstream bytes for `fast-path`, `upstream-new` and target-side `conflict-delete`. A shipped doc with a line starting `<<<<<<< ` would block every apply and leave no resolution that fixes it. Nothing in `src/` has one today.
+- `commands/upgrade.mjs:44`: if a merge throws, `tempDir` is left behind in the OS temp folder.
+- `size.test.mjs:9` tests constant values. Tuning them after `rc.2` would break a test that guards nothing.
 
 ## Related
 - [Upgrade routes](../upgrade-routes.md)

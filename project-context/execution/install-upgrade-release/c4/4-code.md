@@ -32,14 +32,14 @@ Every module here is new except the entry point. The shapes come from the two me
 | `upgrade/guides.mjs` | `parseGuide(markdown) → UpgradeGuide` | Splits on Moves, Migrations, Retired and Notes for the merge; "None" means empty; `from: none` parses to `null`; a missing heading is an error |
 | | `chainGuides(fetchGuide, installedTag, targetTag) → UpgradeGuide[]` | Follows `from:` back from the target, then returns oldest first. `fetchGuide` is injected so unit tests run in memory |
 | | `githubGuideFetcher(targetTag) → fetchGuide(tag) → Promise<string>` | `fetch` from `raw.githubusercontent.com/zacbraddy/ang/<target>/releases/upgrades/<tag>.md`; 404 is an error |
-| `upgrade/classify.mjs` | `applyMoves(baseFiles, guides) → FileMap` | Renames base paths through every guide's Moves, oldest first |
+| `upgrade/classify.mjs` | `applyMoves(files, guides) → { files: FileMap, movedFrom: Map<newPath, oldPath> }` | Renames paths through every guide's Moves, oldest first; run on base and instance. An existing file at the new path wins |
 | | `classifyFile(base, ours, theirs) → { category, hunks, merged }` | The spike's decision table, one file at a time |
-| | `mergeFile(ours, base, theirs) → { merged, hunks }` | `git merge-file -p`; its exit code is the conflict count |
-| | `classifyTrees(baseFiles, oursFiles, theirsFiles) → PlanEntry[]` | Every path in any tree, sorted, minus `EXCLUDED` (`settings.json`, `version.json`, `*.local.*`) |
+| | `mergeFile(ours, base, theirs, path) → { merged, hunks }` | `git merge-file -p`; its exit code is the conflict count; a failure throws naming `path` |
+| | `classifyTrees(baseFiles, oursFiles, theirsFiles, movedFrom) → PlanEntry[]` | Every path in base ∪ target, sorted, minus `EXCLUDED` (`settings.json`, `version.json`, `*.local.*`). A moved `unchanged` or `keep-local` file carries its local bytes so apply lands it at the new path |
 | `upgrade/size.mjs` | `chooseRoute(entries, hasRecord) → UpgradeRoute` | `guided-with-warning` with no record or ≥ `WARN_FROM` conflicted files; `guided` above `AGENT_RESOLVES_UP_TO`; `agent-resolved` with any conflict or `clean-merge`; else `fast` |
 | | `AGENT_RESOLVES_UP_TO = 5`, `WARN_FROM = 12` | Named constants, tuned after `rc.2` (d9) |
-| `upgrade/apply.mjs` | `checkPlan(entries) → string[]` | Every problem that blocks an apply: an unresolved conflict, a missing `mergedFile`, conflict markers left in a file to write, a path outside the project or excluded |
-| | `applyPlan(entries, projectRoot) → { written, deleted, kept }` | Runs only on a plan `checkPlan` passes (d26). Writes and deletes working-tree files with `fs` alone, then removes each `movedFrom`. Never touches the git index |
+| `upgrade/apply.mjs` | `checkPlan(entries) → string[]` | Every problem that blocks an apply: an unresolved conflict, a missing `mergedFile`, conflict markers left in a merge to write (`clean-merge`, `conflict`, `conflict-no-base`; upstream bytes may quote a marker), a path outside the project or excluded |
+| | `applyPlan(entries, projectRoot) → { written, deleted, kept }` | Runs only on a plan `checkPlan` passes (d26). Writes and deletes working-tree files with `fs` alone, then removes each `movedFrom`; a moved conflict resolved `keep` is renamed to its new path. Never touches the git index |
 | `commands/upgrade.mjs` | `upgrade guides --from <tag> --to <tag>` | Prints the chain as JSON, or exits 1 naming the missing guide |
 | | `upgrade plan --base <dir\|none> --target <dir> [--guides <file>]` | Reads three trees, classifies, sizes, writes merged files to a temp folder, prints `{ route, entries, tempDir }`. Writes nothing in the project |
 | | `upgrade apply --plan <file>` | Checks then applies a plan the skill has resolved. Any problem exits 1 listing them all, with nothing written. Changes stay unstaged |
