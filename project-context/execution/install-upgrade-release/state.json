@@ -163,8 +163,8 @@
     },
     {
       "id": "d9",
-      "decision": "The upgrade skill merges file by file, three-way, against the version.json SHA, with git merge-file. Fast path when no file needs judgement. Guided merge when a handful do (clean merges reread against upstream's diff, conflicts resolved with the user, conflict-deletes checked as moves). Escape hatch before writing anything when many files conflict or there's no version record: it warns of the size of the job and the user goes ahead or stops (d26). The 'many' threshold rests on two spike runs; tune it on real upgrades",
-      "evidence": "origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md",
+      "decision": "The upgrade merges file by file, three-way, against the version.json SHA, with git merge-file, and never commits: the user reviews the unstaged result and commits or drops it. Four routes by conflicted-file count: fast (only one-sided changes), agent-resolved (any clean merge or 1-5 conflicts; the agent resolves them itself, no user input), guided (6-11; the agent resolves what it's sure of and confirms with the user only merges that risk breaking Ang or a user customisation), guided with warning (12+ or no version record; before writing, warn with the count and a risk assessment, suggest owning a fork, user decides, then as guided). Thresholds are named constants, tuned after rc.2 (Zac's call)",
+      "evidence": "upgrade-routes.md",
       "from": "install-uninstall-update"
     },
     {
@@ -187,7 +187,7 @@
     },
     {
       "id": "d13",
-      "decision": "The upgrade skill checks before writing anything and stops with a plain message when: already on the target release, the target is older (downgrade), the working tree is dirty, or prerequisites are missing. A missing or unknown version record goes to the escape hatch, not a stop (d8). It finishes with a from/to, clean-vs-judgement summary and how to review (Zac's call)",
+      "decision": "The upgrade skill checks before writing anything and stops with a plain message when: already on the target release, the target is older (downgrade), the working tree is dirty, or prerequisites are missing. A missing or unknown version record goes to guided with warning, not a stop (d8). It finishes with a from/to, clean-vs-judgement summary and how to review (Zac's call)",
       "evidence": "origins/install-uninstall-update/shaping-content/install-and-upgrade-direction.md",
       "from": "install-uninstall-update"
     },
@@ -253,7 +253,7 @@
     },
     {
       "id": "d26",
-      "decision": "Upgrades are all or nothing: no partial upgrades, so every upgrade ends in a stable state and version.json always names one release. The escape hatch warns that the upgrade is big and how big, and the user decides whether to go ahead. Partial upgrades are parked with a wake condition (Zac's call: a feature nobody has asked for, and its version record needs per-file bases)",
+      "decision": "Upgrades are all or nothing: no partial upgrades, so every upgrade ends in a stable state and version.json always names one release. Guided with warning says how big the upgrade is and the user decides whether to go ahead. Partial upgrades are parked with a wake condition (Zac's call: a feature nobody has asked for, and its version record needs per-file bases)",
       "evidence": "/project-context/ideas/parked.md"
     },
     {
@@ -640,6 +640,18 @@
     {
       "date": "2026-11-17",
       "event": "replaced d37: Windows is in scope through WSL only: install.sh, Claude Code and Node 26 all run inside WSL. Native Windows shells (PowerShell, cmd, Git Bash) aren't supported (Zac's call) → Ang supports macOS, Linux and Windows through WSL, where install.sh, Claude Code and Node 26 all run inside WSL, and install.sh stops under Git Bash, MSYS or Cygwin. Native Windows is untested and best effort: it needs Git for Windows (Claude Code runs Ang's hooks and Bash commands in Git Bash) and the documented manual install. Shell-free hooks are parked (Zac's call)"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "replaced d9: The upgrade skill merges file by file, three-way, against the version.json SHA, with git merge-file. Fast path when no file needs judgement. Guided merge when a handful do (clean merges reread against upstream's diff, conflicts resolved with the user, conflict-deletes checked as moves). Escape hatch before writing anything when many files conflict or there's no version record: it warns of the size of the job and the user goes ahead or stops (d26). The 'many' threshold rests on two spike runs; tune it on real upgrades → The upgrade merges file by file, three-way, against the version.json SHA, with git merge-file, and never commits: the user reviews the unstaged result and commits or drops it. Four routes by conflicted-file count: fast (only one-sided changes), agent-resolved (any clean merge or 1-5 conflicts; the agent resolves them itself, no user input), guided (6-11; the agent resolves what it's sure of and confirms with the user only merges that risk breaking Ang or a user customisation), guided with warning (12+ or no version record; before writing, warn with the count and a risk assessment, suggest owning a fork, user decides, then as guided). Thresholds are named constants, tuned after rc.2 (Zac's call); evidence: origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md → upgrade-routes.md"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "replaced d13: The upgrade skill checks before writing anything and stops with a plain message when: already on the target release, the target is older (downgrade), the working tree is dirty, or prerequisites are missing. A missing or unknown version record goes to the escape hatch, not a stop (d8). It finishes with a from/to, clean-vs-judgement summary and how to review (Zac's call) → The upgrade skill checks before writing anything and stops with a plain message when: already on the target release, the target is older (downgrade), the working tree is dirty, or prerequisites are missing. A missing or unknown version record goes to guided with warning, not a stop (d8). It finishes with a from/to, clean-vs-judgement summary and how to review (Zac's call)"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "replaced d26: Upgrades are all or nothing: no partial upgrades, so every upgrade ends in a stable state and version.json always names one release. The escape hatch warns that the upgrade is big and how big, and the user decides whether to go ahead. Partial upgrades are parked with a wake condition (Zac's call: a feature nobody has asked for, and its version record needs per-file bases) → Upgrades are all or nothing: no partial upgrades, so every upgrade ends in a stable state and version.json always names one release. Guided with warning says how big the upgrade is and the user decides whether to go ahead. Partial upgrades are parked with a wake condition (Zac's call: a feature nobody has asked for, and its version record needs per-file bases)"
     }
   ],
   "type": "technical"

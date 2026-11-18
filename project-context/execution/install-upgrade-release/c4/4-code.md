@@ -16,8 +16,8 @@ Every module here is new except the entry point. The shapes come from the two me
 | `UpgradeGuide` | `{ version, from, moves: {from, to, note}[], migrations: string[], retired: string[], notes: string[] }` | `upgrade/guides.mjs`, the skill |
 | `FileMap` | `Map<path, Buffer>` for one tree, with `null` for absent | `upgrade/classify.mjs` |
 | `FileCategory` | `unchanged`, `fast-path`, `fast-path-delete`, `upstream-new`, `local-only`, `keep-local`, `clean-merge`, `conflict`, `conflict-no-base`, `conflict-delete` (k8) | `classify`, `size`, `apply` |
-| `PlanEntry` | `{ path, category, hunks, mergedFile?: string, movedFrom?: string }` | `upgrade plan` output |
-| `UpgradePath` | `fast` \| `guided` \| `escape-hatch`, with `{ conflictedFiles, conflictHunks, reason }` | `upgrade/size.mjs` |
+| `PlanEntry` | `{ path, category, hunks, mergedFile?: string, movedFrom?: string, resolution?: 'write' \| 'delete' \| 'keep' }`. `mergedFile` is the temp copy apply writes; the skill sets `resolution` on every conflict and may edit `mergedFile` | `upgrade plan` output, the skill, `upgrade apply` |
+| `UpgradeRoute` | `{ route: 'fast' \| 'agent-resolved' \| 'guided' \| 'guided-with-warning', conflictedFiles, conflictHunks, cleanMerges, reason }` ([upgrade routes](../upgrade-routes.md)) | `upgrade/size.mjs`, the skill |
 | `Manifest` | `{ fromTag, toRef, files: {path, status, similarity?, added, removed}[], commits, archivedEpics, tenK, cli, settingsDiff }` | `release-manifest`, `release-scout` |
 
 ## Library script (`src/.claude/scripts/ang/`)
@@ -27,7 +27,7 @@ Every module here is new except the entry point. The shapes come from the two me
 | | `mergeArray(path, base, ours, theirs)` | Keeps user entries, swaps Ang's changed entries, drops Ang's removed ones, no duplicates |
 | | `SKIPPED_KEYS = ['outputStyle']` | Conflicts on these are dropped; `tailor-ang` owns them |
 | `commands/settings.mjs` | `settings merge --base <file\|none> --ours <file> --theirs <file>` | Reads, merges, writes `--ours` in place with stable key order, prints conflicts as JSON. Exit 0 on success, even with conflicts |
-| `commands/version.mjs` | `version show` | Prints the `VersionRecord`, or `none` with exit 0 (no record is an escape-hatch input, not an error) |
+| `commands/version.mjs` | `version show` | Prints the `VersionRecord`, or `none` with exit 0 (no record routes to guided with warning, not an error) |
 | | `version write --ref <tag> --sha <sha>` | Writes `.claude/ang/version.json` with `installedAt` set now |
 | `upgrade/guides.mjs` | `parseGuide(markdown) → UpgradeGuide` | Splits on Moves, Migrations, Retired and Notes for the merge; "None" means empty; `from: none` parses to `null`; a missing heading is an error |
 | | `chainGuides(fetchGuide, installedTag, targetTag) → UpgradeGuide[]` | Follows `from:` back from the target, then returns oldest first. `fetchGuide` is injected so unit tests run in memory |
@@ -36,12 +36,13 @@ Every module here is new except the entry point. The shapes come from the two me
 | | `classifyFile(base, ours, theirs) → { category, hunks, merged }` | The spike's decision table, one file at a time |
 | | `mergeFile(ours, base, theirs) → { merged, hunks }` | `git merge-file -p`; its exit code is the conflict count |
 | | `classifyTrees(baseFiles, oursFiles, theirsFiles) → PlanEntry[]` | Every path in any tree, sorted, minus `EXCLUDED` (`settings.json`, `version.json`, `*.local.*`) |
-| `upgrade/size.mjs` | `choosePath(entries, hasRecord) → UpgradePath` | `escape-hatch` with no record or ≥ `MANY_CONFLICTS` conflicted files; `guided` if any `clean-merge` or conflict; else `fast` |
-| | `MANY_CONFLICTS` | One named constant, first set from the spike runs (d9) |
-| `upgrade/apply.mjs` | `applyPlan(entries, projectRoot)` | Writes or deletes every settled entry, including conflicts and `conflict-delete`s the skill has resolved. Skips `unchanged` and any unresolved conflict |
+| `upgrade/size.mjs` | `chooseRoute(entries, hasRecord) → UpgradeRoute` | `guided-with-warning` with no record or ≥ `WARN_FROM` conflicted files; `guided` above `AGENT_RESOLVES_UP_TO`; `agent-resolved` with any conflict or `clean-merge`; else `fast` |
+| | `AGENT_RESOLVES_UP_TO = 5`, `WARN_FROM = 12` | Named constants, tuned after `rc.2` (d9) |
+| `upgrade/apply.mjs` | `checkPlan(entries) → string[]` | Every problem that blocks an apply: an unresolved conflict, a missing `mergedFile`, conflict markers left in a file to write, a path outside the project or excluded |
+| | `applyPlan(entries, projectRoot) → { written, deleted, kept }` | Runs only on a plan `checkPlan` passes (d26). Writes and deletes working-tree files with `fs` alone, then removes each `movedFrom`. Never touches the git index |
 | `commands/upgrade.mjs` | `upgrade guides --from <tag> --to <tag>` | Prints the chain as JSON, or exits 1 naming the missing guide |
-| | `upgrade plan --base <dir\|none> --target <dir> [--guides <file>]` | Reads three trees, classifies, sizes, writes merged files to a temp folder, prints `{ path, entries, tempDir }`. Writes nothing in the project |
-| | `upgrade apply --plan <file>` | Applies a plan the skill has resolved, conflicts included as resolved files |
+| | `upgrade plan --base <dir\|none> --target <dir> [--guides <file>]` | Reads three trees, classifies, sizes, writes merged files to a temp folder, prints `{ route, entries, tempDir }`. Writes nothing in the project |
+| | `upgrade apply --plan <file>` | Checks then applies a plan the skill has resolved. Any problem exits 1 listing them all, with nothing written. Changes stay unstaged |
 | `ang-context-manager.mjs` | (changed) | Imports `settings`, `version` and `upgrade` command arrays beside the existing ones |
 
 ## install.sh (repo root, shipped as a release asset)

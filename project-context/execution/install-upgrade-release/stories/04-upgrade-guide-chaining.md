@@ -95,7 +95,7 @@ Every release gets an upgrade guide in `releases/upgrades/` that starts with a `
 - **Out of scope**:
   - Writing any real guide (story 11 for rc.1; `/cut-release` drafts later ones, story 10).
   - Applying moves, and reading Retired during the merge (stories 05 and 06).
-  - Checking that the target is newer than the installed tag, and the escape hatch on a broken chain (story 06).
+  - Checking that the target is newer than the installed tag, and what a broken chain does to the upgrade (story 06).
   - Release notes in `releases/notes/` (story 10).
 
 ## Review

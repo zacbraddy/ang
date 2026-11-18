@@ -8,7 +8,7 @@ tags: [distribution, open-source]
 ## Summary
 This epic ships three things that depend on each other, and it is done when **`v1.0.0-rc.2` is cut by `/cut-release` and the rehearsed upgrade from `rc.1` passes**:
 - **Install:** a release-asset `install.sh`, one copy-pasteable line. It checks prerequisites, copies in `src/` with giget, merges `settings.json` and writes `.claude/ang/version.json`.
-- **Upgrade:** a shipped `upgrade-ang` skill. It fetches the target release, runs the *target's* merge engine, and takes a fast path, a guided merge or an escape hatch.
+- **Upgrade:** a shipped `upgrade-ang` skill. It fetches the target release, runs the *target's* merge engine, and takes one of four routes: fast, agent-resolved, guided or guided with warning ([upgrade routes](upgrade-routes.md)). It never commits.
 - **Release:** a repo-only `/cut-release` skill with Zac, a `release-manifest` script, a `release-scout` agent, a tag-triggered GitHub Actions job and a seeded fixture repo for rehearsals.
 
 All of the merge logic lives in the library script (`ang-context-manager.mjs`), with Node built-ins only ([ADR 0002](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)). Install and upgrade share one settings merge.
@@ -17,7 +17,7 @@ All of the merge logic lives in the library script (`ang-context-manager.mjs`), 
 - **Repo layout for repo-only tooling (d24):** the root `.claude/skills` and `.claude/agents` become real folders with per-entry links into `src/`. A root `scripts/` folder holds the link script and `release-manifest`, and a repo-only drift test checks the links.
 - **Shared merge core in the library script:**
   - `settings merge` is the three-way JSON merge from the [settings merge spike](settings-merge-spike.md). It is the install merge when the base is empty (d7, k15).
-  - an `upgrade` command group: file-by-file classification and `git merge-file` (d9), reading the upgrade guides, and the escape-hatch sizing.
+  - an `upgrade` command group: file-by-file classification and `git merge-file` (d9), reading the upgrade guides, and sizing the job into a route.
   - `version show` and `version write`, the only way install and upgrade read or write `version.json` (d35).
 - **`install.sh`** at the repo root, unstamped there, which stops without a tag (d28). It runs every check in d12, backs up settings (d4), merges settings, writes `version.json`, and prints the version, location and next step.
 - **`upgrade-ang` skill** (ships in `src/`): the checks in d13, a fetch of the target and base trees, the target's engine (d29), the three paths (d9, d26) and a closing summary.
@@ -63,13 +63,15 @@ flowchart LR
 - **Settings merge:** the copied tree's own `ang-context-manager.mjs` runs it, so the install and the release it installs always agree on the merge.
 
 ### Upgrade
-- **Checks first (d13):** the target exists and is newer, the tree is clean, and the prerequisites are present. A missing or unknown `version.json` goes to the escape hatch (d8).
+- **Checks first (d13):** the target exists and is newer, the tree is clean, and the prerequisites are present. A missing or unknown `version.json` goes to guided with warning (d8).
 - **Fetch three trees into a temp folder with giget:** the target (theirs) at the target tag, and the base at the `version.json` SHA. The instance (ours) is the working tree. The target tree carries its own `ang-context-manager.mjs`, and the skill runs **that** engine (d29), so no separate engine download is needed.
 - **Fetch every upgrade guide in (installed, target]** from `raw.githubusercontent.com` at the target tag, by following each guide's `from:` line back from the target's guide, then applying them oldest first (k12, d34). A missing guide or broken chain is an error.
 - **Classify and size:** the engine sorts files into the spike's categories (k8). It applies the guides' moves before classifying, so a move is no longer read as a deletion. It then sizes the job:
-  - **fast path:** no file needs judgement; write and summarise;
-  - **guided merge:** a handful of files do. The skill rereads clean merges against upstream's diff and the guide's Retired entries (catching semantic staleness), resolves conflicts with the user, and checks conflict-deletes as possible moves;
-  - **escape hatch:** many conflicts, or no record. It warns with the size and the user goes ahead or stops. All or nothing (d26).
+  - **fast:** every change is one-sided; write and summarise;
+  - **agent-resolved:** any clean merge, or a handful of conflicted files. The skill rereads clean merges against upstream's diff and the guide's Retired entries (catching semantic staleness), resolves conflicts itself, and checks conflict-deletes as possible moves. No input from the user;
+  - **guided:** more conflicts. As agent-resolved, but the user confirms only the merges that risk breaking Ang or one of their customisations;
+  - **guided with warning:** many conflicts, or no record. Before writing, it warns with the count and a risk assessment and the user decides, then it runs as guided. All or nothing (d26).
+  - The route thresholds and the reasons behind this design are in [upgrade routes](upgrade-routes.md) (d9).
 - **Settings** go through `settings merge` with the base tree's `settings.json` (k15). `outputStyle` conflicts are skipped, because `tailor-ang` owns that key.
 - **Finish:** write the new `version.json`, run `library validate` and the shipped tests, and print a summary (from/to, clean vs judgement, how to review). Changes stay unstaged.
 
@@ -95,7 +97,8 @@ Steps 3 to 6 can run in parallel once step 2 lands.
 |---|---|
 | An upgrade guide misses a move or migration | The manifest coverage check (d20) and the fixture rehearsal (d22). A miss after release is fixed forward with a patch (d30) |
 | Clean merges that are semantically stale (k8) | Guided-merge rereads, using the guide's Retired entries |
-| The escape-hatch threshold rests on two spike runs (d9) | Make it one named constant. Tune it after the `rc.2` rehearsal and real upgrades |
+| The route thresholds rest on two spike runs (d9) | Make them named constants. Tune them after the `rc.2` rehearsal and real upgrades |
+| An agent-run merge gets a user's customisation wrong | The upgrade never commits, so the user reviews and can drop the whole changeset. Guided routes confirm the risky merges ([upgrade routes](upgrade-routes.md)) |
 | `upgrade-ang` overwrites its own skill file mid-run | The engine runs from the temp target tree. The running prompt is already loaded, and the new skill applies next time |
 | Running code fetched at the target tag (d29) | It's the same trust as installing that release. Fetch only published release tags (d14) |
 | The fixture's seeded edits drift as `src/` evolves | Real upgrades roll it forward. Fix it in the rehearsal step when it breaks |
@@ -116,7 +119,7 @@ Every test uses `node:test`, beside the code it tests. Zero dependencies, run wi
 |---|---|---|
 | Unit (most) | `settings merge`: the spike's four scenarios, plus empty base equals the install merge, plus a no-op re-run | Pure function over three JSON objects |
 | Unit | `version show` with and without a record, `version write` | Temp folder |
-| Unit | Upgrade file classification, applying guide moves, escape-hatch sizing, parsing the upgrade guide (sections, "None", missing file is an error), chaining guides by `from:` with an injected fetch | Inputs are in-memory file maps |
+| Unit | Upgrade file classification, applying guide moves, route sizing, parsing the upgrade guide (sections, "None", missing file is an error), chaining guides by `from:` with an injected fetch | Inputs are in-memory file maps |
 | Unit (repo-only) | Link drift: missing and dangling per-entry links | Lives in `scripts/`, never ships |
 | Integration | `upgrade` engine over three temp git trees: one case per category, and a move declared in a guide | The spike's harness, turned into tests |
 | Integration | `install.sh` against temp git repos, with `npx` stubbed on `PATH` to copy a local `src/`: every d12 check, the settings backup and merge, the version record, and no tag on the repo copy | Mocks giget and GitHub at the boundary |
@@ -148,7 +151,7 @@ These come from a `context-scout` pass over `10k/` and the other streams.
 ## Candidate ADRs
 The next free number is 0005.
 1. **Install by copy-in:** giget pinned through npx, wrapped in a release-asset `install.sh` stamped with its tag and SHA. Installs and upgrades target published release tags only, and the repo copy is unstamped (d1, d6, d14, d16, d28).
-2. **Upgrades are a file-by-file three-way merge against `version.json`:** fast path, guided merge or escape hatch, all or nothing, run by the target release's engine (d9, d26, d29).
+2. **Upgrades are a file-by-file three-way merge against `version.json`:** four routes by conflict count, never committing, all or nothing, run by the target release's engine (d9, d26, d29).
 3. **One three-way settings merge, in the library script,** used by install (empty base) and upgrade (k15, d7).
 4. **Release notes and upgrade guides are separate per-version files** under root `releases/`, and every release gets a guide (k12).
 5. **Releases are cut by a local skill with Zac:** fed by a deterministic manifest and `release-scout` with a coverage check, no commit conventions, explicit go before push, and Zac's own Publish click. The mechanics run in CI on tag push (d15, d19 to d21). This refines open-source hygiene d13.

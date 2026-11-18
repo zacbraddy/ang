@@ -8,7 +8,7 @@ tags: [distribution, open-source]
 ## Summary
 This is a technical epic about how Ang gets into a user's repo and stays current there. It has three parts:
 - **Install:** an `install.sh` published as a release asset, stamped with its tag, and run as one piped line. It checks its prerequisites first, copies in `src/` with giget, merges the user's `.claude/settings.json` (the user's values win) and records the installed version in `.claude/ang/version.json`.
-- **Upgrade:** an upgrade skill that runs a file-by-file three-way merge against that recorded version. It picks a fast path, a guided merge or an escape hatch depending on how many files need judgement.
+- **Upgrade:** an upgrade skill that runs a file-by-file three-way merge against that recorded version. It picks one of four routes by how many files conflict, from fast to guided with warning, and never commits ([upgrade routes](upgrade-routes.md)).
 - **Release:** the repeatable process for cutting the tagged releases that both of the above consume.
 
 There is no uninstall command.

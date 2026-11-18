@@ -90,7 +90,7 @@ C4Container
 | `release.yml` | new | `.github/workflows/` | On `v*` push: `node --test`, smoke install, stamp, draft release (d21). Separate from open-source hygiene's CI |
 | GitHub Release + asset | new | GitHub | Drafts are invisible to `releases/latest` until Zac publishes. Immutable once published (d30) |
 | `ang-context-manager.mjs` | changed | `src/`, installed | Gains core (non-feature-gated) `settings merge` and `upgrade` commands, Node built-ins only ([ADR 0002](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)) |
-| `upgrade-ang` | new | `src/.claude/skills/` | The judgement half of an upgrade: guided merge rereads, conflicts with the user, the escape-hatch decision (d9, d13, d26) |
+| `upgrade-ang` | new | `src/.claude/skills/` | The judgement half of an upgrade: rereads clean merges, resolves conflicts, confirms risky merges with the user on guided routes and gives the size warning (d9, d13, d26) |
 | `settings.json` | changed | User's repo | Merged on install and upgrade. `outputStyle` conflicts are skipped (k15) |
 | `settings.json.pre-ang`, `version.json` | new | User's repo | The backup is written once; the version record is rewritten by each upgrade |
 

@@ -8,7 +8,7 @@ tags: [distribution, open-source, repo-structure]
 ## Summary
 The library script keeps its shape: `commands/*.mjs` declare commands and domain modules sit in sibling folders. This epic adds three command files and two domain folders:
 - `settings/` holds the one three-way JSON merge that install and upgrade share (k15).
-- `upgrade/` holds the deterministic half of an upgrade: guide chaining and parsing, file classification and the escape-hatch sizing.
+- `upgrade/` holds the deterministic half of an upgrade: guide chaining and parsing, file classification and sizing the job into a route.
 - `version` reads and writes `version.json`, so install and upgrade write the record the same way.
 
 All three are core commands, not feature-gated, because a fresh install has no `ang.json` yet. `loadConfig` already treats a missing `ang.json` as defaults, so config is unchanged. The judgement half (rereads, conflicts, go-or-stop) stays in the `upgrade-ang` skill. `install.sh` and `/cut-release` are drawn as stages rather than components, because each is one script or skill run top to bottom.
@@ -31,7 +31,7 @@ C4Component
     Component(merge, "settings/merge.mjs [new]", "Domain", "Three-way JSON merge; arrays as sets of whole entries")
     Component(guides, "upgrade/guides.mjs [new]", "Domain", "Chains guides by their from: line, parses sections")
     Component(classify, "upgrade/classify.mjs [new]", "Domain", "Applies guide moves, sorts each file into one category")
-    Component(size, "upgrade/size.mjs [new]", "Domain", "Fast path, guided merge or escape hatch")
+    Component(size, "upgrade/size.mjs [new]", "Domain", "Fast, agent-resolved, guided or guided with warning")
     Component(apply, "upgrade/apply.mjs [new]", "Domain", "Writes a plan's settled files; never conflicts")
     Component(config, "config/config.mjs [existing]", "Config", "Missing ang.json means defaults")
     Component(validate, "library/validate.mjs [existing]", "Library", "Run after install and upgrade")
@@ -61,8 +61,8 @@ C4Component
 | `settings/merge.mjs` | new | The spike's merge as a pure function. Ang-owned entries are replaced, user values kept; a base entry missing from both sides is a conflict; `outputStyle` conflicts are dropped (k15). An empty base gives exactly the install merge (d7) |
 | `upgrade/guides.mjs` | new | Walks back from the target guide through `from:` lines to the installed tag, so no API call lists releases. A missing guide or a broken chain is an error. Parses Moves, Migrations, Retired and Notes for the merge; "None" means empty, and `from: none` marks the first release |
 | `upgrade/classify.mjs` | new | The upgrade merge spike's categories (k8), after rewriting base paths through the guides' Moves, so a declared move isn't read as a delete. Excludes `settings.json`, `version.json` and `*.local.*` |
-| `upgrade/size.mjs` | new | Picks the path from the classification. `MANY_CONFLICTS` is one named constant, tuned after `rc.2` (d9). No version record always means the escape hatch (d8) |
-| `upgrade/apply.mjs` | new | Writes fast-path, upstream-new, delete and clean-merge results, plus conflicts only once the skill has resolved them. All or nothing is the skill's call (d26): it applies only after go |
+| `upgrade/size.mjs` | new | Picks the route from the conflicted-file count. `AGENT_RESOLVES_UP_TO` and `WARN_FROM` are named constants, tuned after `rc.2` (d9). No version record always means guided with warning (d8) |
+| `upgrade/apply.mjs` | new | Writes and deletes working-tree files from a fully resolved plan, and refuses before writing anything if any conflict is unresolved (d26). Never stages or commits |
 | Entry, registry, config, validate | existing / changed | The entry gains three imports; nothing else changes |
 
 ## install.sh stages
@@ -82,8 +82,8 @@ Run top to bottom, piped. Nothing is written before every check passes (d12).
 | Checks (d13): target resolves and is newer, clean tree, prerequisites | new | Deterministic: `version show`, the tag lookup |
 | Fetch target and base trees with giget into a temp folder | new | Deterministic |
 | `upgrade guides`, then `upgrade plan`, from the **target** tree | new | Deterministic |
-| Escape hatch: show the size, Pilot goes ahead or stops | new | Judgement, the Pilot's |
-| Guided merge: reread clean merges against upstream's diff and Retired entries, resolve conflicts with the Pilot, check conflict-deletes as moves | new | Judgement |
+| Guided with warning: show the count and a risk assessment, Pilot goes ahead or stops | new | Judgement, the Pilot's |
+| Resolve: reread clean merges against upstream's diff and Retired entries, resolve conflicts, check conflict-deletes as moves. On guided routes, confirm only the risky merges with the Pilot ([upgrade routes](../upgrade-routes.md)) | new | Judgement, the agent's; the Pilot's on risky merges |
 | `upgrade apply`, `settings merge`, `version write` | new | Deterministic |
 | `library validate`, shipped tests, summary (from/to, clean vs judgement, how to review). Changes unstaged | new | Deterministic, then a report |
 

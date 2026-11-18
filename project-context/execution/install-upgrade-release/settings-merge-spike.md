@@ -38,7 +38,7 @@ Spiked on 2026-11-17, answering how an upgrade updates Ang's own `settings.json`
 ## What it means for the plan
 - **Install and upgrade share one settings merge.** Install is the empty-base case. It should live in the shipped library script (zero dependencies, per ADR 0002) as something like `settings merge <base> <ours> <theirs>`. install.sh would call it after the copy-in, and the upgrade skill would call it with the base it already fetches for the file merge (d9), so there's no extra download.
 - **Settings conflicts join the guided merge.** They are judgement items like conflicted files, reported by path with the base, user and target versions, and resolved with the user before anything is written.
-- **No record means the install merge.** Without a base, stale Ang entries stay and changed hooks duplicate. That fits the escape hatch for a missing record (d8, d13). The skill should name the likely stale Ang entries (those not in the target) for the user to remove by hand.
+- **No record means the install merge.** Without a base, stale Ang entries stay and changed hooks duplicate. That fits guided with warning for a missing record (d8, d13). The skill should name the likely stale Ang entries (those not in the target) for the user to remove by hand.
 
 ## Unknown unknowns
 - **`outputStyle` conflicts are noise.** Every user with their own style shows a conflict whenever Ang renames its default. `/tailor-ang` owns the style per user, so the upgrade can treat `outputStyle` as always the user's and not report it.
