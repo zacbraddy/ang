@@ -1,0 +1,9 @@
+[
+  {
+    "slug": "docs-upgrading-page",
+    "intent": "Add an Upgrading page to the docs once upgrade-ang has shipped",
+    "conditions": [
+      "stream:install-uninstall-update:story:install-upgrade-release/06=done"
+    ]
+  }
+]

@@ -111,6 +111,11 @@
       "fact": "JSON has no extends, so a shared base ang.json for teams would need loader code (k23). Zac parked it rather than build it, and the Team config pattern page is cut (2026-11-17)",
       "source": "/project-context/ideas/parked.md",
       "answers": "Team config pattern: ang.json rejects an extends key (k23), so is it a small feature, a pattern that lives outside ang.json, or a cut page parked with a wake condition? Settle before plan step 6"
+    },
+    {
+      "id": "k25",
+      "fact": "The user docs need an Upgrading page in Start here. It has to cover what install and upgrade each do, the four upgrade routes (fast, agent-resolved, guided, guided with warning) in the user's terms, that upgrade never commits and how to review or drop the result, why Ang's upgrade is agent-run rather than deterministic, and committing .claude/ang/version.json. No page in the current page map covers this",
+      "source": "https://github.com/zacbraddy/ang/blob/stream/install-uninstall-update/project-context/execution/install-upgrade-release/upgrade-routes.md"
     }
   ],
   "decisions": [
