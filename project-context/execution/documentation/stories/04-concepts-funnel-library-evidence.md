@@ -20,5 +20,6 @@ The three core ideas a user meets on day one: how work moves through stages, whe
 - Link to the command anchors by their planned slugs.
 
 ## Related
+- [Voice lessons from the README](../voice-lessons.md)
 - [Plan: Sequencing step 4](../plan.md)
 - [Brain dump](../origins/docs-website/ideas-content/brain-dump-context.md)

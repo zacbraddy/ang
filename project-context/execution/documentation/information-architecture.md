@@ -6,7 +6,7 @@ tags: [documentation]
 # Information architecture
 
 ## Summary
-Zac agreed this page map on 2026-11-17. There are six sidebar groups and 20 pages. The "Draws from" column tells the agents building each page where to look. A page exists only if it clears the bar below. The brain dump is a voice sample and a quarry for a few lines, not a list of pages. Where the brain dump and the shipped files disagree on how Ang behaves, the shipped files win ([brief](origins/docs-website/ideas-content/brief.md), Accuracy rule).
+Zac agreed this page map on 2026-11-17. There are six sidebar groups and 21 pages. The "Draws from" column tells the agents building each page where to look. A page exists only if it clears the bar below. The brain dump is a voice sample and a quarry for a few lines, not a list of pages. Where the brain dump and the shipped files disagree on how Ang behaves, the shipped files win ([brief](origins/docs-website/ideas-content/brief.md), Accuracy rule).
 
 ## What earns a page
 A page or a passage earns its place only if someone using Ang needs it to do one of these:
@@ -22,6 +22,7 @@ Zac's history with other frameworks and his own usage fail this bar. They surviv
 |---|---|---|
 | Home (splash) | What Ang is, the install one-liner, links in, and 2–3 sentences on why another framework (other frameworks drown agents in their own context and can't be combined) | Brain dump *Overview* and *My motivations*, [spike home page](origins/docs-website/spikes/_content/index.md), [What Ang is](/project-context/10k/product/what-ang-is.md) |
 | Start here | Quick start | Install line and prerequisites ([install plan](https://github.com/zacbraddy/ang/blob/c289cabcc7f68e066e1eb8f537f8c1ef2edf500d/project-context/execution/install-upgrade-release/plan.md)); platforms, with Windows through WSL and the best-effort native Windows manual install as its own section ([install-upgrade-release d37](https://github.com/zacbraddy/ang/blob/794b106cdbf5c358fbb429572c684f387f959a9a/project-context/execution/install-upgrade-release/state.json), k20; check the steps against the shipped files); `/bootstrap-repo`, `/tailor-ang`; one line each on the two starting points, an existing repo or a fresh repo with a brain dump in `raw/` (brain dump *How I personally intend to use Ang*) |
+| | Trying Ang alongside your framework | Ang can run next to another framework (BMAD, Spec Kit, Matt Pocock's skills): trial it on a branch with streams off, work one problem end to end, then back out with Uninstalling or have Ang run a migration project onto Ang. Zac has migrated repos that way (brain dump *My history of use of AI*, the wayfinder-to-Ang migration). Install refuses if `project-context/` or a same-named skill already exists, so check `install.sh`'s `check_collisions` at write time (d13) |
 | | Your first loop | The funnel skills, run end to end once |
 | | Uninstalling | Removing Ang by hand: there is no uninstall command |
 | Concepts | The funnel | `src/project-context/README.md`: Workflow, Raw inputs, Stage exit criteria, Promotion & merging, Killing, Moonshots & parked work; brain dump *Raw files* |

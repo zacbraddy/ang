@@ -25,7 +25,7 @@ A table of files rather than a class diagram: the only code is config, one CSS f
 | Sidebar group | Folder | Slugs |
 |---|---|---|
 | Home | `docs/src/content/docs/` | `index.mdx` (splash template; `.mdx` for LinkCards, d8) |
-| Start here | `start-here/` | `quick-start`, `first-loop`, `uninstalling` |
+| Start here | `start-here/` | `quick-start`, `alongside-your-framework`, `first-loop`, `uninstalling` |
 | Concepts | `concepts/` | `funnel`, `context-library`, `evidence-standard`, `triggers`, `streams-and-mail`, `bending-ang` |
 | Commands | `commands/` | `funnel`, `library-upkeep`, `setup`, `streams`, `bending` (one `##` heading per command, so each gets an anchor, d5) |
 | Reference | `reference/` | `agents`, `ang-context-manager`, `config` |
@@ -36,13 +36,14 @@ Order within a group comes from each page's `sidebar.order` frontmatter. That is
 ## README sections
 | Section | Holds |
 |---|---|
-| Title and one-liner | What Ang is in a sentence |
-| Quick start | Install one-liner, Node 26+, the WSL note (k13, k20), then `/bootstrap-repo` and `/tailor-ang` |
-| How it works | The funnel, the context library, starter-not-loaf, streams in one line (k3) |
-| The funnel | One row per stage: stage, question, command (d2) |
-| Bending Ang | `/raise-workflow-improvement`, `/improve-workflow`; "and a few more" pointer to the site |
+| Title and one-liner | Centred title with the tagline, then what Ang is in a sentence |
+| Quick start | Install one-liner, Node 26+, the WSL note (k13, k20), then `/bootstrap-repo`; `/tailor-ang` only as the way to tweak tailoring later, since bootstrap runs it |
+| How it works | The funnel, the context library, starter-not-loaf, streams, and Orca as an optional integration (k3) |
+| The funnel | One row per stage, told from the reader's side: stage, the question I'm asking, what I do, the command I run, what Ang gives me (d2). Execution gets a row per command |
+| Bending Ang | Why bending matters, then `/raise-workflow-improvement` and `/improve-workflow` |
+| So much more | The features left to the site, which Ang helps users discover as they work; leads into Docs |
 | Docs | Link to `https://zacbraddy.github.io/ang/` |
-| Credits and licence | Attribution line, MIT |
+| Credits and licence | Developed by Zac Braddy, sponsored by We Right Code; MIT |
 
 ## Related
 - [Components](3-components.md)

@@ -19,4 +19,5 @@ Lookup pages for a user bending or debugging Ang: what each agent does, what the
 - The script page groups commands as `--help` does, rather than copying it verbatim, so the script stays the source of truth.
 
 ## Related
+- [Voice lessons from the README](../voice-lessons.md)
 - [Plan: Sequencing step 6](../plan.md)

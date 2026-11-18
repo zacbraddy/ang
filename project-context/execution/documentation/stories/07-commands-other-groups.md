@@ -19,5 +19,6 @@ The commands outside the funnel. They are run less often, so they're kept short,
 - Heading text matches the command name so anchors stay stable.
 
 ## Related
+- [Voice lessons from the README](../voice-lessons.md)
 - [Plan: Sequencing step 5](../plan.md)
 - [Page map](../information-architecture.md#page-map)
