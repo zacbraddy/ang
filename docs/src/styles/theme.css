@@ -1,0 +1,47 @@
+@import '@fontsource/geist/400.css';
+@import '@fontsource/geist/600.css';
+@import '@fontsource/geist/700.css';
+@import '@fontsource/geist-mono/400.css';
+@import '@fontsource/geist-mono/600.css';
+
+/* Palette 4: Radix slate greys + jade accent. Starlight's gray scale runs from text (white) to page (black) in both modes. */
+:root {
+	--sl-font: 'Geist', var(--sl-font-system);
+	--sl-font-mono: 'Geist Mono', var(--sl-font-system-mono);
+	--sl-color-accent-low: #0f2e22;
+	--sl-color-accent: #29a383;
+	--sl-color-accent-high: #1fd8a4;
+	--sl-color-white: #edeef0;
+	--sl-color-gray-1: #edeef0;
+	--sl-color-gray-2: #edeef0;
+	--sl-color-gray-3: #b0b4ba;
+	--sl-color-gray-4: #696e77;
+	--sl-color-gray-5: #363a3f;
+	--sl-color-gray-6: #18191b;
+	--sl-color-black: #111113;
+}
+:root[data-theme='light'] {
+	--sl-color-accent-low: #d6f1e3;
+	--sl-color-accent: #208368;
+	--sl-color-accent-high: #1d3b31;
+	--sl-color-white: #1c2024;
+	--sl-color-gray-1: #1c2024;
+	--sl-color-gray-2: #1c2024;
+	--sl-color-gray-3: #60646c;
+	--sl-color-gray-4: #8b8d98;
+	--sl-color-gray-5: #d9d9e0;
+	--sl-color-gray-6: #f0f0f3;
+	--sl-color-gray-7: #f9f9fb;
+	--sl-color-black: #fcfcfd;
+}
+/* Asides pick their own hue tokens: note goes neutral, tip takes the accent. */
+.starlight-aside--note {
+	--sl-color-asides-text-accent: var(--sl-color-white);
+	--sl-color-asides-border: var(--sl-color-gray-4);
+	background-color: var(--sl-color-gray-6);
+}
+.starlight-aside--tip {
+	--sl-color-asides-text-accent: var(--sl-color-accent-high);
+	--sl-color-asides-border: var(--sl-color-accent);
+	background-color: var(--sl-color-accent-low);
+}
