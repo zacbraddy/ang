@@ -66,4 +66,4 @@ I know you don't want to get drowned in info in a README, but I also know you'll
 Ang was developed by [Zac Braddy](https://zackerthehacker.com) and is sponsored by We Right Code.
 
 Ang is licensed under the [MIT licence](LICENSE), so for you that means, like...
-<img src="https://i.imgflip.com/1xvnfi.jpg?a498612" alt="&quot;I made this&quot; meme: one stick figure hands another a thing they made, and the other walks off saying &quot;I made this&quot;" width=136 height=30 />
+<img src="https://i.imgflip.com/1xvnfi.jpg?a498612" alt="&quot;I made this&quot; meme: one stick figure hands another a thing they made, and the other walks off saying &quot;I made this&quot;" width=136 />
