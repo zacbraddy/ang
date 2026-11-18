@@ -20,5 +20,6 @@ The ideas a user grows into: deferring work until a condition holds, running par
 - Link to the command anchors by their planned slugs.
 
 ## Related
+- [Voice lessons from the README](../voice-lessons.md)
 - [Plan: Sequencing step 4](../plan.md)
 - [What Ang is](/project-context/10k/product/what-ang-is.md)

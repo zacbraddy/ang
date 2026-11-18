@@ -80,7 +80,7 @@
     },
     {
       "id": "k19",
-      "fact": "Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 20 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list",
+      "fact": "Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 21 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list",
       "source": "information-architecture.md",
       "answers": "Information architecture: which pages, and how does the brain-dump content map onto them?"
     },
@@ -176,6 +176,11 @@
       "id": "d12",
       "decision": "No badge trigger: README status badges are open-source-hygiene's to add (its d2) in the same change as the CI they report on, so this epic files nothing for them (Zac, 2026-11-18)",
       "evidence": "/project-context/shaping/open-source-hygiene/README.md"
+    },
+    {
+      "id": "d13",
+      "decision": "Docs pitch trying Ang alongside another framework (BMAD, Spec Kit, Matt Pocock's skills): trial on a branch with streams off, work one problem end to end, then delete Ang's files or have Ang direct a migration project onto Ang. A Start here page, start-here/alongside-your-framework, carries it. Zac has run such migrations himself (Zac, 2026-11-18)",
+      "evidence": "origins/docs-website/ideas-content/brain-dump-context.md"
     }
   ],
   "lineage": [
@@ -410,6 +415,14 @@
     {
       "date": "2026-11-18",
       "event": "replaced k17: README status badges (open-source-hygiene d2) need the CI that the open-source-hygiene item builds; that item is planned as its own epic, so badges are a cross-epic dependency → README status badges (open-source-hygiene d2) need the CI that the open-source-hygiene item builds; that item owns adding them alongside its CI"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "decided: Docs pitch trying Ang alongside another framework (BMAD, Spec Kit, Matt Pocock's skills): trial on a branch with streams off, work one problem end to end, then delete Ang's files or have Ang direct a migration project onto Ang. A Start here page, start-here/alongside-your-framework, carries it. Zac has run such migrations himself (Zac, 2026-11-18)"
+    },
+    {
+      "date": "2026-11-18",
+      "event": "replaced k19: Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 20 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list → Six sidebar groups (Home, Start here, Concepts, Commands, Reference, Why Ang), 21 pages; a page exists only if a user needs it to choose, run, use or bend Ang, and the brain dump is a voice sample, not a page list"
     }
   ],
   "type": "mixed"

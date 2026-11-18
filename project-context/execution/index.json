@@ -330,7 +330,7 @@
   {
     "title": "Start here pages",
     "path": "project-context/execution/documentation/stories/03-start-here-pages.md",
-    "shortDescription": "Quick start, Your first loop and Uninstalling pages are live on the site",
+    "shortDescription": "Quick start, Trying Ang alongside your framework, Your first loop and Uninstalling pages are live on the site",
     "tags": [
       "documentation",
       "distribution"
@@ -380,6 +380,15 @@
     "title": "Why Ang pages",
     "path": "project-context/execution/documentation/stories/09-why-ang-pages.md",
     "shortDescription": "The First principles and Credits pages are live",
+    "tags": [
+      "documentation",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "Voice lessons from the README",
+    "path": "project-context/execution/documentation/voice-lessons.md",
+    "shortDescription": "What Zac changed between the agent's first README draft and the one he signed off, as a target for every docs page still to write",
     "tags": [
       "documentation",
       "brand-voice"
