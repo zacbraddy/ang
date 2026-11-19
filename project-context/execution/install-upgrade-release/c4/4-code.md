@@ -18,7 +18,7 @@ Every module here is new except the entry point. The shapes come from the two me
 | `FileCategory` | `unchanged`, `fast-path`, `fast-path-delete`, `upstream-new`, `local-only`, `keep-local`, `clean-merge`, `conflict`, `conflict-no-base`, `conflict-delete` (k8) | `classify`, `size`, `apply` |
 | `PlanEntry` | `{ path, category, hunks, mergedFile?: string, movedFrom?: string, resolution?: 'write' \| 'delete' \| 'keep' }`. `mergedFile` is the temp copy apply writes; the skill sets `resolution` on every conflict and may edit `mergedFile` | `upgrade plan` output, the skill, `upgrade apply` |
 | `UpgradeRoute` | `{ route: 'fast' \| 'agent-resolved' \| 'guided' \| 'guided-with-warning', conflictedFiles, conflictHunks, cleanMerges, reason }` ([upgrade routes](../upgrade-routes.md)) | `upgrade/size.mjs`, the skill |
-| `Manifest` | `{ fromTag, toRef, files: {path, status, similarity?, added, removed}[], commits, archivedEpics, tenK, cli, settingsDiff }` | `release-manifest`, `release-scout` |
+| `Manifest` | `{ fromTag, toRef, files: {path, status, similarity?, added, removed}[], commits, archivedEpics, tenK, settingsDiff }` | `release-manifest`, `release-scout` |
 
 ## Library script (`src/.claude/scripts/ang/`)
 | Module | Function | Responsibility |
@@ -66,7 +66,7 @@ Every module here is new except the entry point. The shapes come from the two me
 | `scripts/link-entries.mjs` | `planLinks(srcDir, rootDir) → { create, remove, conflicts }` | Compares `src/.claude/{skills,agents}` entries with root links; anything that isn't a link is repo-only and left alone, and reported as a conflict if it shares a `src/` entry's name |
 | | `applyLinks(plan)` | Creates relative links, removes dangling ones |
 | `scripts/link-entries.test.mjs` | drift test | Fails when `planLinks` on the real repo isn't empty |
-| `scripts/release-manifest.mjs` | `buildManifest(fromTag, toRef) → Manifest` | `git diff -M --numstat`, `git log`, `retro: archive` commits, `10k/` paths, `--help` diff, settings diff. Deterministic |
+| `scripts/release-manifest.mjs` | `buildManifest(fromTag, toRef) → Manifest` | `git diff -M --numstat`, `git log`, `retro: archive` commits, `10k/` paths, settings diff. Deterministic |
 | `.claude/skills/cut-release/SKILL.md` | prose | Stages 0 to 8; asks for the go immediately before push; `gh release view --web` |
 | `.claude/agents/release-scout.md` | prose | Reads the manifest and diffs; returns the grouped summary and coverage map |
 | `.github/workflows/release.yml` | job | Tag-format check, checkout, notes-file check, setup-node 26, `node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'`, stamp, smoke install with the stamped copy, draft release |

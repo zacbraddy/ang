@@ -72,7 +72,6 @@ Zac asked for this split so that drafting can't miss a change wholesale. A scrip
   - commits since the tag;
   - epics archived by `/retro` since the tag, found by their `retro: archive {epic}` commits;
   - `10k/` docs changed since the tag;
-  - shipped script command-line changes;
   - the `src/.claude/settings.json` diff.
 
   It's the same answer every time for the same tags.
