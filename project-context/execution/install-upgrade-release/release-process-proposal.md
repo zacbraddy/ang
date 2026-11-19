@@ -130,7 +130,7 @@ from: v1.0.0
 
 ### 4. Upgrade rehearsal on the fixture repo
 - The **fixture repo** is a dedicated repo, kept for this purpose. It's an Ang install from the previous release, plus local edits typical of a real instance, seeded once when it's created:
-  - **one local edit in every shipped area** (skills, agents, rules, output styles, scripts, `ang/features`, `docs/` and `project-context/README.md`), so an upstream move always lands on an edited file;
+  - **one local edit in every shipped area** (skills, agents, rules, output styles, scripts, `ang/features` and `project-context/README.md`), so an upstream move always lands on an edited file;
   - the [upgrade merge spike](origins/install-uninstall-update/shaping-content/upgrade-merge-spike.md)'s five cases: a new local rule, an edit away from upstream's changes, an edit on a line that changes often upstream, a new function in a shipped script, and a custom setting plus a hook;
   - a local-only skill and agent, which the upgrade must leave alone;
   - a library built through `ang-context-manager.mjs`, with an item at each stage, a `10k/` doc, a trigger and state entries. It's what tests a release that changes library conventions;

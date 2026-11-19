@@ -20,7 +20,6 @@ tags: [repo-structure, tech-stack]
 | `src/.claude/settings.json` | Hooks (SessionStart banner, SubagentStart, reindex after edits) and permissions |
 | `src/.claude/output-styles/` | Five canned output styles, tracked. Custom `*.local.md` styles from `/tailor-ang` are gitignored |
 | `src/project-context/README.md` | The library conventions doc that ships to users |
-| `src/docs/procedures/` | User-facing how-tos, e.g. running streams in Orca |
 | `.claude/*` (root) | Symlinks into `src/.claude/`, so this repo dogfoods Ang |
 | `ang.json` (root) | Project feature keys (`intent`, `streams`), committed. Every install has its own; Ang ships none |
 | `ang.local.json` (root) | Personal keys (`pilot`, `host`), gitignored, written by `/tailor-ang` |
