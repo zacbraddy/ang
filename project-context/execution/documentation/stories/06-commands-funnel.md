@@ -19,6 +19,6 @@ The commands a user runs most. One grouped page keeps edits local when skills ch
 - Heading text matches the command name so anchors stay stable for the links from other pages.
 
 ## Related
-- [Voice lessons from the README](../voice-lessons.md)
+- [Docs voice guide](../voice-lessons.md)
 - [Plan: Sequencing step 5](../plan.md)
 - [Page map](../information-architecture.md#page-map)

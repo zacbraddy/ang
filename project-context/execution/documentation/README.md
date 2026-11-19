@@ -11,7 +11,7 @@ Delivers two release goals from the intent as one unit: a whistle-stop README (c
 ## What's here
 - [Information architecture](information-architecture.md): the page map and where each page draws from
 - [Design direction](design-direction.md): type, spacing, imagery and home-page layout research behind the design choices (decisions d6–d9 in `state.json`)
-- [Voice lessons](voice-lessons.md): what Zac changed in the README drafts, the voice target for every page still to write
+- [Docs voice guide](voice-lessons.md): how to write pages Zac signs off with few notes, distilled from his README and Start here edits
 - [Plan](plan.md): scope, sequencing, risks, test strategy, who does what and candidate ADRs
 - [Stories](stories/): 9 stories. 01 (README) and 02 (site skeleton live) come first, and the content batches 03–09 follow once the site is live
 - C4 diagrams: [context](c4/1-context.md), [containers](c4/2-containers.md), [components](c4/3-components.md) and [code](c4/4-code.md), the last with every file, page slug and README section

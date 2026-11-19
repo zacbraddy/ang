@@ -15,6 +15,14 @@
     ]
   },
   {
+    "slug": "start-here-recheck-after-install-merge",
+    "intent": "Re-check the Start here pages' install, Windows, upgrade and uninstall facts against the shipped files once the install epic is on main",
+    "conditions": [
+      "stream:install-uninstall-update:stage:install-upgrade-release=retro",
+      "custom:stream/install-uninstall-update is merged into main (git branch -r --merged origin/main lists origin/stream/install-uninstall-update, or install.sh exists on main)"
+    ]
+  },
+  {
     "slug": "v1-launch-notes",
     "intent": "Replace the v1.0.0 draft release's rc-range notes with launch copy and add the releases/latest install one-liner to the README before Zac presses Publish",
     "conditions": [

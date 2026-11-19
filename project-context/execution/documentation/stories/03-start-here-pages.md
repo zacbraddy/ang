@@ -2,7 +2,7 @@
 title: Start here pages
 shortDescription: Quick start, Trying Ang alongside your framework, Your first loop, Upgrading and Uninstalling pages are live on the site
 tags: [documentation, distribution]
-status: ready
+status: done
 owner: agent
 dependsOn: [02]
 ---
@@ -94,7 +94,41 @@ No unit or integration tests: these are content pages with no code (plan Test st
   - the home page (story 02 finished it)
   - concept and command pages (stories 04–07)
 
+- **As built:**
+  - Facts read from `stream/install-uninstall-update` at `7541df5d25e81cff729d6032f0f32bc23bb09f5a`. The re-check trigger is `start-here-recheck-after-install-merge`.
+  - Links to unwritten pages that 404 for now: `../../concepts/funnel/` and `../../commands/funnel/` (first loop), `../../concepts/streams-and-mail/` (quick start), `../../concepts/bending-ang/` (upgrading). Every other link and in-page anchor resolves in the build.
+  - Native Windows steps: the SHA comes from the same GitHub API call `install.sh` makes (`commits/<tag>` with the `vnd.github.sha` accept header), giget fetches by SHA rather than tag, and the clash check and `.pre-ang` backup are spelled out, since the manual route skips `install.sh`.
+  - Alongside page: a trial that never left its branch backs out by deleting the branch; Uninstalling is for when Ang already reached `main`.
+  - Uninstalling also covers what the story's list didn't name: the shipped `outputStyle` in `settings.json`, the `outputStyle` key tailor writes to `.claude/settings.local.json`, and the `ang/streams` branch and stream worktrees. `/bootstrap-quality` tooling is the reader's to keep.
+  - `review-story` step 5 now recommends fix or skip per finding before asking which to fix (Zac's call, 2026-11-18), so Your first loop can say Ang recommends. It's a one-line change to a shipped skill.
+  - Zac reviewed and edited all 5 pages on the dev server, one at a time, and signed off the voice (2026-11-18 to 2026-11-19). Each round's lessons are in [voice lessons](../voice-lessons.md), and the agent's final passes fixed spelling, grammar and claims the shipped skills don't back.
+  - Upgrading's checks name git, which `upgrade-ang` checks and `install.sh` doesn't.
+  - Heading emoji that carry a variation selector (🛣️, 🗺️, ✍️, 🛠️, 🗑️, ⚙️) put an invisible character at the front of the anchor id. Harmless unless a link targets that heading, so the linked routes heading uses 🚦. Later stories that link to anchors should pick emoji without one.
+  - Screenshots: `shoot.mjs` can't run here (Playwright's Chromium is missing system libraries), so the light and dark full-page shots of Quick start came from Orca's built-in browser, desktop width only. `_tools/node_modules/` isn't gitignored; I removed it after installing.
+
+## Review
+Facts checked against `stream/install-uninstall-update` at `7541df5`. The branch tip `70319e4` only adds a story doc, so the shipped files haven't changed. The build passes with only the known notices, every acceptance criterion is met and the trigger is in place.
+
+**Must-fix:** none.
+
+**Should-fix**
+- `docs/src/content/docs/start-here/upgrading.md:99`: says that leaving `version.json` out "lands you on the warning route". It doesn't: the older record stays, so the upgrade uses a stale base. That makes the upgrade look bigger, but the route still depends on the conflict count. `upgrade-ang` only says it "looks far bigger than it is".
+- `docs/src/content/docs/start-here/quick-start.md:66`: "the link to the source code for the installer is in the install script above". There's no source link on the page, and the reader wants one in the trust section.
+
+**Nit**
+- `quick-start.md:17` "or maybe probably expect problems" and `:19` "Don't worry too much, if any…" are grammar slips.
+- `quick-start.md:139`: `settings merge` prints its conflicts as JSON (`[]` when none), not as the readable lines `install.sh` shows.
+- `quick-start.md:134`: the manual backup overwrites an existing `.pre-ang`, but `install.sh` keeps one that's already there.
+- `upgrading.md:69`: the Guided with warning table cell is a whole paragraph and is cramped at phone width.
+- `alongside-your-framework.md` and `upgrading.md` have no trailing newline.
+
+**Fixes applied**
+- Everything except the source link in `quick-start.md:66` was fixed, Zac revised the wording of some fixes, and the build still passes.
+- Not fixed: the source link in `quick-start.md:66`. The repo's `install.sh` isn't the release asset readers run, since the release workflow stamps the tag and SHA into the asset. The install command's URL already points at the script readers run, and a separate link broke the sentence's flow.
+- Changed: the routes table in `upgrading.md` now has short cells, and the fork heads-up for Guided with warning has its own paragraph after the table. Zac reworded that paragraph to fit the text around it. Later pages with long table cells can follow the same pattern.
+- Grammar: Zac reworded the opening of `quick-start.md:19` to "But hey, don't worry too much."
+
 ## Related
-- [Voice lessons from the README](../voice-lessons.md)
+- [Docs voice guide](../voice-lessons.md)
 - [Plan: Sequencing step 3](../plan.md)
 - [What Ang is](/project-context/10k/product/what-ang-is.md)
