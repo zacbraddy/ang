@@ -386,9 +386,9 @@
     ]
   },
   {
-    "title": "Voice lessons from the README",
+    "title": "Docs voice guide",
     "path": "project-context/execution/documentation/voice-lessons.md",
-    "shortDescription": "What Zac changed between the agent's first README draft and the one he signed off, as a target for every docs page still to write",
+    "shortDescription": "How to write README and docs-site pages Zac signs off with few notes, distilled from his edits to the README and the Start here pages",
     "tags": [
       "documentation",
       "brand-voice"

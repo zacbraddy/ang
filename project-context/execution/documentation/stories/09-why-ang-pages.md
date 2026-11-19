@@ -19,6 +19,6 @@ Explains the behaviour users run into (agents pushing back on additions, the evi
 - Zac's history and personal usage stay out (d5).
 
 ## Related
-- [Voice lessons from the README](../voice-lessons.md)
+- [Docs voice guide](../voice-lessons.md)
 - [Plan: Sequencing step 6](../plan.md)
 - [Page map](../information-architecture.md#page-map)
