@@ -15,4 +15,4 @@ Raised by Zac at bootstrap (2026-11-13): explore how Ang gets into a project qui
 - **Conventions doc.** `library init` doesn't create `project-context/README.md`, yet the rules tell agents to read it. In this repo it only exists at `src/project-context/README.md`. How does a user's install get it, and should init copy it?
 
 ## Related
-- [Hub](../README.md)
+- [Hub](../../../README.md)

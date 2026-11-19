@@ -28,23 +28,6 @@
     ]
   },
   {
-    "title": "Install, uninstall, update, brief",
-    "path": "project-context/ideas/install-uninstall-update/ideas-content/brief.md",
-    "shortDescription": "Zac's framing of the install, uninstall and update questions",
-    "tags": [
-      "distribution"
-    ]
-  },
-  {
-    "title": "Install, uninstall, update",
-    "path": "project-context/ideas/install-uninstall-update/README.md",
-    "shortDescription": "How Ang gets into a project, and whether uninstall and update commands are worth having",
-    "tags": [
-      "distribution",
-      "open-source"
-    ]
-  },
-  {
     "title": "Parked work",
     "path": "project-context/ideas/parked.md",
     "shortDescription": "Doable threads with no value yet, each with the wake condition that would make it worth doing",

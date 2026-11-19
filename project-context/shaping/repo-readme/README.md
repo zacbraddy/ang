@@ -16,5 +16,5 @@ It's the first thing a potential user reads, and it's a release goal in the inte
 
 ## Related
 - [Documentation website](/project-context/ideas/docs-website/README.md)
-- [Install, uninstall, update](/project-context/ideas/install-uninstall-update/README.md)
+- [Install, uninstall, update](/project-context/execution/install-upgrade-release/README.md)
 - [Voice and attribution](/project-context/10k/marketing/voice-and-attribution.md)

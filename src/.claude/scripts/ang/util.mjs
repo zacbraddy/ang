@@ -15,6 +15,15 @@ export function fail(message) {
   process.exit(1);
 }
 
+export function readJson(file, { missing } = {}) {
+  if (!fs.existsSync(file)) return missing ?? fail(`${file}: not found`);
+  try {
+    return JSON.parse(read(file));
+  } catch (error) {
+    return fail(`${file}: invalid JSON (${error.message})`);
+  }
+}
+
 export function walk(dir, includeAllFiles = false) {
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
