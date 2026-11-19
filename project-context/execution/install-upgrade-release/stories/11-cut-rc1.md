@@ -2,7 +2,7 @@
 title: Cut v1.0.0-rc.1
 shortDescription: The first release, cut with /cut-release, proving the job, the stamp, the publish flow and a live one-liner install
 tags: [distribution, open-source]
-status: ready
+status: done
 owner: both
 dependsOn: [06, 07, 10]
 ---
@@ -95,6 +95,29 @@ The first real run of the whole release process, with no rehearsal because nothi
 - The unstamped `install.sh`'s fallback message names the `latest` URL, which 404s until v1.0.0. That's a pre-v1 state only, so it stays as is.
 - `.github/workflows/release.yml`'s smoke install has never run on a GitHub runner. If it fails on the runner's missing git identity or the like, fix it in the job, test-first where there's code to test.
 - **Out of scope:** the fixture repo (story 12), the first rehearsal and threshold tuning (story 13), v1.0.0's launch copy (`v1-launch-notes`).
+- `/cut-release` ran in the `/implement-story` session rather than a fresh one, so the first-release departures stayed in context.
+
+## Result
+- **Release:** https://github.com/zacbraddy/ang/releases/tag/v1.0.0-rc.1, published as a pre-release with the stamped `install.sh` attached. Tag `v1.0.0-rc.1` is on `faa0de3`, the `release: v1.0.0-rc.1` commit.
+- **Preflight:** three expected warnings, carried on: no CI run on `main` (no CI workflow exists yet; the open-source-hygiene item brings one), the README one-liner (first release), and the `documentation` stream's one unmerged `src/` file, left for the next release.
+- **Fix-forward before the tag:** the scout found that `src/docs/procedures/running-ang-streams-in-orca.md`, the only file under `src/docs/`, was ohnvm-era source material, not a shipped how-to. It moved to `project-context/raw/` as source for the docs site's Orca page (`d8a0010`). Installs no longer create a `docs/` folder. Because no release had shipped it, it needs no upgrade guide entry.
+- **CI:** the release job passed first time, smoke install included, in 16s. No recut.
+- **Fresh repo:** the one-liner installed; `version.json` named `v1.0.0-rc.1` and `faa0de3f01e1f4cf2d60a36d6da51b82c4ced3cd`, matching `git rev-parse v1.0.0-rc.1^{commit}`. `library init` and `library validate` passed. A re-run stopped with "Ang is already installed here", pointed to `/upgrade-ang` and changed nothing.
+- **Existing project:** with its own permission and `PostToolUse` hook, both were kept and Ang's permission, output style and four hook events were added. `settings.json.pre-ang` matched the original, `CLAUDE.md` was untouched, and `library init` and `library validate` passed.
+- **Leak check:** all three checks printed nothing in both repos, and neither had a `docs/` folder.
+- **Skipped as planned:** stage 4 (Rehearsal), the fixture roll-forward and the `releases/latest` check.
+- **Trigger:** `v1-launch-notes` now also adds the `releases/latest` install line to the README.
+
+## Review
+Every Done-when item checks out: the release is a published pre-release with `install.sh` attached, the tag is on `faa0de3` on `origin/main`, the guide parses to `from: null`, the trigger's intent covers the README line and `library validate` passes. A fresh-repo re-run of the one-liner reproduced the version stamp, the clean leak check and the "already installed" stop.
+
+**Must-fix:** none.
+
+**Should-fix:** none.
+
+**Nit**
+- `11-cut-rc1.md:98`: the "ran in the `/implement-story` session" line records what happened, so it belongs in **Result** rather than the implementation notes, which are written for whoever runs the story.
+- `11-cut-rc1.md:100`: **Record afterwards** asks for any `/cut-release` or release-job problems raised as recorded work, but **Result** doesn't say whether there were any. One line ("nothing to raise", or what was raised) closes it.
 
 ## Related
 - [Plan: success measures](../plan.md)
