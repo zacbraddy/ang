@@ -254,7 +254,7 @@
   {
     "title": "release-scout and /cut-release",
     "path": "project-context/execution/install-upgrade-release/stories/10-release-scout-and-cut-release.md",
-    "shortDescription": "The repo-only release-scout agent and /cut-release skill that take a release from preflight to post-publish with Zac making every decision",
+    "shortDescription": "The repo-only release-scout agent, /cut-release skill and draft-guides script that take a release from preflight to post-publish with Zac making every decision",
     "tags": [
       "distribution",
       "open-source"
