@@ -1,17 +1,17 @@
 [
   {
-    "slug": "v1-launch-notes",
-    "intent": "Replace the v1.0.0 draft release's rc-range notes with launch copy before Zac presses Publish",
-    "conditions": [
-      "file:releases/notes/v1.0.0-rc.2.md",
-      "custom:`gh release view v1.0.0 --json isDraft` shows a v1.0.0 release that is still a draft"
-    ]
-  },
-  {
     "slug": "node-lts-bump",
     "intent": "Raise Ang's minimum Node to the newest LTS everywhere it's named, then re-point for next year",
     "conditions": [
       "after:2027-11-01"
+    ]
+  },
+  {
+    "slug": "v1-launch-notes",
+    "intent": "Replace the v1.0.0 draft release's rc-range notes with launch copy and add the releases/latest install one-liner to the README before Zac presses Publish",
+    "conditions": [
+      "file:releases/notes/v1.0.0-rc.2.md",
+      "custom:`gh release view v1.0.0 --json isDraft` shows a v1.0.0 release that is still a draft"
     ]
   }
 ]
