@@ -2,7 +2,7 @@
 title: Concepts I, funnel, library and evidence
 shortDescription: The funnel, Context library and Evidence standard concept pages are live, the funnel with a Mermaid diagram
 tags: [documentation]
-status: ready
+status: done
 owner: agent
 dependsOn: [02]
 ---
@@ -82,6 +82,21 @@ No unit or integration tests: these are content pages with no code (plan Test st
   - any change to `src/` files, including the README's "Used by" line
   - the home page and Start here pages, except a link fix if a slug turns out wrong
   - the conflict between `10k/product/first-principles.md:16` and the shipped tiers, which story 09 (Why Ang: first principles) meets head on
+- **As built:**
+  - **Diagram split in two** (allowed by the funnel notes above): one funnel diagram with the main line, fast-track and kill, and a second, left-to-right diagram of `/ideate`'s nine actions under the Raw section. The single diagram with all the side exits was too wide to read at phone width.
+  - **README gap:** the shipped README's Evidence standard says "Used by `/refine-ideas` and `/shape-ideas`", but `bootstrap-repo/SKILL.md:29,59` applies it too. The page names all three, as this story asks. Fixing the README line is a `src/` change, so it's out of scope here.
+  - **Execution to retro** isn't a `stage-gate` exit: `/retro` checks every story is done and moves the epic itself (`retro/SKILL.md` step 1). The page says so.
+  - **Retitled "Working the funnel"** after Zac's review: the page covers the funnel's rules and side doors, while first loop owns the funnel itself. The slug stays `funnel`, so every link holds; `first-loop.md:110`'s link text now matches the title.
+  - **Links that 404 until later stories land:** `../../commands/funnel/`, `../../commands/library-upkeep/`, `../../commands/setup/` (06, 07), `../../concepts/triggers/` (05), `../../reference/agents/`, `../../reference/ang-context-manager/`, `../../reference/config/` (08). Every other link resolves, including the home page hero, its Concepts card and `first-loop.md:110` into `concepts/funnel/`.
+
+## Review
+Build passes (only the known notices); every acceptance criterion is met; facts match the shipped README and skills, apart from the points below.
+- **Should-fix:** `docs/src/content/docs/concepts/funnel.md:104` says that when `stage-gate` says yes "the move happens in that session". For shaping, that isn't true: `stage-gate` only marks the item `ready-for-planning`, and `/plan-epic` moves it later (`shape-ideas/SKILL.md:35`, README Promotion & merging).
+- **Nit:** `docs/src/content/docs/concepts/context-library.md:92` gives tokens as the reason agents don't hand-edit the script-managed files. The shipped reason is that they're generated (a hook rebuilds `index.json` from frontmatter) and checked by `validate`, so hand edits drift.
+- **Nit:** the `triggers.json` and `triggers/start-here-recheck-after-install-merge.md` changes are outside this story's scope. They're sound, but would read better as a separate commit.
+- **Nit:** `funnel.md:16,26` have doubled blank lines around the table. Rendering is unaffected.
+
+All skipped: none of these changes what a reader takes away, and the extra precision would cost readability.
 
 ## Related
 - [Docs voice guide](../voice-lessons.md)

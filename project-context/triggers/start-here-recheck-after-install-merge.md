@@ -6,10 +6,10 @@ tags: [documentation, distribution]
 # Re-check the Start here pages against the merged install files
 
 ## Summary
-An agent, in a fresh session, re-reads every install, native Windows, upgrade and uninstall fact on the docs site's Start here pages against the shipped files on `main`, and fixes the pages where they've drifted. It's for the moment the install epic (`stream/install-uninstall-update`) merges to `main`.
+An agent, in a fresh session, re-reads every install, native Windows, upgrade and uninstall fact on the docs site's Start here pages against the shipped files on `main`, and fixes the pages where they've drifted. It's for the moment the install epic (`install-upgrade-release`) is complete on `main`.
 
 ## Why now, not sooner or later
-Documentation story 03 wrote the pages from the install branch at commit `7541df5`, before that epic finished. Its later stories can still change things: `size.mjs` says its route thresholds get tuned after the rc.2 rehearsal (install story 13), and `install.sh`, `upgrade-ang` or the shipped tree may move too. Checking before the merge would check a moving target. Leaving it long after means readers follow stale steps on the live site. The stream condition fires once the install epic reaches retro; the custom one confirms the merge itself.
+Documentation story 03 wrote the pages from the install branch at commit `7541df5`, before that epic finished. Its later stories can still change things: `size.mjs` says its route thresholds get tuned after the rc.2 rehearsal (install story 13), and `install.sh`, `upgrade-ang` or the shipped tree may move too. The epic merged to `main` mid-flight so its release could be built and smoke-tested there, and it finishes on `main`. Checking before it's done would check a moving target. Leaving it long after means readers follow stale steps on the live site. The condition fires once its retro has archived it on `main`.
 
 ## What to do
 1. Read the shipped files on `main`: `install.sh`, `src/.claude/skills/upgrade-ang/SKILL.md`, `src/.claude/scripts/ang/upgrade/size.mjs`, `src/.claude/scripts/ang/commands/{settings,version}.mjs`, `src/.claude/settings.json`, and the shipped tree (`git ls-tree -r --name-only main src`).
@@ -21,7 +21,7 @@ Documentation story 03 wrote the pages from the install branch at commit `7541df
 3. Fix any drift on the pages, run `npm run build` in `docs/`, and leave the changes unstaged for Zac.
 
 ## Signs it's already handled
-- `git log main -- docs/src/content/docs/start-here/` shows a commit after the install epic's merge that touches these facts.
+- `git log main -- docs/src/content/docs/start-here/` shows a commit after the install epic's retro that touches these facts.
 - The thresholds in `upgrading.md` match `AGENT_RESOLVES_UP_TO` and `WARN_FROM` in `size.mjs` on `main`, and the skill list in `uninstalling.md` matches `git ls-tree --name-only main src/.claude/skills/`.
 
 ## Related

@@ -107,4 +107,4 @@ Once you've reviewed and committed all that, Ang deletes the epic folder in a co
 
 That's one full loop! A hunch in `raw/` turned into shipped work, and `10k/` now knows dark mode exists and why it was built the way it was. Your next raw note starts the next loop.
 
-If you want the detail on each command, they're all on [Commands: the funnel](../../commands/funnel/). If you'd rather understand the *why* behind the stages, start with [The funnel](../../concepts/funnel/).
+If you want the detail on each command, they're all on [Commands: the funnel](../../commands/funnel/). If you'd rather understand the *why* behind the stages, start with [Working the funnel](../../concepts/funnel/).
