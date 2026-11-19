@@ -2,7 +2,7 @@
 
 Every Ang release has an upgrade guide here, `vX.Y.Z.md` named after its tag (`v1.1.0.md`, `v1.0.0-rc.1.md`). `/upgrade-ang` reads them with `ang-context-manager.mjs upgrade guides --from <installed> --to <target>`, which starts at the target's guide and follows each `from:` line back to the installed tag. Every guide is read as it stands at the target tag, so fixing an old guide in a later release fixes it for every upgrade to that release onwards.
 
-A guide that doesn't parse, or a `from:` line that skips or loops, stops every upgrade that crosses it. `/cut-release` checks the new guide before tagging.
+A guide that doesn't parse, or a `from:` line that skips or loops, stops every upgrade that crosses it. `/cut-release` checks the new guide before tagging, with `node scripts/draft-guides.mjs <previous tag> <new tag>`: it chains the guides in this folder as they stand on disk, the same way `upgrade guides` does at the target tag.
 
 ## Format
 1. **Title line:** `# Upgrade guide vX.Y.Z`, the exact tag the file is named after.

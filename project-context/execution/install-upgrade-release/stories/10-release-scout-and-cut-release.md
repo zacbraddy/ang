@@ -2,14 +2,14 @@
 title: release-scout and /cut-release
 shortDescription: The repo-only release-scout agent, /cut-release skill and draft-guides script that take a release from preflight to post-publish with Zac making every decision
 tags: [distribution, open-source]
-status: ready
+status: done
 owner: agent
 dependsOn: [08, 09]
 ---
 # release-scout and /cut-release
 
 ## Summary
-The local half of the release process (d15, d18 to d20, d23, d25). `/cut-release` walks stages 0 to 8 of the release process proposal with Zac. `release-scout` reads the manifest and diffs in its own context, so a big manifest doesn't overflow the drafting session. A small repo-only script, `draft-guides.mjs`, turns the local draft upgrade guide into the guides JSON the upgrade engine takes. The rehearsal needs it on every release, because the new tag doesn't exist yet at stage 4, and it doubles as the check that the new guide parses and chains before tagging.
+The local half of the release process (d15, d18 to d20, d23, d25). `/cut-release` walks stages 1 to 8 of the release process proposal with Zac. `release-scout` reads the manifest and diffs in its own context, so a big manifest doesn't overflow the drafting session. A small repo-only script, `draft-guides.mjs`, turns the local draft upgrade guide into the guides JSON the upgrade engine takes. The rehearsal needs it on every release, because the new tag doesn't exist yet at stage 4, and it doubles as the check that the new guide parses and chains before tagging.
 
 ## Outcome
 Zac runs `/cut-release` from preflight warnings through manifest, scout, version, drafted notes and upgrade guide, rehearsal, go, CI and publish to post-publish. He makes only decisions and never types a git or gh command. The coverage check maps every manifest entry to the notes, the guide or an internal list.
@@ -70,12 +70,10 @@ Zac runs `/cut-release` from preflight warnings through manifest, scout, version
 - Opening: it runs from the main checkout. It's the one workflow command that commits, tags and pushes, each on Zac's go (d19). `$TMP` is `mktemp -d -t ang-release-XXXXXX`, removed on every exit.
 - Host actions are named inline, since there's no shipped `host/steps/` file for a repo-only skill: say status at each stage (`release vX.Y.Z: rehearsal`), and ask for the user at every stop for Zac.
 - Numbered bold-lead stages:
-  0. **Decide.** Running the skill is the decision. There are no checks on whether it's time.
   1. **Preflight.** Run every check, then list the failures, each with its fix, and ask whether to carry on:
      - on `main`, `git status --porcelain` empty, and after `git fetch origin` `HEAD` equals `origin/main`;
      - streams with `src/` work not on main: for each stream in `ang-context-manager.mjs stream list`, the count of `git diff --name-only origin/main...<branch> -- src/`, listed as "<slug>: N src/ files";
      - CI green: the latest `gh run list --branch main` conclusion;
-     - Node LTS: in October or later, `.node-version` names a major older than the newest LTS in `https://nodejs.org/dist/index.json` (a missing file is just a failed check);
      - immutable releases on: `gh api repos/zacbraddy/ang/immutable-releases` shows `"enabled": true`;
      - no draft release left over: `gh release list --json tagName,isDraft`;
      - no link drift: `node --test scripts/link-entries.test.mjs` (fix: `node scripts/link-entries.mjs`);
@@ -110,10 +108,25 @@ Zac runs `/cut-release` from preflight warnings through manifest, scout, version
 - The skill runs on `main`, not a stream branch, so the stream preflight compares other branches against `origin/main`.
 - A re-run after a CI failure keeps the `release:` commit. The fix is a new commit, and the tag moves to the new `HEAD`.
 
+**Deviations**
+- The release notes template now lives in `releases/notes/README.md` (carried from the proposal), so `/cut-release` points at one place instead of carrying a fallback to the proposal.
+- No stage 0 (Decide): running `/cut-release` is the decision, so the skill starts at Preflight. Stages keep the proposal's numbers 1 to 8.
+- No Node LTS preflight check: a once-a-year date check would run on every release. The bump is the `node-lts-bump` trigger instead (Zac's call in review).
+
 **Out of scope**
 - Anything for rc.1 (no rehearsal, `from: none`) or v1.0.0's launch notes: story 11 and the `v1-launch-notes` trigger do those by hand (d38, d39).
 - Creating or seeding the fixture repo (story 12). If story 12 names it differently, it updates the skill's one mention.
 - Tuning the upgrade route thresholds (story 13).
+
+## Review
+Done-when evidence present: 183 tests pass (`draft-guides.test.mjs` covers every draft-guides line), nothing under `src/` names the new files, `releases/upgrades/README.md` names the script. Skill commands match the real `upgrade plan`/`guides`/`version write` flags, the release job's tag regex and the manifest's shape.
+
+**Should-fix**
+- `.claude/skills/cut-release/SKILL.md:51`: the rehearsal follows `upgrade-ang` through **Finish**, whose Clean up removes `$TMP`. The subagent was handed the release's `$TMP`, so it would wipe `manifest.json`, `coverage.json` and the folder stage 8 works in. Say Clean up removes only the plan's `tempDir` here.
+
+**Nits**
+- `c4/3-components.md:99` still says "Stages 0 to 8".
+- `releases/notes/README.md:26` hardcodes Node 26, and the Node-bump preflight fix didn't name it. Superseded: the preflight check is gone, and the `node-lts-bump` trigger lists every place the minimum is named, this template included.
 
 ## Related
 - [Release process proposal](../release-process-proposal.md)

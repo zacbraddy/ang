@@ -213,7 +213,7 @@
     },
     {
       "id": "d18",
-      "decision": "Zac alone decides when to release: no nudges, schedules or automatic releases. Preflight checks (unmerged streams, listed by name, CI, Node LTS bump, leftover drafts, the README one-liner) are warnings to eyeball, never blocks. Releases are cut from the head of main (Zac's call)",
+      "decision": "Zac alone decides when to release: no nudges, schedules or automatic releases. Preflight checks (unmerged streams, listed by name, CI, leftover drafts, the README one-liner) are warnings to eyeball, never blocks. Releases are cut from the head of main. The yearly Node LTS bump is the node-lts-bump trigger, not a preflight check (Zac's call)",
       "evidence": "release-process-proposal.md"
     },
     {
@@ -678,6 +678,10 @@
     {
       "date": "2026-11-19",
       "event": "replaced d39: v1.0.0 is cut like any release, from the last rc: the manifest, the upgrade guide (from: the last rc, so the fixture and any rc install roll forward) and the rehearsal run unchanged. Only the human notes differ: launch copy (what Ang is, how to install it), drafted ahead through the v1-launch-notes trigger, replaces the CI draft's body and releases/notes/v1.0.0.md before Zac presses Publish. The rc-range diff never reaches the public notes. v1.0.0 still contains everything since the first commit (d17) (Zac's call) → v1.0.0 is cut like any release, from the last rc: the manifest, the upgrade guide (from: the last rc, so the fixture and any rc install roll forward) and the rehearsal run unchanged. Only the human notes differ: once CI has created the v1.0.0 draft, the v1-launch-notes trigger writes launch copy (what Ang is, how to install it) into the draft's body and releases/notes/v1.0.0.md before Zac presses Publish. /cut-release has no v1.0.0 branch, and the rc-range diff never reaches the public notes. v1.0.0 still contains everything since the first commit (d17) (Zac's call)"
+    },
+    {
+      "date": "2026-11-19",
+      "event": "replaced d18: Zac alone decides when to release: no nudges, schedules or automatic releases. Preflight checks (unmerged streams, listed by name, CI, Node LTS bump, leftover drafts, the README one-liner) are warnings to eyeball, never blocks. Releases are cut from the head of main (Zac's call) → Zac alone decides when to release: no nudges, schedules or automatic releases. Preflight checks (unmerged streams, listed by name, CI, leftover drafts, the README one-liner) are warnings to eyeball, never blocks. Releases are cut from the head of main. The yearly Node LTS bump is the node-lts-bump trigger, not a preflight check (Zac's call)"
     }
   ],
   "type": "technical"

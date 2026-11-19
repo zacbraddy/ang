@@ -60,7 +60,6 @@ Zac decides when, and nothing nudges him. He runs `/cut-release` when he wants a
 - On main, clean, and up to date with `origin/main`.
 - **Streams with `src/` changes that aren't on main.** The skill lists each stream by name with a count, e.g. "open-source-hygiene: 9 `src/` files". Normally this is expected work for the next release. The list is there so Zac can spot one he meant to include.
 - CI is green on the commit being released (`gh run list`).
-- **Node LTS (long-term support) bump due:** it's October or later and `.node-version` is behind the current LTS (open-source hygiene's d11).
 - Immutable releases are on, and no draft release is left over from an abandoned attempt.
 - **Link drift:** a `src/` skill or agent with no per-entry link at the root, or a dangling link. The fix is to re-run the link script in `scripts/`.
 - The README's copy-paste install line matches the release-asset URL. This only checks the one-liner users run. The README says nothing about how releases are made; that lives only in the skill.
