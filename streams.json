@@ -1,11 +1,5 @@
 [
   {
-    "slug": "install-uninstall-update",
-    "branch": "stream/install-uninstall-update",
-    "worktree": "/home/zacbraddy/orca/workspaces/ang/install-uninstall-update",
-    "focus": "How Ang gets into a project, and whether uninstall and update commands are worth having (ideas/install-uninstall-update)"
-  },
-  {
     "slug": "documentation",
     "branch": "stream/documentation",
     "worktree": "/home/zacbraddy/orca/workspaces/ang/documentation",
