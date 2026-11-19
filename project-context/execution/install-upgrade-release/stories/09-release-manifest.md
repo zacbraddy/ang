@@ -2,7 +2,7 @@
 title: release-manifest script
 shortDescription: A repo-only script that builds a deterministic release manifest from git alone
 tags: [distribution, repo-structure]
-status: ready
+status: done
 owner: agent
 dependsOn: [01]
 ---
@@ -43,7 +43,7 @@ The deterministic feed for drafting a release (d20): everything that changed bet
 - **Files**: new `scripts/release-manifest.mjs` and `scripts/release-manifest.test.mjs`. Repo-only, never under `src/`, so `install.sh` and the release tarball never see it. Follow `scripts/link-entries.mjs:47-57`: exported functions, the `import.meta.url === pathToFileURL(process.argv[1]).href` CLI guard, the repo root from `path.resolve(import.meta.dirname, '..')`.
 - **Signature**: `buildManifest({ cwd, fromTag, toRef }) → Manifest` (`cwd` so tests point it at a temp repo; C4's `buildManifest(fromTag, toRef)` with the repo made explicit).
 - **CLI**: `node scripts/release-manifest.mjs [fromTag] [toRef]`. `toRef` defaults to `HEAD`. `fromTag` defaults to `git describe --tags --abbrev=0 --match 'v*' <toRef>`, or `null` when there is none. Prints `JSON.stringify(manifest, null, 2)` to stdout. `/cut-release` (story 10) decides where to save it and passes `fromTag` explicitly when the default is wrong, such as a final release that should span its rcs.
-- **Base of the range**: the tag, or the empty tree (`git hash-object -t tree /dev/null`) when `fromTag` is `null`. This gives v1.0.0 "everything since the first commit" (d17).
+- **Base of the range**: the tag, or the empty tree (`git hash-object -t tree /dev/null`) when `fromTag` is `null`. This gives the first release, rc.1, everything since the first commit.
 - **Manifest shape** (refines C4's `Manifest`, c4/4-code.md:21):
   - `fromTag`: string or `null`. `toRef`: as given.
   - `files`: `{ path, status, from?, similarity?, added, removed }[]` from `git diff -M -z --name-status` and `--numstat` over `-- src/`, joined on path, sorted by `path`. Use `-z` to avoid rename brace syntax and path quoting.
@@ -54,6 +54,19 @@ The deterministic feed for drafting a release (d20): everything that changed bet
 - **No CLI help diff**: every shipped file ships whatever a user's `ang.json` says, so command-line changes show up in `files` like any other change. C4 and the proposal no longer list a `cli` field.
 - **Determinism**: no timestamps, no working-tree reads (refs only), explicit sorting, and run git with `-c core.quotePath=false` and a fixed `LC_ALL=C`.
 - **Out of scope**: `release-scout`, the coverage check and saving the manifest (story 10); tag creation and validation (story 08).
+
+## Review
+Done-when holds: in this repo the CLI prints 102 `src/` files, all `A`, with `fromTag: null`, and two runs are byte-identical. 48 repo-only and 128 shipped tests pass, and `release.yml:36` already globs `scripts/*.test.mjs`. Every acceptance criterion has a passing test.
+
+**Must-fix:** none.
+
+**Should-fix**
+- The staged changeset goes beyond this story. It also holds d38/d39, the `v1-launch-notes` trigger, the plan and story 10/11 edits, and a change to shipped code (`src/.claude/scripts/ang/upgrade/target.mjs:65` plus its tests) that no story owns. That's fine as a session's work, but commit it separately from story 09 so the history traces it. *Kept as is: Zac asked for this work in session.*
+- Determinism holds per machine, not across machines (`scripts/release-manifest.mjs:13-14`). `git diff` reads the user's `diff.algorithm`, so line counts and `settingsDiff` can differ between Zac's machine and another. Pin it with `-c diff.algorithm=myers` in the `git` wrapper.
+
+**Nit**
+- `scripts/release-manifest.test.mjs:144` tests a pass-through (`fromTag`/`toRef` echoed back). Other tests already cover `fromTag`. Delete it.
+- `scripts/release-manifest.mjs:96` runs `archivedEpic` twice per commit. One `flatMap` reads more cleanly.
 
 ## Related
 - [C4 code: repo-only](../c4/4-code.md)

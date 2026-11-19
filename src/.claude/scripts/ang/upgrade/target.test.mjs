@@ -74,9 +74,9 @@ test('resolveRelease with a tag resolves that published release', async () => {
   assert.deepEqual(await resolveRelease(fetch, 'v1.0.0-rc.2', API), { ref: 'v1.0.0-rc.2', sha: SHA });
 });
 
-test('resolveRelease with no tag and no stable release says to name a tag', async () => {
+test('resolveRelease with no tag and no latest release says to name a tag', async () => {
   const { fetch } = stubFetch({});
-  await assert.rejects(resolveRelease(fetch, undefined, API), /no stable Ang release yet[\s\S]*\/upgrade-ang v1\.0\.0-rc\.2/);
+  await assert.rejects(resolveRelease(fetch, undefined, API), /no latest Ang release[\s\S]*github\.com\/zacbraddy\/ang\/releases[\s\S]*\/upgrade-ang <tag>/);
 });
 
 test('resolveRelease rejects a missing or draft tag as not a published release', async () => {

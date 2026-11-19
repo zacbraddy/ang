@@ -96,7 +96,7 @@ Run top to bottom, piped. Nothing is written before every check passes (d12).
 | `scripts/link-entries.mjs` | new | Plans and applies per-entry links; a no-op on re-run |
 | `scripts/link-entries.test.mjs` | new | Fails on a missing or dangling link. Runs in the release job |
 | `scripts/release-manifest.mjs` | new | Builds the manifest from git alone (d20) |
-| `/cut-release` | new | Stages 0 to 8 of the [proposal](../release-process-proposal.md). Skips the rehearsal for `rc.1` and says why |
+| `/cut-release` | new | Stages 0 to 8 of the [proposal](../release-process-proposal.md), for the steady state only: no branch for `rc.1` or v1.0.0 (d38, d39) |
 | `release-scout` | new | Returns themes, user-facing vs internal, and upgrade hazards; every manifest entry maps to notes, guide or an internal list |
 | `release.yml` | new | `node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'` on Node 26, stamp, smoke install with the stamped copy, `gh release create --draft` (with `--prerelease` for rc tags) |
 

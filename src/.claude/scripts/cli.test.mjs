@@ -388,12 +388,12 @@ test('upgrade target with --to and no record is no-record with a null from', asy
   assert.deepEqual(JSON.parse(stdout), { status: 'no-record', from: null, to: { ref: 'v1.0.0-rc.2', sha: SHA } });
 });
 
-test('upgrade target fails saying to name a tag when there is no stable release', async () => {
+test('upgrade target fails saying to name a tag when there is no latest release', async () => {
   const api = await serve({});
   const { status, stdout, stderr } = await runAsync(['upgrade', 'target'], { ANG_GITHUB_API: api }, recordAt('v1.0.0-rc.1'));
   assert.equal(status, 1);
   assert.equal(stdout, '');
-  assert.match(stderr, /^✖ There's no stable Ang release yet[\s\S]*\/upgrade-ang v1\.0\.0-rc\.2/);
+  assert.match(stderr, /^✖ GitHub has no latest Ang release[\s\S]*\/upgrade-ang <tag>/);
 });
 
 test('upgrade target fails on a draft tag as not a published release', async () => {

@@ -16,6 +16,7 @@ The first real run of the whole release process, with no rehearsal because nothi
 
 ## Rough scope
 - Run `/cut-release` with Zac; fix forward anything the first run turns up.
+- Handle the first-release states by hand, since `/cut-release` has no branch for them (d38): tell it to skip the rehearsal (nothing to upgrade from), and make sure `releases/upgrades/v1.0.0-rc.1.md` says `from: none`.
 
 ## Related
 - [Plan: success measures](../plan.md)

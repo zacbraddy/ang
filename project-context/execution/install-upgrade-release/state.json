@@ -310,6 +310,16 @@
       "id": "d37",
       "decision": "Ang supports macOS, Linux and Windows through WSL, where install.sh, Claude Code and Node 26 all run inside WSL, and install.sh stops under Git Bash, MSYS or Cygwin. Native Windows is untested and best effort: it needs Git for Windows (Claude Code runs Ang's hooks and Bash commands in Git Bash) and the documented manual install. Shell-free hooks are parked (Zac's call)",
       "evidence": "stories/03-install-script.md"
+    },
+    {
+      "id": "d38",
+      "decision": "Built for the steady state: install, upgrade and release are designed for life after v1.0.0, where each semver release is cut from the previous one. Release candidates (v1.0.0-rc.N) exist only to rehearse the process before v1.0.0; they are test artefacts, not a feature. A state that can only occur before or at v1.0.0 (no release yet, the first rc, rc to v1.0.0) gets a bespoke manual step in the story that meets it, never a permanent check or branch that would sit as a no-op forever. rc support that costs nothing (the -rc.N tag pattern, prerelease flag and ordering) stays dormant; nothing is built to polish it (Zac's call)",
+      "evidence": "plan.md"
+    },
+    {
+      "id": "d39",
+      "decision": "v1.0.0 is cut like any release, from the last rc: the manifest, the upgrade guide (from: the last rc, so the fixture and any rc install roll forward) and the rehearsal run unchanged. Only the human notes differ: once CI has created the v1.0.0 draft, the v1-launch-notes trigger writes launch copy (what Ang is, how to install it) into the draft's body and releases/notes/v1.0.0.md before Zac presses Publish. /cut-release has no v1.0.0 branch, and the rc-range diff never reaches the public notes. v1.0.0 still contains everything since the first commit (d17) (Zac's call)",
+      "evidence": "/project-context/triggers/v1-launch-notes.md"
     }
   ],
   "lineage": [
@@ -656,6 +666,18 @@
     {
       "date": "2026-11-18",
       "event": "replaced d30: Zac turns on immutable releases and adds a v* tag ruleset once, guided by a story. A broken release or install.sh is fixed only by a patch release, never by editing a published asset (Zac's call) → Zac turns on immutable releases once, by hand. No v* tag ruleset: immutable releases already lock published tags, and a ruleset would only guard the unpublished window as insurance against a hypothetical, while blocking deletes would break the delete-and-recut path for a failed release run. A broken release or install.sh is fixed only by a patch release, never by editing a published asset (Zac's call)"
+    },
+    {
+      "date": "2026-11-19",
+      "event": "decided: Built for the steady state: install, upgrade and release are designed for life after v1.0.0, where each semver release is cut from the previous one. Release candidates (v1.0.0-rc.N) exist only to rehearse the process before v1.0.0; they are test artefacts, not a feature. A state that can only occur before or at v1.0.0 (no release yet, the first rc, rc to v1.0.0) gets a bespoke manual step in the story that meets it, never a permanent check or branch that would sit as a no-op forever. rc support that costs nothing (the -rc.N tag pattern, prerelease flag and ordering) stays dormant; nothing is built to polish it (Zac's call)"
+    },
+    {
+      "date": "2026-11-19",
+      "event": "decided: v1.0.0 is cut like any release, from the last rc: the manifest, the upgrade guide (from: the last rc, so the fixture and any rc install roll forward) and the rehearsal run unchanged. Only the human notes differ: launch copy (what Ang is, how to install it), drafted ahead through the v1-launch-notes trigger, replaces the CI draft's body and releases/notes/v1.0.0.md before Zac presses Publish. The rc-range diff never reaches the public notes. v1.0.0 still contains everything since the first commit (d17) (Zac's call)"
+    },
+    {
+      "date": "2026-11-19",
+      "event": "replaced d39: v1.0.0 is cut like any release, from the last rc: the manifest, the upgrade guide (from: the last rc, so the fixture and any rc install roll forward) and the rehearsal run unchanged. Only the human notes differ: launch copy (what Ang is, how to install it), drafted ahead through the v1-launch-notes trigger, replaces the CI draft's body and releases/notes/v1.0.0.md before Zac presses Publish. The rc-range diff never reaches the public notes. v1.0.0 still contains everything since the first commit (d17) (Zac's call) → v1.0.0 is cut like any release, from the last rc: the manifest, the upgrade guide (from: the last rc, so the fixture and any rc install roll forward) and the rehearsal run unchanged. Only the human notes differ: once CI has created the v1.0.0 draft, the v1-launch-notes trigger writes launch copy (what Ang is, how to install it) into the draft's body and releases/notes/v1.0.0.md before Zac presses Publish. /cut-release has no v1.0.0 branch, and the rc-range diff never reaches the public notes. v1.0.0 still contains everything since the first commit (d17) (Zac's call)"
     }
   ],
   "type": "technical"

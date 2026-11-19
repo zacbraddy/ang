@@ -36,6 +36,12 @@ All of the merge logic lives in the library script (`ang-context-manager.mjs`), 
 - Checksums, signing, `CHANGELOG.md`, commit conventions and release bots (k11, [proposal: not proposed](release-process-proposal.md)).
 
 ## Approach
+### Built for the steady state (d38)
+Install, upgrade and release are designed for life after v1.0.0, where each semver release is cut from the previous one. The `v1.0.0-rc.N` pre-releases are test artefacts that exist only to rehearse the process before v1. They are not a feature.
+- **One-off states get a manual step, not code.** A state that can only happen before or at v1.0.0 is handled by hand in the story that meets it. That covers the first release with nothing to upgrade from, the fixture not existing yet, and rc to v1.0.0 (d39, the `v1-launch-notes` trigger). No skill step, check or branch exists that would sit as a no-op forever.
+- **rc support stays dormant where it costs nothing.** The `-rc.N` tag pattern, the prerelease flag and prerelease ordering stay. Nothing is added to polish them.
+- **Test for new work:** if a condition can never be true again after v1.0.0, it belongs in a story's manual steps, not in shipped or repo-only tooling.
+
 ### How the pieces connect
 ```mermaid
 flowchart LR
@@ -77,7 +83,7 @@ flowchart LR
 
 ### Release
 This follows the [release process proposal](release-process-proposal.md) as agreed: preflight warnings, then manifest, scout, version, drafts, rehearsal, go, CI, publish and post-publish. Zac makes every decision (d18, d19, d23).
-- **No rehearsal for `rc.1`,** because no release exists to upgrade from. `/cut-release` says so and skips the step. Then the fixture is seeded from the `rc.1` install, and `rc.2` gets the first real rehearsal (proposal step 4).
+- **No rehearsal for `rc.1`,** because no release exists to upgrade from. Story 11 skips that step by hand; `/cut-release` has no branch for it (d38). Then the fixture is seeded from the `rc.1` install, and `rc.2` gets the first real rehearsal (proposal step 4).
 
 ## Sequencing
 1. **Repo layout and link script (d24).** This comes first, because every repo-only skill, agent and script below needs a home that doesn't ship.

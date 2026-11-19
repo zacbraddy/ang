@@ -1,0 +1,10 @@
+[
+  {
+    "slug": "v1-launch-notes",
+    "intent": "Replace the v1.0.0 draft release's rc-range notes with launch copy before Zac presses Publish",
+    "conditions": [
+      "file:releases/notes/v1.0.0-rc.2.md",
+      "custom:`gh release view v1.0.0 --json isDraft` shows a v1.0.0 release that is still a draft"
+    ]
+  }
+]

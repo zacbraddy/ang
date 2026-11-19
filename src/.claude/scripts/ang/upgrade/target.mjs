@@ -62,7 +62,7 @@ export async function resolveRelease(fetch, tag, api = process.env.ANG_GITHUB_AP
   const releaseUrl = tag ? `${api}/repos/${REPO}/releases/tags/${encodeURIComponent(tag)}` : `${api}/repos/${REPO}/releases/latest`;
   const noRelease = tag
     ? () => notPublished(tag)
-    : () => stop("There's no stable Ang release yet.", 'Name the tag to upgrade to, e.g. /upgrade-ang v1.0.0-rc.2');
+    : () => stop('GitHub has no latest Ang release.', `Pick a tag from https://github.com/${REPO}/releases and run /upgrade-ang <tag>.`);
   const release = await (await get(releaseUrl, 'application/vnd.github+json', noRelease)).json();
   if (release.draft) throw notPublished(tag ?? release.tag_name);
 

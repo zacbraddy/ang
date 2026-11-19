@@ -75,7 +75,7 @@ Zac asked for this split so that drafting can't miss a change wholesale. A scrip
   - the `src/.claude/settings.json` diff.
 
   It's the same answer every time for the same tags.
-- **`release-scout`** (a repo-only agent, modelled on `context-scout`) reads the manifest and the diffs it points to. It returns a summary to the main session: changes grouped by theme, user-facing vs internal, and upgrade hazards. This keeps the diff reading out of the main session's context, which matters most for v1.0.0, where everything since the first commit is in range.
+- **`release-scout`** (a repo-only agent, modelled on `context-scout`) reads the manifest and the diffs it points to. It returns a summary to the main session: changes grouped by theme, user-facing vs internal, and upgrade hazards. This keeps the diff reading out of the main session's context, which matters most for the first release, where everything since the first commit is in range.
 - **Coverage check:** every manifest entry must end up in the notes, the upgrade guide or an explicit "internal, not mentioned" list. The skill shows any entry left over. Misses can still happen inside the analysis, but no change can be silently overlooked.
 - The skill proposes a version, with its reasons. **Zac picks it.**
 
