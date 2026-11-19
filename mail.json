@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "526eb3",
+    "from": "main",
+    "to": "documentation",
+    "sent": "2026-11-19",
+    "text": "The Orca streams how-to no longer ships: src/docs/procedures/running-ang-streams-in-orca.md moved to project-context/raw/ on main (d8a0010), and installs no longer create docs/. Your plan's 'summarise it and link to it on GitHub' approach (plan.md, stories 03 and 05) needs the streams page to carry the steps itself, sourced from the raw file. The start-here-recheck-after-install-merge trigger's file list should drop docs/procedures/."
+  }
+]
