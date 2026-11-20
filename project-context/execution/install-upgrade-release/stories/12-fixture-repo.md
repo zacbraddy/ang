@@ -2,7 +2,7 @@
 title: Fixture repo created and seeded
 shortDescription: Zac creates the upgrade fixture repo from an rc.1 install and seeds it once with representative local edits
 tags: [distribution, open-source]
-status: ready
+status: done
 owner: user
 dependsOn: [11]
 ---
@@ -84,6 +84,22 @@ The fixture repo holds an rc.1 install plus the k17 seed: one local edit in ever
 - **Spike mapping:** the spike's `retro` (an untouched file) and `ang.json`-moved cases aren't in k17's five. The area edits cover untouched files, and the move case only arises when upstream moves something.
 - **Faker version:** `@faker-js/faker` 10.6.0 is the latest, last published 2026-09-06. Vet it with `supermatt:dependency-vetting` before the install.
 - **Out of scope:** any rehearsal run and threshold tuning (story 13), seed generators or fixture tooling in the Ang repo (k17), and `*.local.*` files.
+
+## Result
+- **Fixture:** https://github.com/zacbraddy/ang-upgrade-fixture, public, default branch `main`.
+- **Commits:** `install: Ang v1.0.0-rc.1` is `4a92a16`. `seed: rc.1 fixture` is `45ebac3`, and lightweight tag `v1.0.0-rc.1` points at it, level with `main`.
+- **Done when**, checked from a fresh anonymous HTTPS clone in a temp folder: `gh repo view` showed `PUBLIC` and `main`; the clone needed no credentials; `version.json` named `v1.0.0-rc.1` and `faa0de3f01e1f4cf2d60a36d6da51b82c4ced3cd`; the diff against the `install:` commit showed all eight shipped-file edits, the three local-only `.claude` files and the library; `library validate` passed and `node --test .claude/scripts` passed 125 of 125; no `*.local.*` file is tracked.
+- **Seed script:** `seed/seed.mjs` applies the checklist with `faker.seed(17)`, using `faker.lorem` for all prose. Before applying, it restores the files it edits and cleans the paths it generates, so a re-run needs no manual `git checkout`/`git clean`. It refuses to run once `ang.json` is committed at `HEAD`. A second run produced byte-identical output across all 57 seeded files.
+- **Differently from the guide:**
+  - The fixture had no `package.json`, so `npm i -D` walked up and installed faker into `~/Projects`. That stray install was deleted. The fixture now has `package.json` with faker pinned exactly to `10.6.0` (same integrity hash as the vetted tarball), committed with `package-lock.json`.
+  - Re-runs match byte for byte only on the same day: `state.json` lineage entries take the date from `ang-context-manager.mjs`'s `today()`.
+  - The planning, execution and retro epics are typed `business`, so they don't imply missing C4 docs.
+
+## Review
+Re-checked every Done-when from a fresh anonymous clone: `PUBLIC`/`main`, `version.json` matches rc.1 at `faa0de3`, tag and `main` both at `45ebac3`, all 12 checklist rows and the library present, `library validate` passes, 125 of 125 tests pass, and no `*.local.*` file is tracked.
+- **must-fix:** none.
+- **should-fix:** none.
+- **nit:** the fixture's `project-context/ideas/parked.md:12` reads `What:Sustineo` with no space after the colon. It's faker filler and validate passes, so leave it; fixing it means a re-seed and moving the tag.
 
 ## Related
 - [Release process proposal](../release-process-proposal.md)
