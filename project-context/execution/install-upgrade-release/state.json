@@ -1,6 +1,6 @@
 {
   "status": "active",
-  "statusNote": "13 draft stories; next /write-story on 01",
+  "statusNote": "story 13 (cut rc.2 with rehearsal) in progress; last story in the epic",
   "unknowns": [],
   "knowns": [
     {
@@ -163,7 +163,7 @@
     },
     {
       "id": "d9",
-      "decision": "The upgrade merges file by file, three-way, against the version.json SHA, with git merge-file, and never commits: the user reviews the unstaged result and commits or drops it. Four routes by conflicted-file count: fast (only one-sided changes), agent-resolved (any clean merge or 1-5 conflicts; the agent resolves them itself, no user input), guided (6-11; the agent resolves what it's sure of and confirms with the user only merges that risk breaking Ang or a user customisation), guided with warning (12+ or no version record; before writing, warn with the count and a risk assessment, suggest owning a fork, user decides, then as guided). Thresholds are named constants, tuned after rc.2 (Zac's call)",
+      "decision": "The upgrade merges file by file, three-way, against the version.json SHA, with git merge-file, and never commits: the user reviews the unstaged result and commits or drops it. Four routes by conflicted-file count: fast (only one-sided changes), agent-resolved (any clean merge or 1-5 conflicts; the agent resolves them itself, no user input), guided (6-11; the agent resolves what it's sure of and confirms with the user only merges that risk breaking Ang or a user customisation), guided with warning (12+ or no version record; before writing, warn with the count and a risk assessment, suggest owning a fork, user decides, then as guided). Thresholds are named constants; tuning parked until a user reports a wrong route (Zac's call)",
       "evidence": "upgrade-routes.md",
       "from": "install-uninstall-update"
     },
@@ -682,6 +682,14 @@
     {
       "date": "2026-11-19",
       "event": "replaced d18: Zac alone decides when to release: no nudges, schedules or automatic releases. Preflight checks (unmerged streams, listed by name, CI, Node LTS bump, leftover drafts, the README one-liner) are warnings to eyeball, never blocks. Releases are cut from the head of main (Zac's call) → Zac alone decides when to release: no nudges, schedules or automatic releases. Preflight checks (unmerged streams, listed by name, CI, leftover drafts, the README one-liner) are warnings to eyeball, never blocks. Releases are cut from the head of main. The yearly Node LTS bump is the node-lts-bump trigger, not a preflight check (Zac's call)"
+    },
+    {
+      "date": "2026-11-20",
+      "event": "replaced d9: The upgrade merges file by file, three-way, against the version.json SHA, with git merge-file, and never commits: the user reviews the unstaged result and commits or drops it. Four routes by conflicted-file count: fast (only one-sided changes), agent-resolved (any clean merge or 1-5 conflicts; the agent resolves them itself, no user input), guided (6-11; the agent resolves what it's sure of and confirms with the user only merges that risk breaking Ang or a user customisation), guided with warning (12+ or no version record; before writing, warn with the count and a risk assessment, suggest owning a fork, user decides, then as guided). Thresholds are named constants, tuned after rc.2 (Zac's call) → The upgrade merges file by file, three-way, against the version.json SHA, with git merge-file, and never commits: the user reviews the unstaged result and commits or drops it. Four routes by conflicted-file count: fast (only one-sided changes), agent-resolved (any clean merge or 1-5 conflicts; the agent resolves them itself, no user input), guided (6-11; the agent resolves what it's sure of and confirms with the user only merges that risk breaking Ang or a user customisation), guided with warning (12+ or no version record; before writing, warn with the count and a risk assessment, suggest owning a fork, user decides, then as guided). Thresholds are named constants; tuning parked until a user reports a wrong route (Zac's call)"
+    },
+    {
+      "date": "2026-11-20",
+      "event": "status → active: story 13 (cut rc.2 with rehearsal) in progress; last story in the epic"
     }
   ],
   "type": "technical"

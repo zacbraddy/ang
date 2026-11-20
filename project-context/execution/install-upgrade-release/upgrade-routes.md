@@ -14,7 +14,7 @@ An upgrade sorts every file into a route by how likely the agent is to get the m
 - Everything else here rests on that. It's why the agent can act on its own judgement for most merges: a wrong call costs a review, never lost work.
 
 ## The four routes
-"Conflicted files" means files both sides changed on the same lines, plus files one side deleted while the other edited them. The engine counts them, and the counts are named constants, tuned after the `rc.2` rehearsal and real upgrades.
+"Conflicted files" means files both sides changed on the same lines, plus files one side deleted while the other edited them. The engine counts them, and the counts are named constants. Tuning them is parked until users report an upgrade taking the wrong route ([route threshold tuning](/project-context/ideas/parked.md#route-threshold-tuning)).
 
 | Route | When | What the user experiences |
 |---|---|---|

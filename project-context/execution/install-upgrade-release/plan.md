@@ -103,7 +103,7 @@ Steps 3 to 6 can run in parallel once step 2 lands.
 |---|---|
 | An upgrade guide misses a move or migration | The manifest coverage check (d20) and the fixture rehearsal (d22). A miss after release is fixed forward with a patch (d30) |
 | Clean merges that are semantically stale (k8) | Guided-merge rereads, using the guide's Retired entries |
-| The route thresholds rest on two spike runs (d9) | Make them named constants. Tune them after the `rc.2` rehearsal and real upgrades |
+| The route thresholds rest on two spike runs (d9) | Named constants, tuning parked until users report a wrong route |
 | An agent-run merge gets a user's customisation wrong | The upgrade never commits, so the user reviews and can drop the whole changeset. Guided routes confirm the risky merges ([upgrade routes](upgrade-routes.md)) |
 | `upgrade-ang` overwrites its own skill file mid-run | The engine runs from the temp target tree. The running prompt is already loaded, and the new skill applies next time |
 | Running code fetched at the target tag (d29) | It's the same trust as installing that release. Fetch only published release tags (d14) |

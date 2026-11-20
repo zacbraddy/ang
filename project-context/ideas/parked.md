@@ -43,6 +43,11 @@ Ang's hooks in `settings.json` would use Claude Code's exec form (`"command": "n
 - **Wake condition:** a native Windows user reports a hook failure, or native Windows moves from best effort to supported.
 - **Source:** parked in execution on 2026-11-17, not from a raw file. Zac's call during [story 03: install.sh](/project-context/execution/install-upgrade-release/stories/03-install-script.md), from Claude Code's hooks docs ("Exec form and shell form").
 
+### Route threshold tuning
+The upgrade's route thresholds would be retuned: `AGENT_RESOLVES_UP_TO` and `WARN_FROM` in `src/.claude/scripts/ang/upgrade/size.mjs`, with the boundary cases in `size.test.mjs`, the prose in [upgrade routes](/project-context/execution/install-upgrade-release/upgrade-routes.md) and install-upgrade-release d9 to match. Today they're 5 and 12, resting on the upgrade merge spike's two runs. The rc.2 rehearsal barely touches `src/`, so it takes the fast route and has no conflicts to learn from. The only data that would justify a change is real users' upgrades.
+- **Wake condition:** an Ang user reports an upgrade that took the wrong route, e.g. guided for trivial conflicts, or agent-resolved when it should have asked.
+- **Source:** parked in execution on 2026-11-20, not from a raw file. Zac's call while writing [story 13: cut rc.2 with rehearsal](/project-context/execution/install-upgrade-release/stories/13-cut-rc2-with-rehearsal.md).
+
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)
 - [ADR 0003: Per-user config overlay](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md)

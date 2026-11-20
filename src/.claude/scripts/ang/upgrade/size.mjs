@@ -1,4 +1,4 @@
-// Starting values from the upgrade merge spike, tuned after the rc.2 rehearsal and real upgrades.
+// Starting values from the upgrade merge spike. Revisit when users report upgrades taking the wrong route.
 export const AGENT_RESOLVES_UP_TO = 5;
 export const WARN_FROM = 12;
 export const CONFLICTED = ['conflict', 'conflict-no-base', 'conflict-delete'];
