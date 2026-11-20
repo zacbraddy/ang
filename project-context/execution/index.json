@@ -281,7 +281,7 @@
   {
     "title": "Cut v1.0.0-rc.2 with rehearsal",
     "path": "project-context/execution/install-upgrade-release/stories/13-cut-rc2-with-rehearsal.md",
-    "shortDescription": "The second release, cut with the first real rc.1 to rc.2 fixture upgrade rehearsal, closing the epic",
+    "shortDescription": "The second release, cut with the first real rc.1 to rc.2 fixture upgrade rehearsal and roll-forward, closing the epic",
     "tags": [
       "distribution",
       "open-source"
