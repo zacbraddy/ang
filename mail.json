@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "200ddd",
+    "from": "open-source-hygiene",
+    "to": "documentation",
+    "sent": "2026-11-23",
+    "text": "open-source-hygiene adds four README badges (CI, licence, Node >=26, latest release) and a 'fork it' section. If your repo-readme work restructures the README, tell us where they belong, or take them over."
+  }
+]
