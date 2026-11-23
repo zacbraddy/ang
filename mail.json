@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "92b220",
+    "from": "main",
+    "to": "documentation",
+    "sent": "2026-11-23",
+    "text": "Install/upgrade retro landed in 10k. For user docs: prerequisites and platforms are in 10k/product/what-ang-is.md#what-you-need; the upgrade explainer source (the four routes, never-commits, why it isn't deterministic) moved from the epic's upgrade-routes.md into ADR 0006; the install one-liner and checks are in ADR 0005."
+  }
+]
