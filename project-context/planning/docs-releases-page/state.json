@@ -81,6 +81,26 @@
       "decision": "Redeploy on publish with a small release: published workflow that dispatches deploy-docs.yml on main — spiked green, no tag rule or deploy-docs change, builds from main's docs",
       "evidence": "origins/docs-releases-page/shaping-content/release-redeploy-spike.md",
       "from": "docs-releases-page"
+    },
+    {
+      "id": "d4",
+      "decision": "Revise ADR 0008 for the plugin, override, Releases sidebar entry and publish-triggered redeploy rather than adding a new ADR; ADR 0007 unchanged since it points at the template",
+      "evidence": "/project-context/planning/docs-releases-page/plan.md"
+    },
+    {
+      "id": "d5",
+      "decision": "quick-start.md and upgrading.md keep linking GitHub's releases page, since their tag instructions need RC tags the docs page hides",
+      "evidence": "/project-context/planning/docs-releases-page/plan.md"
+    },
+    {
+      "id": "d6",
+      "decision": "No new tests: all changes are config, workflow and docs; checks are a local build with a token, format:check, the first CI deploy, and a new /cut-release post-publish check that the page lists a stable tag",
+      "evidence": "/project-context/planning/docs-releases-page/plan.md"
+    },
+    {
+      "id": "d7",
+      "decision": "The epic breaks down into one story; the nine scope rows are changes within it, not stories — Zac, 2026-11-23",
+      "evidence": "/project-context/planning/docs-releases-page/plan.md"
     }
   ],
   "lineage": [
@@ -151,6 +171,22 @@
     {
       "date": "2026-11-23",
       "event": "removed k8: GitHub Releases at build time via starlight-changelogs' GitHub provider: drafts and pre-releases are filtered out and hand-edited bodies are what's shown; no file-based provider reads releases/notes/*.md."
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: Revise ADR 0008 for the plugin, override, Releases sidebar entry and publish-triggered redeploy rather than adding a new ADR; ADR 0007 unchanged since it points at the template"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: quick-start.md and upgrading.md keep linking GitHub's releases page, since their tag instructions need RC tags the docs page hides"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: No new tests: all changes are config, workflow and docs; checks are a local build with a token, format:check, the first CI deploy, and a new /cut-release post-publish check that the page lists a stable tag"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: The epic breaks down into one story; the nine scope rows are changes within it, not stories — Zac, 2026-11-23"
     }
   ],
   "type": "technical"

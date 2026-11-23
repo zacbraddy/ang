@@ -9,6 +9,7 @@ tags: [documentation, distribution]
 Ang's docs site gets a releases page: every published release, newest first, on one page, with at most a header above it. The page is built by the starlight-changelogs plugin reading GitHub Releases at build time. A small workflow redeploys the docs whenever Zac publishes a release. Shaping spiked both halves green. This epic plans how they land in `docs/` and `.github/workflows/`, plus the release-notes heading change the page needs.
 
 ## What's here
+- [Plan](plan.md)
 - [Origin: how other docs sites build a releases page](origins/docs-releases-page/shaping-content/how-others-build-it.md)
 - [Origin: starlight-changelogs spike](origins/docs-releases-page/shaping-content/starlight-changelogs-spike.md)
 - [Origin: release redeploy spike](origins/docs-releases-page/shaping-content/release-redeploy-spike.md)

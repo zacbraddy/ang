@@ -49,6 +49,15 @@
     ]
   },
   {
+    "title": "Plan: releases page on the docs site",
+    "path": "project-context/planning/docs-releases-page/plan.md",
+    "shortDescription": "Scope, approach, sequencing, risks, test strategy and candidate ADRs for adding a GitHub Releases-fed releases page to Ang's docs, redeployed on publish",
+    "tags": [
+      "documentation",
+      "distribution"
+    ]
+  },
+  {
     "title": "Releases page on the docs site (epic)",
     "path": "project-context/planning/docs-releases-page/README.md",
     "shortDescription": "Epic adding a docs-site page that lists every published Ang release, newest first, built from GitHub Releases and redeployed on publish",
