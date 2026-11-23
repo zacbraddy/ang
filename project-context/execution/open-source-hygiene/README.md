@@ -25,7 +25,7 @@ Ang's tagged release needs a decided, Ang-sized hygiene kit, and code that bears
 - [What the templates are for](origins/open-source-hygiene/shaping-content/pr-template-purpose.md)
 
 ## Related
-- [Repo README (shaping)](/project-context/shaping/repo-readme/README.md): where the badges will sit
+- [Documentation epic](/project-context/execution/documentation/README.md): where the badges will sit
 - [ADR 0002: zero-dependency library script](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)
 - [Business constraints](/project-context/10k/business-constraints.md)
 - [Delivery intent](/project-context/10k/intent.md)

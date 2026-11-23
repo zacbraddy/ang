@@ -2,7 +2,7 @@
 title: Enforcement
 shortDescription: Husky and lint-staged auto-fix on commit, an advisory ci.yml on every PR and push to main, README badges and the Node LTS bump trigger
 tags: [open-source, tech-stack, repo-structure]
-status: ready
+status: done
 owner: agent
 dependsOn: [02]
 ---
@@ -68,10 +68,26 @@ A commit with a misformatted, lint-fixable `.mjs` file is fixed by the hook befo
 - **Edge cases:**
   - `core.hooksPath` (`.husky/_`) is in the git config shared by every worktree. Other stream worktrees without a `.husky/_` folder run no hook. Ones that have run `npm ci` on a branch with `.husky/pre-commit` get it, which is the intent.
   - Shipped Ang is unaffected: `install.sh` copies only `src/` and never runs npm, so `prepare` never runs for installs.
+- **Node badge route (deviation):** shields.io's `github/package-json/engines-node` reads a top-level `engines-node` key and shows "not specified". The badge uses shields.io's dynamic JSON badge instead, reading `$.engines.node` from `main`'s raw `package.json`. Same source, same `>=26`.
+- **Rebase onto main:** the documentation epic moved `repo-readme` into `execution/documentation/`. Links to it and to the old `shaping/open-source-hygiene/` hub (in both epics, plus the documentation epic's state entries k17 and d12) now point at the execution hubs, and ADR 0002 names both private `package.json` files (root and `docs/`).
+- **Hook on `.md`-only commits:** lint-staged prints a one-line "could not find any staged files matching configured tasks" and the commit goes through untouched. That's lint-staged's info line, not a warning.
+- **Verified so far:** fixable, unfixable, `--no-verify`, `.md`/`project-context/`-only and `.json`/`.yml` commits on a scratch branch, plus a fresh clone's `npm ci` setting `core.hooksPath`. The green `ci.yml` runs on a pull request and on a push to `main`, and the CI and Node badges rendering, wait on this branch reaching GitHub.
 - **Out of scope:** branch protection and required checks (d18); GitHub settings (story 04); CONTRIBUTING's mention of the hook and CI (story 05).
+
+## Review
+Lint, format check, `npm test` (200 pass) and `library validate` are clean. `ci.yml`, the hook, the `lint-staged` config, the badges and the trigger edits match the plan and C4.
+
+**Must-fix:** none.
+
+**Should-fix**
+- Done-when evidence is incomplete: a green `ci.yml` run on a PR and on a push to `main`, and all four badges rendering, can only happen once the branch is on GitHub (Implementation notes, "Verified so far"). A trigger on the PR's first run would make sure they get checked.
+
+**Nits**
+- `README.md:5`: the Node badge's alt text hardcodes `>=26`, but the value is read from `main`. The next LTS bump would leave the alt text stale, and the trigger doesn't list it. Plain `Node` avoids that.
+- `c4/4-code.md:14`: the `lint-staged` row lists `eslint --fix` without the `--no-warn-ignored` that the story and `package.json` use.
 
 ## Related
 - [Plan: scope](../plan.md#scope), [sequencing](../plan.md#sequencing)
 - [C4 code: root tooling files](../c4/4-code.md#root-tooling-files-story-1-story-3), [workflows](../c4/4-code.md#workflows)
-- [Repo README (shaping)](/project-context/shaping/repo-readme/README.md)
+- [Documentation epic](/project-context/execution/documentation/README.md)
 - [Node LTS bump trigger](/project-context/triggers/node-lts-bump.md)

@@ -1,5 +1,12 @@
 <h1 align="center">🚢🚫👀 | Ang: The Last Software Bender | 🚢🚫👀</h1>
 
+<p align="center">
+  <a href="https://github.com/zacbraddy/ang/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/zacbraddy/ang/ci.yml?branch=main&label=CI" /></a>
+  <a href="LICENSE"><img alt="Licence: MIT" src="https://img.shields.io/github/license/zacbraddy/ang" /></a>
+  <a href="package.json"><img alt="Node" src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fzacbraddy%2Fang%2Fmain%2Fpackage.json&query=%24.engines.node&label=node" /></a>
+  <a href="https://github.com/zacbraddy/ang/releases"><img alt="Latest release" src="https://img.shields.io/github/v/release/zacbraddy/ang" /></a>
+</p>
+
 **Avoid Navel Gazing.** A lean, opinionated framework for AI-assisted development. Hate the opinions but love the way it stops your agents burning tokens until the ocean begins to boil 🌊🔥 and gets them doing actual work instead? Cool, it's yours now. Go ahead and make it your own, it'll help!
 <br />
 <br />

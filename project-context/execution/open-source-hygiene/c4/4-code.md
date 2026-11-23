@@ -11,7 +11,7 @@ This epic adds no new modules or types. Its code level is a set of **config file
 ## Root tooling files (story 1, story 3)
 | File | Status | Key contents |
 |---|---|---|
-| `package.json` | new | `private: true`; `engines.node: ">=26"`; `devDependencies` only; scripts `test` (`node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'`), `lint` (`eslint .`), `format` (`prettier --write .`), `format:check` (`prettier --check .`), `prepare` (`husky`); `lint-staged`: `*.{js,mjs}` → `eslint --fix`, `prettier --write`; `*.{json,yml,yaml}` → `prettier --write` |
+| `package.json` | new | `private: true`; `engines.node: ">=26"`; `devDependencies` only; scripts `test` (`node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'`), `lint` (`eslint .`), `format` (`prettier --write .`), `format:check` (`prettier --check .`), `prepare` (`husky`); `lint-staged`: `*.{js,mjs}` → `eslint --fix --no-warn-ignored`, `prettier --write`; `*.{json,yml,yaml}` → `prettier --write` |
 | `package-lock.json` | new | Pins every dev dependency |
 | `.node-version` | new | `26` |
 | `.gitignore` | changed | Adds `node_modules/` |
