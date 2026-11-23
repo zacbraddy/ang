@@ -15,6 +15,7 @@ Ang's users work with agents all day, and an agent asked about Ang does better r
 - `starlight-llms-txt` runs as a Starlight plugin with default output.
 - It builds its links from `site` plus `base`, so `llms.txt` lists `https://zacbraddy.github.io/ang/llms-small.txt` and `…/llms-full.txt`.
 - Links inside page bodies in those files keep the relative routes the pages are written with.
+- The Releases pages from `starlight-changelogs` aren't in these files, since the plugin reads only the docs collection. That suits the files' job: they cover using Ang, not its history.
 
 ## Consequences
 - One more pinned plugin to bump alongside Starlight.

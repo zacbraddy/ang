@@ -40,6 +40,7 @@ Configuration modules (`intent`, `host`, `pilot`) and `/tailor-ang` personalise 
 
 ## Where Ang is documented
 - The root `README.md` is a short tour: the main concepts, the funnel as a table with every stage command, and the install one-liner. Everything deeper is on the docs site at `https://zacbraddy.github.io/ang/`, which also publishes `llms.txt`, `llms-full.txt` and `llms-small.txt` for agents ([ADR 0008](/project-context/10k/technical/adrs/0008-docs-starlight-on-github-pages.md), [ADR 0010](/project-context/10k/technical/adrs/0010-docs-publish-llms-txt.md)).
+- The docs site's Releases page lists published stable releases only, newest first. Quick-start and upgrading link to GitHub's own releases page instead, because their tag instructions need RC (release candidate) tags, which the docs page hides.
 - A page exists only if a user needs it to choose, run, use or bend Ang. Zac's history and how he got here don't meet that bar.
 - Pages describe what the shipped files do ([ADR 0009](/project-context/10k/technical/adrs/0009-docs-describe-shipped-files.md)) and are written per the [docs voice guide](/project-context/10k/marketing/docs-voice-guide.md).
 

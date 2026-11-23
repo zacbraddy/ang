@@ -211,6 +211,10 @@
     {
       "date": "2026-11-23",
       "event": "replaced d7: evidence: /project-context/planning/docs-releases-page/plan.md → plan.md"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "moved execution → retro"
     }
   ],
   "type": "technical"

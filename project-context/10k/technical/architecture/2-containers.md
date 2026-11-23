@@ -81,7 +81,7 @@ C4Container
 | `project-context/` | The library: `10k/` plus in-flight stage folders |
 | Per-user files | Written only by `/tailor-ang`, previewed first, and covered by unanchored `.gitignore` patterns |
 
-The docs site (`docs/`) and its deploy workflow are repo-only and never ship, so they aren't containers of Ang; see [project structure](/project-context/10k/technical/project-structure.md).
+The docs site (`docs/`) and its deploy workflows are repo-only and never ship, so they aren't containers of Ang; see [project structure](/project-context/10k/technical/project-structure.md).
 
 ## Related
 - [Context](1-context.md)
