@@ -1,13 +1,7 @@
 {
   "status": "active",
   "statusNote": "",
-  "unknowns": [
-    {
-      "id": "u5",
-      "question": "Who does what for GitHub-side settings (Discussions on, private vulnerability reporting on, blank issues off, any branch protection for CI) and the badge set",
-      "approach": "plan.md business deliverables"
-    }
-  ],
+  "unknowns": [],
   "knowns": [
     {
       "id": "k1",
@@ -54,15 +48,21 @@
     },
     {
       "id": "k12",
-      "fact": "null",
+      "fact": "Swap the founding-only line for an offer: /bootstrap-repo asks whether to set a /trigger for quality tooling once code exists; yes sets it, no sets nothing (Zac, 2026-11-23)",
       "source": "/src/.claude/skills/bootstrap-repo/SKILL.md",
       "answers": "bootstrap-repo step 7 tells founding-only repos to run /bootstrap-quality later: drop that line too, or swap it for offering a /trigger, per k7?"
     },
     {
       "id": "k13",
-      "fact": "null",
+      "fact": "Lint and format cover src/, scripts/ and root configs; ignored: docs/, project-context/, releases/, root .claude/ (symlinks into src/.claude, so it would lint everything twice) and all markdown. npm test = node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs' (Node only, no npm ci needed). CI runs on pull_request and push to main: npm ci, eslint, prettier --check, npm test, on Node from .node-version (Zac, 2026-11-23)",
       "source": "/.github/workflows/release.yml",
       "answers": "Tooling scope and CI shape: which paths lint/format/test cover (src/, scripts/, root configs; docs/ and project-context/ ignored), npm test must add scripts/*.test.mjs, CI triggers, and whether release.yml switches to npm ci + npm test"
+    },
+    {
+      "id": "k14",
+      "fact": "GitHub settings are flipped by an agent with gh api in a story, with Zac confirming each call and the story checking the result: Discussions on, private vulnerability reporting on, wiki off, projects off. Blank issues off ships as .github/ISSUE_TEMPLATE/config.yml. No branch protection or rulesets; CI is advisory. README badges: CI status, licence (MIT), Node >=26 from package.json engines, latest release (Zac, 2026-11-23)",
+      "source": "/.github/workflows/release.yml",
+      "answers": "Who does what for GitHub-side settings (Discussions on, private vulnerability reporting on, blank issues off, any branch protection for CI) and the badge set"
     }
   ],
   "decisions": [
@@ -151,17 +151,27 @@
     },
     {
       "id": "d15",
-      "decision": "null",
+      "decision": "bootstrap-repo step 7's founding-only fallback stops telling the pilot to run /bootstrap-quality later and instead offers a /trigger for it; declining sets nothing (Zac, 2026-11-23)",
       "evidence": "/src/.claude/skills/bootstrap-repo/SKILL.md"
     },
     {
       "id": "d16",
-      "decision": "null",
+      "decision": "release.yml swaps its hard-coded node --test line for npm test, so the test glob lives only in package.json; no npm ci, no lint step, job structure otherwise unchanged (Zac, 2026-11-23)",
       "evidence": "/.github/workflows/release.yml"
     },
     {
       "id": "d17",
-      "decision": "null",
+      "decision": "Prettier formats JS, JSON and YAML (ang.json, settings.json, package.json, .github workflows), not only JS (Zac, 2026-11-23)",
+      "evidence": "/.github/workflows/release.yml"
+    },
+    {
+      "id": "d18",
+      "decision": "No branch protection or rulesets on main: CI is advisory and its badge shows the result, in line with d12's no PR-blocking settings and Zac pushing to main directly (Zac, 2026-11-23)",
+      "evidence": "/.github/workflows/release.yml"
+    },
+    {
+      "id": "d19",
+      "decision": "Repo tidy-ups join the settings story: wiki off and projects off; delete-branch-on-merge stays off (Zac, 2026-11-23)",
       "evidence": "/.github/workflows/release.yml"
     }
   ],
@@ -353,6 +363,34 @@
     {
       "date": "2026-11-23",
       "event": "replaced d17: Prettier formats JS, JSON and YAML (ang.json, settings.json, package.json, .github workflows), not only JS (Zac, 2026-11-23) → null; evidence: .github/workflows/release.yml → /.github/workflows/release.yml"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced k12: null → Swap the founding-only line for an offer: /bootstrap-repo asks whether to set a /trigger for quality tooling once code exists; yes sets it, no sets nothing (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced k13: null → Lint and format cover src/, scripts/ and root configs; ignored: docs/, project-context/, releases/, root .claude/ (symlinks into src/.claude, so it would lint everything twice) and all markdown. npm test = node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs' (Node only, no npm ci needed). CI runs on pull_request and push to main: npm ci, eslint, prettier --check, npm test, on Node from .node-version (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d15: null → bootstrap-repo step 7's founding-only fallback stops telling the pilot to run /bootstrap-quality later and instead offers a /trigger for it; declining sets nothing (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d16: null → release.yml swaps its hard-coded node --test line for npm test, so the test glob lives only in package.json; no npm ci, no lint step, job structure otherwise unchanged (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d17: null → Prettier formats JS, JSON and YAML (ang.json, settings.json, package.json, .github workflows), not only JS (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: No branch protection or rulesets on main: CI is advisory and its badge shows the result, in line with d12's no PR-blocking settings and Zac pushing to main directly (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: Repo tidy-ups join the settings story: wiki off and projects off; delete-branch-on-merge stays off (Zac, 2026-11-23)"
     }
   ],
   "type": "mixed"
