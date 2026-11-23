@@ -8,7 +8,7 @@ tags: [open-source, tech-stack, repo-structure]
 ## Summary
 This epic makes the Ang repo fit to be read, forked and contributed to. It is done when **a pull request to `main` gets a green CI run (lint, format check and every test), the README shows its four badges, and GitHub's New issue page offers only Ang's templates**.
 - **Technical half:** a private, dev-only root `package.json` with ESLint, Prettier, Husky and lint-staged; `npm test` on `node:test`; Ang's code fixed to zero errors and zero warnings; an advisory CI workflow on Node 26 (the current LTS, long-term support, release). `release.yml` runs `npm test`.
-- **Repo-facing half:** CONTRIBUTING, a code of conduct, issue and PR templates written as rubber-ducking nudges toward [first principles](/project-context/10k/product/first-principles.md), a "fork it" README section, badges, and GitHub settings flipped with `gh api`.
+- **Repo-facing half:** CONTRIBUTING, issue and PR templates written as rubber-ducking nudges toward [first principles](/project-context/10k/product/first-principles.md), a "fork it" README section, badges, and GitHub settings flipped with `gh api`.
 - **Shipped change:** Ang stops nudging pilots toward `/bootstrap-quality`; `/bootstrap-repo` offers a `/trigger` instead.
 
 Nothing here ships to installs except the three `src/` edits in story 6. The root `package.json` and its tooling stay outside `src/`, so `install.sh` never copies them.
@@ -22,7 +22,7 @@ Nothing here ships to installs except the three `src/` edits in story 6. The roo
 - **Clean code:** Prettier and ESLint over `src/`, `scripts/` and root configs to zero errors and zero warnings, including the regexp plugin's 10 findings as of 2026-11-23: 3 super-linear backtracking, 5 unused capture groups and 2 style fixes ([code level](c4/4-code.md#lint-findings-in-the-shipped-script-story-2)).
 - **Enforcement:** Husky pre-commit running lint-staged with `eslint --fix` and `prettier --write` (d1). A `ci.yml` workflow on `pull_request` and `push` to `main`: `npm ci`, ESLint, `prettier --check`, `npm test`, Node from `.node-version` (k13). Advisory only, no branch protection (d18).
 - **`release.yml`:** its test step becomes `npm test` (d16), so the test globs live only in `package.json`.
-- **Contributor kit (d4, d6, d12):** `CONTRIBUTING.md` (about 10 lines), `CODE_OF_CONDUCT.md` (about 3 lines), `.github/PULL_REQUEST_TEMPLATE.md`, `.github/ISSUE_TEMPLATE/` with the open-conversation template leading and the feature-request template, and `config.yml` with `blank_issues_enabled: false` and a contact link to Discussions ([what the templates are for](origins/open-source-hygiene/shaping-content/pr-template-purpose.md)).
+- **Contributor kit (d4, d6, d12):** `CONTRIBUTING.md` (about 10 lines), `.github/PULL_REQUEST_TEMPLATE.md`, `.github/ISSUE_TEMPLATE/` with the open-conversation template leading and the feature-request template, and `config.yml` with `blank_issues_enabled: false` and a contact link to Discussions ([what the templates are for](origins/open-source-hygiene/shaping-content/pr-template-purpose.md)).
 - **README:** a "fork it" section in Ang's voice that points to CONTRIBUTING and the templates (d4), and four badges: CI status, licence (MIT), Node `>=26` from `engines`, latest release (k14). The README itself is the documentation stream's rewrite; this epic adds to it.
 - **GitHub settings (k14, d19):** Discussions on, private vulnerability reporting on, wiki off, projects off. Delete-branch-on-merge stays off.
 - **Shipped `src/` edits (d10, d15):** drop the nudge sentence from `src/.claude/rules/engineering-defaults.md`, drop "flag that instead" from the `bootstrap-quality` description, and swap `bootstrap-repo` step 7's founding-only line for the `/trigger` offer.
@@ -33,7 +33,7 @@ Nothing here ships to installs except the three `src/` edits in story 6. The roo
 - Release mechanics, a changelog, release bots (d13, k11). ADR 0007 is unchanged.
 - Vitest and any test-file changes (d7). Shipped tests keep running on Node alone.
 - Linting markdown (d1). The docs site's own tooling stays in `docs/`, owned by the documentation stream.
-- SECURITY.md, CONTRIBUTORS, account-level `zacbraddy/.github` defaults (d5, d6).
+- SECURITY.md, CONTRIBUTORS, a code of conduct (parked), account-level `zacbraddy/.github` defaults (d5, d6).
 - Branch protection, rulesets, collaborators-only PRs, auto-close bots (d12, d18).
 - Dependency update bots. Nothing decided asks for one; bumps are by hand.
 - Nudging other installs toward this kit. One repo's choice binds no other (d10).
@@ -61,7 +61,7 @@ The agent proposes each `gh api` call, Zac confirms it, and the story reads the 
 | 2 | **Clean code:** Prettier pass, then hand fixes to zero errors and warnings, test-first for changed regexes | agent | 1 |
 | 3 | **Enforcement:** Husky and lint-staged, `ci.yml`, README badges (the documentation plan expects badges in the same change as CI), Node bump trigger update | agent | 2 |
 | 4 | **GitHub settings:** Discussions, private vulnerability reporting, wiki off, projects off, each read back | both | — |
-| 5 | **Contributor kit:** CONTRIBUTING, code of conduct, PR template, issue templates, `config.yml`, README "fork it" section | agent, Zac signs off the voice | 3 (README badges), 4 (Discussions link) |
+| 5 | **Contributor kit:** CONTRIBUTING, PR template, issue templates, `config.yml`, README "fork it" section | agent, Zac signs off the voice | 3 (README badges), 4 (Discussions link) |
 | 6 | **Drop the nudge:** the three `src/` edits | agent | — |
 
 Stories 4 and 6 can run any time. Stories 3 and 5 touch the README, so they go after the documentation stream's README rewrite reaches `main`, or rebase onto it.
@@ -96,7 +96,7 @@ Right-sized: this epic adds tooling and docs, not behaviour, so the pyramid stay
 |---|---|---|
 | Root `package.json`, lockfile, configs, `.node-version` | npm, ESLint 10, Prettier, Husky, lint-staged | agent |
 | `ci.yml`, `release.yml` edit | GitHub Actions, `actions/setup-node` | agent |
-| CONTRIBUTING, code of conduct, PR and issue templates, `config.yml`, README sections and badges | GitHub community files, shields.io badges | agent drafts, Zac signs off the voice |
+| CONTRIBUTING, PR and issue templates, `config.yml`, README sections and badges | GitHub community files, shields.io badges | agent drafts, Zac signs off the voice |
 | Discussions, private vulnerability reporting, wiki and projects settings | `gh api` | agent proposes each call, Zac confirms |
 | ADR 0002 amendment, `project-structure.md`, Node bump trigger | `project-context/` | agent |
 | Shipped `src/` edits | `src/.claude/` | agent |

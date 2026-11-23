@@ -25,7 +25,7 @@ C4Container
     Container(ci, "ci.yml [new]", "GitHub Actions", "npm ci, eslint, prettier --check, npm test on push and PR")
     Container(release, "release.yml [changed]", "GitHub Actions", "Tag release job; tests via npm test, Node from .node-version")
     Container(scripts, "scripts/ [changed]", "Node ESM", "Release tooling and its tests; reformatted and linted")
-    Container(kit, "Contributor kit [new]", "Markdown, YAML", "CONTRIBUTING, code of conduct, PR and issue templates, issue chooser")
+    Container(kit, "Contributor kit [new]", "Markdown, YAML", "CONTRIBUTING, PR and issue templates, issue chooser")
     Container(readme, "README.md [changed]", "Markdown", "Badges and a fork it section, added to the documentation stream's rewrite")
     ContainerDb(tenk, "project-context/10k [changed]", "Markdown", "ADR 0002, project structure, Node LTS bump trigger")
     ContainerDb(settings, "GitHub repo settings [changed]", "GitHub state", "Discussions, vulnerability reporting on; wiki, projects off")

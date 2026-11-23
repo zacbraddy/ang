@@ -6,7 +6,7 @@ tags: [open-source]
 # Open-source hygiene
 
 ## Summary
-A mixed epic that gets the Ang repo ready to be read, forked and contributed to. The technical half adds a private, dev-only root `package.json` with ESLint, Prettier, Husky and lint-staged, a working `npm test` on `node:test`, and GitHub Actions CI on the current Node LTS (long-term support release), then fixes Ang's code to zero warnings. The repo-facing half adds a short CONTRIBUTING and code of conduct in Ang's voice, issue and PR templates that nudge toward Ang's first principles, private vulnerability reporting and README badges. Shipped Ang also drops its nudge toward `/bootstrap-quality`.
+A mixed epic that gets the Ang repo ready to be read, forked and contributed to. The technical half adds a private, dev-only root `package.json` with ESLint, Prettier, Husky and lint-staged, a working `npm test` on `node:test`, and GitHub Actions CI on the current Node LTS (long-term support release), then fixes Ang's code to zero warnings. The repo-facing half adds a short CONTRIBUTING in Ang's voice, issue and PR templates that nudge toward Ang's first principles, private vulnerability reporting and README badges. Shipped Ang also drops its nudge toward `/bootstrap-quality`.
 
 ## Why it matters
 Ang's tagged release needs a decided, Ang-sized hygiene kit, and code that bears Zac's name should hold to the standards Ang itself recommends.

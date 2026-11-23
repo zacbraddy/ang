@@ -58,6 +58,11 @@ Let a company keep one base `ang.json` that many repos inherit from, for example
 - **Wake condition:** an organisation runs Ang across several repos and wants one place to set their shared `ang.json` keys.
 - **Source:** parked in planning on 2026-11-17, not from a raw file. See [documentation epic](https://github.com/zacbraddy/ang/blob/cd09b979853fdb75db2ac7f202ec86be1aff96c6/project-context/execution/documentation/README.md) (k23, k24) and [ADR 0003](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md).
 
+### Code of conduct for the Ang repo
+A short `CODE_OF_CONDUCT.md` in Ang's voice (be decent, I moderate, report privately), plus a private route for reports, such as GitHub's reported-content setting. Ang has no community to moderate, because everyone bends their own copy instead of building on a shared one.
+- **Wake condition:** a community forms around the Ang repo, for example regular Discussions threads or issues between people other than Zac, or a conduct problem turns up.
+- **Source:** cut in execution on 2026-11-23, not from a raw file. Zac's call while writing story 05 of the [open-source hygiene epic](/project-context/execution/open-source-hygiene/README.md) (d6).
+
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)
 - [ADR 0003: Per-user config overlay](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md)

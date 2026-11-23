@@ -35,7 +35,6 @@ C4Component
 
   Container_Boundary(kit, "Contributor kit [new]") {
     Component(contributing, "CONTRIBUTING.md", "Markdown", "About 10 lines; points to the templates")
-    Component(coc, "CODE_OF_CONDUCT.md", "Markdown", "About 3 lines, Ang's voice")
     Component(prtpl, "PR template", ".github/PULL_REQUEST_TEMPLATE.md", "How does this serve every Ang user?")
     Component(issuetpl, "Issue templates", ".github/ISSUE_TEMPLATE/*.md", "Open conversation first, then feature request")
     Component(chooser, "Issue chooser", ".github/ISSUE_TEMPLATE/config.yml", "Blank issues off; contact link to Discussions")
@@ -73,7 +72,7 @@ C4Component
 | Node version | new | `.node-version` and `engines` move together; both workflows read the file | d11, d20 |
 | `ci.yml` check job | new | Advisory. No required checks, no branch protection | k13, d18 |
 | `release.yml` test step | changed | Two one-line swaps; every other step unchanged | d13, d16, d20 |
-| CONTRIBUTING, code of conduct | new | Short and in Ang's voice; Zac signs off the wording | d4, d6 |
+| CONTRIBUTING | new | Short and in Ang's voice; Zac signs off the wording | d4, d6 |
 | PR and issue templates | new | Rubber-ducking nudges toward [first principles](/project-context/10k/product/first-principles.md), not gates | d12 |
 | Issue chooser | new | Needs Discussions on (story 4) for its contact link | k14 |
 

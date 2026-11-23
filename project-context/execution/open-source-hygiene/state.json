@@ -103,7 +103,7 @@
     },
     {
       "id": "d6",
-      "decision": "Hygiene kit: README 'fork it' section, issue templates with blank issues off, fork-aware PR template, private vulnerability reporting on (no SECURITY.md), plus a short CONTRIBUTING and short code of conduct in Ang's voice (Zac, 2026-11-16)",
+      "decision": "Hygiene kit: README 'fork it' section, issue templates with blank issues off, fork-aware PR template, private vulnerability reporting on (no SECURITY.md), plus a short CONTRIBUTING in Ang's voice. No code of conduct: Ang has no community to moderate, so it's parked until one appears (Zac, 2026-11-16; code of conduct cut 2026-11-23)",
       "evidence": "origins/open-source-hygiene/ideas-content/hygiene-survey.md",
       "from": "open-source-hygiene"
     },
@@ -446,6 +446,10 @@
     {
       "date": "2026-11-23",
       "event": "replaced d9: ESLint set: @eslint/js + n (no-process-exit off, prefer-node-protocol on) + regexp + eslint-config-prettier, globals.node; unicorn, jsdoc, security, import(-x), promise and all-in-one configs dropped — too noisy or churny under zero warnings, lagging ESLint 10, or adding nothing on Ang's code → ESLint set: @eslint/js + n (no-process-exit off, prefer-node-protocol on) + regexp + eslint-config-prettier, globals.node, plus readability rules: @stylistic/padding-line-between-statements (blank line before return, after const/let runs and after blocks), curly all (after eslint-config-prettier, which turns it off), no-nested-ternary, no-else-return, max-depth 3. Zac found the code too packed to read; naming and explaining variables stay a manual habit. unicorn, jsdoc, security, import(-x), promise and all-in-one configs dropped — too noisy or churny under zero warnings, lagging ESLint 10, or adding nothing on Ang's code"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d6: Hygiene kit: README 'fork it' section, issue templates with blank issues off, fork-aware PR template, private vulnerability reporting on (no SECURITY.md), plus a short CONTRIBUTING and short code of conduct in Ang's voice (Zac, 2026-11-16) → Hygiene kit: README 'fork it' section, issue templates with blank issues off, fork-aware PR template, private vulnerability reporting on (no SECURITY.md), plus a short CONTRIBUTING in Ang's voice. No code of conduct: Ang has no community to moderate, so it's parked until one appears (Zac, 2026-11-16; code of conduct cut 2026-11-23)"
     }
   ],
   "type": "mixed"

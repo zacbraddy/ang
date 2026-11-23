@@ -52,7 +52,7 @@ Paths are under `src/.claude/scripts/ang/`.
 ## Contributor kit files (story 5)
 | File | Status |
 |---|---|
-| `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md` | new |
+| `CONTRIBUTING.md` | new |
 | `.github/PULL_REQUEST_TEMPLATE.md` | new |
 | `.github/ISSUE_TEMPLATE/1-open-conversation.md`, `2-feature-request.md` | new (numbered so the chooser lists conversation first) |
 | `.github/ISSUE_TEMPLATE/config.yml` | new: `blank_issues_enabled: false`, one `contact_links` entry to Discussions |

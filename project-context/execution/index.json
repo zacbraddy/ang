@@ -163,7 +163,7 @@
   {
     "title": "Contributor kit",
     "path": "project-context/execution/open-source-hygiene/stories/05-contributor-kit.md",
-    "shortDescription": "CONTRIBUTING, code of conduct, PR and issue templates as rubber-ducking nudges, an issue chooser routing chat to Discussions, and a README fork-it section",
+    "shortDescription": "CONTRIBUTING, PR and issue templates as rubber-ducking nudges, an issue chooser routing chat to Discussions, and a README fork-it section",
     "tags": [
       "open-source",
       "brand-voice"
