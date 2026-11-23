@@ -3,11 +3,6 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u4",
-      "question": "Tooling scope and CI shape: which paths lint/format/test cover (src/, scripts/, root configs; docs/ and project-context/ ignored), npm test must add scripts/*.test.mjs, CI triggers, and whether release.yml switches to npm ci + npm test",
-      "approach": "Decide while drafting plan.md and C4"
-    },
-    {
       "id": "u5",
       "question": "Who does what for GitHub-side settings (Discussions on, private vulnerability reporting on, blank issues off, any branch protection for CI) and the badge set",
       "approach": "plan.md business deliverables"
@@ -59,9 +54,15 @@
     },
     {
       "id": "k12",
-      "fact": "Swap the founding-only line for an offer: /bootstrap-repo asks whether to set a /trigger for quality tooling once code exists; yes sets it, no sets nothing (Zac, 2026-11-23)",
-      "source": "src/.claude/skills/bootstrap-repo/SKILL.md",
+      "fact": "null",
+      "source": "/src/.claude/skills/bootstrap-repo/SKILL.md",
       "answers": "bootstrap-repo step 7 tells founding-only repos to run /bootstrap-quality later: drop that line too, or swap it for offering a /trigger, per k7?"
+    },
+    {
+      "id": "k13",
+      "fact": "null",
+      "source": "/.github/workflows/release.yml",
+      "answers": "Tooling scope and CI shape: which paths lint/format/test cover (src/, scripts/, root configs; docs/ and project-context/ ignored), npm test must add scripts/*.test.mjs, CI triggers, and whether release.yml switches to npm ci + npm test"
     }
   ],
   "decisions": [
@@ -150,8 +151,18 @@
     },
     {
       "id": "d15",
-      "decision": "bootstrap-repo step 7's founding-only fallback stops telling the pilot to run /bootstrap-quality later and instead offers a /trigger for it; declining sets nothing (Zac, 2026-11-23)",
-      "evidence": "src/.claude/skills/bootstrap-repo/SKILL.md"
+      "decision": "null",
+      "evidence": "/src/.claude/skills/bootstrap-repo/SKILL.md"
+    },
+    {
+      "id": "d16",
+      "decision": "null",
+      "evidence": "/.github/workflows/release.yml"
+    },
+    {
+      "id": "d17",
+      "decision": "null",
+      "evidence": "/.github/workflows/release.yml"
     }
   ],
   "lineage": [
@@ -314,6 +325,34 @@
     {
       "date": "2026-11-23",
       "event": "decided: bootstrap-repo step 7's founding-only fallback stops telling the pilot to run /bootstrap-quality later and instead offers a /trigger for it; declining sets nothing (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: release.yml swaps its hard-coded node --test line for npm test, so the test glob lives only in package.json; no npm ci, no lint step, job structure otherwise unchanged (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: Prettier formats JS, JSON and YAML (ang.json, settings.json, package.json, .github workflows), not only JS (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced k12: Swap the founding-only line for an offer: /bootstrap-repo asks whether to set a /trigger for quality tooling once code exists; yes sets it, no sets nothing (Zac, 2026-11-23) → null; source: src/.claude/skills/bootstrap-repo/SKILL.md → /src/.claude/skills/bootstrap-repo/SKILL.md"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d15: bootstrap-repo step 7's founding-only fallback stops telling the pilot to run /bootstrap-quality later and instead offers a /trigger for it; declining sets nothing (Zac, 2026-11-23) → null; evidence: src/.claude/skills/bootstrap-repo/SKILL.md → /src/.claude/skills/bootstrap-repo/SKILL.md"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced k13: Lint and format cover src/, scripts/ and root configs; ignored: docs/, project-context/, releases/, root .claude/ (symlinks into src/.claude, so it would lint everything twice) and all markdown. npm test = node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs' (Node only, no npm ci needed). CI runs on pull_request and push to main: npm ci, eslint, prettier --check, npm test, on Node from .node-version (Zac, 2026-11-23) → null; source: .github/workflows/release.yml → /.github/workflows/release.yml"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d16: release.yml swaps its hard-coded node --test line for npm test, so the test glob lives only in package.json; no npm ci, no lint step, job structure otherwise unchanged (Zac, 2026-11-23) → null; evidence: .github/workflows/release.yml → /.github/workflows/release.yml"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d17: Prettier formats JS, JSON and YAML (ang.json, settings.json, package.json, .github workflows), not only JS (Zac, 2026-11-23) → null; evidence: .github/workflows/release.yml → /.github/workflows/release.yml"
     }
   ],
   "type": "mixed"
