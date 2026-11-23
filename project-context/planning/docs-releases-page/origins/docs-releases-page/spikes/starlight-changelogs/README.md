@@ -17,4 +17,4 @@ To see how pre-releases would render, edit `node_modules/starlight-changelogs/pr
 
 ## Related
 - [Spike write-up](../../shaping-content/starlight-changelogs-spike.md)
-- [Item hub](../../README.md)
+- [Item hub](../../../../README.md)

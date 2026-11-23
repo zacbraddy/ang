@@ -78,6 +78,6 @@ GitHub REST docs (ET 1): unauthenticated 60/hour per IP; `GITHUB_TOKEN` in Actio
 | [Community discussion #39054](https://github.com/orgs/community/discussions/39054), [ILGPU issue #979](https://github.com/m4rs-mt/ILGPU/issues/979) | — | 2 | Users hitting the tag/environment rule |
 
 ## Related
-- [Item hub](../README.md)
+- [Item hub](../../../README.md)
 - [ADR 0007: how releases are cut](/project-context/10k/technical/adrs/0007-how-releases-are-cut.md)
 - [ADR 0008: docs on Starlight and GitHub Pages](/project-context/10k/technical/adrs/0008-docs-starlight-on-github-pages.md)

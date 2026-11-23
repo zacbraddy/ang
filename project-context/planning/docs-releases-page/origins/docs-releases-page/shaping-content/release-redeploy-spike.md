@@ -34,7 +34,7 @@ Publishing a release can rebuild the docs with a small extra workflow. It listen
 
 ## Related
 - [Spike files](../spikes/release-redeploy/README.md)
-- [starlight-changelogs spike](starlight-changelogs-spike.md)
-- [How other docs sites build it](how-others-build-it.md)
-- [Item hub](../README.md)
+- [starlight-changelogs spike](./starlight-changelogs-spike.md)
+- [How other docs sites build it](./how-others-build-it.md)
+- [Item hub](../../../README.md)
 - [ADR 0008: docs on Starlight and GitHub Pages](/project-context/10k/technical/adrs/0008-docs-starlight-on-github-pages.md)

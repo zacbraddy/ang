@@ -16,4 +16,4 @@ tags: [documentation, tech-stack]
 
 ## Related
 - [Spike write-up](../../shaping-content/release-redeploy-spike.md)
-- [Item hub](../../README.md)
+- [Item hub](../../../../README.md)
