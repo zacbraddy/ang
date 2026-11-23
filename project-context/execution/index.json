@@ -101,5 +101,14 @@
       "documentation",
       "distribution"
     ]
+  },
+  {
+    "title": "Releases page live on the docs site",
+    "path": "project-context/execution/docs-releases-page/stories/01-releases-page-live.md",
+    "shortDescription": "The docs build serves /releases/ from GitHub Releases, publishing a release redeploys the site from main, and the notes template, launch-notes trigger, /cut-release and 10k match",
+    "tags": [
+      "documentation",
+      "distribution"
+    ]
   }
 ]
