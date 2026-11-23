@@ -2,7 +2,7 @@
   {
     "id": "fd8616",
     "from": "open-source-hygiene",
-    "to": "documentation",
+    "to": "open-source-hygiene",
     "sent": "2026-11-23",
     "text": "Heads-up: open-source-hygiene d15 changes /bootstrap-repo step 7. The founding-only branch no longer says to run /bootstrap-quality later; it offers a /trigger instead. Your story 07 may describe the old hand-off."
   }
