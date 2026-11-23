@@ -78,5 +78,5 @@ C was chosen. These stay here as the alternatives it was weighed against.
 - S17 Husky v9 notes quoted in dependency-bump PRs, e.g. https://github.com/aws-powertools/powertools-lambda-typescript/pull/2131 (ET 3)
 
 ## Related
-- [Hub](../README.md)
-- [Brief](brief.md)
+- [Hub](../../../README.md)
+- [Brief](./brief.md)

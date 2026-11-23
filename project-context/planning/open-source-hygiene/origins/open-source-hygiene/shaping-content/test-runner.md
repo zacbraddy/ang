@@ -29,7 +29,7 @@ No spike. The decision came from first-hand facts plus a call already made on an
 - ESLint has to lint test files that use `node:test` globals through imports. That's fine for flat config, but check that the plugin set (u5) has no Vitest- or Jest-specific rules switched on.
 
 ## Related
-- [Hub](../README.md)
+- [Hub](../../../README.md)
 - [Quality tooling](../ideas-content/quality-tooling.md): the kit decision this narrows
 - [ADR 0002: zero-dependency library script](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)
 - [Project structure](/project-context/10k/technical/project-structure.md): where the test command is documented

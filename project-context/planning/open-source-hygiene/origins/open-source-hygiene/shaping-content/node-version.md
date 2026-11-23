@@ -25,6 +25,6 @@ Ang is developed against the current Node LTS (long-term support release), and t
 - The README and release notes state the supported version and the caveat.
 
 ## Related
-- [ESLint plugins](eslint-plugins.md): where the `engines` gap was found
-- [Test runner](test-runner.md): the root `package.json` this lives in
+- [ESLint plugins](./eslint-plugins.md): where the `engines` gap was found
+- [Test runner](./test-runner.md): the root `package.json` this lives in
 - [Quality tooling](../ideas-content/quality-tooling.md)

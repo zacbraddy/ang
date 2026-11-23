@@ -82,7 +82,7 @@ For every kit: use tags plus generated GitHub Releases rather than a hand-kept c
 | [GitHub ReadME: How open is open source (litestream)](https://github.com/readme/featured/how-open-is-open-source) | undated | 2 | |
 
 ## Related
-- [Hub](../README.md)
-- [Brief](brief.md)
-- [Quality tooling](quality-tooling.md)
+- [Hub](../../../README.md)
+- [Brief](./brief.md)
+- [Quality tooling](./quality-tooling.md)
 - [First principles](/project-context/10k/product/first-principles.md)

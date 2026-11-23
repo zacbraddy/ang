@@ -22,4 +22,4 @@ Zac's reasons, in his words, summarised:
 
 ## Related
 - [Quality tooling](../ideas-content/quality-tooling.md): the Ang repo's own kit
-- [ESLint plugins](eslint-plugins.md): the rest of this session's shaping
+- [ESLint plugins](./eslint-plugins.md): the rest of this session's shaping

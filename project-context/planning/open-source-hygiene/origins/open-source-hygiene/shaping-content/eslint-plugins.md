@@ -79,5 +79,5 @@ export default defineConfig([
 
 ## Related
 - [Quality tooling](../ideas-content/quality-tooling.md): the kit decision this fills in
-- [Test runner](test-runner.md): the private dev-only root `package.json`
+- [Test runner](./test-runner.md): the private dev-only root `package.json`
 - [Project structure](/project-context/10k/technical/project-structure.md)
