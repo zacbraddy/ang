@@ -6,13 +6,14 @@ tags: [open-source]
 # Open-source hygiene
 
 ## Summary
-A mixed epic that gets the Ang repo ready to be read, forked and contributed to. The technical half adds a private, dev-only root `package.json` with ESLint, Prettier, Husky and lint-staged, a working `npm test` on `node:test`, and GitHub Actions CI on the current Node LTS (long-term support release), then fixes Ang's code to zero warnings. The repo-facing half adds the MIT licence, a short CONTRIBUTING and code of conduct in Ang's voice, issue and PR templates that nudge toward Ang's first principles, private vulnerability reporting and README badges. Shipped Ang also drops its nudge toward `/bootstrap-quality`.
+A mixed epic that gets the Ang repo ready to be read, forked and contributed to. The technical half adds a private, dev-only root `package.json` with ESLint, Prettier, Husky and lint-staged, a working `npm test` on `node:test`, and GitHub Actions CI on the current Node LTS (long-term support release), then fixes Ang's code to zero warnings. The repo-facing half adds a short CONTRIBUTING and code of conduct in Ang's voice, issue and PR templates that nudge toward Ang's first principles, private vulnerability reporting and README badges. Shipped Ang also drops its nudge toward `/bootstrap-quality`.
 
 ## Why it matters
 Ang's tagged release needs a decided, Ang-sized hygiene kit, and code that bears Zac's name should hold to the standards Ang itself recommends.
 
 ## What's here
 - [Plan](plan.md): scope, sequencing, risks, success measures, test strategy and candidate ADRs
+- [C4](c4/1-context.md): [context](c4/1-context.md), [containers](c4/2-containers.md), [components](c4/3-components.md), [code](c4/4-code.md)
 - [Brief](origins/open-source-hygiene/ideas-content/brief.md)
 - [Quality tooling](origins/open-source-hygiene/ideas-content/quality-tooling.md): evidence and the decision for the full kit
 - [Hygiene survey](origins/open-source-hygiene/ideas-content/hygiene-survey.md): what 17 small or whimsical repos keep

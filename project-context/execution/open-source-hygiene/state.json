@@ -63,6 +63,11 @@
       "fact": "GitHub settings are flipped by an agent with gh api in a story, with Zac confirming each call and the story checking the result: Discussions on, private vulnerability reporting on, wiki off, projects off. Blank issues off ships as .github/ISSUE_TEMPLATE/config.yml. No branch protection or rulesets; CI is advisory. README badges: CI status, licence (MIT), Node >=26 from package.json engines, latest release (Zac, 2026-11-23)",
       "source": "/.github/workflows/release.yml",
       "answers": "Who does what for GitHub-side settings (Discussions on, private vulnerability reporting on, blank issues off, any branch protection for CI) and the badge set"
+    },
+    {
+      "id": "k15",
+      "fact": "eslint-plugin-regexp now finds 10 issues in the shipped script (3 super-linear backtracking, 5 unused capture groups, 2 style), not shaping's 8; library/frontmatter.mjs holds three of them and has no direct test, so story 2 writes one first (probe, 2026-11-23)",
+      "source": "/project-context/execution/open-source-hygiene/c4/4-code.md"
     }
   ],
   "decisions": [
@@ -182,7 +187,7 @@
     {
       "id": "d21",
       "decision": "The Prettier pass is its own commit, listed in .git-blame-ignore-revs so git blame skips it; hand lint fixes follow in a separate commit (Zac, 2026-11-23)",
-      "evidence": "/project-context/planning/open-source-hygiene/plan.md"
+      "evidence": "/project-context/execution/open-source-hygiene/plan.md"
     }
   ],
   "lineage": [
@@ -413,6 +418,26 @@
     {
       "date": "2026-11-23",
       "event": "decided: The Prettier pass is its own commit, listed in .git-blame-ignore-revs so git blame skips it; hand lint fixes follow in a separate commit (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "moved planning → execution"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced k15: eslint-plugin-regexp now finds 10 issues in the shipped script (3 super-linear backtracking, 5 unused capture groups, 2 style), not shaping's 8; library/frontmatter.mjs holds three of them and has no direct test, so story 2 writes one first (probe, 2026-11-23) → null; source: /project-context/planning/open-source-hygiene/c4/4-code.md → /project-context/execution/open-source-hygiene/c4/4-code.md"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d21: The Prettier pass is its own commit, listed in .git-blame-ignore-revs so git blame skips it; hand lint fixes follow in a separate commit (Zac, 2026-11-23) → null; evidence: /project-context/planning/open-source-hygiene/plan.md → /project-context/execution/open-source-hygiene/plan.md"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced k15: null → eslint-plugin-regexp now finds 10 issues in the shipped script (3 super-linear backtracking, 5 unused capture groups, 2 style), not shaping's 8; library/frontmatter.mjs holds three of them and has no direct test, so story 2 writes one first (probe, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d21: null → The Prettier pass is its own commit, listed in .git-blame-ignore-revs so git blame skips it; hand lint fixes follow in a separate commit (Zac, 2026-11-23)"
     }
   ],
   "type": "mixed"

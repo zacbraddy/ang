@@ -19,7 +19,7 @@ Nothing here ships to installs except the three `src/` edits in story 6. The roo
   - `.node-version` set to `26`; `node_modules/` added to `.gitignore`;
   - `eslint.config.mjs` with d9's set and `reportUnusedDisableDirectives: "error"`; Prettier config with semicolons and trailing commas set explicitly (d3), formatting JS, JSON and YAML (d17);
   - ignores for both tools: `docs/`, `project-context/`, `releases/`, root `.claude/` (it symlinks into `src/.claude`) and all markdown (d1, k13).
-- **Clean code:** Prettier and ESLint over `src/`, `scripts/` and root configs to zero errors and zero warnings, including the regexp plugin's 2 super-linear backtracking and 6 unused-capture findings ([ESLint plugins](origins/open-source-hygiene/shaping-content/eslint-plugins.md)).
+- **Clean code:** Prettier and ESLint over `src/`, `scripts/` and root configs to zero errors and zero warnings, including the regexp plugin's 10 findings as of 2026-11-23: 3 super-linear backtracking, 5 unused capture groups and 2 style fixes ([code level](c4/4-code.md#lint-findings-in-the-shipped-script-story-2)).
 - **Enforcement:** Husky pre-commit running lint-staged with `eslint --fix` and `prettier --write` (d1). A `ci.yml` workflow on `pull_request` and `push` to `main`: `npm ci`, ESLint, `prettier --check`, `npm test`, Node from `.node-version` (k13). Advisory only, no branch protection (d18).
 - **`release.yml`:** its test step becomes `npm test` (d16), so the test globs live only in `package.json`.
 - **Contributor kit (d4, d6, d12):** `CONTRIBUTING.md` (about 10 lines), `CODE_OF_CONDUCT.md` (about 3 lines), `.github/PULL_REQUEST_TEMPLATE.md`, `.github/ISSUE_TEMPLATE/` with the open-conversation template leading and the feature-request template, and `config.yml` with `blank_issues_enabled: false` and a contact link to Discussions ([what the templates are for](origins/open-source-hygiene/shaping-content/pr-template-purpose.md)).
@@ -88,7 +88,7 @@ Stories 4 and 6 can run any time. Stories 3 and 5 touch the README, so they go a
 ## Test strategy
 Right-sized: this epic adds tooling and docs, not behaviour, so the pyramid stays the one Ang already has.
 - **Unit (existing):** the `node:test` suites in `src/.claude/**/*.test.mjs` and `scripts/*.test.mjs` are the regression guard for story 2. Every story ends with `npm test` green.
-- **Unit (new, story 2 only):** where a regexp or `n` fix changes a regex or code path no existing test covers, write a failing test for its current behaviour first, then fix. No other new tests.
+- **Unit (new, story 2 only):** where a regexp or `n` fix changes a regex or code path no existing test covers, write a failing test for its current behaviour first, then fix. `library/frontmatter.mjs` has no direct test and three of the findings, so it gets one. No other new tests.
 - **Integration:** the CI run on a real pull request is the check for `ci.yml`, the lockfile and `.node-version`. One deliberately misformatted commit checks the hook.
 - **Not tested (engineering defaults):** ESLint, Prettier, Husky and lint-staged configs, `package.json` scripts and the workflow YAML beyond running them. Templates and GitHub settings are checked by eye and by `gh api` readback.
 
@@ -117,6 +117,7 @@ Right-sized: this epic adds tooling and docs, not behaviour, so the pyramid stay
 
 ## Related
 - [Hub](README.md)
+- [C4: context](c4/1-context.md), [containers](c4/2-containers.md), [components](c4/3-components.md), [code](c4/4-code.md)
 - [Brief](origins/open-source-hygiene/ideas-content/brief.md)
 - [Hygiene survey](origins/open-source-hygiene/ideas-content/hygiene-survey.md)
 - [Quality tooling](origins/open-source-hygiene/ideas-content/quality-tooling.md)
