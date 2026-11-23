@@ -61,7 +61,7 @@ Let a company keep one base `ang.json` that many repos inherit from, for example
 ### Code of conduct for the Ang repo
 A short `CODE_OF_CONDUCT.md` in Ang's voice (be decent, I moderate, report privately), plus a private route for reports, such as GitHub's reported-content setting. Ang has no community to moderate, because everyone bends their own copy instead of building on a shared one.
 - **Wake condition:** a community forms around the Ang repo, for example regular Discussions threads or issues between people other than Zac, or a conduct problem turns up.
-- **Source:** cut in execution on 2026-11-23, not from a raw file. Zac's call while writing story 05 of the [open-source hygiene epic](/project-context/retro/open-source-hygiene/README.md) (d6).
+- **Source:** cut in execution on 2026-11-23, not from a raw file. Zac's call while writing story 05 of the open-source hygiene epic (d6; see [ADR 0012](/project-context/10k/technical/adrs/0012-contributor-templates-nudge-not-gate.md)).
 
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)
