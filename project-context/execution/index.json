@@ -136,7 +136,7 @@
   {
     "title": "Clean code",
     "path": "project-context/execution/open-source-hygiene/stories/02-clean-code.md",
-    "shortDescription": "Prettier pass in its own blame-ignored commit, then hand fixes to zero ESLint errors and warnings, test-first where behaviour could change",
+    "shortDescription": "Prettier pass, then hand fixes to zero ESLint errors and warnings, test-first where behaviour could change",
     "tags": [
       "open-source",
       "tech-stack"

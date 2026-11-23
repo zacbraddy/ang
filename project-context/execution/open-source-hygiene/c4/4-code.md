@@ -18,7 +18,6 @@ This epic adds no new modules or types. Its code level is a set of **config file
 | `eslint.config.mjs` | new | `@eslint/js` recommended, `n` flat recommended, `regexp` flat recommended, `eslint-config-prettier` last; `globals.node`; `linterOptions.reportUnusedDisableDirectives: "error"`; ignores from the shared set |
 | `.prettierrc.json` | new | `{ "semi": true, "trailingComma": "all" }` |
 | `.prettierignore` | new | `docs/`, `project-context/`, `releases/`, `.claude/` (root only), `*.md`, `node_modules/` |
-| `.git-blame-ignore-revs` | new | The Prettier pass commit's SHA (story 2) |
 | `.husky/pre-commit` | new | `npx lint-staged` |
 
 ## Workflows

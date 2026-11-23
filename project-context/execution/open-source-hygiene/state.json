@@ -186,7 +186,7 @@
     },
     {
       "id": "d21",
-      "decision": "The Prettier pass is its own commit, listed in .git-blame-ignore-revs so git blame skips it; hand lint fixes follow in a separate commit (Zac, 2026-11-23)",
+      "decision": "The Prettier pass and the hand lint fixes land together, unstaged for Zac to commit; no dedicated formatting commit and no .git-blame-ignore-revs (Zac, 2026-11-23)",
       "evidence": "/project-context/execution/open-source-hygiene/plan.md"
     }
   ],
@@ -438,6 +438,10 @@
     {
       "date": "2026-11-23",
       "event": "replaced d21: null → The Prettier pass is its own commit, listed in .git-blame-ignore-revs so git blame skips it; hand lint fixes follow in a separate commit (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d21: The Prettier pass is its own commit, listed in .git-blame-ignore-revs so git blame skips it; hand lint fixes follow in a separate commit (Zac, 2026-11-23) → The Prettier pass and the hand lint fixes land together, unstaged for Zac to commit; no dedicated formatting commit and no .git-blame-ignore-revs (Zac, 2026-11-23)"
     }
   ],
   "type": "mixed"

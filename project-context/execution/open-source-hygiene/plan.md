@@ -46,7 +46,7 @@ Nothing here ships to installs except the three `src/` edits in story 6. The roo
 `ci.yml` reads `.node-version` through `actions/setup-node`'s `node-version-file`. `release.yml` does the same in story 1, replacing its hard-coded `26` and the "No .node-version yet" comment, so the yearly bump edits `.node-version` and `engines` and nothing else in CI. This is a one-line input swap; the job's steps stay as d16 describes (d20).
 
 ### Clean in one pass, then enforce
-Formatting and lint fixes land before any hook or CI, so neither starts red. The Prettier pass is mechanical and gets its own commit, listed in `.git-blame-ignore-revs` so `git blame` skips it (d21). Hand fixes (the regexp findings, `n` rules) follow in a separate commit.
+Formatting and lint fixes land before any hook or CI, so neither starts red. The Prettier pass and the hand fixes (the regexp findings, `n` rules) land together, unstaged; no dedicated formatting commit (d21).
 
 ### Templates nudge, settings stay open
 Templates ask; nothing blocks (d12). The PR template's prompts are the shape in [what the templates are for](origins/open-source-hygiene/shaping-content/pr-template-purpose.md); wording is Ang's voice and Zac signs it off. The issue chooser links chat to Discussions, so Discussions must be on before `config.yml` lands.
@@ -58,7 +58,7 @@ The agent proposes each `gh api` call, Zac confirms it, and the story reads the 
 | # | Story | Owner | Depends on |
 |---|---|---|---|
 | 1 | **Root tooling:** `package.json`, lockfile, `.node-version`, `.gitignore`, ESLint and Prettier configs and ignores, `npm test`; `release.yml` on `npm test` and `node-version-file`; ADR 0002 amendment; `project-structure.md` | agent | — |
-| 2 | **Clean code:** Prettier pass (own commit, blame-ignored), then hand fixes to zero errors and warnings, test-first for changed regexes | agent | 1 |
+| 2 | **Clean code:** Prettier pass, then hand fixes to zero errors and warnings, test-first for changed regexes | agent | 1 |
 | 3 | **Enforcement:** Husky and lint-staged, `ci.yml`, README badges (the documentation plan expects badges in the same change as CI), Node bump trigger update | agent | 2 |
 | 4 | **GitHub settings:** Discussions, private vulnerability reporting, wiki off, projects off, each read back | both | — |
 | 5 | **Contributor kit:** CONTRIBUTING, code of conduct, PR template, issue templates, `config.yml`, README "fork it" section | agent, Zac signs off the voice | 3 (README badges), 4 (Discussions link) |
@@ -74,7 +74,6 @@ Stories 4 and 6 can run any time. Stories 3 and 5 touch the README, so they go a
 | Regex fixes in the library script change behaviour | A failing regression test per changed regex first, then the fix (see Test strategy) |
 | A dev-dependency bump breaks zero warnings | Lockfile pins versions; d9 already dropped the churny plugins; CI is advisory, so a red run blocks nothing |
 | `release.yml`'s `npm test` and `node-version-file` are only exercised on the next tag | Both are one-line swaps; check them on the next rc cut, and `ci.yml` runs the same `npm test` on every PR first |
-| The Prettier pass rewrites most `.mjs` lines and buries blame | Its own commit, listed in `.git-blame-ignore-revs` |
 | The documentation stream's story 07 describes `/bootstrap-repo` handing off to `/bootstrap-quality` | d15 only changes the founding-only branch; flagged to that stream at the mail checkpoint |
 
 ## Success measures
@@ -95,7 +94,7 @@ Right-sized: this epic adds tooling and docs, not behaviour, so the pyramid stay
 ## Deliverables, tools and who does what
 | Deliverable | Tool or service | Who |
 |---|---|---|
-| Root `package.json`, lockfile, configs, `.node-version`, `.git-blame-ignore-revs` | npm, ESLint 10, Prettier, Husky, lint-staged | agent |
+| Root `package.json`, lockfile, configs, `.node-version` | npm, ESLint 10, Prettier, Husky, lint-staged | agent |
 | `ci.yml`, `release.yml` edit | GitHub Actions, `actions/setup-node` | agent |
 | CONTRIBUTING, code of conduct, PR and issue templates, `config.yml`, README sections and badges | GitHub community files, shields.io badges | agent drafts, Zac signs off the voice |
 | Discussions, private vulnerability reporting, wiki and projects settings | `gh api` | agent proposes each call, Zac confirms |

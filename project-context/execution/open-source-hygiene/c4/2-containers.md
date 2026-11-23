@@ -55,7 +55,7 @@ C4Container
 ## Containers
 | Container | Status | What changes |
 |---|---|---|
-| Dev toolchain | new | Private, dev-only root `package.json` with `engines.node >=26`, lockfile, `.node-version`, `eslint.config.mjs`, Prettier config and ignores, `.git-blame-ignore-revs`, `node_modules/` in `.gitignore` (d8, d9, d3, d17, d21) |
+| Dev toolchain | new | Private, dev-only root `package.json` with `engines.node >=26`, lockfile, `.node-version`, `eslint.config.mjs`, Prettier config and ignores, `node_modules/` in `.gitignore` (d8, d9, d3, d17, d21) |
 | Pre-commit hook | new | `.husky/pre-commit` runs lint-staged. Auto-fix on, so it rarely stops a commit (d1) |
 | `ci.yml` | new | One job, advisory, no branch protection (k13, d18). Its status drives the README badge |
 | `release.yml` | changed | Test step becomes `npm test` (d16); `setup-node` reads `.node-version` (d20). No `npm ci`, because `npm test` is plain `node --test` and needs no packages |
