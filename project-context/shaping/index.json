@@ -19,12 +19,31 @@
     ]
   },
   {
-    "title": "Spike: starlight-changelogs on Ang's docs site",
-    "path": "project-context/shaping/docs-releases-page/shaping-content/starlight-changelogs-spike.md",
-    "shortDescription": "Built starlight-changelogs 0.7.2 into a copy of Ang's docs against the real repo on 2026-11-23; works with one npm override, empty until v1.0.0, doubled h1 from the notes, drafts break the parse",
+    "title": "Spike: redeploying the docs when a release is published",
+    "path": "project-context/shaping/docs-releases-page/shaping-content/release-redeploy-spike.md",
+    "shortDescription": "Ran on a throwaway public repo on 2026-11-23. A release-published workflow that dispatches deploy-docs on main works; a direct tag-ref deploy is rejected; CI's contents-read token never sees drafts",
     "tags": [
       "documentation",
       "distribution",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Spike: starlight-changelogs on Ang's docs site",
+    "path": "project-context/shaping/docs-releases-page/shaping-content/starlight-changelogs-spike.md",
+    "shortDescription": "Built starlight-changelogs 0.7.2 into a copy of Ang's docs against the real repo on 2026-11-23; works with one npm override, empty until v1.0.0, doubled h1 from the notes, a visible draft would break the parse (CI's token can't see them)",
+    "tags": [
+      "documentation",
+      "distribution",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Spike: release-published docs redeploy",
+    "path": "project-context/shaping/docs-releases-page/spikes/release-redeploy/README.md",
+    "shortDescription": "The three workflows run on a throwaway repo to test redeploying the docs when a release is published, and how to rerun them",
+    "tags": [
+      "documentation",
       "tech-stack"
     ]
   },

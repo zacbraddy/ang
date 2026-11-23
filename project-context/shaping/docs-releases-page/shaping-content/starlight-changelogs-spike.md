@@ -1,12 +1,12 @@
 ---
 title: "Spike: starlight-changelogs on Ang's docs site"
-shortDescription: Built starlight-changelogs 0.7.2 into a copy of Ang's docs against the real repo on 2026-11-23; works with one npm override, empty until v1.0.0, doubled h1 from the notes, drafts break the parse
+shortDescription: Built starlight-changelogs 0.7.2 into a copy of Ang's docs against the real repo on 2026-11-23; works with one npm override, empty until v1.0.0, doubled h1 from the notes, a visible draft would break the parse (CI's token can't see them)
 tags: [documentation, distribution, tech-stack]
 ---
 # Spike: starlight-changelogs on Ang's docs site
 
 ## Summary
-starlight-changelogs 0.7.2 works on Ang's site, with three catches. Under npm it crashes until an `overrides` entry pins a sub-dependency's Astro to Ang's own. Ang's release notes open with an h1 (top-level heading), which doubles up on the page. And a draft release in the API response fails the whole build, if the build's token can see drafts. With only RC (release candidate) pre-releases published, the page is empty until v1.0.0. Zac is fine with that. Run on 2026-11-23 against `zacbraddy/ang`'s real releases (v1.0.0-rc.1 and rc.2).
+starlight-changelogs 0.7.2 works on Ang's site, with three catches. Under npm it crashes until an `overrides` entry pins a sub-dependency's Astro to Ang's own. Ang's release notes open with an h1 (top-level heading), which doubles up on the page. And a draft release in the API response fails the whole build, though CI's token turned out not to see drafts ([redeploy spike](release-redeploy-spike.md)). With only RC (release candidate) pre-releases published, the page is empty until v1.0.0. Zac is fine with that. Run on 2026-11-23 against `zacbraddy/ang`'s real releases (v1.0.0-rc.1 and rc.2).
 
 ## Setup
 - A copy of `docs/` with `starlight-changelogs@0.7.2` added, a `changelogs` collection using the GitHub provider (`base: 'releases'`, `pageSize: 100`, `token: process.env.GITHUB_TOKEN`) and a sidebar link via `makeChangelogsSidebarLinks`. The changed files are in [the spike folder](../spikes/starlight-changelogs/README.md).
@@ -37,11 +37,9 @@ It's one more thing to remember on upgrades, but it's inert once loader-utils wi
 ### Pages generated
 For each release: the list page, a per-version page and a "since this version" compare page. With pre-releases forced through, two RCs made five pages. No option turns the extras off. They're harmless.
 
-## Unknown unknowns
-- Whether CI's `GITHUB_TOKEN` (`contents: read`) sees draft releases. GitHub lists drafts only to callers with push access, so it probably doesn't, but this is untested. If it does, any docs build that runs between a release's tag push and Zac publishing it fails.
-
 ## Related
 - [How other docs sites build it](how-others-build-it.md)
 - [Spike files](../spikes/starlight-changelogs/README.md)
+- [Release redeploy spike](release-redeploy-spike.md)
 - [Item hub](../README.md)
 - [ADR 0007: how releases are cut](/project-context/10k/technical/adrs/0007-how-releases-are-cut.md)
