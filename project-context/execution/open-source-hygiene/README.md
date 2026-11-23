@@ -13,6 +13,7 @@ Ang's tagged release needs a decided, Ang-sized hygiene kit, and code that bears
 
 ## What's here
 - [Plan](plan.md): scope, sequencing, risks, success measures, test strategy and candidate ADRs
+- [Stories](stories/): six stories, from root tooling to dropping the `/bootstrap-quality` nudge
 - [C4](c4/1-context.md): [context](c4/1-context.md), [containers](c4/2-containers.md), [components](c4/3-components.md), [code](c4/4-code.md)
 - [Brief](origins/open-source-hygiene/ideas-content/brief.md)
 - [Quality tooling](origins/open-source-hygiene/ideas-content/quality-tooling.md): evidence and the decision for the full kit

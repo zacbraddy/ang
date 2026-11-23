@@ -122,5 +122,59 @@
     "tags": [
       "open-source"
     ]
+  },
+  {
+    "title": "Root tooling",
+    "path": "project-context/execution/open-source-hygiene/stories/01-root-tooling.md",
+    "shortDescription": "A private, dev-only root package.json with ESLint, Prettier and npm test on node:test, with release.yml and the 10k docs brought in line",
+    "tags": [
+      "open-source",
+      "tech-stack",
+      "repo-structure"
+    ]
+  },
+  {
+    "title": "Clean code",
+    "path": "project-context/execution/open-source-hygiene/stories/02-clean-code.md",
+    "shortDescription": "Prettier pass in its own blame-ignored commit, then hand fixes to zero ESLint errors and warnings, test-first where behaviour could change",
+    "tags": [
+      "open-source",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Enforcement",
+    "path": "project-context/execution/open-source-hygiene/stories/03-enforcement.md",
+    "shortDescription": "Husky and lint-staged auto-fix on commit, an advisory ci.yml on every PR and push to main, README badges and the Node LTS bump trigger",
+    "tags": [
+      "open-source",
+      "tech-stack",
+      "repo-structure"
+    ]
+  },
+  {
+    "title": "GitHub settings",
+    "path": "project-context/execution/open-source-hygiene/stories/04-github-settings.md",
+    "shortDescription": "Discussions and private vulnerability reporting on, wiki and projects off, each set with gh api and read back",
+    "tags": [
+      "open-source"
+    ]
+  },
+  {
+    "title": "Contributor kit",
+    "path": "project-context/execution/open-source-hygiene/stories/05-contributor-kit.md",
+    "shortDescription": "CONTRIBUTING, code of conduct, PR and issue templates as rubber-ducking nudges, an issue chooser routing chat to Discussions, and a README fork-it section",
+    "tags": [
+      "open-source",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "Drop the nudge",
+    "path": "project-context/execution/open-source-hygiene/stories/06-drop-the-nudge.md",
+    "shortDescription": "Shipped Ang stops nudging pilots toward /bootstrap-quality; /bootstrap-repo offers a /trigger instead",
+    "tags": [
+      "open-source"
+    ]
   }
 ]
