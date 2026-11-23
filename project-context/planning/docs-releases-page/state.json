@@ -1,14 +1,7 @@
 {
   "status": "active",
   "statusNote": "",
-  "unknowns": [
-    {
-      "id": "u1",
-      "question": "How do the release notes drop their '# 🚀 Ang vX: theme' h1 and move sections to ###, and where does the theme line go instead? A wording choice for Zac in releases/notes/README.md.",
-      "approach": "origins/docs-releases-page/shaping-content/starlight-changelogs-spike.md",
-      "from": "docs-releases-page"
-    }
-  ],
+  "unknowns": [],
   "knowns": [
     {
       "id": "k1",
@@ -62,6 +55,12 @@
       "source": "origins/docs-releases-page/shaping-content/release-redeploy-spike.md",
       "answers": "What makes the site rebuild when a release is published? deploy-docs.yml only runs on pushes touching docs/** or a manual dispatch, so the page goes stale unless a release-published trigger (or the file-based source) covers it.",
       "from": "docs-releases-page"
+    },
+    {
+      "id": "k12",
+      "fact": "The notes template drops the '# 🚀 Ang vX: theme' h1: the theme becomes a bold first line of the body ('**🚀 {theme}**'), the intro follows, and sections drop to ###. release.yml, release titles and the plugin's slugs stay as they are; past RC notes stay untouched since RCs aren't shown — Zac, 2026-11-23",
+      "source": "origins/docs-releases-page/shaping-content/starlight-changelogs-spike.md",
+      "answers": "How do the release notes drop their '# 🚀 Ang vX: theme' h1 and move sections to ###, and where does the theme line go instead? A wording choice for Zac in releases/notes/README.md."
     }
   ],
   "decisions": [
