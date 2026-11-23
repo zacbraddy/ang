@@ -9,6 +9,16 @@
     ]
   },
   {
+    "title": "How other docs sites build a releases page",
+    "path": "project-context/shaping/docs-releases-page/shaping-content/how-others-build-it.md",
+    "shortDescription": "Survey of Starlight changelog plugins, real open-source releases pages and GitHub's release-publish trigger, as of 2026-11-23",
+    "tags": [
+      "documentation",
+      "distribution",
+      "tech-stack"
+    ]
+  },
+  {
     "title": "Open-source hygiene, brief",
     "path": "project-context/shaping/open-source-hygiene/ideas-content/brief.md",
     "shortDescription": "Zac's stance on open-source standards and the deferred quality-tooling options",

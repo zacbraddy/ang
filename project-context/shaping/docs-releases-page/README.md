@@ -12,9 +12,12 @@ Many open-source repos have a releases page in their docs as well as GitHub's ow
 It's the polish people expect on an open-source docs site, and it lets readers see Ang's history without leaving the docs.
 
 ## What's here
-Nothing yet: unknowns and knowns live in `state.json`.
+- [How other docs sites build a releases page](shaping-content/how-others-build-it.md): the Starlight plugin landscape, real sites' setups and GitHub's release-publish trigger.
+
+Unknowns, knowns and decisions live in `state.json`.
 
 ## Related
+- [How other docs sites build it](shaping-content/how-others-build-it.md)
 - [ADR 0007: how releases are cut](/project-context/10k/technical/adrs/0007-how-releases-are-cut.md)
 - [ADR 0008: docs on Starlight and GitHub Pages](/project-context/10k/technical/adrs/0008-docs-starlight-on-github-pages.md)
 - [Delivery intent](/project-context/10k/intent.md)

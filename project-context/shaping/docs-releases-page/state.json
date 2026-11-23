@@ -13,19 +13,19 @@
       "approach": ""
     },
     {
-      "id": "u3",
-      "question": "How do other open-source repos and Starlight plugins build a releases page, and is there an off-the-shelf plugin that fits?",
-      "approach": ""
-    },
-    {
-      "id": "u4",
-      "question": "What sits above the release list: a header only, or some static prose? Let the survey of other repos show the done thing.",
-      "approach": ""
-    },
-    {
       "id": "u5",
       "question": "Do release-candidate pre-releases appear on the page, and how are they marked?",
       "approach": ""
+    },
+    {
+      "id": "u6",
+      "question": "Built on Ang's site, does starlight-changelogs behave as its source reads: one page with a big pageSize, GITHUB_TOKEN wiring, no doubled h1 from the release notes' own headings?",
+      "approach": "shaping-content/how-others-build-it.md"
+    },
+    {
+      "id": "u7",
+      "question": "A release: published trigger runs on the tag ref, and the github-pages environment only lets main deploy by default: add a tag rule, or check out main?",
+      "approach": "shaping-content/how-others-build-it.md"
     }
   ],
   "knowns": [
@@ -43,6 +43,18 @@
       "id": "k3",
       "fact": "No pagination: Ang expects few releases, so the page shows them all, newest first.",
       "source": "/project-context/shaping/docs-releases-page/README.md"
+    },
+    {
+      "id": "k4",
+      "fact": "starlight-changelogs 0.7.2 (HiDeoo) is the only off-the-shelf Starlight plugin; all six real releases pages found use it, and others run it on Starlight 0.43.1 and Astro 7.4. It reads GitHub Releases at build time, always drops drafts and pre-releases, has no prose slot, and needs GITHUB_TOKEN in CI to avoid rate-limit 403s. astro-loader-github-releases is the data-only alternative (GraphQL, token required).",
+      "source": "shaping-content/how-others-build-it.md",
+      "answers": "How do other open-source repos and Starlight plugins build a releases page, and is there an off-the-shelf plugin that fits?"
+    },
+    {
+      "id": "k5",
+      "fact": "Every surveyed site shows only a title and version picker above the list, no prose; starlight-changelogs offers no slot for prose.",
+      "source": "shaping-content/how-others-build-it.md",
+      "answers": "What sits above the release list: a header only, or some static prose? Let the survey of other repos show the done thing."
     }
   ],
   "decisions": [],
