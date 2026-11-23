@@ -18,6 +18,15 @@
     ]
   },
   {
+    "title": "Docs voice guide",
+    "path": "project-context/10k/marketing/docs-voice-guide.md",
+    "shortDescription": "How to write README and docs-site pages Zac signs off with few notes, distilled from his edits to the README and the Start here pages",
+    "tags": [
+      "documentation",
+      "brand-voice"
+    ]
+  },
+  {
     "title": "Voice and attribution",
     "path": "project-context/10k/marketing/voice-and-attribution.md",
     "shortDescription": "The tone Ang's public writing uses and how its author and We Right Code are credited",
@@ -37,7 +46,7 @@
   {
     "title": "What Ang is",
     "path": "project-context/10k/product/what-ang-is.md",
-    "shortDescription": "Ang's definition, positioning, deliberately closed feature set and how its author uses it",
+    "shortDescription": "Ang's definition, positioning, deliberately closed feature set, where it is documented and how its author uses it",
     "tags": [
       "product-vision",
       "open-source"

@@ -27,7 +27,7 @@ C4Container
     ContainerDb(version, ".claude/ang/version.json", "JSON", "Installed release: ref, sha, installedAt")
     ContainerDb(backup, ".claude/settings.json.pre-ang", "JSON", "The user's settings before the first install")
     Container(features, "Feature modules", "Node ESM + Markdown", "intent, streams, host, pilot")
-    ContainerDb(angjson, "ang.json (repo root)", "JSON", "Project keys: intent, streams")
+    ContainerDb(angjson, "ang.json (repo root)", "JSON", "Project keys: intent, streams; may set team-default host, pilot")
     ContainerDb(library, "project-context/", "Markdown + JSON", "The context library")
     ContainerDb(gitignore, ".gitignore", "Text", "Covers every *.local file")
   }
@@ -77,9 +77,11 @@ C4Container
 | Script | The one CLI, wired into hooks ([ADR 0002](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md)). Its `settings`, `version` and `upgrade` commands are core, not feature-gated ([ADR 0006](/project-context/10k/technical/adrs/0006-upgrade-by-three-way-merge.md)) |
 | `version.json`, `settings.json.pre-ang` | Written by install, and `version.json` again by each upgrade. The user commits `version.json`. Without `version.json` the next upgrade has no merge base ([ADR 0005](/project-context/10k/technical/adrs/0005-install-by-copy-in-from-releases.md)) |
 | Feature modules | Optional behaviour, invisible when off. A feature's rule is `rule.md` or `rule(value)` ([ADR 0004](/project-context/10k/technical/adrs/0004-pilot-identity-hook-injected.md)) |
-| `ang.json`, `ang.local.json` | Project config plus a per-user overlay limited to `LOCAL_KEYS` ([ADR 0003](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md)) |
+| `ang.json`, `ang.local.json` | Project config, which may set any feature key, plus a per-user overlay limited to `LOCAL_KEYS` that wins for those keys ([ADR 0003](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md)) |
 | `project-context/` | The library: `10k/` plus in-flight stage folders |
 | Per-user files | Written only by `/tailor-ang`, previewed first, and covered by unanchored `.gitignore` patterns |
+
+The docs site (`docs/`) and its deploy workflow are repo-only and never ship, so they aren't containers of Ang; see [project structure](/project-context/10k/technical/project-structure.md).
 
 ## Related
 - [Context](1-context.md)

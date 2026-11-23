@@ -21,10 +21,11 @@ The release needs a live docs site in Zac's voice for as little building and upk
 ## Consequences
 - The build is the only automated gate; there's no link checker.
 - Expect 1–3 forced Starlight or action bumps a year.
-- The site changes only when `docs/**` lands on `main`.
+- The site changes only when `docs/**` lands on `main` (or on a manual run); only `main` may deploy to the `github-pages` environment.
+- Pages are reviewed on `npm run dev` in `docs/`, which hot-reloads Zac's edits; screenshots come from Orca's built-in browser. Links are checked by crawling the built `docs/dist/`.
 
 ## Standing
-2026-11-18. Built: `docs/` and `deploy-docs.yml`. The repo's Pages source is GitHub Actions, and the first deploy published the site at `https://zacbraddy.github.io/ang/` ([run](https://github.com/zacbraddy/ang/actions/runs/44314555360)).
+2026-11-23. Built: `docs/` with all 21 pages, and `deploy-docs.yml`. The repo's Pages source is GitHub Actions, and the site is live at `https://zacbraddy.github.io/ang/`.
 
 ## Related
 | Doc | Why |
