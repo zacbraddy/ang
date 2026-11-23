@@ -19,7 +19,7 @@ The docs site gets a Releases page from the starlight-changelogs 0.7.2 plugin, w
 | 6 | Pass `GITHUB_TOKEN: ${{ github.token }}` as env to the build step; permissions stay `contents: read` | `.github/workflows/deploy-docs.yml` |
 | 7 | New `redeploy-docs-on-release.yml`: `release: published`, `actions: write`, one step running `gh workflow run deploy-docs.yml --ref main` (spike file, adopted as is) | `.github/workflows/` |
 | 8 | Post-publish check for a stable tag: the "Redeploy docs on release" run went green and `/ang/releases/` lists the tag | `.claude/skills/cut-release/SKILL.md` step 8 |
-| 9 | 10k: revise ADR 0008 (see Candidate ADRs) and list the new workflow | ADR 0008, `10k/technical/project-structure.md` |
+| 9 | 10k: revise ADR 0008 (see Candidate ADRs), list the new workflow, and add the release-publish build and the Releases API read to the context view | ADR 0008, `10k/technical/project-structure.md`, `10k/technical/architecture/1-context.md` |
 
 ## Out of scope
 - **Showing RCs (release candidates).** The plugin always drops pre-releases (d2).
@@ -33,7 +33,7 @@ The docs site gets a Releases page from the starlight-changelogs 0.7.2 plugin, w
 1. **Template and trigger (1, 2).** These come first, so the shape is in place before anyone drafts v1.0.0's notes. Doc edits only.
 2. **Plugin on the site (3–6).** Lift the spike's three files into `docs/`, run `npm i` so the lockfile records the override, and add the env line to the deploy workflow. Lands with the next push to `docs/**`.
 3. **Redeploy workflow (7).** Copy the spike file. It needs Prettier's `format:check` to pass.
-4. **Release process and 10k (8, 9).** Add the cut-release check, revise ADR 0008 and update project-structure.
+4. **Release process and 10k (8, 9).** Add the cut-release check, revise ADR 0008, and update project-structure and the 10k context view.
 
 The scope rows are changes, not stories. The whole epic is **one story**, done in the order above.
 
@@ -71,6 +71,7 @@ Everything here is config, workflow and docs, which the engineering defaults say
 
 ## Related
 - [Epic hub](./README.md)
+- [C4 context](c4/1-context.md), [container](c4/2-container.md), [component](c4/3-component.md), [code](c4/4-code.md)
 - [starlight-changelogs spike](origins/docs-releases-page/shaping-content/starlight-changelogs-spike.md)
 - [Release redeploy spike](origins/docs-releases-page/shaping-content/release-redeploy-spike.md)
 - [ADR 0007: how releases are cut](/project-context/10k/technical/adrs/0007-how-releases-are-cut.md)

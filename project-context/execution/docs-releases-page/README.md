@@ -10,6 +10,7 @@ Ang's docs site gets a releases page: every published release, newest first, on 
 
 ## What's here
 - [Plan](plan.md)
+- C4: [context](c4/1-context.md), [container](c4/2-container.md), [component](c4/3-component.md), [code](c4/4-code.md)
 - [Origin: how other docs sites build a releases page](origins/docs-releases-page/shaping-content/how-others-build-it.md)
 - [Origin: starlight-changelogs spike](origins/docs-releases-page/shaping-content/starlight-changelogs-spike.md)
 - [Origin: release redeploy spike](origins/docs-releases-page/shaping-content/release-redeploy-spike.md)
