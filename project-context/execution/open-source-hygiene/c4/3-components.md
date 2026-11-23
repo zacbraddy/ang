@@ -20,7 +20,7 @@ C4Component
 
   Container_Boundary(toolchain, "Dev toolchain [new]") {
     Component(npmscripts, "npm scripts", "package.json", "test, lint, format, format:check, prepare")
-    Component(eslintcfg, "ESLint config", "eslint.config.mjs", "@eslint/js, n, regexp, prettier-compat; zero warnings")
+    Component(eslintcfg, "ESLint config", "eslint.config.mjs", "@eslint/js, n, regexp, stylistic padding, prettier-compat; zero warnings")
     Component(prettiercfg, "Prettier config", ".prettierrc.json", "Semicolons and trailing commas explicit; JS, JSON, YAML")
     Component(ignores, "Shared ignore set", ".prettierignore + ESLint ignores", "docs/, project-context/, releases/, root .claude/, markdown")
     Component(lintstaged, "lint-staged config", "package.json", "eslint --fix and prettier --write per staged glob")
@@ -66,7 +66,7 @@ C4Component
 | Component | Status | Responsibility | Decisions |
 |---|---|---|---|
 | npm scripts | new | The single home for every check command and the test globs | d8, k3, k13 |
-| ESLint config | new | d9's set, `globals.node`, `reportUnusedDisableDirectives: "error"`, `n/no-process-exit` off, `n/prefer-node-protocol` on | d1, d9 |
+| ESLint config | new | d9's set, `globals.node`, `reportUnusedDisableDirectives: "error"`, `n/no-process-exit` off, `n/prefer-node-protocol` on, d9's readability rules | d1, d9 |
 | Prettier config | new | Defaults plus `semi: true` and `trailingComma: "all"` written out | d3, d17 |
 | Shared ignore set | new | One list, applied to both tools. Root `.claude/` is ignored because it symlinks into `src/.claude` and would be linted twice | d1, k13 |
 | lint-staged and Husky | new | Auto-fix on commit; `prepare` installs the hook on `npm ci` or `npm install` | d1 |

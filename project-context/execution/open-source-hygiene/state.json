@@ -121,7 +121,7 @@
     },
     {
       "id": "d9",
-      "decision": "ESLint set: @eslint/js + n (no-process-exit off, prefer-node-protocol on) + regexp + eslint-config-prettier, globals.node; unicorn, jsdoc, security, import(-x), promise and all-in-one configs dropped — too noisy or churny under zero warnings, lagging ESLint 10, or adding nothing on Ang's code",
+      "decision": "ESLint set: @eslint/js + n (no-process-exit off, prefer-node-protocol on) + regexp + eslint-config-prettier, globals.node, plus readability rules: @stylistic/padding-line-between-statements (blank line before return, after const/let runs and after blocks), curly all (after eslint-config-prettier, which turns it off), no-nested-ternary, no-else-return, max-depth 3. Zac found the code too packed to read; naming and explaining variables stay a manual habit. unicorn, jsdoc, security, import(-x), promise and all-in-one configs dropped — too noisy or churny under zero warnings, lagging ESLint 10, or adding nothing on Ang's code",
       "evidence": "origins/open-source-hygiene/shaping-content/eslint-plugins.md",
       "from": "open-source-hygiene"
     },
@@ -442,6 +442,10 @@
     {
       "date": "2026-11-23",
       "event": "replaced d21: The Prettier pass is its own commit, listed in .git-blame-ignore-revs so git blame skips it; hand lint fixes follow in a separate commit (Zac, 2026-11-23) → The Prettier pass and the hand lint fixes land together, unstaged for Zac to commit; no dedicated formatting commit and no .git-blame-ignore-revs (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d9: ESLint set: @eslint/js + n (no-process-exit off, prefer-node-protocol on) + regexp + eslint-config-prettier, globals.node; unicorn, jsdoc, security, import(-x), promise and all-in-one configs dropped — too noisy or churny under zero warnings, lagging ESLint 10, or adding nothing on Ang's code → ESLint set: @eslint/js + n (no-process-exit off, prefer-node-protocol on) + regexp + eslint-config-prettier, globals.node, plus readability rules: @stylistic/padding-line-between-statements (blank line before return, after const/let runs and after blocks), curly all (after eslint-config-prettier, which turns it off), no-nested-ternary, no-else-return, max-depth 3. Zac found the code too packed to read; naming and explaining variables stay a manual habit. unicorn, jsdoc, security, import(-x), promise and all-in-one configs dropped — too noisy or churny under zero warnings, lagging ESLint 10, or adding nothing on Ang's code"
     }
   ],
   "type": "mixed"

@@ -15,7 +15,7 @@ This epic adds no new modules or types. Its code level is a set of **config file
 | `package-lock.json` | new | Pins every dev dependency |
 | `.node-version` | new | `26` |
 | `.gitignore` | changed | Adds `node_modules/` |
-| `eslint.config.mjs` | new | `@eslint/js` recommended, `n` flat recommended, `regexp` flat recommended, `eslint-config-prettier` last; `globals.node`; `linterOptions.reportUnusedDisableDirectives: "error"`; ignores from the shared set |
+| `eslint.config.mjs` | new | `@eslint/js` recommended, `n` flat recommended, `regexp` flat recommended, `eslint-config-prettier`, then a block re-enabling `curly: all`; d9's readability rules (`@stylistic/padding-line-between-statements`, `no-nested-ternary`, `no-else-return`, `max-depth` 3); `no-unused-vars` with `ignoreRestSiblings`; `globals.node`; `linterOptions.reportUnusedDisableDirectives: "error"`; ignores from the shared set |
 | `.prettierrc.json` | new | `{ "semi": true, "trailingComma": "all" }` |
 | `.prettierignore` | new | `docs/`, `project-context/`, `releases/`, `.claude/` (root only), `*.md`, `node_modules/` |
 | `.husky/pre-commit` | new | `npx lint-staged` |

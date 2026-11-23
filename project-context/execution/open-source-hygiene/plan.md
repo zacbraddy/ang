@@ -15,7 +15,7 @@ Nothing here ships to installs except the three `src/` edits in story 6. The roo
 
 ## Scope
 - **Root tooling (d8, d11, k13):**
-  - `package.json`: `private: true`, `engines.node >=26`, dev dependencies only (ESLint, `@eslint/js`, `eslint-plugin-n`, `eslint-plugin-regexp`, `eslint-config-prettier`, `globals`, Prettier, Husky, lint-staged), a lockfile, and scripts `test`, `lint`, `format`, `format:check` and `prepare` (Husky);
+  - `package.json`: `private: true`, `engines.node >=26`, dev dependencies only (ESLint, `@eslint/js`, `eslint-plugin-n`, `eslint-plugin-regexp`, `@stylistic/eslint-plugin`, `eslint-config-prettier`, `globals`, Prettier, Husky, lint-staged), a lockfile, and scripts `test`, `lint`, `format`, `format:check` and `prepare` (Husky);
   - `.node-version` set to `26`; `node_modules/` added to `.gitignore`;
   - `eslint.config.mjs` with d9's set and `reportUnusedDisableDirectives: "error"`; Prettier config with semicolons and trailing commas set explicitly (d3), formatting JS, JSON and YAML (d17);
   - ignores for both tools: `docs/`, `project-context/`, `releases/`, root `.claude/` (it symlinks into `src/.claude`) and all markdown (d1, k13).

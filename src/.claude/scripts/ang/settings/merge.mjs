@@ -2,59 +2,124 @@
 // the install merge); ours: the user's file; theirs: Ang's settings at the target version.
 
 // Top-level keys whose conflicts aren't reported: tailor-ang owns outputStyle, so the user's value is kept silently.
-export const SKIPPED_KEYS = new Set(['outputStyle']);
+export const SKIPPED_KEYS = new Set(["outputStyle"]);
 
-const isObject = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
-const canonical = (v) => {
-  if (Array.isArray(v)) return v.map(canonical);
-  if (!isObject(v)) return v;
-  return Object.fromEntries(Object.keys(v).sort().map((k) => [k, canonical(v[k])]));
+const isObject = (value) =>
+  value !== null && typeof value === "object" && !Array.isArray(value);
+
+const canonical = (value) => {
+  if (Array.isArray(value)) {
+    return value.map(canonical);
+  }
+
+  if (!isObject(value)) {
+    return value;
+  }
+
+  const sortedKeys = Object.keys(value).sort();
+
+  return Object.fromEntries(
+    sortedKeys.map((key) => [key, canonical(value[key])]),
+  );
 };
-const same = (a, b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
-const has = (entries, value) => entries.some((e) => same(e, value));
+
+const same = (a, b) =>
+  JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
+const includesEntry = (entries, value) => entries.some((e) => same(e, value));
 
 // Arrays are sets of whole entries: a changed hook group is one entry removed and another added.
 export function mergeArray(base, ours, theirs, path = []) {
+  const isNew = (entry) => !includesEntry(base, entry);
+  const oursOnly = ours.filter((o) => isNew(o) && !includesEntry(theirs, o));
+  const theirsOnly = theirs.filter((t) => isNew(t) && !includesEntry(ours, t));
+  const bothAddedEntries = oursOnly.length > 0 && theirsOnly.length > 0;
   const conflicts = [];
-  const oursOnly = ours.filter((o) => !has(base, o) && !has(theirs, o));
-  const theirsOnly = theirs.filter((t) => !has(base, t) && !has(ours, t));
+
   for (const entry of base) {
+    const droppedByBoth =
+      !includesEntry(ours, entry) && !includesEntry(theirs, entry);
+
     // Both sides dropped the same entry and each added its own, so each probably replaced it with its own edit.
-    if (!has(ours, entry) && !has(theirs, entry) && oursOnly.length && theirsOnly.length) {
+    if (droppedByBoth && bothAddedEntries) {
       conflicts.push({ path, base: entry, ours: oursOnly, theirs: theirsOnly });
     }
   }
-  const kept = ours.filter((o) => !(has(base, o) && !has(theirs, o)));
-  const added = theirs.filter((t) => !has(base, t) && !has(ours, t));
-  return { merged: [...kept, ...added], conflicts };
+
+  const droppedByTheirs = (entry) =>
+    includesEntry(base, entry) && !includesEntry(theirs, entry);
+  const kept = ours.filter((o) => !droppedByTheirs(o));
+
+  return { merged: [...kept, ...theirsOnly], conflicts };
+}
+
+function mergeObject(path, base, ours, theirs, conflicts) {
+  const baseObject = isObject(base) ? base : {};
+  const allKeys = new Set([...Object.keys(ours), ...Object.keys(theirs)]);
+  const merged = {};
+
+  for (const key of allKeys) {
+    const value = merge(
+      [...path, key],
+      baseObject[key],
+      ours[key],
+      theirs[key],
+      conflicts,
+    );
+
+    if (value !== undefined) {
+      merged[key] = value;
+    }
+  }
+
+  return merged;
 }
 
 function merge(path, base, ours, theirs, conflicts) {
+  const matchesBase = (value) => base !== undefined && same(value, base);
+
   // Missing from the user's file: a new Ang key arrives, one the user deleted stays deleted.
-  if (ours === undefined) return base === undefined ? theirs : undefined;
-  if (theirs === undefined) return base !== undefined && same(ours, base) ? undefined : ours;
-  if (isObject(ours) && isObject(theirs)) {
-    const b = isObject(base) ? base : {};
-    const out = {};
-    for (const k of new Set([...Object.keys(ours), ...Object.keys(theirs)])) {
-      const value = merge([...path, k], b[k], ours[k], theirs[k], conflicts);
-      if (value !== undefined) out[k] = value;
-    }
-    return out;
+  if (ours === undefined) {
+    return base === undefined ? theirs : undefined;
   }
+
+  if (theirs === undefined) {
+    return matchesBase(ours) ? undefined : ours;
+  }
+
+  if (isObject(ours) && isObject(theirs)) {
+    return mergeObject(path, base, ours, theirs, conflicts);
+  }
+
   if (Array.isArray(ours) && Array.isArray(theirs)) {
-    const result = mergeArray(Array.isArray(base) ? base : [], ours, theirs, path);
+    const baseArray = Array.isArray(base) ? base : [];
+    const result = mergeArray(baseArray, ours, theirs, path);
+
     conflicts.push(...result.conflicts);
+
     return result.merged;
   }
-  if (same(ours, theirs)) return ours;
-  if (base !== undefined && same(ours, base)) return theirs;
-  if (base === undefined || !same(theirs, base)) conflicts.push({ path, base, ours, theirs });
+
+  if (same(ours, theirs)) {
+    return ours;
+  }
+
+  if (matchesBase(ours)) {
+    return theirs;
+  }
+
+  if (!matchesBase(theirs)) {
+    conflicts.push({ path, base, ours, theirs });
+  }
+
   return ours;
 }
 
 export function mergeSettings(base, ours, theirs) {
   const conflicts = [];
   const merged = merge([], base, ours, theirs, conflicts);
-  return { merged, conflicts: conflicts.filter((c) => !SKIPPED_KEYS.has(c.path[0])) };
+
+  return {
+    merged,
+    conflicts: conflicts.filter((c) => !SKIPPED_KEYS.has(c.path[0])),
+  };
 }

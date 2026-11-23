@@ -2,7 +2,7 @@
 title: Clean code
 shortDescription: Prettier pass, then hand fixes to zero ESLint errors and warnings, test-first where behaviour could change
 tags: [open-source, tech-stack]
-status: ready
+status: done
 owner: agent
 dependsOn: [01]
 ---
@@ -71,6 +71,29 @@ Paths below are under `src/.claude/scripts/ang/` unless rooted. C4 element: [lin
 - **Edge cases:** CRLF frontmatter, tab indentation in tag lists, and the dash-only list item.
 - **Out of scope:**
   - `.husky/pre-commit`, lint-staged config, `ci.yml` (story 03)
+- **As built:**
+  - The regex rewrites use `(\S.*)?` after the whitespace run (with `?? ''` / a `= ''` default) for list items and key-value lines, and drop the `\s*` before a move's note since `.trim()` already strips it. 17 new tests (16 in `frontmatter.test.mjs`, 1 in `guides.test.mjs`) passed against the old regexes first; the suite is now 200, with all 183 old test names still passing.
+  - **Readability pass (added at Zac's request, 2026-11-23):** Prettier alone left the code too packed to read. Following a style research pass (Code Complete's "paragraphs of code", Tidy First?'s chunking and explaining variables, Google JS naming), d9 gained readability rules, autofixed across the tree, and every module and test file got a hand pass: blank lines between logical chunks, named intermediate values, guard clauses, extracted functions and descriptive local names. Exports, output text, error messages and test titles are unchanged. The old test bodies were tidied too (arrange/act/assert, named setup), so "the pre-existing 183 are unchanged" now holds for their titles and assertions, not their bytes. `streams/store.mjs` and `triggers/triggers.mjs` have no tests, so both were checked by running the old and new versions side by side.
+  - ESLint `--fix` removed the shebangs; the unused-group swaps weren't auto-fixable (suggestions only), so they were done by hand.
+  - The `cause` criterion reads as if a non-ENOENT local read is wrapped. It isn't: that error is rethrown as-is, as before. Only the ENOENT error is wrapped, and it now carries the original as `cause`.
+  - Pathological inputs: none of the four flagged regexes can fail once past the whitespace run (`.*` and `[\s\S]*` accept whatever `\s` hands back, and they're `^`-anchored), so the old ones returned in 0 ms on 50,000-space inputs too. The new ones return the same results just as fast.
+
+## Review
+Done-when evidence holds: lint and `format:check` exit 0, 200 tests pass, every pre-HEAD test title still passes, assert counts per file are unchanged (guides +1), no `eslint-disable`, validate clean. Old vs new frontmatter regexes agree on a 200k-case fuzz; `triggers.mjs` and `streams/store.mjs` match old behaviour side by side. No behaviour change found.
+
+**Must-fix:** none.
+
+**Should-fix**
+- `src/.claude/scripts/ang/registry.mjs:127`: `reportUnmatchedCommand` is single-use, takes a six-field bag, and the caller still needs a `return` after it. Inline it back into `dispatch`'s `if (!command)` block, keeping the `isKnownNoun` / `isDisabledForNoun` names.
+
+Fixed after review: the should-fix and the first three nits. The last two stay as they are.
+
+**Nit**
+- `src/.claude/scripts/ang/commands/tag.mjs:42`: `isMerging` depends only on `fromTags` but is rebuilt per doc; hoist it above the loop.
+- `src/.claude/scripts/ang/upgrade/guides.mjs:51`: the comment restates what `readSectionHeadings` visibly throws on; drop it.
+- `src/.claude/scripts/cli.test.mjs:530, 569, 645`: `tempDirs.push(plan.tempDir)` now runs after other setup or asserts, so a throw leaks the temp folder; move each straight after the `JSON.parse`.
+- `src/.claude/scripts/ang/items/move.mjs:97`: `relinkMovedDoc` returns the whole markdown link fragment, not just the new target.
+- `src/.claude/scripts/ang/items/board.mjs:131`: `shouldSkipTriggers` holds a string or number, not a boolean.
 
 ## Related
 - [Plan: clean in one pass, then enforce](../plan.md#clean-in-one-pass-then-enforce), [test strategy](../plan.md#test-strategy)
