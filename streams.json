@@ -1,11 +1,5 @@
 [
   {
-    "slug": "documentation",
-    "branch": "stream/documentation",
-    "worktree": "/home/zacbraddy/orca/workspaces/ang/documentation",
-    "focus": "Docs website idea, to be planned together with the repo-readme task from open-source-hygiene as one docs epic (ideas/docs-website)"
-  },
-  {
     "slug": "open-source-hygiene",
     "branch": "stream/open-source-hygiene",
     "worktree": "/home/zacbraddy/orca/workspaces/ang/open-source-hygiene",
