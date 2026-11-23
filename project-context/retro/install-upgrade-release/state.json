@@ -694,6 +694,10 @@
     {
       "date": "2026-11-23",
       "event": "status → active: All 13 stories done; next /retro in a fresh session"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "moved execution → retro"
     }
   ],
   "type": "technical"

@@ -54,7 +54,7 @@
   {
     "title": "ADR 0002: Zero-dependency library script",
     "path": "project-context/10k/technical/adrs/0002-zero-dependency-library-script.md",
-    "shortDescription": "The context library is managed by one Node CLI that uses only built-ins, so Ang ships with no package.json or install step",
+    "shortDescription": "The context library, settings merge, version record and upgrade engine are one Node CLI that uses only built-ins; installing needs Node 26+, npx and git, but the script itself has no packages",
     "tags": [
       "tech-stack"
     ]
@@ -78,6 +78,33 @@
     ]
   },
   {
+    "title": "ADR 0005: Install by copy-in from published releases",
+    "path": "project-context/10k/technical/adrs/0005-install-by-copy-in-from-releases.md",
+    "shortDescription": "Ang installs with a stamped install.sh release asset that copies src/ in with pinned giget, only ever onto a published release, with no plugin and no uninstall command",
+    "tags": [
+      "distribution",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "ADR 0006: Upgrade by three-way merge",
+    "path": "project-context/10k/technical/adrs/0006-upgrade-by-three-way-merge.md",
+    "shortDescription": "upgrade-ang merges each file three-way against the recorded release, picks one of four routes by conflict count, never commits and is all or nothing; one settings merge serves install and upgrade",
+    "tags": [
+      "distribution",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "ADR 0007: How releases are cut",
+    "path": "project-context/10k/technical/adrs/0007-how-releases-are-cut.md",
+    "shortDescription": "Zac cuts each release with the repo-only /cut-release skill, CI does the mechanics on tag push, notes and upgrade guides are separate files, and every release is rehearsed on a fixture repo",
+    "tags": [
+      "open-source",
+      "distribution"
+    ]
+  },
+  {
     "title": "C4 level 1, context",
     "path": "project-context/10k/technical/architecture/1-context.md",
     "shortDescription": "Who uses Ang and which outside systems it touches; Ang is a set of files inside one repo, run by Claude Code",
@@ -98,7 +125,7 @@
   {
     "title": "Project structure",
     "path": "project-context/10k/technical/project-structure.md",
-    "shortDescription": "What ships (src/), how this repo runs Ang on itself through symlinks, and where everything else lives",
+    "shortDescription": "What ships (src/), how this repo runs Ang on itself through symlinks, the repo-only release tooling, and where everything else lives",
     "tags": [
       "repo-structure",
       "tech-stack"

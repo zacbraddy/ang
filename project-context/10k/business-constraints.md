@@ -15,10 +15,11 @@ These are the hard limits on releasing and running Ang. Ownership, licence, main
 - `github.com/zacbraddy/ang` has been public since before bootstrap (checked 2026-11-13).
 
 ## Maintenance stance
-- No open-source maintainer time: no release processes, PR (pull request) reviews or issue-thread arguments beyond the bare minimum.
+- No open-source maintainer time: no release processes, PR (pull request) reviews or issue-thread arguments beyond the bare minimum. **"Bare minimum" means the minimum for a process that is comfortable to maintain and operate**, not the least effort or fewest dependencies, so the release skill, CI job and fixture repo fit within it (Zac's call, 2026-11-18).
+- **Releases:** Zac alone decides when to release and every version number, with no schedule, nudges or automatic releases. A bad release is fixed only by a patch release, never by editing or rolling back a published one. No CHANGELOG.md, commit convention, changesets, PR labels, checksums or signing. How it runs: [ADR 0007](/project-context/10k/technical/adrs/0007-how-releases-are-cut.md).
 - The default answer to a feature issue or PR is "cool idea, go build it" ([first principles](/project-context/10k/product/first-principles.md), principle 4).
 - No PR or issue templates and no CONTRIBUTORS file, unless one is an absolute no-brainer to add.
-- **"Released" means:** a tagged release, a README and a live docs site. Stars, adoption and other metrics are not goals.
+- **"Released" means:** the published v1.0.0 release, a README and a live docs site. `v1.0.0-rc.N` pre-releases are rehearsals and don't count (Zac's call, 2026-11-18). Stars, adoption and other metrics are not goals.
 
 ## Spend and capacity
 - There is no fixed spend cap. Recurring costs (a domain, hosting) are acceptable when the case for them beats free options such as GitHub Pages.

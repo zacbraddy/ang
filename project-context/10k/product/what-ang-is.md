@@ -29,7 +29,13 @@ The core features are:
 
 A new feature joins the open-source repo only if its benefit is truly universal. There are no plans to grow the set.
 
-Configuration modules (`intent`, `host`, `pilot`) and `/tailor-ang` personalise these four. They aren't features in this sense.
+Configuration modules (`intent`, `host`, `pilot`) and `/tailor-ang` personalise these four. They aren't features in this sense. Nor is the plumbing that gets Ang into a repo and keeps it current: `install.sh`, `upgrade-ang` and the release process.
+
+## What you need
+- Claude Code, and Node.js 26 or newer (the current LTS, long-term support release; the minimum moves up each October) with npx.
+- git, inside a git repo: install runs from its root on a clean working tree.
+- macOS, Linux, or Windows through WSL (Windows Subsystem for Linux), with everything running inside WSL. Native Windows is untested best effort: it needs Git for Windows and a manual install.
+- Install is one piped line, and upgrades run through `upgrade-ang`; there is no uninstall command ([ADR 0005](/project-context/10k/technical/adrs/0005-install-by-copy-in-from-releases.md), [ADR 0006](/project-context/10k/technical/adrs/0006-upgrade-by-three-way-merge.md)).
 
 ## Defaults and opinions
 - **Methods ship as defaults.** DDD, Onion architecture, TDD, Atomic Design and Lean ship in `engineering-defaults.md`, so output is predictable out of the box. Only facts about the pilot are personal: identity, experience, stack, and whether they work solo or in a team. `/tailor-ang` adds those in a gitignored `pilot.local.md`.

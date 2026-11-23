@@ -2,7 +2,7 @@
 title: Delivery intent
 shortDescription: How Zac means the open-source release of Ang to be delivered, and why
 tags: [delivery-intent, open-source]
-confirmed: 2026-11-16
+confirmed: 2026-11-23
 ---
 # Delivery intent
 

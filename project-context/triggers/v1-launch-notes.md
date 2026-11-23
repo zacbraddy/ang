@@ -9,7 +9,7 @@ tags: [distribution, open-source, brand-voice]
 Once CI has created the v1.0.0 draft release, Zac and an agent write launch copy (what Ang is, how to install it), in a fresh session. The copy replaces the draft's body and `releases/notes/v1.0.0.md`, the README gets its install line, and then Zac presses Publish. It runs once, ever.
 
 ## Why now, not sooner or later
-v1.0.0 is cut like any release, from the last rc (d39 in the install-upgrade-release epic). So `/cut-release` drafts notes from the rc to v1.0.0 diff. That diff is right for the upgrade guide but means nothing to the public: the rcs were only rehearsals. Rather than give `/cut-release` a v1.0.0 branch that would never run again (d38), the notes are swapped by hand. That has to happen in the gap between CI creating the draft and Zac pressing Publish. Before the draft exists there's nothing to edit. After Publish, the launch announcement has already gone out with the wrong notes.
+v1.0.0 is cut like any release, from the last rc ([ADR 0007](/project-context/10k/technical/adrs/0007-how-releases-are-cut.md)). So `/cut-release` drafts notes from the rc to v1.0.0 diff. That diff is right for the upgrade guide but means nothing to the public: the rcs were only rehearsals. Rather than give `/cut-release` a v1.0.0 branch that would never run again (d38), the notes are swapped by hand. That has to happen in the gap between CI creating the draft and Zac pressing Publish. Before the draft exists there's nothing to edit. After Publish, the launch announcement has already gone out with the wrong notes.
 
 The `file:` condition is the rc.2 notes file, which proves the release process has run end to end at least once. It sits outside the stage folders, so it survives the epic's archive.
 
@@ -27,5 +27,4 @@ The `file:` condition is the rc.2 notes file, which proves the release process h
 - `grep -F 'releases/latest/download/install.sh' README.md` finds the install line.
 
 ## Related
-- [Install, upgrade and release plan (d38, d39)](/project-context/execution/install-upgrade-release/plan.md)
-- [Release process proposal](/project-context/execution/install-upgrade-release/release-process-proposal.md)
+- [ADR 0007: How releases are cut](/project-context/10k/technical/adrs/0007-how-releases-are-cut.md)

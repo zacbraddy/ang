@@ -6,7 +6,7 @@ tags: [tech-stack, distribution]
 # Bump Ang's minimum Node to the new LTS
 
 ## Summary
-Ang's minimum supported Node is the current LTS (long-term support) release, bumped each year once the new one is promoted (open-source hygiene's d11, k9 in the install-upgrade-release epic). This trigger does that bump, then sets itself up for the following year.
+Ang's minimum supported Node is the current LTS (long-term support) release, bumped each year once the new one is promoted (open-source hygiene's d11, [what Ang needs](/project-context/10k/product/what-ang-is.md#what-you-need)). This trigger does that bump, then sets itself up for the following year.
 
 ## Why now, not sooner or later
 Node promotes a new even-numbered major to LTS in late October, so the date condition sits just after it. Before that there's nothing to bump to. Doing it as a trigger keeps a once-a-year date check out of `/cut-release`, where it would run on every release.
@@ -27,5 +27,5 @@ Node promotes a new even-numbered major to LTS in late October, so the date cond
 - `release.yml`'s `node-version` and `install.sh`'s version check already name the newest LTS major.
 
 ## Related
-- [Install, upgrade and release plan](/project-context/execution/install-upgrade-release/plan.md)
-- [Release process proposal](/project-context/execution/install-upgrade-release/release-process-proposal.md)
+- [ADR 0005: Install by copy-in](/project-context/10k/technical/adrs/0005-install-by-copy-in-from-releases.md)
+- [ADR 0007: How releases are cut](/project-context/10k/technical/adrs/0007-how-releases-are-cut.md)

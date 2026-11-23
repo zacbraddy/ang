@@ -13,6 +13,7 @@ Ang's README and docs speak in Zac's own voice and credit him and We Right Code 
 - Trim his verbosity so readers aren't flooded, but keep the spirit and the way he explains ideas.
 - Not corporate. Ang is one developer's project and doesn't pretend to the standards of React-scale repos.
 - Avoid generic AI-generated design and copy.
+- **Release notes** use this voice with an emoji per heading. Breaking changes and fixes stay plain-spoken. Upgrade guides have no voice, because an agent reads them (Zac's call, 2026-11-19; template in `releases/notes/README.md`).
 
 ## Attribution
 - Briefly mention that Ang was developed by Zac Braddy as part of his work under **We Right Code**, linking to **https://zackerthehacker.com** (his CV site). The mention should be easy to find, never pushed in readers' faces.
