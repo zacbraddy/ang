@@ -3,29 +3,24 @@
   "statusNote": "",
   "unknowns": [
     {
-      "id": "u1",
-      "question": "Where does the page's content come from: the GitHub Releases API at build time, or the releases/notes/*.md files in the repo? The files need no token but include unpublished drafts and miss bodies swapped by hand before Publish (the v1-launch-notes trigger).",
-      "approach": ""
-    },
-    {
       "id": "u2",
       "question": "What makes the site rebuild when a release is published? deploy-docs.yml only runs on pushes touching docs/** or a manual dispatch, so the page goes stale unless a release-published trigger (or the file-based source) covers it.",
       "approach": ""
     },
     {
-      "id": "u5",
-      "question": "Do release-candidate pre-releases appear on the page, and how are they marked?",
-      "approach": ""
-    },
-    {
-      "id": "u6",
-      "question": "Built on Ang's site, does starlight-changelogs behave as its source reads: one page with a big pageSize, GITHUB_TOKEN wiring, no doubled h1 from the release notes' own headings?",
-      "approach": "shaping-content/how-others-build-it.md"
-    },
-    {
       "id": "u7",
       "question": "A release: published trigger runs on the tag ref, and the github-pages environment only lets main deploy by default: add a tag rule, or check out main?",
       "approach": "shaping-content/how-others-build-it.md"
+    },
+    {
+      "id": "u8",
+      "question": "Does CI's GITHUB_TOKEN (contents: read) see draft releases? If so, any docs build between a tag push and Zac publishing fails, because drafts' null published_at breaks the plugin's schema.",
+      "approach": "shaping-content/starlight-changelogs-spike.md"
+    },
+    {
+      "id": "u9",
+      "question": "How do the release notes drop their '# 🚀 Ang vX: theme' h1 and move sections to ###, and where does the theme line go instead? A wording choice for Zac in releases/notes/README.md.",
+      "approach": "shaping-content/starlight-changelogs-spike.md"
     }
   ],
   "knowns": [
@@ -55,9 +50,38 @@
       "fact": "Every surveyed site shows only a title and version picker above the list, no prose; starlight-changelogs offers no slot for prose.",
       "source": "shaping-content/how-others-build-it.md",
       "answers": "What sits above the release list: a header only, or some static prose? Let the survey of other repos show the done thing."
+    },
+    {
+      "id": "k6",
+      "fact": "starlight-changelogs 0.7.2 builds on Ang's Starlight 0.43.1 / Astro 7.4.12 only with an npm override pinning @ascorbic/loader-utils's astro peer to Ang's (otherwise npm nests Astro 5 and config load crashes); pageSize 100 gives one newest-first page; token reads from GITHUB_TOKEN; Ang's notes' '# 🚀 …' line renders a second h1 per release and their ## sections sit level with the version headings.",
+      "source": "shaping-content/starlight-changelogs-spike.md",
+      "answers": "Built on Ang's site, does starlight-changelogs behave as its source reads: one page with a big pageSize, GITHUB_TOKEN wiring, no doubled h1 from the release notes' own headings?"
+    },
+    {
+      "id": "k7",
+      "fact": "RC pre-releases don't appear on the page (the plugin drops them anyway); it builds empty, title plus version finder, until v1.0.0 is published. Zac's call, 2026-11-23.",
+      "source": "shaping-content/starlight-changelogs-spike.md",
+      "answers": "Do release-candidate pre-releases appear on the page, and how are they marked?"
+    },
+    {
+      "id": "k8",
+      "fact": "GitHub Releases at build time via starlight-changelogs' GitHub provider: drafts and pre-releases are filtered out and hand-edited bodies are what's shown; no file-based provider reads releases/notes/*.md.",
+      "source": "shaping-content/starlight-changelogs-spike.md",
+      "answers": "Where does the page's content come from: the GitHub Releases API at build time, or the releases/notes/*.md files in the repo? The files need no token but include unpublished drafts and miss bodies swapped by hand before Publish (the v1-launch-notes trigger)."
     }
   ],
-  "decisions": [],
+  "decisions": [
+    {
+      "id": "d1",
+      "decision": "Build the page with starlight-changelogs 0.7.2's GitHub provider plus the npm override — only off-the-shelf option, works on Ang's versions in the spike, fits buy over build",
+      "evidence": "shaping-content/starlight-changelogs-spike.md"
+    },
+    {
+      "id": "d2",
+      "decision": "RCs not shown; an empty page until v1.0.0 is fine — Zac, 2026-11-23",
+      "evidence": "shaping-content/starlight-changelogs-spike.md"
+    }
+  ],
   "lineage": [
     {
       "date": "2026-11-23",
@@ -66,6 +90,18 @@
     {
       "date": "2026-11-23",
       "event": "from raw: releases-page-in-the-docs.md (commit 4ae0cff), fast-tracked to shaping"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: Build the page with starlight-changelogs 0.7.2's GitHub provider plus the npm override — only off-the-shelf option, works on Ang's versions in the spike, fits buy over build"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: RCs not shown; an empty page until v1.0.0 is fine — Zac, 2026-11-23"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced k7: No: RC pre-releases stay off the page (the plugin drops them anyway) and the page builds empty, title plus version finder, until v1.0.0 is published. Zac's call, 2026-11-23. → RC pre-releases don't appear on the page (the plugin drops them anyway); it builds empty, title plus version finder, until v1.0.0 is published. Zac's call, 2026-11-23."
     }
   ],
   "type": "technical"

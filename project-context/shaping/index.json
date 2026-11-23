@@ -17,5 +17,25 @@
       "distribution",
       "tech-stack"
     ]
+  },
+  {
+    "title": "Spike: starlight-changelogs on Ang's docs site",
+    "path": "project-context/shaping/docs-releases-page/shaping-content/starlight-changelogs-spike.md",
+    "shortDescription": "Built starlight-changelogs 0.7.2 into a copy of Ang's docs against the real repo on 2026-11-23; works with one npm override, empty until v1.0.0, doubled h1 from the notes, drafts break the parse",
+    "tags": [
+      "documentation",
+      "distribution",
+      "tech-stack"
+    ]
+  },
+  {
+    "title": "Spike: starlight-changelogs on Ang's docs site",
+    "path": "project-context/shaping/docs-releases-page/spikes/starlight-changelogs/README.md",
+    "shortDescription": "The three files that differ from docs/ when starlight-changelogs 0.7.2 is added, and how to rerun the spike",
+    "tags": [
+      "documentation",
+      "distribution",
+      "tech-stack"
+    ]
   }
 ]
