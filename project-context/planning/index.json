@@ -66,6 +66,16 @@
     ]
   },
   {
+    "title": "Open-source hygiene plan",
+    "path": "project-context/planning/open-source-hygiene/plan.md",
+    "shortDescription": "Scope, approach, sequencing, risks, success measures, test strategy, deliverables and candidate ADRs for Ang's dev-only quality tooling, CI and contributor kit",
+    "tags": [
+      "open-source",
+      "tech-stack",
+      "repo-structure"
+    ]
+  },
+  {
     "title": "Open-source hygiene",
     "path": "project-context/planning/open-source-hygiene/README.md",
     "shortDescription": "Epic delivering Ang's contributor kit, dev-only quality tooling and CI so the repo is ready to release as open source",

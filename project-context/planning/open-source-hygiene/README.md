@@ -12,6 +12,7 @@ A mixed epic that gets the Ang repo ready to be read, forked and contributed to.
 Ang's tagged release needs a decided, Ang-sized hygiene kit, and code that bears Zac's name should hold to the standards Ang itself recommends.
 
 ## What's here
+- [Plan](plan.md): scope, sequencing, risks, success measures, test strategy and candidate ADRs
 - [Brief](origins/open-source-hygiene/ideas-content/brief.md)
 - [Quality tooling](origins/open-source-hygiene/ideas-content/quality-tooling.md): evidence and the decision for the full kit
 - [Hygiene survey](origins/open-source-hygiene/ideas-content/hygiene-survey.md): what 17 small or whimsical repos keep

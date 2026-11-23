@@ -11,8 +11,8 @@
     },
     {
       "id": "k3",
-      "fact": "The test command documented in 10k/technical/project-structure.md runs 0 of 37 tests (Node's glob skips .claude/); fixing it is part of this idea's tooling work: use 'src/.claude/**/*.test.mjs' or a package.json test script",
-      "source": "origins/open-source-hygiene/ideas-content/quality-tooling.md",
+      "fact": "npm test = node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs' (the quoted globs; bare node --test skips .claude/). project-structure.md and release.yml already use this form; package.json makes it the single home",
+      "source": "/project-context/10k/technical/project-structure.md",
       "from": "open-source-hygiene"
     },
     {
@@ -173,6 +173,16 @@
       "id": "d19",
       "decision": "Repo tidy-ups join the settings story: wiki off and projects off; delete-branch-on-merge stays off (Zac, 2026-11-23)",
       "evidence": "/.github/workflows/release.yml"
+    },
+    {
+      "id": "d20",
+      "decision": "release.yml and ci.yml read Node from .node-version via setup-node's node-version-file, replacing release.yml's hard-coded 26, so the yearly bump edits only .node-version and engines (Zac, 2026-11-23)",
+      "evidence": "/.github/workflows/release.yml"
+    },
+    {
+      "id": "d21",
+      "decision": "The Prettier pass is its own commit, listed in .git-blame-ignore-revs so git blame skips it; hand lint fixes follow in a separate commit (Zac, 2026-11-23)",
+      "evidence": "/project-context/planning/open-source-hygiene/plan.md"
     }
   ],
   "lineage": [
@@ -391,6 +401,18 @@
     {
       "date": "2026-11-23",
       "event": "decided: Repo tidy-ups join the settings story: wiki off and projects off; delete-branch-on-merge stays off (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced k3: The test command documented in 10k/technical/project-structure.md runs 0 of 37 tests (Node's glob skips .claude/); fixing it is part of this idea's tooling work: use 'src/.claude/**/*.test.mjs' or a package.json test script → npm test = node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs' (the quoted globs; bare node --test skips .claude/). project-structure.md and release.yml already use this form; package.json makes it the single home; source: origins/open-source-hygiene/ideas-content/quality-tooling.md → /project-context/10k/technical/project-structure.md"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: release.yml and ci.yml read Node from .node-version via setup-node's node-version-file, replacing release.yml's hard-coded 26, so the yearly bump edits only .node-version and engines (Zac, 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "decided: The Prettier pass is its own commit, listed in .git-blame-ignore-revs so git blame skips it; hand lint fixes follow in a separate commit (Zac, 2026-11-23)"
     }
   ],
   "type": "mixed"
