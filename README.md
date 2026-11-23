@@ -1,6 +1,6 @@
 <h1 align="center">🚢🚫👀 | Ang: The Last Software Bender | 🚢🚫👀</h1>
 
-**Avoid Navel Gazing.** A lean, opinionated framework for AI-assisted development. It stops your agents burning tokens until the ocean begins to boil 🌊🔥 and gets them doing actual work instead, all without drowning every session in context!
+**Avoid Navel Gazing.** A lean, opinionated framework for AI-assisted development. Hate the opinions but love the way it stops your agents burning tokens until the ocean begins to boil 🌊🔥 and gets them doing actual work instead? Cool, it's yours now. Go ahead and make it your own, it'll help!
 <br />
 <br />
 
