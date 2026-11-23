@@ -1,6 +1,6 @@
 ---
 name: bootstrap-quality
-description: Sets up set-and-forget quality tooling (linting, formatting, test runner, pre-commit hooks, CI checks) for the repo's languages. Use when the user runs /bootstrap-quality, asks to set up linting, formatting, pre-commit or CI checks, or when /bootstrap-repo reaches its quality tooling step. Don't run it unprompted just because a repo lacks tooling; flag that instead.
+description: Sets up set-and-forget quality tooling (linting, formatting, test runner, pre-commit hooks, CI checks) for the repo's languages. Use when the user runs /bootstrap-quality, asks to set up linting, formatting, pre-commit or CI checks, or when /bootstrap-repo reaches its quality tooling step. Don't run it unprompted just because a repo lacks tooling.
 ---
 
 # Bootstrap quality tooling

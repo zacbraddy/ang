@@ -65,7 +65,7 @@ Run `ang-context-manager.mjs library validate` and fix everything it reports, so
 
 ## 7. Quality tooling
 If the repo has code, invoke the `bootstrap-quality` skill and follow it, including its go-ahead checkpoint. It extends whatever lint, test, pre-commit and CI setup already exists. Existing code rarely passes new rules on day one. Set the offending rules to warn rather than rewriting code in this session, and list that debt as a leftover. If the tooling adds files worth knowing about, update `10k/technical/project-structure.md` to match and validate again.
-No code yet (a founding-only repo)? Skip this and tell me to run `/bootstrap-quality` once the first technical epic creates some.
+No code yet (a founding-only repo)? Skip this and offer a trigger through the `trigger` skill: intent "run `/bootstrap-quality`", condition `custom:the repo has source code outside project-context/ and .claude/ (git ls-files)`. On my yes, add it there; on a no, nothing is set and the offer isn't made again.
 
 ## 8. Leftovers and hand over
 - Leftovers: list the threads you set aside across every step: ideas, open questions, gaps between docs and code, risks, and tooling debt. If I want them carried, write them to `project-context/raw/bootstrap-leftovers.md` as plain markdown for `/ideate`.

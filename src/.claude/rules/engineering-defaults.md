@@ -28,4 +28,4 @@ In repos with their own conventions, the repo's CLAUDE.md/AGENTS.md and those co
 - Don't test: pass-throughs, library/ORM behaviour, bootstrap/startup code that fails loudly, config and dev tooling. Mock at the boundary and assert *our* logic.
 
 ## Quality tooling
-Lint, format, tests, pre-commit and CI are set-and-forget. If a repo past spike stage lacks them, flag it once and suggest `/bootstrap-quality`. Never debate style a formatter can own.
+Lint, format, tests, pre-commit and CI are set-and-forget. Never debate style a formatter can own.

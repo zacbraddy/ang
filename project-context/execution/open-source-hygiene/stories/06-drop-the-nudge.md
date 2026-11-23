@@ -2,7 +2,7 @@
 title: Drop the nudge
 shortDescription: Shipped Ang stops nudging pilots toward /bootstrap-quality; /bootstrap-repo offers a /trigger instead
 tags: [open-source]
-status: ready
+status: done
 owner: agent
 dependsOn: []
 ---
@@ -40,6 +40,13 @@ The three shipped `src/` edits in this epic. Ang offers quality tooling once at 
   - `docs/src/content/docs/commands/setup.md:36-40` already describes the trigger offer and "say no and nothing is set". Leave it.
   - Step 7's has-code branch (`bootstrap-repo/SKILL.md:67`).
   - The shaping doc's "`/bootstrap-repo`'s own offer stays as it is" (`bootstrap-quality-nudge.md:21`). Decision d15 supersedes it, and origins aren't kept current.
+
+## Review
+All Done-when evidence present: the rules `grep` prints nothing, `npm test` passes 200/200, lint and `library validate` are clean. Edits match the C4 table and implementation notes. The docs page (`setup.md:38-40`, `:82`) already says the same thing.
+
+- **must-fix:** none.
+- **should-fix:** none.
+- **nit:** `src/.claude/skills/bootstrap-repo/SKILL.md:68`: in a founding-only repo, `git ls-files` already lists root files outside both folders (`CLAUDE.md`, `ang.json`, `.gitignore`). The words "source code" carry the condition, so a judging agent should still read it right.
 
 ## Related
 - [C4 code: shipped prose edits](../c4/4-code.md#shipped-prose-edits-story-6)
