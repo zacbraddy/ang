@@ -70,7 +70,7 @@ No unit or integration tests: the only code is config, CSS and a footer (plan Te
   - Plan candidate 1 rewrites ADR 0002 rather than adding an ADR. It narrows the zero-dependency rule to what ships under `src/`, and names root `docs/` as dev-only with its own lockfile.
     - Word it so open-source-hygiene d8's dev-only root `package.json` fits the same rule. That way the two land as one amendment, and that epic only updates Standing.
     - Update its Standing line "The repo has no package.json".
-  - Candidates 2–4 become `0005-docs-starlight-on-github-pages.md`, `0006-docs-describe-shipped-files.md` and `0007-docs-publish-llms-txt.md`.
+  - Candidates 2–4 become `0008-docs-starlight-on-github-pages.md`, `0009-docs-describe-shipped-files.md` and `0010-docs-publish-llms-txt.md`.
 - **llms.txt:** checked on 2026-11-18 against a copy of the spike with `starlight-llms-txt` 0.12. The plugin builds its links from `site` + `base`, so `llms.txt` lists `https://zacbraddy.github.io/ang/llms-small.txt` and `…/llms-full.txt`. Page-body links inside those files keep the page's relative routes as written. That's the plugin's default, and it stays (d10).
 - **u6:** what's left of it is the deploy half (Actions plus Pages publishing at `/ang/`). Answer it with `ang-context-manager.mjs state answer documentation u6 "<fact>" "<source>"`, with the Actions run URL as the source.
 - **As built (2026-11-18):**
@@ -104,7 +104,7 @@ No unit or integration tests: the only code is config, CSS and a footer (plan Te
 
 **Recorded afterwards:**
 - u6 answered with the run URL.
-- The Pages source being set to GitHub Actions goes into ADR 0005's Standing. No credentials are involved.
+- The Pages source being set to GitHub Actions goes into ADR 0008's Standing. No credentials are involved.
 
 ## Review
 2026-11-18, over commit 8bd7d9b plus the staged changeset. `npm run build` passes (only the known chunk-size, `i18n` and `404` notices); `llms.txt` lists both `/ang/` links; files match [C4 code: Files](../c4/4-code.md#files) and the page routes match the C4 slugs.
@@ -113,11 +113,11 @@ No unit or integration tests: the only code is config, CSS and a footer (plan Te
 1. `stream/documentation` is still an allowed deployment branch on the `github-pages` environment (`gh api …/environments/github-pages/deployment-branch-policies` returns `main` and `stream/documentation`). Done-when's last bullet needs it gone before commit. Zac's action (Guide step 6). **Fixed:** policy deleted with `gh api` on Zac's go-ahead; only `main` remains.
 
 **Should-fix**
-2. ADRs cite this epic's register keys: `0005-docs-starlight-on-github-pages.md:12` (d4, k8, k18), `0006-docs-describe-shipped-files.md:9` (k5), `0007-docs-publish-llms-txt.md:12` (k22, d10). `10k/` is current truth and outlives the epic's `state.json`, so those keys dangle after `/retro`, and they're bare abbreviations. State the facts instead. **Fixed.**
+2. ADRs cite this epic's register keys: `0008-docs-starlight-on-github-pages.md:12` (d4, k8, k18), `0009-docs-describe-shipped-files.md:9` (k5), `0010-docs-publish-llms-txt.md:12` (k22, d10). `10k/` is current truth and outlives the epic's `state.json`, so those keys dangle after `/retro`, and they're bare abbreviations. State the facts instead. **Fixed.**
 
 **Nit**
 3. [C4 code](../c4/4-code.md) lines 15 and 18 still describe the plan, not the build: `--ec-*` font variables (not needed) and scripts `build`, `dev` (now also `preview`, plus the `mermaid` pin). **Fixed.**
-4. `0005-docs-starlight-on-github-pages.md:15` calls `astro-mermaid` a plugin alongside `starlight-llms-txt`; it's an Astro integration, the other is a Starlight plugin. **Fixed.**
+4. `0008-docs-starlight-on-github-pages.md:15` calls `astro-mermaid` a plugin alongside `starlight-llms-txt`; it's an Astro integration, the other is a Starlight plugin. **Fixed.**
 
 ## Related
 - [Plan: Approach, Risks and Test strategy](../plan.md)

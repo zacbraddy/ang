@@ -1,9 +1,9 @@
 ---
-title: "ADR 0007: Docs publish llms.txt"
+title: "ADR 0010: Docs publish llms.txt"
 shortDescription: The docs site publishes llms.txt, llms-full.txt and llms-small.txt for agents through starlight-llms-txt with default settings
 tags: [documentation, tech-stack]
 ---
-# ADR 0007: Docs publish llms.txt
+# ADR 0010: Docs publish llms.txt
 
 ## Summary
 The docs site publishes agent-readable copies of itself: `/ang/llms.txt` (an index), `/ang/llms-full.txt` (every page) and `/ang/llms-small.txt` (a compact version). They come from the `starlight-llms-txt` plugin with its default settings and no custom sets. Drawn from `docs/astro.config.mjs` and a local build on 2026-11-18.
@@ -26,5 +26,5 @@ Ang's users work with agents all day, and an agent asked about Ang does better r
 ## Related
 | Doc | Why |
 |---|---|
-| [ADR 0005: Docs site](/project-context/10k/technical/adrs/0005-docs-starlight-on-github-pages.md) | The site these files come from |
+| [ADR 0008: Docs site](/project-context/10k/technical/adrs/0008-docs-starlight-on-github-pages.md) | The site these files come from |
 | [starlight-llms-txt](https://delucis.github.io/starlight-llms-txt/) | The plugin's docs |

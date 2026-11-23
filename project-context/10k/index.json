@@ -78,30 +78,12 @@
     ]
   },
   {
-    "title": "ADR 0005: Docs are a Starlight site on GitHub Pages",
-    "path": "project-context/10k/technical/adrs/0005-docs-starlight-on-github-pages.md",
-    "shortDescription": "The user docs are a Starlight site in root docs/, built and published to zacbraddy.github.io/ang/ by one Actions workflow, with relative page links so a custom domain stays a config change",
-    "tags": [
-      "tech-stack",
-      "documentation"
-    ]
-  },
-  {
     "title": "ADR 0005: Install by copy-in from published releases",
     "path": "project-context/10k/technical/adrs/0005-install-by-copy-in-from-releases.md",
     "shortDescription": "Ang installs with a stamped install.sh release asset that copies src/ in with pinned giget, only ever onto a published release, with no plugin and no uninstall command",
     "tags": [
       "distribution",
       "tech-stack"
-    ]
-  },
-  {
-    "title": "ADR 0006: Docs describe the shipped files",
-    "path": "project-context/10k/technical/adrs/0006-docs-describe-shipped-files.md",
-    "shortDescription": "The README and docs site describe what the files under src/ actually do; where memory and the files differ the files win, and docs defects become recorded work rather than changes to Ang",
-    "tags": [
-      "documentation",
-      "brand-voice"
     ]
   },
   {
@@ -114,21 +96,39 @@
     ]
   },
   {
-    "title": "ADR 0007: Docs publish llms.txt",
-    "path": "project-context/10k/technical/adrs/0007-docs-publish-llms-txt.md",
-    "shortDescription": "The docs site publishes llms.txt, llms-full.txt and llms-small.txt for agents through starlight-llms-txt with default settings",
-    "tags": [
-      "documentation",
-      "tech-stack"
-    ]
-  },
-  {
     "title": "ADR 0007: How releases are cut",
     "path": "project-context/10k/technical/adrs/0007-how-releases-are-cut.md",
     "shortDescription": "Zac cuts each release with the repo-only /cut-release skill, CI does the mechanics on tag push, notes and upgrade guides are separate files, and every release is rehearsed on a fixture repo",
     "tags": [
       "open-source",
       "distribution"
+    ]
+  },
+  {
+    "title": "ADR 0008: Docs are a Starlight site on GitHub Pages",
+    "path": "project-context/10k/technical/adrs/0008-docs-starlight-on-github-pages.md",
+    "shortDescription": "The user docs are a Starlight site in root docs/, built and published to zacbraddy.github.io/ang/ by one Actions workflow, with relative page links so a custom domain stays a config change",
+    "tags": [
+      "tech-stack",
+      "documentation"
+    ]
+  },
+  {
+    "title": "ADR 0009: Docs describe the shipped files",
+    "path": "project-context/10k/technical/adrs/0009-docs-describe-shipped-files.md",
+    "shortDescription": "The README and docs site describe what the files under src/ actually do; where memory and the files differ the files win, and docs defects become recorded work rather than changes to Ang",
+    "tags": [
+      "documentation",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "ADR 0010: Docs publish llms.txt",
+    "path": "project-context/10k/technical/adrs/0010-docs-publish-llms-txt.md",
+    "shortDescription": "The docs site publishes llms.txt, llms-full.txt and llms-small.txt for agents through starlight-llms-txt with default settings",
+    "tags": [
+      "documentation",
+      "tech-stack"
     ]
   },
   {

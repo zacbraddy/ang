@@ -1,9 +1,9 @@
 ---
-title: "ADR 0005: Docs are a Starlight site on GitHub Pages"
+title: "ADR 0008: Docs are a Starlight site on GitHub Pages"
 shortDescription: The user docs are a Starlight site in root docs/, built and published to zacbraddy.github.io/ang/ by one Actions workflow, with relative page links so a custom domain stays a config change
 tags: [tech-stack, documentation]
 ---
-# ADR 0005: Docs are a Starlight site on GitHub Pages
+# ADR 0008: Docs are a Starlight site on GitHub Pages
 
 ## Summary
 The user docs are an Astro Starlight site in the root `docs/` folder. `.github/workflows/deploy-docs.yml` builds it and publishes it to GitHub Pages at `https://zacbraddy.github.io/ang/` on every push to `main` that touches `docs/**`. Pages link to each other with relative routes, never `/ang/…`, so moving to a custom domain is a change to `site` and `base` alone. Drawn from `docs/astro.config.mjs` and the workflow as of 2026-11-18.
@@ -30,5 +30,5 @@ The release needs a live docs site in Zac's voice for as little building and upk
 | Doc | Why |
 |---|---|
 | [ADR 0002: Zero-dependency library script](/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md) | Why `docs/` may have its own dependencies |
-| [ADR 0007: Docs publish llms.txt](/project-context/10k/technical/adrs/0007-docs-publish-llms-txt.md) | The agent-readable output |
+| [ADR 0010: Docs publish llms.txt](/project-context/10k/technical/adrs/0010-docs-publish-llms-txt.md) | The agent-readable output |
 | [Delivery intent](/project-context/10k/intent.md) | The low-upkeep stance |

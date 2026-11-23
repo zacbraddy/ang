@@ -1,9 +1,9 @@
 ---
-title: "ADR 0006: Docs describe the shipped files"
+title: "ADR 0009: Docs describe the shipped files"
 shortDescription: The README and docs site describe what the files under src/ actually do; where memory and the files differ the files win, and docs defects become recorded work rather than changes to Ang
 tags: [documentation, brand-voice]
 ---
-# ADR 0006: Docs describe the shipped files
+# ADR 0009: Docs describe the shipped files
 
 ## Summary
 The README and every docs page describe Ang as the files under `src/` make it behave, from the user's seat. Where Zac's memory, a brain dump or a story spec disagrees with the files, the files win. A defect found while writing docs becomes recorded work, not a change to Ang made in the docs work. Drawn from the documentation epic, which found the brain dump out of step with the files (the evidence tiers, for one), and the README story's review (2026-11-18).
@@ -27,5 +27,5 @@ Zac's brain dumps describe Ang from memory and sometimes lag the code. The READM
 ## Related
 | Doc | Why |
 |---|---|
-| [ADR 0005: Docs site](/project-context/10k/technical/adrs/0005-docs-starlight-on-github-pages.md) | Where the docs live |
+| [ADR 0008: Docs site](/project-context/10k/technical/adrs/0008-docs-starlight-on-github-pages.md) | Where the docs live |
 | [Voice and attribution](/project-context/10k/marketing/voice-and-attribution.md) | How the docs read |

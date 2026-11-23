@@ -32,4 +32,4 @@ Ang is copied into a repo, often a client's, beside whatever stack that repo alr
 | [Project structure](/project-context/10k/technical/project-structure.md) | Where the script and its modules live |
 | [ADR 0005: Install by copy-in](/project-context/10k/technical/adrs/0005-install-by-copy-in-from-releases.md) | The install step and its prerequisites |
 | [Business constraints](/project-context/10k/business-constraints.md) | Low-upkeep limits this serves |
-| [ADR 0005: Docs site](/project-context/10k/technical/adrs/0005-docs-starlight-on-github-pages.md) | The first dev-only package |
+| [ADR 0008: Docs site](/project-context/10k/technical/adrs/0008-docs-starlight-on-github-pages.md) | The first dev-only package |
