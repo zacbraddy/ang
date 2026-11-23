@@ -2,7 +2,7 @@
 title: GitHub settings
 shortDescription: Discussions and private vulnerability reporting on, wiki and projects off, each set with gh api and read back
 tags: [open-source]
-status: ready
+status: done
 owner: both
 dependsOn: []
 ---
@@ -56,6 +56,21 @@ In this story's Review: the before values, the after readbacks and the date. No 
 - No script, workflow or file in the repo changes. `library validate` is the only check that runs on the repo.
 - Disabling the wiki hides any existing wiki pages rather than deleting them; the before-readback says whether there was one.
 - **Out of scope:** SECURITY.md and account-level `.github` defaults (d5, d6); branch protection and rulesets (d12, d18); the New issue page check, which needs story 05's templates.
+
+## Review
+No code changed, so Zac skipped `/review-story` and accepted the readbacks below as the Done-when evidence.
+
+### Evidence (2026-11-23)
+| Setting | Before | After |
+|---|---|---|
+| `has_discussions` | false | true |
+| `has_wiki` | true | false |
+| `has_projects` | true | false |
+| `delete_branch_on_merge` | false | false (not touched) |
+| private vulnerability reporting | `{"enabled":false}` | `{"enabled":true}` |
+
+- All four settings needed changing, so no call was dropped. Zac confirmed the repo PATCH and the PVR PUT before each ran, and both exited cleanly.
+- `https://github.com/zacbraddy/ang/discussions` loads with GitHub's six default categories (Announcements, General, Ideas, Polls, Q&A, Show and tell). The Wiki and Projects tabs are gone from the repo nav.
 
 ## Related
 - [Plan: settings by agent, confirmed by Zac](../plan.md#settings-by-agent-confirmed-by-zac)
