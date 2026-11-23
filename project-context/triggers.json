@@ -1,13 +1,5 @@
 [
   {
-    "slug": "docs-site-post-merge-smoke-check",
-    "intent": "Walk Zac through the live docs-site smoke check once the documentation epic is merged to main",
-    "conditions": [
-      "file:docs/astro.config.mjs",
-      "custom:stream/documentation is merged into main (docs/ exists on main)"
-    ]
-  },
-  {
     "slug": "node-lts-bump",
     "intent": "Raise Ang's minimum Node to the newest LTS everywhere it's named, then re-point for next year",
     "conditions": [
