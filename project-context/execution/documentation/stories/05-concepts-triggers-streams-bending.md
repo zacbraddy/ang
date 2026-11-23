@@ -2,7 +2,7 @@
 title: Concepts II, triggers, streams and bending
 shortDescription: The Triggers, Streams & mail and Bending Ang concept pages are live
 tags: [documentation]
-status: ready
+status: done
 owner: agent
 dependsOn: [02]
 ---
@@ -77,6 +77,19 @@ No unit or integration tests: these are content pages with no code (plan Test st
   - the other Concepts pages, and command, reference and why-Ang pages (stories 04, 06–09)
   - any change to `src/` files, including the README's trigger states and the Orca procedure's ohnvm wording
   - the home page and Start here pages, except a link fix if a slug turns out wrong
+
+- **As built:**
+  - **Orca procedure no longer ships.** Main's `d8a0010` moved `src/docs/procedures/running-ang-streams-in-orca.md` to `project-context/raw/`, so the planned GitHub link 404s. Agreed with Zac: the page walks the reader through the setup itself under its own heading, using Orca's own UI labels from orca.dev/docs (Add Repo, a local setup script under Settings → Repository as Zac runs it for ohnvm, `.worktreeinclude`, showing non-Orca worktrees), and drops the link and the "lands in `docs/procedures/`" line. `quick-start.md` and `uninstalling.md` still name `docs/procedures/`; the `start-here-recheck-after-install-merge` trigger already re-reads those file lists.
+  - **Trigger states:** the shipped README names only waiting and ready; the page names all three from `trigger/SKILL.md` (waiting, judge, ready), as this story asks. The README line is a `src/` change, so it's out of scope.
+  - **Fresh analogies:** Triggers uses a phone's "remind me when I get home", Streams & mail a stove with every burner going, and Bending Ang a starter Pokémon in place of the sourdough line.
+  - **Illustrative examples:** the `pricing` and `onboarding` streams, the load-test `/trigger add` and the `/write-story` friction example are made up for the page. The worked trigger is this repo's real `start-here-recheck-after-install-merge`.
+  - **Diagram:** one, on Streams & mail. Checked in light, dark and at 390px wide in Orca's built-in browser.
+  - **Links that 404 until later stories land:** `../../commands/library-upkeep/`, `../../commands/streams/`, `../../commands/bending/`, `../../commands/funnel/` (06, 07), `../../reference/ang-context-manager/`, `../../reference/config/` (08). Every other link and in-page anchor resolves, including the 5 inbound links under Done when. The external Orca repo link returns 200.
+
+## Review
+Build passes with only the known notices. The 5 inbound links and the in-page anchors resolve. Behaviour claims match the `trigger`, stream, `read-mail`, improvement, `tailor-ang` and `retro` sources, the README's Ang config and the host steps. The worked trigger matches `trigger list`.
+
+- **nit (fixed):** typos at `streams-and-mail.md:17` ("make every problem is a nail", "while it still providing"), `:37` ("the example like the one above"), `:99` ("a stream's agent decide"), `triggers.md:36` (double space) and `triggers.md:54` (needs commas around "predefined or otherwise").
 
 ## Related
 - [Docs voice guide](../voice-lessons.md)
