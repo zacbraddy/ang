@@ -143,7 +143,7 @@
     },
     {
       "id": "d5",
-      "decision": "Commands docs as 5 grouped pages (one anchor per command). Why Ang is first principles plus credits; Zac's history and personal usage fail the user-value bar and survive only as a few lines on Home and Quick start (Zac, 2026-11-17)",
+      "decision": "Commands docs as 5 grouped pages (one anchor per command). Why Ang is the First principles page only: the footer on every page carries the attribution, so a Credits page adds nothing (Zac, 2026-11-23). Zac's history and personal usage fail the user-value bar and survive only as a few lines on Home and Quick start (Zac, 2026-11-17)",
       "evidence": "information-architecture.md"
     },
     {
@@ -439,6 +439,10 @@
     {
       "date": "2026-11-23",
       "event": "replaced k27: ADR 0002 (zero-dependency library script) gets one amendment covering both package.json files: whichever of documentation (docs/package.json) or open-source-hygiene (root, dev-only package.json) merges to main first amends it in that change, and the other revises the amendment when its own merges (Zac, 2026-11-23) → ADR 0002 (zero-dependency library script) gets one amendment covering both package.json files: whichever of documentation (docs/package.json) or open-source-hygiene (root, dev-only package.json) merges to main first amends it in that change, and the other revises the amendment when its own merges (Zac, 2026-11-23; recorded on stream/open-source-hygiene in planning/open-source-hygiene/state.json); source: stream/open-source-hygiene:project-context/planning/open-source-hygiene/state.json → /project-context/10k/technical/adrs/0002-zero-dependency-library-script.md"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d5: Commands docs as 5 grouped pages (one anchor per command). Why Ang is first principles plus credits; Zac's history and personal usage fail the user-value bar and survive only as a few lines on Home and Quick start (Zac, 2026-11-17) → Commands docs as 5 grouped pages (one anchor per command). Why Ang is the First principles page only: the footer on every page carries the attribution, so a Credits page adds nothing (Zac, 2026-11-23). Zac's history and personal usage fail the user-value bar and survive only as a few lines on Home and Quick start (Zac, 2026-11-17)"
     }
   ],
   "type": "mixed"

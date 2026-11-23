@@ -29,9 +29,9 @@ A table of files rather than a class diagram: the only code is config, one CSS f
 | Concepts | `concepts/` | `funnel`, `context-library`, `evidence-standard`, `triggers`, `streams-and-mail`, `bending-ang` |
 | Commands | `commands/` | `funnel`, `library-upkeep`, `setup`, `streams`, `bending` (one `##` heading per command, so each gets an anchor, d5) |
 | Reference | `reference/` | `agents`, `ang-context-manager`, `config` |
-| Why Ang | `why-ang/` | `first-principles`, `credits` |
+| Why Ang | `why-ang/` | `first-principles` |
 
-Order within a group comes from each page's `sidebar.order` frontmatter. That is 20 pages in all.
+Order within a group comes from each page's `sidebar.order` frontmatter. That is 21 pages in all.
 
 ## README sections
 | Section | Holds |

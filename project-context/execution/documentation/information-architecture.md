@@ -6,7 +6,7 @@ tags: [documentation]
 # Information architecture
 
 ## Summary
-Zac agreed this page map on 2026-11-17. There are six sidebar groups and 22 pages. The "Draws from" column tells the agents building each page where to look. A page exists only if it clears the bar below. The brain dump is a voice sample and a quarry for a few lines, not a list of pages. Where the brain dump and the shipped files disagree on how Ang behaves, the shipped files win ([brief](origins/docs-website/ideas-content/brief.md), Accuracy rule).
+Zac agreed this page map on 2026-11-17. There are six sidebar groups and 21 pages. The "Draws from" column tells the agents building each page where to look. A page exists only if it clears the bar below. The brain dump is a voice sample and a quarry for a few lines, not a list of pages. Where the brain dump and the shipped files disagree on how Ang behaves, the shipped files win ([brief](origins/docs-website/ideas-content/brief.md), Accuracy rule).
 
 ## What earns a page
 A page or a passage earns its place only if someone using Ang needs it to do one of these:
@@ -41,11 +41,10 @@ Zac's history with other frameworks and his own usage fail this bar. They surviv
 | | `ang-context-manager.mjs` | Its `--help` output |
 | | Config | `ang.json` and the feature modules: host, intent, pilot, streams |
 | Why Ang | First principles | One tight page. For each principle, what it means for the user and how Ang carries it out; none of the essay. Sources: [first principles](/project-context/10k/product/first-principles.md), brain dump *Ang's first principles* for voice |
-| | Credits | Attribution to Zac and We Right Code, linking https://zackerthehacker.com ([voice and attribution](/project-context/10k/marketing/voice-and-attribution.md)) |
 
 ## Choices behind it
 - **Commands as 5 grouped pages:** fewer pages to keep in step when skills change, which fits the low-upkeep intent. The cost is that a command gets an anchor, not its own URL.
-- **Why Ang is first principles plus credits:** the principles explain behaviour users run into (agents pushing back on additions, the evidence tiers, the pilot deciding, forking rather than sending PRs). The story-so-far and how-Zac-uses-Ang pages were cut because they failed the bar.
+- **Why Ang is first principles only:** the principles explain behaviour users run into (agents pushing back on additions, the evidence tiers, the pilot deciding, forking rather than sending PRs). The story-so-far and how-Zac-uses-Ang pages were cut because they failed the bar, and so was a Credits page: the footer on every page already credits Zac and We Right Code and links https://zackerthehacker.com (Zac, 2026-11-23).
 - **Links:** pages use relative links, never a hard-coded `/ang/` prefix, so a later custom domain needs only a config change (k18).
 
 ## Related
