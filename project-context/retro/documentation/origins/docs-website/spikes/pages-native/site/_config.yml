@@ -1,4 +1,0 @@
-title: Ang
-description: Avoid Navel Gazing. A lean, AI-assisted development workflow for Claude Code.
-theme: jekyll-theme-primer
-exclude: [Gemfile, Gemfile.lock, vendor]

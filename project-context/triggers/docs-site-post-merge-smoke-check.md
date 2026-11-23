@@ -19,15 +19,15 @@ An agent walks Zac through a smoke check of `https://zacbraddy.github.io/ang/`, 
    - One page from every sidebar group, and the sidebar order within each group.
    - Search for a command name, e.g. `write-story`: the result opens the right anchor under `/ang/`.
    - A page with a Mermaid diagram renders it.
-   - `/ang/llms.txt`, `/ang/llms-small.txt` and `/ang/llms-full.txt` load, and every page in the [page map](/project-context/retro/documentation/information-architecture.md) appears in `llms-full.txt`.
+   - `/ang/llms.txt`, `/ang/llms-small.txt` and `/ang/llms-full.txt` load, and every page in the [page map](https://github.com/zacbraddy/ang/blob/5c830e460e042bad3d41bca207de47bb3676be2d/project-context/retro/documentation/information-architecture.md) appears in `llms-full.txt`.
    - The README's site link lands on the home page.
 3. Check every internal link in the agent's own pass: `curl -s` each route in the page map under `https://zacbraddy.github.io/ang/` and expect `200`.
 4. Record any failure as a story or a workflow improvement, not as an in-session fix.
 
 ## Signs it's already handled
-- The documentation retro (`project-context/retro/`) records a live smoke check after the merge.
+- The documentation retro's archive commit records a live smoke check after the merge.
 - Zac says he has already walked the live site since the merge.
 
 ## Related
-- [Story 02: Site skeleton live on GitHub Pages](/project-context/retro/documentation/stories/02-site-skeleton-live.md)
-- [Plan: Test strategy](/project-context/retro/documentation/plan.md)
+- [Story 02: Site skeleton live on GitHub Pages](https://github.com/zacbraddy/ang/blob/5c830e460e042bad3d41bca207de47bb3676be2d/project-context/retro/documentation/stories/02-site-skeleton-live.md)
+- [Plan: Test strategy](https://github.com/zacbraddy/ang/blob/5c830e460e042bad3d41bca207de47bb3676be2d/project-context/retro/documentation/plan.md)
