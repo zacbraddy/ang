@@ -2,7 +2,7 @@
 title: Commands, library upkeep, setup, streams and bending
 shortDescription: The four remaining command pages are live, covering 12 commands with one anchor each
 tags: [documentation]
-status: ready
+status: done
 owner: agent
 dependsOn: [02]
 ---
@@ -78,6 +78,24 @@ No unit or integration tests: content pages with no code (plan Test strategy, `e
   - the Reference and Why Ang pages (stories 08 and 09)
   - changing the inbound links to point at anchors
   - any change to `src/` files
+- **As built:** heading emoji 🪓 kill, 🔬 curate-10k, 🔖 curate-tags, 🔔 trigger, 🥾 bootstrap-repo, 🧵 tailor-ang, 🧰 bootstrap-quality, 🚣 start-stream, 🏁 end-stream, 📨 read-mail, 📌 raise-workflow-improvement, 🪚 improve-workflow. New jokes spent: junk drawer (tags), bespoke suit (tailor-ang), smoke alarm (bootstrap-quality), sticky note on your monitor (read-mail), `if` statement or lemonade stand and "do an Elsa" (raise, Zac's).
+- **As built:** the only broken links are the four to `../../reference/config/` (library-upkeep, streams twice, bending), which 404 until story 08. The sidebar reads "The funnel" rather than "Funnel", because story 06 titled that page so.
+- **Deviation (Zac, 2026-11-23): `commands/setup.md` describes v1 behaviour, ahead of `src/`.** Mail from open-source-hygiene: that stream is removing the `/bootstrap-quality` nudge (engineering-defaults "flag it once and suggest" line, the skill description's "flag that instead") and changing `/bootstrap-repo` step 7 so a repo with no code gets an offer of a `/trigger` for quality tooling instead of being told to run `/bootstrap-quality` later. Zac chose to document what ships in v1, so the setup page's at-a-glance row, the end of `/bootstrap-repo`'s quality paragraph and the `/bootstrap-quality` intro follow the planned change, not this branch's `src/`. Reviewer: check those three spots against `planning/open-source-hygiene/origins/open-source-hygiene/shaping-content/bootstrap-quality-nudge.md` and its state (k for step 7) on `stream/open-source-hygiene`, not against `src/` here. `/read-mail` is "you only" in the table, with asking in plain words noted, since that path comes from the streams rule rather than model invocation.
+- **As built:** the bending page's `/raise-workflow-improvement` has a "Here be dragons" box on Zac's stance (raise what you want done every time, not one-off annoyances), from `raw/opening-ang.md` (commit `11e2abf`) first principle 1. It links `../../why-ang/first-principles/`, which 404s until story 09.
+- **Deviation (Zac, 2026-11-23):** the Streams page doesn't say `/read-mail` stops when streams are off, though the streams-off acceptance criterion asks for it. Zac cut it as not useful: the page's opening note already says these commands need `streams: true`.
+
+## Review
+Build passes with only the known notices; all 12 anchors are in the built pages; the 8 inbound links land; sidebar orders 1 to 5; no `/ang/` links. Every behaviour claim was checked against its shipped skill, and the setup deviations against `execution/open-source-hygiene/` on `stream/open-source-hygiene` (d15 and `bootstrap-quality-nudge.md`): they match.
+
+**Must-fix:** none.
+
+**Should-fix:**
+- `docs/src/content/docs/commands/library-upkeep.md:52`: a fix leaves "the answer to a question you've clarified", but `curate-10k` step 7 says the fix is the proven fact *or a question for you*, which can stay open.
+- `docs/src/content/docs/commands/setup.md:66`: "asks five questions", but `tailor-ang` asks question 5 only when the style has a personality to drop, so it's up to five.
+- `docs/src/content/docs/commands/streams.md:33`: the worktree is "named after the slug", but `start-stream` step 2 names it `<trunk folder>-<slug>` (e.g. `myrepo-pricing`).
+- `docs/src/content/docs/commands/streams.md:60` matches `end-stream` step 1, but the skill is wrong: from inside the stream, step 5's `git branch -d` hits the checked-out branch and git refuses it. This is a skill defect, not a page defect. Fixed in review on Zac's call: both files now skip branch deletion from inside the stream too.
+
+**Nit:** none worth a change.
 
 ## Related
 - [Docs voice guide](../voice-lessons.md)

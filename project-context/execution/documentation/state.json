@@ -115,6 +115,11 @@
       "fact": "Yes. With the Pages source set to GitHub Actions and stream/documentation allowed on the github-pages environment, deploy-docs.yml (withastro/action@v6 then actions/deploy-pages@v5) built and published the site at https://zacbraddy.github.io/ang/ first time (2026-11-18). starlight-llms-txt 0.12.0 builds its llms.txt links from site + base, so /ang/llms.txt lists https://zacbraddy.github.io/ang/llms-small.txt and .../llms-full.txt, and both resolve on the live site; no rewrite needed",
       "source": "https://github.com/zacbraddy/ang/actions/runs/44314555360",
       "answers": "Does the Starlight deploy workflow (withastro/action + deploy-pages, Pages source set to GitHub Actions) actually publish at zacbraddy.github.io/ang/, and do starlight-llms-txt's links in /ang/llms.txt carry the /ang/ base? Written, never run"
+    },
+    {
+      "id": "k27",
+      "fact": "ADR 0002 (zero-dependency library script) gets one amendment covering both package.json files: whichever of documentation (docs/package.json) or open-source-hygiene (root, dev-only package.json) merges to main first amends it in that change, and the other revises the amendment when its own merges (Zac, 2026-11-23; recorded on stream/open-source-hygiene in planning/open-source-hygiene/state.json)",
+      "source": "/project-context/10k/technical/adrs/0002-zero-dependency-library-script.md"
     }
   ],
   "decisions": [
@@ -430,6 +435,10 @@
     {
       "date": "2026-11-18",
       "event": "replaced k25: The user docs need an Upgrading page in Start here. It has to cover what install and upgrade each do, the four upgrade routes (fast, agent-resolved, guided, guided with warning) in the user's terms, that upgrade never commits and how to review or drop the result, why Ang's upgrade is agent-run rather than deterministic, and committing .claude/ang/version.json. No page in the current page map covers this → The user docs need an Upgrading page in Start here, now in the page map and story 03. It covers what install and upgrade each do, the four upgrade routes (fast, agent-resolved, guided, guided with warning) in the user's terms, that upgrade never commits and how to review or drop the result, why Ang's upgrade is agent-run rather than deterministic, and committing .claude/ang/version.json"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced k27: ADR 0002 (zero-dependency library script) gets one amendment covering both package.json files: whichever of documentation (docs/package.json) or open-source-hygiene (root, dev-only package.json) merges to main first amends it in that change, and the other revises the amendment when its own merges (Zac, 2026-11-23) → ADR 0002 (zero-dependency library script) gets one amendment covering both package.json files: whichever of documentation (docs/package.json) or open-source-hygiene (root, dev-only package.json) merges to main first amends it in that change, and the other revises the amendment when its own merges (Zac, 2026-11-23; recorded on stream/open-source-hygiene in planning/open-source-hygiene/state.json); source: stream/open-source-hygiene:project-context/planning/open-source-hygiene/state.json → /project-context/10k/technical/adrs/0002-zero-dependency-library-script.md"
     }
   ],
   "type": "mixed"
