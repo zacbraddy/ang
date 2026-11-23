@@ -1,6 +1,6 @@
 {
   "status": "active",
-  "statusNote": "story 13 (cut rc.2 with rehearsal) in progress; last story in the epic",
+  "statusNote": "All 13 stories done; next /retro in a fresh session",
   "unknowns": [],
   "knowns": [
     {
@@ -690,6 +690,10 @@
     {
       "date": "2026-11-20",
       "event": "status → active: story 13 (cut rc.2 with rehearsal) in progress; last story in the epic"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "status → active: All 13 stories done; next /retro in a fresh session"
     }
   ],
   "type": "technical"

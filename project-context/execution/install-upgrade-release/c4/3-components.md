@@ -63,7 +63,7 @@ C4Component
 | `settings/merge.mjs` | new | The spike's merge as a pure function. Ang-owned entries are replaced, user values kept; a base entry missing from both sides is a conflict; `outputStyle` conflicts are dropped (k15). An empty base gives exactly the install merge (d7) |
 | `upgrade/guides.mjs` | new | Walks back from the target guide through `from:` lines to the installed tag, so no API call lists releases. A missing guide or a broken chain is an error. Parses Moves, Migrations, Retired and Notes for the merge; "None" means empty, and `from: none` marks the first release |
 | `upgrade/classify.mjs` | new | The upgrade merge spike's categories (k8), after rewriting base paths through the guides' Moves, so a declared move isn't read as a delete. Excludes `settings.json`, `version.json` and `*.local.*` |
-| `upgrade/size.mjs` | new | Picks the route from the conflicted-file count. `AGENT_RESOLVES_UP_TO` and `WARN_FROM` are named constants, tuned after `rc.2` (d9). No version record always means guided with warning (d8) |
+| `upgrade/size.mjs` | new | Picks the route from the conflicted-file count. `AGENT_RESOLVES_UP_TO` and `WARN_FROM` are named constants; tuning is parked until users report a wrong route ([route threshold tuning](/project-context/ideas/parked.md#route-threshold-tuning), d9). No version record always means guided with warning (d8) |
 | `upgrade/apply.mjs` | new | Writes and deletes working-tree files from a fully resolved plan, and refuses before writing anything if any conflict is unresolved (d26). Never stages or commits |
 | Entry, registry, config, validate | existing / changed | The entry gains three imports; nothing else changes |
 

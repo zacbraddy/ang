@@ -2,7 +2,7 @@
 title: Cut v1.0.0-rc.2 with rehearsal
 shortDescription: The second release, cut with the first real rc.1 to rc.2 fixture upgrade rehearsal and roll-forward, closing the epic
 tags: [distribution, open-source]
-status: ready
+status: done
 owner: both
 dependsOn: [12]
 ---
@@ -93,6 +93,29 @@ The rc.1 to rc.2 fixture upgrade keeps every seeded local edit and the local-onl
 - The rehearsal runs the fixture's rc.1 `upgrade-ang` with the candidate's engine (d36). The roll-forward runs the fixture's own rc.1 skill against the published rc.2.
 - `v1-launch-notes`'s `file:` condition comes true when `releases/notes/v1.0.0-rc.2.md` is committed. Its custom condition (a v1.0.0 draft exists) doesn't, so `library validate` will report it as needing judgement, not ready. Don't run it.
 - **Out of scope:** threshold tuning (parked), v1.0.0 and its launch copy (`v1-launch-notes`), the `documentation` stream's `src/` edit, gapped-version rehearsals (parked).
+- The rehearsal plan has no `local-only` entries: the engine reads only paths in the base tree, the target tree or a move's old path, so purely local files (`fixture-notes`, `fixture-auditor`, `fixture-house-style.md`) never enter the plan. They stayed untouched, which is the outcome the criterion was after; its expected `local-only` tag was wrong, not the engine.
+- The fixture push in stage 8 failed over HTTPS (`could not read Username`), because `/cut-release` clones the fixture by its HTTPS URL and this machine pushes over SSH. Pushed to `git@github.com:zacbraddy/ang-upgrade-fixture.git` instead, same refs. Fixed forward: `/cut-release` stages 4 and 8 now clone the fixture over SSH.
+
+## Result
+- **Release:** https://github.com/zacbraddy/ang/releases/tag/v1.0.0-rc.2, tag `v1.0.0-rc.2` on `e214f84` (`release: v1.0.0-rc.2`). Published as a pre-release with `install.sh` attached. CI passed first time, no recut.
+- **Preflight:** the three expected warnings only: no CI run on `main`, no `releases/latest` README one-liner, and the `documentation` stream's one unmerged `src/` file (`review-story/SKILL.md`).
+- **Gather:** `fromTag` `v1.0.0-rc.1`, one `src/` file (`size.mjs`), 5 commits, no 10k docs, archived epics or settings diff. Coverage check printed nothing. Notes trimmed to the one non-library commit; the guide is `- None` throughout.
+- **Rehearsal:** fixture at `v1.0.0-rc.1` (no missed roll-forward). Route `fast`: 92 unchanged, 7 keep-local (every seeded edit), 1 fast-path (`size.mjs`), 0 conflicts or conflict-deletes. `library validate` passed, `node --test .claude/scripts` 125/125.
+- **Kept-edits check (rehearsal and roll-forward):** `git diff --name-only` listed only `.claude/scripts/ang/upgrade/size.mjs` and `.claude/ang/version.json`, matching the manifest. No seeded edit or local file touched, nothing stranded.
+- **Real install:** `version.json` named `v1.0.0-rc.2` and `e214f84`.
+- **Roll-forward:** the fixture's own rc.1 `upgrade-ang` took the same fast route with no questions. Committed as `upgrade: Ang v1.0.0-rc.2` (`157cf6d`) with lightweight tag `v1.0.0-rc.2`, pushed to the fixture's `main`.
+- **Second run:** clean tree, `upgrade target --to v1.0.0-rc.2` printed `"status": "current"`.
+- **Fix-forward:** the fixture clone in `/cut-release` stages 4 and 8 now uses SSH, so stage 8's push works (Implementation notes). **Raised:** nothing. No stranded files, so the undeclared-moves parked entry stays asleep.
+
+## Review
+Every Done-when item checks out: the release is a pre-release with `install.sh`, the tag is on `e214f84` with both release files and `from: v1.0.0-rc.1`, the fixture's `main` is `157cf6d` with its tag and `version.json` naming `e214f84`, the parking commit comes before the tag, `library validate` passes and the tests pass 125/125.
+
+**Should-fix**
+- The Outcome says the threshold tuning promise is replaced everywhere, but the C4 docs still promise it: `c4/3-components.md:66` and `c4/4-code.md:40` say "tuned after `rc.2` (d9)". Point both at the parked entry. Story 05:17 is a done story's record, so leave it.
+- The `statusNote` in `state.json` still reads "Story 13 … in progress". Once this story is done, every story in the epic is done, so the note should say the epic is ready for `/retro`.
+
+**Nit**
+- `stories/13-cut-rc2-with-rehearsal.md:96`: a stray blank line splits the Implementation notes list in two.
 
 ## Related
 - [Plan: success measures](../plan.md)

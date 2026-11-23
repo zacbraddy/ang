@@ -42,7 +42,7 @@ Host actions: say status at the start of each stage as `release <tag>: <stage>` 
    - Iterate with Zac, his own edits included, as many rounds as it takes. Nothing moves on until he says the drafts are approved.
 
 4. **Rehearsal.** Spawn a general-purpose subagent with `$TMP`, `<tag>` and these steps:
-   1. `git clone https://github.com/zacbraddy/ang-upgrade-fixture "$TMP/fixture"`, the fixture repo: an Ang install from an earlier release with typical local edits.
+   1. `git clone git@github.com:zacbraddy/ang-upgrade-fixture.git "$TMP/fixture"`, the fixture repo: an Ang install from an earlier release with typical local edits.
    2. Read `ref` and `sha` from `"$TMP/fixture/.claude/ang/version.json"`. Fetch the base tree: `npx -y giget@3.3.1 "gh:zacbraddy/ang/src#<sha>" "$TMP/base" --force </dev/null`.
    3. Take the candidate's `src/` as the target: `mkdir -p "$TMP/cand" && git archive HEAD src | tar -x -C "$TMP/cand"`, from the Ang repo. `HEAD` is the candidate, since stage 5 commits only `releases/`.
    4. From the Ang repo: `node scripts/draft-guides.mjs <fixture ref> <tag> > "$TMP/guides.json"`. If the fixture's `ref` isn't `<fromTag>` (a missed roll-forward), the chain still works across releases; say so in the report.
@@ -75,7 +75,7 @@ Host actions: say status at the start of each stage as `release <tag>: <stage>` 
 8. **Post-publish.**
    - **Real install:** in `"$TMP/install"`, `git init`, then `curl -fsSL https://github.com/zacbraddy/ang/releases/download/<tag>/install.sh | sh`. Check `.claude/ang/version.json`'s `ref` is `<tag>` and its `sha` is `git rev-parse <tag>^{commit}` from the Ang repo.
    - **Latest:** for a tag without `-rc.`, `gh api repos/zacbraddy/ang/releases/latest --jq .tag_name` is `<tag>`.
-   - **Fixture roll-forward:** spawn a general-purpose subagent to clone the fixture fresh into `"$TMP/fixture-up"` and follow its own `.claude/skills/upgrade-ang/SKILL.md` with `<tag>` as the target, reporting as at stage 4. Show Zac the summary. On his go, in `"$TMP/fixture-up"`: `git add -A`, `git commit -m "upgrade: Ang <tag>"`, `git tag <tag>`, `git push origin HEAD <tag>`.
+   - **Fixture roll-forward:** spawn a general-purpose subagent to clone the fixture fresh over SSH, `git clone git@github.com:zacbraddy/ang-upgrade-fixture.git "$TMP/fixture-up"`, and follow its own `.claude/skills/upgrade-ang/SKILL.md` with `<tag>` as the target, reporting as at stage 4. Show Zac the summary. On his go, in `"$TMP/fixture-up"`: `git add -A`, `git commit -m "upgrade: Ang <tag>"`, `git tag <tag>`, `git push origin HEAD <tag>`.
    - Print what's done and what's left, such as a failed check above or a docs page still naming the old version.
 
 Then remove `$TMP` and run `node .claude/scripts/ang-context-manager.mjs library validate`.
