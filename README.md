@@ -65,6 +65,12 @@ Luckily, this ain't a "me" problem, it's a problem inherent in all AI-assisted d
 - `/improve-workflow`: run it in a new session and Ang will have an agent make the changes you want to see in the framework, because that ain't your job, you didn't sign up to be an Ang dev, you just wanted to use it and have it be super useful. Well, now Ang is **your** perfect AI-assisted coding framework.
 <br />
 
+## 🍴 Fork it
+
+Want Ang to do something different? Bend your own copy first with `/raise-workflow-improvement`: that's what it's for, and it's a lot quicker than waiting on me. If you're convinced a change is right for every Ang user, [`CONTRIBUTING.md`](CONTRIBUTING.md) explains which of the [issue templates](https://github.com/zacbraddy/ang/issues/new/choose) to reach for and why the questions in them are worth answering. And if you just want to chat, ask a question or show off your smokin' hot version of the framework, come say hi in [Discussions](https://github.com/zacbraddy/ang/discussions).
+<br />
+<br />
+
 ## 🫶 So much more...
 
 Although Ang wants to stay lean and light-touch, it's ready to drive your software development processes straight out the box. Ang is waiting to show you what else it can do, and will help you discover these features as you work with it if you'd prefer not to have to trawl through docs. Triggers, parked work, item merging, and more, are all things Ang will help you get to grips with as you work.

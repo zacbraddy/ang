@@ -2,7 +2,7 @@
 title: Contributor kit
 shortDescription: CONTRIBUTING, PR and issue templates as rubber-ducking nudges, an issue chooser routing chat to Discussions, and a README fork-it section
 tags: [open-source, brand-voice]
-status: ready
+status: done
 owner: agent
 dependsOn: [03, 04]
 ---
@@ -58,7 +58,16 @@ GitHub's New issue page offers the open-conversation and feature-request templat
 - **README fork-it section:** a new `##` heading with a left emoji, placed straight after "🪄 Bending Ang" and before "🫶 So much more...". Keep it short (2–4 sentences), match the section spacing (`<br />` lines), and don't repeat Bending Ang's pitch. It says: bend your own first; if you think it's right for everyone, read `CONTRIBUTING.md`, which explains the templates; for chat, use Discussions. Links: `CONTRIBUTING.md` relative, Discussions absolute.
 - **Formatting:** `.prettierignore` skips `*.md`, so only `config.yml` goes through Prettier (the hook and `format:check`).
 - **Edge cases:** GitHub reads issue templates, `config.yml` and the PR template from the default branch, so the chooser and the pre-filled PR can only be seen after merge. Before that, check the files against GitHub's documented front matter and `config.yml` keys.
+- **Absolute links in templates:** the first-principles links in the PR and feature-request templates are full `github.com/.../blob/main/` URLs, because a relative link in a pre-filled issue or PR body doesn't resolve. The README's "templates" link points at the issue chooser (`/issues/new/choose`).
 - **Out of scope:** a code of conduct (cut, and parked in [parked work](/project-context/ideas/parked.md#code-of-conduct-for-the-ang-repo)); SECURITY.md, labels and YAML issue forms (C4 names `.md` templates); branch protection and auto-close bots; the `src/.claude` prose edits (story 06).
+
+## Review
+All six files match the shapes, every acceptance criterion is met, heading emoji carry no variation selector, and `format:check`, `lint`, `npm test` (200 pass) and `library validate` are clean. The post-merge checks (issue chooser, pre-filled PR, README links on GitHub) wait for the merge to `main`.
+
+- **Should-fix:** `.github/PULL_REQUEST_TEMPLATE.md:1`: `CONTRIBUTING.md:5` welcomes small fixes, but the PR template then asks a typo fixer which first principle their change serves. Nothing blocks it, but the questions read as out of proportion. One line in the opening comment saying a small fix only needs what it fixes would close the gap.
+- **Should-fix:** `CONTRIBUTING.md:9`: "open an issue with the *Open a conversation* template" names the template but doesn't link to it. Linking "open an issue" to `https://github.com/zacbraddy/ang/issues/new/choose` (as the README does) takes the reader straight there.
+- **Nit:** `CONTRIBUTING.md:3`: two "so" clauses in one sentence ("so the expected route is… so that you get…").
+- **Nit:** `.github/ISSUE_TEMPLATE/2-feature-request.md:17` and `.github/PULL_REQUEST_TEMPLATE.md:13`: the "Who benefits" hint, embedded and IoT riff included, is word for word the same in both. Voice lessons say every joke is a one-off, but a contributor usually meets only one of these templates.
 
 ## Related
 - [Plan: templates nudge, settings stay open](../plan.md#templates-nudge-settings-stay-open)
