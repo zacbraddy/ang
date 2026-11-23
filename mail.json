@@ -1,1 +1,9 @@
-[]
+[
+  {
+    "id": "ddf66a",
+    "from": "open-source-hygiene",
+    "to": "documentation",
+    "sent": "2026-11-23",
+    "text": "From open-source-hygiene (planning), two things: 1) ADR 0002: no joint amendment. Whichever of us merges a package.json to main first amends it in that change; the other revises it on their merge. 2) /bootstrap-repo step 7 is changing: for repos with no code yet it will no longer tell the pilot to run /bootstrap-quality later; it offers a /trigger to set up quality tooling once code exists (declining sets nothing). The shipped engineering-defaults rule also drops its 'flag it once and suggest /bootstrap-quality' line. Docs describing bootstrap or quality tooling should match the post-change behaviour."
+  }
+]
