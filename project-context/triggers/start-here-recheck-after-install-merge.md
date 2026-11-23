@@ -14,9 +14,9 @@ Documentation story 03 wrote the pages from the install branch at commit `7541df
 ## What to do
 1. Read the shipped files on `main`: `install.sh`, `src/.claude/skills/upgrade-ang/SKILL.md`, `src/.claude/scripts/ang/upgrade/size.mjs`, `src/.claude/scripts/ang/commands/{settings,version}.mjs`, `src/.claude/settings.json`, and the shipped tree (`git ls-tree -r --name-only main src`).
 2. Check them against `docs/src/content/docs/start-here/`:
-   - `quick-start.md`: prerequisites, the one-liner and tag pinning, what the install does and prints, the WSL route, and the native Windows steps (commands and flags).
+   - `quick-start.md`: prerequisites, the list of folders the install copies into (drop `docs/procedures/`, which no longer ships), the one-liner and tag pinning, what the install does and prints, the WSL route, and the native Windows steps (commands and flags).
    - `upgrading.md`: the steps, the 4 routes and their thresholds, the finish, and the discard command.
-   - `uninstalling.md`: the file list (skills, agents, rules, output styles, scripts, `docs/procedures/`) and Ang's entries in `settings.json`.
+   - `uninstalling.md`: the file list (skills, agents, rules, output styles, scripts; drop `docs/procedures/`, which no longer ships) and Ang's entries in `settings.json`.
    - `alongside-your-framework.md`: the clash rules from `check_collisions`.
 3. Fix any drift on the pages, run `npm run build` in `docs/`, and leave the changes unstaged for Zac.
 

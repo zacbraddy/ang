@@ -22,10 +22,10 @@ The README is rewritten first and ships on its own. Then a Starlight site goes u
 
 ## Approach
 - **Site source lives in a root `docs/`, outside `src/`**, so the installer never copies it. It has its own `package.json` and lockfile, with exact versions pinned. Nothing at the repo root depends on it.
-- **Root `docs/` is the site; `src/docs/procedures/` is shipped how-tos.** Same folder name, different jobs: page sources cite `src/docs/…` by full path so the two never blur.
+- **Root `docs/` is the site.** Installs ship no `docs/` folder, so the name means only the site.
 - **Start from the spike, not from it as-is.** Move to the current Starlight (0.43.x) and Astro 7. Keep `theme.css` (d6) and `Footer.astro`. Drop the link-rewriting remark plugin, `@astrojs/markdown-remark` and `remark-definition-list`. Pages link with relative route links (`../../concepts/funnel/` from any page in a group folder, since every page URL ends in a slash), which work under any base path, so a later custom domain needs no link sweep (k18). Callouts use Starlight's `:::note` syntax.
 - **Integrations, in this order:** `astro-mermaid` before Starlight (d9), then Starlight with `starlight-llms-txt` as a plugin (d10). Fonts come from `@fontsource/geist` and `@fontsource/geist-mono` through `customCss` (d7).
-- **Sources and accuracy:** each page draws from the sources in the page map. Where the brain dump and the shipped files differ, the files win (k5). The streams page summarises `src/docs/procedures/running-ang-streams-in-orca.md` and links to it on GitHub, so the steps live in one place. Node is given as 26+ (install k13), not the 21+ in `10k/technical/project-structure.md`, which lags.
+- **Sources and accuracy:** each page draws from the sources in the page map. Where the brain dump and the shipped files differ, the files win (k5). The Orca how-to no longer ships (main `d8a0010` moved it to `project-context/raw/running-ang-streams-in-orca.md`), so the streams page carries the Orca setup steps itself. Node is given as 26+ (install k13), not the 21+ in `10k/technical/project-structure.md`, which lags.
 - **Voice:** Zac's voice, trimmed ([voice and attribution](/project-context/10k/marketing/voice-and-attribution.md)). The brain dump is a voice sample, not a page list (k19).
 
 ## Sequencing
