@@ -1,0 +1,6 @@
+docs/
+project-context/
+releases/
+/.claude/
+*.md
+node_modules/

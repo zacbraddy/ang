@@ -141,6 +141,24 @@
     ]
   },
   {
+    "title": "ADR 0011: Dev-only quality tooling and advisory CI",
+    "path": "project-context/10k/technical/adrs/0011-dev-only-quality-tooling-advisory-ci.md",
+    "shortDescription": "The Ang repo lints and formats to zero warnings with root-only dev tooling, keeps node:test, and runs CI on every PR and push to main without blocking merges",
+    "tags": [
+      "tech-stack",
+      "repo-structure",
+      "open-source"
+    ]
+  },
+  {
+    "title": "ADR 0012: Contributor templates nudge, they don't gate",
+    "path": "project-context/10k/technical/adrs/0012-contributor-templates-nudge-not-gate.md",
+    "shortDescription": "Ang's PR and issue templates are rubber-ducking prompts toward its first principles; blank issues are off, chat goes to Discussions, security reports go private, and no setting blocks a PR",
+    "tags": [
+      "open-source"
+    ]
+  },
+  {
     "title": "C4 level 1, context",
     "path": "project-context/10k/technical/architecture/1-context.md",
     "shortDescription": "Who uses Ang and which outside systems it touches; Ang is a set of files inside one repo, run by Claude Code",

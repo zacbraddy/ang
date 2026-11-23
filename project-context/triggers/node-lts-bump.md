@@ -14,17 +14,18 @@ Node promotes a new even-numbered major to LTS in late October, so the date cond
 ## What to do
 1. Find the newest LTS major: `curl -fsSL https://nodejs.org/dist/index.json | jq -r '[.[] | select(.lts)][0].version'`. If it's still the current minimum, the promotion is late: re-point this trigger a couple of weeks on with `trigger repoint` and stop.
 2. Raise the minimum everywhere it's named. Last known places (grep for the old major to catch new ones):
-   - `.github/workflows/release.yml`: `node-version`;
+   - `.node-version`, which `release.yml` and `ci.yml` read through `node-version-file`;
+   - `package.json`: `engines.node`;
    - `install.sh`: the Windows hint, the missing-node and version checks, and the npx hint;
    - `src/.claude/skills/upgrade-ang/SKILL.md`: the Node and npx checks;
    - `releases/notes/README.md`: the template's "Requires Node" line;
-   - the README's and docs' install prerequisites, `engines` and `.node-version` if they exist by then.
-3. Run `node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'` on the new Node.
+   - the README's and docs' install prerequisites.
+3. Run `npm ci && npm test` on the new Node.
 4. Note the bump for the next release's notes: it's a change users must act on.
 5. Don't remove this trigger: re-point it to next year, `trigger repoint node-lts-bump after:<next year>-11-01`, which keeps this doc. Leave the changes unstaged for Zac.
 
 ## Signs it's already handled
-- `release.yml`'s `node-version` and `install.sh`'s version check already name the newest LTS major.
+- `.node-version` and `install.sh`'s version check already name the newest LTS major.
 
 ## Related
 - [ADR 0005: Install by copy-in](/project-context/10k/technical/adrs/0005-install-by-copy-in-from-releases.md)
