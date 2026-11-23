@@ -15,13 +15,6 @@
     ]
   },
   {
-    "slug": "start-here-recheck-after-install-merge",
-    "intent": "Re-check the Start here pages' install, Windows, upgrade and uninstall facts against the shipped files once the install epic is on main",
-    "conditions": [
-      "custom:the install-upgrade-release epic has finished its retro on main (git log origin/main --oneline --grep 'retro: archive install-upgrade-release' finds a commit)"
-    ]
-  },
-  {
     "slug": "v1-launch-notes",
     "intent": "Replace the v1.0.0 draft release's rc-range notes with launch copy and add the releases/latest install one-liner to the README before Zac presses Publish",
     "conditions": [

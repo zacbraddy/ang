@@ -51,7 +51,7 @@ Fair play, and I wouldn't expect you to do this blind so here's the whole story 
 1. **Checks everything first.** Platform, Node, `npx`, git repo root, clean tree, Ang not already installed, and that any `.claude/settings.json` that's already there is valid JSON. Nothing is written until every check passes.
 2. **Downloads into a temp folder.** Ang's files go somewhere safe first, so that a failed download can't leave your repo with a half-installed copy of Ang.
 3. **Stops on clashes.** If `project-context/`, a skill folder with the same name as one of Ang's, or any other file Ang ships already exists, it lists them and stops rather than blasting away at your files. (Btw: Got another framework in your repo? It's chill, check out [Trying Ang alongside your framework](../alongside-your-framework/) because it covers this.)
-4. **Copies Ang in.** Agents, skills, rules, output styles, scripts and the conventions file all land under `.claude/`, `docs/procedures/` and `project-context/`.
+4. **Copies Ang in.** Agents, skills, rules, output styles, scripts and the conventions file all land under `.claude/` and `project-context/`.
 5. **Merges your settings with Ang's, it doesn't replace them.** If you already have a `.claude/settings.json`, it backs them up to `.claude/settings.json.pre-ang`, then merges Ang's hooks and permissions in. Where your values differ from Ang's, yours win, and it tells you which ones it kept.
 6. **Records the version.** It writes `.claude/ang/version.json` so that a later [upgrade](../upgrading/) knows exactly what you started from.
 

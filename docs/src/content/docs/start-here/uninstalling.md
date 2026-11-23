@@ -24,8 +24,7 @@ rm -rf .claude/ang \
   .claude/rules/context-library.md .claude/rules/engineering-defaults.md \
   .claude/output-styles/briefing.md .claude/output-styles/mentor.md \
   .claude/output-styles/pair-programmer.md .claude/output-styles/partner-in-crime.md \
-  .claude/output-styles/straight-shooter.md \
-  docs/procedures/running-ang-streams-in-orca.md
+  .claude/output-styles/straight-shooter.md
 
 for skill in bootstrap-quality bootstrap-repo break-down-epic curate-10k curate-tags \
   end-stream ideate implement-story improve-workflow kill plan-epic \
