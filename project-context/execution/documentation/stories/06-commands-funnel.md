@@ -2,7 +2,7 @@
 title: Commands, funnel
 shortDescription: One page covering the 9 funnel commands, each under its own anchor
 tags: [documentation]
-status: ready
+status: done
 owner: agent
 dependsOn: [02]
 ---
@@ -66,6 +66,18 @@ No unit or integration tests: a content page with no code (plan Test strategy, `
   - the other 4 Commands pages, Reference and Why Ang pages (stories 07–09)
   - adding anchor links to this page from existing pages; they link to the page, and story 08 or a later pass can deepen them
   - any change to `src/` files
+- **As built:** links to `commands/library-upkeep`, `commands/setup` and `reference/config` 404 until stories 07 and 08 write those pages. The 5 inbound links and every other link resolve; anchors `#-ideate` … `#-retro` are in the built page.
+- **`/plan-epic` with no argument starts a new epic** (the skill's Mode A covers "no epic named"), so the page tells readers to pass the epic's slug to carry on planning one.
+- **No workspace-host asides:** Zac cut the card-update mentions from every command. They don't help a reader understand the commands, and the host is covered in Concepts: Streams & mail.
+
+## Review
+Build passes with only the known notices, all 9 anchors are in the built page, the 5 inbound links resolve and the page is in the search index. Every behaviour claim was checked against the 9 shipped skills and their feature steps: no errors.
+
+**Should-fix**
+- `docs/src/content/docs/commands/funnel.md:19`: the at-a-glance table's Next cell says "`/plan-epic` again", but a bare `/plan-epic` starts a new epic (`plan-epic/SKILL.md` Mode A). A reader working from the table would start a second epic. Line 90 gets it right.
+
+**Nit**
+- `docs/src/content/docs/commands/funnel.md:9`: "The only commits Ang makes itself are deletions" ignores `mail send`'s commits, though those land on the `ang/streams` branch, never yours, and only with your yes.
 
 ## Related
 - [Docs voice guide](../voice-lessons.md)
