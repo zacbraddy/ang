@@ -1,3 +1,4 @@
 ang.local.json
 settings.local.json
 *.local.md
+node_modules/

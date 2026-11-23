@@ -6,7 +6,7 @@ tags: [repo-structure, tech-stack]
 # Project structure
 
 ## Summary
-`src/` is the Ang that ships. The root `.claude/` points into `src/.claude/`, so this repo runs on the same files it ships: most entries are whole-folder symlinks, while `skills/` and `agents/` are real folders of per-entry links plus the repo-only release skill and agent. The release tooling (`install.sh`, `scripts/`, `releases/`, `.github/`) and the docs site (`docs/`) sit at the root, outside `src/`, so they never ship. The root `project-context/` is this repo's own library and is never shipped. Taken from the tracked tree on 2026-11-23.
+`src/` is the Ang that ships. The root `.claude/` points into `src/.claude/`, so this repo runs on the same files it ships: most entries are whole-folder symlinks, while `skills/` and `agents/` are real folders of per-entry links plus the repo-only release skill and agent. The release tooling (`install.sh`, `scripts/`, `releases/`, `.github/`), the dev tooling (`package.json`, `package-lock.json`, `.node-version`, `eslint.config.mjs`, `.prettierrc.json`, `.prettierignore`) and the docs site (`docs/`) sit at the root, outside `src/`, so they never ship. The root `project-context/` is this repo's own library and is never shipped. Taken from the tracked tree on 2026-11-23.
 
 ## Layout
 | Path | What it is |
@@ -27,6 +27,9 @@ tags: [repo-structure, tech-stack]
 | `docs/` (root) | The Starlight docs site: `astro.config.mjs`, `src/content/docs/` (one folder per sidebar group), `src/styles/theme.css`, `src/components/Footer.astro`. Its own `package.json` and lockfile with exact pins |
 | `.github/workflows/deploy-docs.yml` | Builds `docs/` and publishes it to Pages on a push to `main` touching `docs/**`, or on a manual run |
 | `.github/workflows/release.yml` | Runs on a `v*` tag push: tests, smoke install, stamp `install.sh`, draft release |
+| `package.json`, `package-lock.json` (root) | Private and dev-only: ESLint, Prettier and Husky as dev dependencies, and the `test`, `lint`, `format` and `format:check` scripts. `npm test` holds the test globs |
+| `.node-version` (root) | The Node major the repo and `release.yml` run on |
+| `eslint.config.mjs`, `.prettierrc.json`, `.prettierignore` (root) | Lint and format config. Both skip `docs/`, `project-context/`, `releases/`, the root `.claude/` symlinks and `*.md` |
 | `ang.json` (root) | Project feature keys (`intent`, `streams`), committed. Every install has its own; Ang ships none |
 | `ang.local.json` (root) | Personal keys (`pilot`, `host`), gitignored, written by `/tailor-ang` |
 | `project-context/` (root) | This repo's own context library. Its `README.md` is a symlink to `src/project-context/README.md`, the conventions that ship |
@@ -36,7 +39,7 @@ tags: [repo-structure, tech-stack]
 ## Dragons
 - Because of the symlinks, editing `.claude/` edits the product itself.
 - A new skill or agent in `src/` needs `node scripts/link-entries.mjs` before this repo sees it; the drift test fails the release job otherwise.
-- Run the tests with the globs quoted, on Node 26 (the minimum, bumped each October by the `node-lts-bump` trigger): `node --test 'src/.claude/**/*.test.mjs' 'scripts/*.test.mjs'`. A bare directory argument is treated as a test file and fails.
+- Run the tests with `npm test`, on Node 26 (the minimum, bumped each October by the `node-lts-bump` trigger). The tests need no `npm ci`: they use `node:test` alone.
 - Ang ships no config: a fresh install has every feature off until `/bootstrap-repo` writes `ang.json`. This repo's root `ang.json` and `ang.local.json` are its own, like any install's, and never ship.
 - Gitignored `*.local.*` files sit physically under `src/` through the symlinks. Releases are fetched from git, so they never ship; never build a release from disk.
 

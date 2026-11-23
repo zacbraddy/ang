@@ -2,7 +2,7 @@
 title: Root tooling
 shortDescription: A private, dev-only root package.json with ESLint, Prettier and npm test on node:test, with release.yml and the 10k docs brought in line
 tags: [open-source, tech-stack, repo-structure]
-status: ready
+status: done
 owner: agent
 dependsOn: []
 ---
@@ -59,9 +59,21 @@ Adds the repo's dev-only tooling at the root, outside `src/`, so `install.sh` ne
 - **ADR 0002:** per k10, check `main` first. If the documentation stream's rewrite has merged, only revise its wording to name this root `package.json` and fix the Standing line. Otherwise amend it here: Ang's shipped script stays dependency-free on Node built-ins; the repo itself carries a private, dev-only root `package.json` that never ships. Update Summary, Decision and Standing, and keep it short. Candidate ADR 1 is written later, not here.
 - **project-structure.md:** add `package.json`, `package-lock.json`, `.node-version`, `eslint.config.mjs` and the Prettier files to the Summary's root list and the layout table. The test-running dragon becomes "run `npm test`" and keeps the bare-directory warning only if it still helps. Reword the ADR 0002 Related row.
 - **Edge cases:** the existing tests must pass unchanged (d7). If `npm test` reports fewer tests than the raw command, the globs are wrong.
+- **As built:**
+  - ESLint already skips the root `.claude/` symlinked folders without the ignore (checked: 0 files linted through them either way). The ignore stays as the plan's shared set and guards explicit paths such as lint-staged's; ESLint writes it `.claude/` (root-only, as Prettier's `/.claude/` is), since it never matches a leading slash; `*.md` is `**/*.md` in ESLint's `globalIgnores` to match Prettier's anywhere-match.
+  - ADR 0002 was amended here: the documentation stream's rewrite hadn't merged to `main` on 2026-11-23. The `project-structure.md` dragon drops the bare-directory warning, since the globs now live only in `package.json`.
+  - npm's Node 24 engines warning reads `package: undefined` because the root `package.json` has no `version`; the warning still fires.
+  - Husky's `prepare` sets `core.hooksPath` in the git config the worktrees share. No hooks existed before, so nothing is bypassed.
 - **Out of scope:**
   - lint and format fixes, the Prettier pass and the shebang-versus-`n` finding (story 02)
   - `.husky/pre-commit`, the `lint-staged` config, `ci.yml`, badges and the `node-lts-bump` trigger update (story 03)
+
+## Review
+Done-when evidence holds: clean `npm ci && npm test` on Node 26.13.1 gives 183 pass, 0 fail (install smoke test included); lint (17 findings) and `format:check` (56 files) load and finish; only `eslint.config.mjs` and `src/`/`scripts/` files are linted; `release.yml` differs from `main` only in the two planned steps; every lockfile entry resolves from registry.npmjs.org; `library validate` is clean.
+
+- **Must-fix:** none.
+- **Should-fix:** `eslint.config.mjs:14`: ESLint's flat config never matches `"/.claude/"` (`isPathIgnored(".claude/scripts/ang-context-manager.mjs")` is `false`, and `eslint .claude/scripts/ang-context-manager.mjs` lints it). `".claude/"` matches the root folder only, leaving `src/.claude/` linted. `eslint .` passes today only because it doesn't walk symlinked folders, so the "guard" in the As built note (line 63) guards nothing. Fix the pattern and the note.
+- **Nit:** `project-context/10k/technical/adrs/0002-zero-dependency-library-script.md:9`: with the new clause in between, "Installing it needs Node 26+" now reads as if "it" were the root `package.json`. Say "Installing Ang".
 
 ## Related
 - [Plan: scope](../plan.md#scope), [approach](../plan.md#approach), [risks](../plan.md#risks), [test strategy](../plan.md#test-strategy)
