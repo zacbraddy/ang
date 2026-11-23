@@ -2,7 +2,7 @@
 title: Reference pages
 shortDescription: The Agents, ang-context-manager.mjs and Config reference pages are live
 tags: [documentation]
-status: ready
+status: done
 owner: agent
 dependsOn: [02]
 ---
@@ -76,6 +76,23 @@ No unit or integration tests: content pages with no code (plan Test strategy, `e
   - changing inbound links to anchors
   - any change to `src/`
   - a Team config page (d11) and the parked shared base config (k24)
+- **As built:** heading emoji: Config 📁 two files, 🔮 intent, 🛶 streams, 🃏 host, 🪪 pilot, 📡 how "on" reaches agents, 🚨 when something's wrong; Agents 🐕 context-scout, 🏆 prioritiser, 🚧 stage-gate; script 📒 library, 📊 board, 📦 item, 🧮 state, 🪧 tag, ⏰ trigger, 🪝 session (with the hooks), 💧 stream, 📮 mail. New jokes spent: fuse box (config), phone driving mode (host), "unless you're also called Sam" (pilot), sniffer dog (context-scout), bouncer with a reasonable door policy (stage-gate), stagehand (script). Made-up pilot name: Sam.
+- **As built:** the only broken links are `../../why-ang/first-principles/` from `ang-context-manager.md` and the existing one in `commands/bending.md`, both 404 until story 09. All 14 inbound links land.
+- **Files vs story:** `prioritiser` is called only by `/refine-ideas` and `/shape-ideas` (not `/plan-epic`), so the page says so. `mergeConfig` also lets `ang.json` carry `host` and `pilot` (`config.test.mjs` "ang.json pilot applies"), with `ang.local.json` winning; the page keeps to the story's split (personal keys belong in the local file) and doesn't mention it.
+
+## Review
+Build passes and all three pages render. All 18 inbound links land on live slugs, and no link uses `/ang/…`. The facts match the agent files, feature modules, `config.mjs`, `--help` and the hooks in `settings.json`.
+
+**Must-fix**
+- `docs/src/content/docs/reference/agents.md:12`: the AC "whether it can change anything" isn't met. Won't fix: Zac dropped the column on purpose because it didn't help readers, so the AC no longer applies.
+
+**Should-fix**
+- `docs/src/content/docs/reference/config.md:102`: a reader with a typo'd key isn't told how to find it. Resolved by Zac: the page now says what the reader will see, not which script command to run.
+- Story As built is out of date (emoji and spent-jokes list). Won't fix: pedantic.
+
+**Nit**
+- `docs/src/content/docs/reference/config.md:84`: the bold "**in**" looked accidental. Fixed.
+- `docs/src/content/docs/reference/config.md:64`: "it will let you know" undersells the `validate` error. Won't fix: pedantic.
 
 ## Related
 - [Docs voice guide](../voice-lessons.md)
