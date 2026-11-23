@@ -2,7 +2,7 @@
 title: First principles page
 shortDescription: The First principles page is live, and every link on the site lands now that the last content page exists
 tags: [documentation, brand-voice]
-status: ready
+status: done
 owner: agent
 dependsOn: [02]
 ---
@@ -65,6 +65,22 @@ No unit or integration tests: this is a content page with no code (plan Test str
   - Changing the footer or README attribution wording.
   - Updating [voice and attribution](/project-context/10k/marketing/voice-and-attribution.md) to the shipped "sponsored by" wording, which belongs to `/retro` (voice lessons, Facts).
   - Any change to `src/`.
+- **As built:** heading emoji 💪 lean, 👑 boss, 🤝 helpful, 🔑 bastard framework. Jokes spent: hugging the model to death, "make no mistakes" / "no seriously bro" (both Zac's, from the brain dump), foot over the brake, "my bad" over the early agents that wouldn't decide anything, and from Zac's edits a maze of rules, the hustle bro YouTube channel, second fiddle in your own house, arguing with a toaster, "squishy human brain" and "say it with your chest". Principle 1 links into `commands/bending/#-when-improvements-dontimprove` for the bar on improvements.
+- **As built:** `stage-gate` does the promotion itself, so it doesn't hand you a choice as the story's notes suggest (`src/.claude/agents/stage-gate.md`). Principle 2 says instead that it defaults to "not yet", gives its reasoning, and leaves its move unstaged in your working tree.
+- **As built:** the site-wide crawl of `dist/` finds every content link and anchor resolving across all 21 pages, including the 404s that stories 03 to 08 listed. `docs/public/favicon.svg` (a jade "A" in the site accent, standing in until there's a logo) fills the favicon slot Starlight links on every page, so the crawl of all 22 built files finds no misses.
+- **As built:** Zac checked the page in light and dark mode on the dev server.
+
+## Review
+Build passes with only the known notices; both inbound links land, every AC holds, and every behaviour claim traces to `src/`.
+
+**Should-fix**
+- Light and dark mode sign-off wasn't recorded (Done when). Fixed: Zac confirmed, noted under As built.
+- The stage-gate As built note doesn't match the page's principle 2 wording after Zac's edits (`docs/src/content/docs/why-ang/first-principles.md:34`). Skipped: not worth it.
+
+**Nit**
+- Principle 1 doesn't name `/raise-workflow-improvement` (`first-principles.md:23`). Skipped.
+- 🤝 heading emoji is reused from `start-here/alongside-your-framework.md:36` (`first-principles.md:37`). Skipped.
+- `/ang/favicon.svg` was missing on every page, and [design direction](../design-direction.md) lists a favicon. Fixed: `docs/public/favicon.svg`.
 
 ## Related
 - [Docs voice guide](../voice-lessons.md)
