@@ -1,5 +1,14 @@
 [
   {
+    "title": "Releases page on the docs site",
+    "path": "project-context/shaping/docs-releases-page/README.md",
+    "shortDescription": "A docs-site page listing every Ang release, newest first, built from GitHub Releases",
+    "tags": [
+      "documentation",
+      "distribution"
+    ]
+  },
+  {
     "title": "Open-source hygiene, brief",
     "path": "project-context/shaping/open-source-hygiene/ideas-content/brief.md",
     "shortDescription": "Zac's stance on open-source standards and the deferred quality-tooling options",
