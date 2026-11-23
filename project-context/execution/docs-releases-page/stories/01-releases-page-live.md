@@ -2,7 +2,7 @@
 title: Releases page live on the docs site
 shortDescription: The docs build serves /releases/ from GitHub Releases, publishing a release redeploys the site from main, and the notes template, launch-notes trigger, /cut-release and 10k match
 tags: [documentation, distribution]
-status: ready
+status: done
 owner: agent
 dependsOn: []
 ---
@@ -73,6 +73,18 @@ Follow the [plan's sequencing](../plan.md#approach-and-sequencing); the exact ke
   - `architecture/1-context.md`: lines 9, 25 and 51 gain the release-publish build, and the docs site reads the GitHub Releases API.
 - **Edge cases:** before v1.0.0 the page is empty by design (d2), so add no empty state or prose. A build without `GITHUB_TOKEN` still works locally, but unauthenticated reads can hit rate limits.
 - **Out of scope:** the plan's list, plus a `releases/notes/**` path trigger on `deploy-docs.yml`, since the page reads GitHub release bodies, not the notes files.
+- **As built:** the template has a blank line after the bold theme line, so it renders as its own paragraph rather than running into the intro. The project-structure docs dragons also changed: the build command now carries `GITHUB_TOKEN`, the new empty `changelogs` notice is listed until v1.0.0, and the plugin allowlist names `starlight-changelogs` and the override. ADR 0008's Standing lists the redeploy workflow.
+
+## Review
+Evidence checked: the token build is green with only the expected notices (Mermaid chunk size, `i18n`, `changelogs` empty, `404`). `dist/releases/index.html` has the "Releases" title and the versions list, and every page's sidebar ends with one `/ang/releases/` link. `npm ls astro` shows a single 7.4.12, the redeploy workflow matches the spike byte for byte, a link crawl of `dist/` (23 pages) is clean, and root lint and `format:check` pass. All nine scope rows match C4 code.
+
+**Must-fix:** none.
+
+**Should-fix**
+- `.claude/skills/cut-release/SKILL.md:78`: the check reads the runs once with `--limit 1` right after Publish. The dispatched deploy is likely still running, so it reads as a miss. A later push to `main` could also be the latest `deploy-docs` run. Step 6 already uses `gh run watch <id> --exit-status`. Pick the dispatched run with `--event workflow_dispatch` and watch it to the end.
+
+**Nit**
+- `project-context/10k/technical/architecture/1-context.md:9`: "Its releases page reads the GitHub Releases API at build; people and agents … read it" now makes "it" the releases page, not the site. Split it into two sentences.
 
 ## Related
 - [Plan](../plan.md), with its [test strategy](../plan.md#test-strategy) and [risks](../plan.md#risks)

@@ -25,7 +25,8 @@ tags: [repo-structure, tech-stack]
 | `scripts/` (root) | Repo-only Node scripts with tests: `link-entries` (keeps the per-entry links in sync, and its test fails on drift), `release-manifest` (what changed since the last tag), `draft-guides` (checks an upgrade guide before its tag exists), and `install.test.mjs` |
 | `releases/notes/`, `releases/upgrades/` | Per-version release notes (the GitHub Release body) and agent-facing upgrade guides. Each folder's `README.md` is the template |
 | `docs/` (root) | The Starlight docs site: `astro.config.mjs`, `src/content/docs/` (one folder per sidebar group), `src/styles/theme.css`, `src/components/Footer.astro`. Its own `package.json` and lockfile with exact pins |
-| `.github/workflows/deploy-docs.yml` | Builds `docs/` and publishes it to Pages on a push to `main` touching `docs/**`, or on a manual run |
+| `.github/workflows/deploy-docs.yml` | Builds `docs/` and publishes it to Pages on a push to `main` touching `docs/**`, on a dispatch from `redeploy-docs-on-release.yml`, or on a manual run |
+| `.github/workflows/redeploy-docs-on-release.yml` | On a published release, dispatches `deploy-docs.yml` on `main` so the releases page picks it up |
 | `.github/workflows/release.yml` | Runs on a `v*` tag push: tests, smoke install, stamp `install.sh`, draft release |
 | `.github/workflows/ci.yml` | Advisory CI on pull requests and pushes to `main`: `npm ci`, lint, format check, `npm test`. Nothing blocks a merge ([ADR 0011](/project-context/10k/technical/adrs/0011-dev-only-quality-tooling-advisory-ci.md)) |
 | `package.json`, `package-lock.json` (root) | Private and dev-only: ESLint and its plugins, Prettier, Husky and lint-staged as dev dependencies, the `lint-staged` config, and the `test`, `lint`, `format`, `format:check` and `prepare` scripts. `npm test` holds the test globs |
@@ -47,8 +48,8 @@ tags: [repo-structure, tech-stack]
 - Gitignored `*.local.*` files sit physically under `src/` through the symlinks. Releases are fetched from git, so they never ship; never build a release from disk.
 
 ## Docs site dragons
-- Work in `docs/`: `npm run dev` to review, `npm run build` to check. Every build prints three harmless notices: the Mermaid chunk-size warning, the empty `i18n` notice and the missing `404` notice.
-- Pins are exact and bumped only when the build breaks or a security fix lands. No community plugins beyond `astro-mermaid` and `starlight-llms-txt`.
+- Work in `docs/`: `npm run dev` to review, `GITHUB_TOKEN=$(gh auth token) npm run build` to check (the releases page reads GitHub Releases, and without a token the build can hit rate limits). Every build prints three harmless notices: the Mermaid chunk-size warning, the empty `i18n` notice and the missing `404` notice. Until v1.0.0 is published, an empty `changelogs` notice joins them.
+- Pins are exact and bumped only when the build breaks or a security fix lands. No community plugins beyond `astro-mermaid`, `starlight-llms-txt` and `starlight-changelogs`. The `overrides` entry for `@ascorbic/loader-utils` keeps one Astro in the tree; `npm ls astro` checks it.
 - Pages link by relative route (`../../concepts/funnel/`), never `/ang/…`. There's no link-checker plugin (`starlight-links-validator` broke on Astro 7), so crawl the built `docs/dist/` with a throwaway script instead.
 - The light accent `#208368` sits exactly at AA (the WCAG 4.5:1 contrast minimum). Re-check contrast on any tint change.
 - Heading emoji must have no variation selector (🛣️ ⚙️ ✍️ 🛠️ 🗑️ 🗺️ 🌪️ have one): it lands in the anchor and breaks links to it.

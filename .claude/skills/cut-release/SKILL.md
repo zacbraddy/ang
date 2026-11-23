@@ -75,8 +75,9 @@ Host actions: say status at the start of each stage as `release <tag>: <stage>` 
 8. **Post-publish.**
    - **Real install:** in `"$TMP/install"`, `git init`, then `curl -fsSL https://github.com/zacbraddy/ang/releases/download/<tag>/install.sh | sh`. Check `.claude/ang/version.json`'s `ref` is `<tag>` and its `sha` is `git rev-parse <tag>^{commit}` from the Ang repo.
    - **Latest:** for a tag without `-rc.`, `gh api repos/zacbraddy/ang/releases/latest --jq .tag_name` is `<tag>`.
+   - **Docs releases page:** for a tag without `-rc.`, the latest "Redeploy docs on release" run is green (`gh run list --workflow redeploy-docs-on-release.yml --limit 1`). Find the `deploy-docs` run it started, `gh run list --workflow deploy-docs.yml --event workflow_dispatch --json databaseId --jq '.[0].databaseId'`, then `gh run watch <id> --exit-status`. Then `https://zacbraddy.github.io/ang/releases/` lists `<tag>`. On a miss, the fix is `gh workflow run deploy-docs.yml --ref main`.
    - **Fixture roll-forward:** spawn a general-purpose subagent to clone the fixture fresh over SSH, `git clone git@github.com:zacbraddy/ang-upgrade-fixture.git "$TMP/fixture-up"`, and follow its own `.claude/skills/upgrade-ang/SKILL.md` with `<tag>` as the target, reporting as at stage 4. Show Zac the summary. On his go, in `"$TMP/fixture-up"`: `git add -A`, `git commit -m "upgrade: Ang <tag>"`, `git tag <tag>`, `git push origin HEAD <tag>`.
-   - Print what's done and what's left, such as a failed check above or a docs page still naming the old version.
+   - Print what's done and what's left, such as a failed check above (with its fix) or a docs page still naming the old version.
 
 Then remove `$TMP` and run `node .claude/scripts/ang-context-manager.mjs library validate`.
 

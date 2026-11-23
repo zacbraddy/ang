@@ -9,22 +9,25 @@ Notes are for people deciding whether to install or upgrade: what changed for th
 ## Template
 Short, in Zac's public voice ([voice and attribution](../../project-context/10k/marketing/voice-and-attribution.md)): conversational, a bit funny, an emoji per heading. Fixes and breaking changes stay plain-spoken.
 
+The body has no h1. The docs site's [releases page](https://zacbraddy.github.io/ang/releases/) puts each release under its own version heading, so the notes open with a bold theme line and use `###` sections.
+
 ```markdown
-# 🚀 Ang vX.Y.Z: {a short, slightly cheeky theme for the release}
+**🚀 {a short, slightly cheeky theme for the release}**
+
 {Two or three sentences: what this release is for and why it matters to how you work.}
 
-## ✨ What's new
+### ✨ What's new
 {A paragraph or a few bullets per theme: what you can now do and how your workflow changes.
 Grouped by what it means for the user, not by file.}
 
-## 🔀 What changes for you
+### 🔀 What changes for you
 {Anything that behaves differently, in plain words. If upgrading needs care, say so and point to /upgrade-ang.}
 
-## 🐛 Fixes
+### 🐛 Fixes
 {Only the ones a user would have noticed.}
 
 🟢 Requires Node 26 or later.
 
-## 🔗 Changes in this release
+### 🔗 Changes in this release
 - {commit or PR link}: {one line on what it is}
 ```

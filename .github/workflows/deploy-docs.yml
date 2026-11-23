@@ -19,6 +19,8 @@ jobs:
       - uses: withastro/action@v6
         with:
           path: docs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
   deploy:
     needs: build
     runs-on: ubuntu-latest
