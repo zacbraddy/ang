@@ -13,5 +13,12 @@
       "file:releases/notes/v1.0.0-rc.2.md",
       "custom:`gh release view v1.0.0 --json isDraft` shows a v1.0.0 release that is still a draft"
     ]
+  },
+  {
+    "slug": "hygiene-post-merge-check",
+    "intent": "Check the first ci.yml run, README badges, issue chooser and PR template live once open-source hygiene is merged to main",
+    "conditions": [
+      "custom:stream/open-source-hygiene is merged into main (git ls-tree origin/main .github/workflows/ci.yml prints a path)"
+    ]
   }
 ]

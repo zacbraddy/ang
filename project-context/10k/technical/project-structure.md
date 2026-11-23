@@ -6,7 +6,7 @@ tags: [repo-structure, tech-stack]
 # Project structure
 
 ## Summary
-`src/` is the Ang that ships. The root `.claude/` points into `src/.claude/`, so this repo runs on the same files it ships: most entries are whole-folder symlinks, while `skills/` and `agents/` are real folders of per-entry links plus the repo-only release skill and agent. The release tooling (`install.sh`, `scripts/`, `releases/`, `.github/`), the dev tooling (`package.json`, `package-lock.json`, `.node-version`, `eslint.config.mjs`, `.prettierrc.json`, `.prettierignore`) and the docs site (`docs/`) sit at the root, outside `src/`, so they never ship. The root `project-context/` is this repo's own library and is never shipped. Taken from the tracked tree on 2026-11-23.
+`src/` is the Ang that ships. The root `.claude/` points into `src/.claude/`, so this repo runs on the same files it ships: most entries are whole-folder symlinks, while `skills/` and `agents/` are real folders of per-entry links plus the repo-only release skill and agent. The release tooling (`install.sh`, `scripts/`, `releases/`, `.github/workflows/release.yml`), the dev tooling (`package.json`, `package-lock.json`, `.node-version`, `eslint.config.mjs`, `.prettierrc.json`, `.prettierignore`, `.husky/`, `.github/workflows/ci.yml`), the docs site (`docs/`, `.github/workflows/deploy-docs.yml`) and the contributor kit (`CONTRIBUTING.md`, `.github/` templates) sit at the root, outside `src/`, so they never ship. The root `project-context/` is this repo's own library and is never shipped. Taken from the tracked tree on 2026-11-23.
 
 ## Layout
 | Path | What it is |
@@ -27,13 +27,16 @@ tags: [repo-structure, tech-stack]
 | `docs/` (root) | The Starlight docs site: `astro.config.mjs`, `src/content/docs/` (one folder per sidebar group), `src/styles/theme.css`, `src/components/Footer.astro`. Its own `package.json` and lockfile with exact pins |
 | `.github/workflows/deploy-docs.yml` | Builds `docs/` and publishes it to Pages on a push to `main` touching `docs/**`, or on a manual run |
 | `.github/workflows/release.yml` | Runs on a `v*` tag push: tests, smoke install, stamp `install.sh`, draft release |
-| `package.json`, `package-lock.json` (root) | Private and dev-only: ESLint, Prettier and Husky as dev dependencies, and the `test`, `lint`, `format` and `format:check` scripts. `npm test` holds the test globs |
+| `.github/workflows/ci.yml` | Advisory CI on pull requests and pushes to `main`: `npm ci`, lint, format check, `npm test`. Nothing blocks a merge ([ADR 0011](/project-context/10k/technical/adrs/0011-dev-only-quality-tooling-advisory-ci.md)) |
+| `package.json`, `package-lock.json` (root) | Private and dev-only: ESLint and its plugins, Prettier, Husky and lint-staged as dev dependencies, the `lint-staged` config, and the `test`, `lint`, `format`, `format:check` and `prepare` scripts. `npm test` holds the test globs |
+| `.husky/pre-commit` (root) | Runs lint-staged: `eslint --fix` and `prettier --write` on staged files |
 | `.node-version` (root) | The Node major the repo and `release.yml` run on |
 | `eslint.config.mjs`, `.prettierrc.json`, `.prettierignore` (root) | Lint and format config. Both skip `docs/`, `project-context/`, `releases/`, the root `.claude/` symlinks and `*.md` |
 | `ang.json` (root) | Project feature keys (`intent`, `streams`), committed. Every install has its own; Ang ships none |
 | `ang.local.json` (root) | Personal keys (`pilot`, `host`), gitignored, written by `/tailor-ang` |
 | `project-context/` (root) | This repo's own context library. Its `README.md` is a symlink to `src/project-context/README.md`, the conventions that ship |
 | `workflow-improvements/` | Raised workflow-improvement docs |
+| `CONTRIBUTING.md`, `.github/PULL_REQUEST_TEMPLATE.md`, `.github/ISSUE_TEMPLATE/` | Contributor kit: rubber-ducking templates, blank issues off, chat to Discussions ([ADR 0012](/project-context/10k/technical/adrs/0012-contributor-templates-nudge-not-gate.md)) |
 | `LICENSE`, `README.md` | MIT licence and the repo README |
 
 ## Dragons
@@ -60,4 +63,5 @@ tags: [repo-structure, tech-stack]
 | [ADR 0005: Install by copy-in](/project-context/10k/technical/adrs/0005-install-by-copy-in-from-releases.md) | What `install.sh` does |
 | [ADR 0007: How releases are cut](/project-context/10k/technical/adrs/0007-how-releases-are-cut.md) | What `scripts/`, `releases/` and the workflow are for |
 | [ADR 0008: Docs site](/project-context/10k/technical/adrs/0008-docs-starlight-on-github-pages.md) | Why `docs/` is Starlight on Pages |
+| [ADR 0011: Dev-only quality tooling and advisory CI](/project-context/10k/technical/adrs/0011-dev-only-quality-tooling-advisory-ci.md) | Why the dev tooling and CI look the way they do |
 | [What Ang is](/project-context/10k/product/what-ang-is.md) | What these files add up to |

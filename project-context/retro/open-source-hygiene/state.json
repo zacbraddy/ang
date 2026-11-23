@@ -67,7 +67,7 @@
     {
       "id": "k15",
       "fact": "eslint-plugin-regexp now finds 10 issues in the shipped script (3 super-linear backtracking, 5 unused capture groups, 2 style), not shaping's 8; library/frontmatter.mjs holds three of them and has no direct test, so story 2 writes one first (probe, 2026-11-23)",
-      "source": "/project-context/execution/open-source-hygiene/c4/4-code.md"
+      "source": "c4/4-code.md"
     }
   ],
   "decisions": [
@@ -187,7 +187,7 @@
     {
       "id": "d21",
       "decision": "The Prettier pass and the hand lint fixes land together, unstaged for Zac to commit; no dedicated formatting commit and no .git-blame-ignore-revs (Zac, 2026-11-23)",
-      "evidence": "/project-context/execution/open-source-hygiene/plan.md"
+      "evidence": "plan.md"
     }
   ],
   "lineage": [
@@ -450,6 +450,18 @@
     {
       "date": "2026-11-23",
       "event": "replaced d6: Hygiene kit: README 'fork it' section, issue templates with blank issues off, fork-aware PR template, private vulnerability reporting on (no SECURITY.md), plus a short CONTRIBUTING and short code of conduct in Ang's voice (Zac, 2026-11-16) → Hygiene kit: README 'fork it' section, issue templates with blank issues off, fork-aware PR template, private vulnerability reporting on (no SECURITY.md), plus a short CONTRIBUTING in Ang's voice. No code of conduct: Ang has no community to moderate, so it's parked until one appears (Zac, 2026-11-16; code of conduct cut 2026-11-23)"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "moved execution → retro"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced k15: source: /project-context/execution/open-source-hygiene/c4/4-code.md → c4/4-code.md"
+    },
+    {
+      "date": "2026-11-23",
+      "event": "replaced d21: evidence: /project-context/execution/open-source-hygiene/plan.md → plan.md"
     }
   ],
   "type": "mixed"
