@@ -11,7 +11,7 @@ argument-hint: "<slug>"
 
 Ending a stream removes it from the registry so other streams stop seeing it. Its work survives only through main, so this refuses to lose unmerged work silently (`.claude/ang/features/streams/conventions.md`).
 
-1. **Find it.** Take the slug from $ARGUMENTS and look it up with `node .claude/scripts/ang-context-manager.mjs stream list`. If it is this checkout's stream (`*`), carry on, but skip the worktree removal in step 5; a session can't remove the folder it runs in.
+1. **Find it.** Take the slug from $ARGUMENTS and look it up with `node .claude/scripts/ang-context-manager.mjs stream list`. If it is this checkout's stream (`*`), carry on, but skip the worktree removal and branch deletion in step 5; a session can't remove the folder it runs in or the branch it has checked out.
 2. **Check it's merged.** `git merge-base --is-ancestor <branch> main`; if that fails, try `origin/main`. If it isn't merged, stop and show the user what's unmerged (`git log --oneline main..<branch>`). Go on only if they explicitly say to abandon it.
 3. **Clear its inbox.** `mail list <slug>`. These notes would otherwise be orphaned, because nothing reads a removed stream's mail. Notes it *sent* stay with their recipients. For each one, the user decides:
    - **forward** it to a live stream (`mail forward <id> <stream>`);

@@ -72,22 +72,5 @@
       "open-source",
       "tech-stack"
     ]
-  },
-  {
-    "title": "Repo README",
-    "path": "project-context/shaping/repo-readme/README.md",
-    "shortDescription": "A short whistle-stop README covering concepts, key commands and a quick start",
-    "tags": [
-      "documentation",
-      "open-source"
-    ]
-  },
-  {
-    "title": "Repo README, brief",
-    "path": "project-context/shaping/repo-readme/shaping-content/brief.md",
-    "shortDescription": "What the repo README must and mustn't be",
-    "tags": [
-      "documentation"
-    ]
   }
 ]

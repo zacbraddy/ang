@@ -54,7 +54,7 @@
   {
     "title": "ADR 0002: Zero-dependency library script",
     "path": "project-context/10k/technical/adrs/0002-zero-dependency-library-script.md",
-    "shortDescription": "The context library, settings merge, version record and upgrade engine are one Node CLI that uses only built-ins; installing needs Node 26+, npx and git, but the script itself has no packages",
+    "shortDescription": "What ships under src/ uses only Node built-ins, so the library script has no packages and installing Ang needs only Node 26+, npx and git; dev-only tooling outside src/ may carry its own private dependencies",
     "tags": [
       "tech-stack"
     ]
@@ -102,6 +102,33 @@
     "tags": [
       "open-source",
       "distribution"
+    ]
+  },
+  {
+    "title": "ADR 0008: Docs are a Starlight site on GitHub Pages",
+    "path": "project-context/10k/technical/adrs/0008-docs-starlight-on-github-pages.md",
+    "shortDescription": "The user docs are a Starlight site in root docs/, built and published to zacbraddy.github.io/ang/ by one Actions workflow, with relative page links so a custom domain stays a config change",
+    "tags": [
+      "tech-stack",
+      "documentation"
+    ]
+  },
+  {
+    "title": "ADR 0009: Docs describe the shipped files",
+    "path": "project-context/10k/technical/adrs/0009-docs-describe-shipped-files.md",
+    "shortDescription": "The README and docs site describe what the files under src/ actually do; where memory and the files differ the files win, and docs defects become recorded work rather than changes to Ang",
+    "tags": [
+      "documentation",
+      "brand-voice"
+    ]
+  },
+  {
+    "title": "ADR 0010: Docs publish llms.txt",
+    "path": "project-context/10k/technical/adrs/0010-docs-publish-llms-txt.md",
+    "shortDescription": "The docs site publishes llms.txt, llms-full.txt and llms-small.txt for agents through starlight-llms-txt with default settings",
+    "tags": [
+      "documentation",
+      "tech-stack"
     ]
   },
   {

@@ -48,6 +48,16 @@ The upgrade's route thresholds would be retuned: `AGENT_RESOLVES_UP_TO` and `WAR
 - **Wake condition:** an Ang user reports an upgrade that took the wrong route, e.g. guided for trivial conflicts, or agent-resolved when it should have asked.
 - **Source:** parked in execution on 2026-11-20, not from a raw file. Zac's call while writing story 13 of the install-upgrade-release epic (in git history).
 
+### Custom domain for the docs site
+Move the Ang docs site from `zacbraddy.github.io/ang/` to a custom domain on GitHub Pages (about $10–12 a year, plus DNS and a TXT record that must stay in place). The move means changing Starlight's `site` and `base` config and sweeping any links that hard-code the `/ang/` prefix.
+- **Wake condition:** Ang has outside users or contributors finding it through the docs, or We Right Code wants a branded URL to market it under.
+- **Source:** parked in planning on 2026-11-17, not from a raw file. See [Docs site hosting](/project-context/execution/documentation/origins/docs-website/shaping-content/hosting.md).
+
+### Shared base ang.json for teams
+Let a company keep one base `ang.json` that many repos inherit from, for example with an `extends` key the way `tsconfig.json` does. JSON has no inheritance of its own, so Ang's config loader would have to read the key and merge the files. Today it rejects any key that isn't a feature. The docs site was going to document this as a free pattern until that came to light.
+- **Wake condition:** an organisation runs Ang across several repos and wants one place to set their shared `ang.json` keys.
+- **Source:** parked in planning on 2026-11-17, not from a raw file. See [documentation epic](/project-context/execution/documentation/README.md) (k6, k23) and [ADR 0003](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md).
+
 ## Related
 - [Delivery intent](/project-context/10k/intent.md)
 - [ADR 0003: Per-user config overlay](/project-context/10k/technical/adrs/0003-per-user-config-overlay.md)

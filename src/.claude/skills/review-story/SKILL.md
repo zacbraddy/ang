@@ -28,5 +28,5 @@ Run this in a session that didn't implement the story.
      - clarity and fitness for the audience;
      - no secrets or personal data committed.
 4. Write `## Review` into the story with findings ranked **must-fix / should-fix / nit**, each with a file:line reference. Keep it short.
-5. Ask which to fix, then apply them **without staging**, so I can compare unstaged (review) against staged (implementation). Re-run the tests.
+5. Recommend fix or skip for each finding with a one-line reason, then ask me which to fix. Apply my picks **without staging**, so I can compare unstaged (review) against staged (implementation). Re-run the tests.
 6. Set `status: done` and run `ang-context-manager.mjs library validate`. If every story in the epic is done, say so: next is `/retro` in a fresh session.

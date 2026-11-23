@@ -1,0 +1,10 @@
+<button id="theme-toggle" class="btn btn-outline" type="button" aria-label="Toggle dark mode">◐</button>
+<script>
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    var dark = document.getElementById('jtd-dark');
+    var isDark = dark.media === 'all' || (dark.media !== 'not all' && matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = isDark ? 'light' : 'dark';
+    dark.media = next === 'dark' ? 'all' : 'not all';
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+</script>

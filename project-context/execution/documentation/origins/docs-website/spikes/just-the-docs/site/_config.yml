@@ -1,0 +1,11 @@
+title: Ang
+description: Avoid Navel Gazing. A lean, AI-assisted development workflow for Claude Code.
+remote_theme: just-the-docs/just-the-docs@v0.12.0
+plugins:
+  - jekyll-remote-theme
+color_scheme: light
+search_enabled: true
+aux_links:
+  GitHub: https://github.com/zacbraddy/ang
+footer_content: 'Built by <a href="https://zackerthehacker.com">Zac Braddy</a> as part of his work at We Right Code.'
+exclude: [Gemfile, Gemfile.lock, README.md, vendor]

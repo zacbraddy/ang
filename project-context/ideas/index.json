@@ -1,33 +1,5 @@
 [
   {
-    "title": "Brain dump context (verbatim)",
-    "path": "project-context/ideas/docs-website/ideas-content/brain-dump-context.md",
-    "shortDescription": "Zac's own words on what Ang is, its history, motivations, principles, his usage and raw files, kept as docs source and voice sample",
-    "tags": [
-      "documentation",
-      "product-vision",
-      "brand-voice"
-    ]
-  },
-  {
-    "title": "Documentation website, brief",
-    "path": "project-context/ideas/docs-website/ideas-content/brief.md",
-    "shortDescription": "Zac's requirements for the docs site's design, framework, hosting and content",
-    "tags": [
-      "documentation"
-    ]
-  },
-  {
-    "title": "Documentation website",
-    "path": "project-context/ideas/docs-website/README.md",
-    "shortDescription": "A comprehensive docs site in Zac's voice, built on an existing docs framework",
-    "tags": [
-      "documentation",
-      "open-source",
-      "brand-voice"
-    ]
-  },
-  {
     "title": "Parked work",
     "path": "project-context/ideas/parked.md",
     "shortDescription": "Doable threads with no value yet, each with the wake condition that would make it worth doing",
